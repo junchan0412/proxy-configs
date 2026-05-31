@@ -1,0 +1,23 @@
+name: validate
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch: {}
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v8.1.0
+
+      - name: Install surge-doctor
+        run: uv tool install "git+https://github.com/qidewei2004/surge-doctor@v0.1.0"
+
+      - name: Validate all modules
+        run: surge-doctor check modules/*.sgmodule --fail-on warning

@@ -1,0 +1,25 @@
+#!name=重定向增强
+#!desc=高频体验优化:Bing 国内版跳转国际版、维基百科移动版跳桌面版、知乎/微博等外链直跳。纯 302 重定向,稳定不易失效。
+#!category=功能增强
+#!author=qidewei2004
+#!homepage=https://github.com/qidewei2004/surge-modules
+
+[URL Rewrite]
+# Bing:国内版 cn.bing.com -> 国际版 www.bing.com
+^https?:\/\/cn\.bing\.com https://www.bing.com 302
+
+# 维基百科:移动版 -> 桌面版(zh / en)
+^https?:\/\/zh\.m\.wikipedia\.org https://zh.wikipedia.org 302
+^https?:\/\/en\.m\.wikipedia\.org https://en.wikipedia.org 302
+
+# 知乎安全外链跳转 -> 直达目标
+^https?:\/\/link\.zhihu\.com\/\?target=(.+) $1 302
+
+# 微博国际版安全外链跳转 -> 直达目标
+^https?:\/\/weibo\.cn\/sinaurl\?(?:toasturl|u)=(.+) $1 302
+
+# 简书外链跳转 -> 直达目标
+^https?:\/\/links\.jianshu\.com\/go\?to=(.+) $1 302
+
+[MITM]
+hostname = %INSERT% cn.bing.com, zh.m.wikipedia.org, en.m.wikipedia.org, link.zhihu.com, weibo.cn, links.jianshu.com
