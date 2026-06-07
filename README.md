@@ -1,15 +1,35 @@
 # proxy-configs
 
-自用的代理客户端配置合集，覆盖 **Surge** 与 **Mihomo / Clash** 两套生态。所有内容都以「叠加 / 增强」为原则，与你已有的主配置或订阅安全合并，**不替你做节点与订阅管理**。
+自用的代理客户端配置合集，覆盖 **Surge**、**Shadowrocket** 与 **Mihomo / Clash** 生态。所有内容都以「叠加 / 增强」为原则，与你已有的主配置或订阅安全合并，**不替你做节点与订阅管理**。
 
-聚焦"小而稳"：不易随 App 更新失效，公开版均不含节点、订阅链接、本机端口与外部控制器等隐私信息。
+聚焦"小而稳"：公开版均不含节点、订阅链接、本机端口、外部控制器、证书材料、本地 iCloud 路径等隐私信息。
 
 ## 目录结构
 
 | 目录 | 内容 |
 |---|---|
+| `surge/` | Surge 可复用干净配置与公开规则集 |
+| `shadowrocket/` | Shadowrocket 可复用干净配置 |
 | `modules/` | Surge 功能增强模块（`.sgmodule`），独立可开关，通过 `%APPEND%` / `%INSERT%` 与主配置合并 |
 | `mihomo/` | Mihomo / Clash 覆写模板（`.yaml`），作为 override 叠加到订阅配置之上 |
+
+## 可复用配置模板
+
+| 客户端 | 配置 URL |
+|---|---|
+| Surge | `https://fastly.jsdelivr.net/gh/qidewei2004/proxy-configs@main/surge/Surge.clean.conf` |
+| Shadowrocket | `https://fastly.jsdelivr.net/gh/qidewei2004/proxy-configs@main/shadowrocket/shadowrocket.conf` |
+
+公开模板使用仓库内规则集：
+
+| 规则集 | 作用 |
+|---|---|
+| `surge/rules/ai-major.list` | 官方或大规模 AI 服务，避免把普通小站或共享基础设施塞进 AI 策略 |
+| `surge/rules/pre-ai-infra.list` | Stripe、Cloudflare Challenge、Google 通用后台等共享基础设施，放在 AI 前匹配 |
+| `surge/rules/direct-cn.list` | 高频中国大陆网站和 CDN 直连兜底 |
+| `surge/rules/emby-meta.list` | Emby/Jellyfin 元数据与字幕服务 |
+
+> 模板不包含任何真实节点或订阅链接。请在客户端内添加自己的节点/订阅后，再使用策略组进行筛选或选择。
 
 ## Surge 模块
 
@@ -23,7 +43,7 @@
 
 在 Surge 中：**Modules → 安装新模块 → 从 URL 安装**，填入对应模块的 jsdelivr 地址：
 
-```
+```text
 https://fastly.jsdelivr.net/gh/qidewei2004/proxy-configs@main/modules/google-redirect.sgmodule
 https://fastly.jsdelivr.net/gh/qidewei2004/proxy-configs@main/modules/redirect-enhance.sgmodule
 https://fastly.jsdelivr.net/gh/qidewei2004/proxy-configs@main/modules/dns-mapping.sgmodule
@@ -49,7 +69,7 @@ surge-doctor check modules/google-redirect.sgmodule
 
 作为 **override / 覆写规则** 在客户端中叠加到你的订阅配置之上即可使用：
 
-```
+```text
 https://fastly.jsdelivr.net/gh/qidewei2004/proxy-configs@main/mihomo/mihomo-override.yaml
 ```
 
