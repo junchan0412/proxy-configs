@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" role="img" aria-label="STREAM">
+  <defs>
+    <linearGradient id="bg" x1="94" y1="50" x2="420" y2="468" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#1b1c1f"/>
+      <stop offset=".58" stop-color="#090a0c"/>
+      <stop offset="1" stop-color="#000000"/>
+    </linearGradient>
+    <radialGradient id="sheen" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(164 104) rotate(42) scale(326)">
+      <stop offset="0" stop-color="#ffffff" stop-opacity=".17"/>
+      <stop offset=".44" stop-color="#ffffff" stop-opacity=".055"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="markShadow" x="-18%" y="-18%" width="136%" height="148%">
+      <feDropShadow dx="0" dy="10" stdDeviation="12" flood-color="#000000" flood-opacity=".38"/>
+    </filter>
+  </defs>
+  <rect x="24" y="24" width="464" height="464" rx="118" fill="url(#bg)"/>
+  <rect x="25.5" y="25.5" width="461" height="461" rx="116.5" fill="none" stroke="#f8f3e8" stroke-width="3" stroke-opacity=".13"/>
+  <rect x="51" y="51" width="410" height="410" rx="96" fill="none" stroke="#f8f3e8" stroke-width="1.5" stroke-opacity=".07"/>
+  <circle cx="154" cy="105" r="214" fill="url(#sheen)"/>
+  <path d="M104 392c48 24 100 36 156 36 54 0 104-10 150-31" fill="none" stroke="#f8f3e8" stroke-width="10" stroke-linecap="round" stroke-opacity=".045"/>
+  <g filter="url(#markShadow)">
+
+    <rect x="128" y="160" width="256" height="173" rx="42" fill="none" stroke="#f6f1e8" stroke-width="16"/>
+    <path d="M235 209l82 47-82 47z" fill="none" stroke="#f6f1e8" stroke-width="16" stroke-linejoin="round"/>
+    <path d="M168 372h188M205 410h114M400 187c23 18 35 42 35 71s-12 52-35 70" fill="none" stroke="#f6f1e8" stroke-width="14" stroke-linecap="round"/>
+
+  </g>
+</svg>
