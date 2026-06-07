@@ -24,7 +24,7 @@ echo "[2/5] Mihomo YAML check"
 /usr/bin/ruby -e 'require "yaml"; YAML.load_file("mihomo/mihomo-override.yaml")'
 
 echo "[3/5] public sensitivity scan"
-if "$RG" -n "(psk=|ca-p12 = [A-Za-z0-9+/]{40,}|sub\\.store/download|/Users/qidewei|iCloud~com~nssurge|Mobile Documents|http-api =|external-controller-access =|155\\.117\\.18\\.27|213\\.35\\.108\\.139|82\\.152\\.161\\.6)" README.md surge shadowrocket mihomo; then
+if "$RG" -n --glob '!scripts/preflight-public.sh' "(psk=|ca-p12 = [A-Za-z0-9+/]{40,}|sub\\.store/download|/Users/[^/]+|iCloud~com~nssurge|Mobile Documents|http-api =|external-controller-access =|snell, *[0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+)" README.md surge shadowrocket mihomo scripts; then
   echo "sensitive pattern found in public files" >&2
   exit 1
 fi
