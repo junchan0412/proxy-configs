@@ -138,6 +138,7 @@ FallBack: &FallBack {type: fallback, interval: 300, lazy: true, url: 'https://ww
 LoadBalance: &LoadBalance {type: load-balance, interval: 300, lazy: true, url: 'https://www.gstatic.com/generate_204', disable-udp: false, strategy: consistent-hashing, timeout: 5000, max-failed-times: 3, hidden: true, include-all: true, include-all-providers: true}
 # 锚点 - 规则参数 [每小时更新一次订阅规则]
 RuleProviders: &RuleProviders {type: http, behavior: classical, interval: 3600, format: yaml}
+TextRuleProviders: &TextRuleProviders {type: http, behavior: classical, interval: 3600, format: text}
 
 # 策略组
 proxy-groups: 
@@ -165,6 +166,21 @@ rule-providers:
     interval: 86400
     path: './rules/AdvertisingLite.yaml'
     url: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/AdvertisingLite/AdvertisingLite.yaml'
+
+  DirectCN:
+    <<: *TextRuleProviders
+    path: './rules/DirectCN.list'
+    url: 'https://fastly.jsdelivr.net/gh/qidewei2004/proxy-configs@main/surge/rules/direct-cn.list'
+
+  PreAIInfra:
+    <<: *TextRuleProviders
+    path: './rules/PreAIInfra.list'
+    url: 'https://fastly.jsdelivr.net/gh/qidewei2004/proxy-configs@main/surge/rules/pre-ai-infra.list'
+
+  AIMajor:
+    <<: *TextRuleProviders
+    path: './rules/AIMajor.list'
+    url: 'https://fastly.jsdelivr.net/gh/qidewei2004/proxy-configs@main/surge/rules/ai-major.list'
 
   OpenAI:
     <<: *RuleProviders
@@ -687,16 +703,12 @@ rules:
   - IP-CIDR,0.0.0.0/32,REJECT,no-resolve
   - RULE-SET,AdvertisingLite,REJECT
 
-  # 1. AI 服务优先，避免被 Google/Microsoft/Global 规则抢先命中
-  - DOMAIN-SUFFIX,chatgpt.com,AI
-  - DOMAIN-SUFFIX,openai.com,AI
-  - DOMAIN-SUFFIX,oaistatic.com,AI
-  - DOMAIN-SUFFIX,oaiusercontent.com,AI
-  - DOMAIN-SUFFIX,anthropic.com,AI
-  - DOMAIN-SUFFIX,claude.ai,AI
-  - DOMAIN-SUFFIX,gemini.google.com,AI
-  - DOMAIN-SUFFIX,generativelanguage.googleapis.com,AI
-  - DOMAIN-SUFFIX,makersuite.google.com,AI
+  # 1. Pre-AI 共享基础设施与官方/大规模 AI 服务
+  - RULE-SET,PreAIInfra,国际基础服务
+  - DOMAIN-SUFFIX,fonts.gstatic.com,国际基础服务
+  - DOMAIN-SUFFIX,ssl.gstatic.com,国际基础服务
+  - DOMAIN-SUFFIX,maps.gstatic.com,国际基础服务
+  - RULE-SET,AIMajor,AI
   - RULE-SET,OpenAI,AI
   - RULE-SET,Claude,AI
   - RULE-SET,Anthropic,AI
@@ -711,6 +723,7 @@ rules:
   - RULE-SET,PrivateTracker,下载服务
 
   # 3. 国内常用服务与内容平台
+  - RULE-SET,DirectCN,国内服务
   - RULE-SET,Direct,国内服务
   - RULE-SET,WeChat,国内服务
   - RULE-SET,Alibaba,国内服务
