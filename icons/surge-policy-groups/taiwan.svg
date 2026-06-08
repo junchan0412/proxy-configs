@@ -1,37 +1,20 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" role="img" aria-label="台湾 / TW">
+<svg xmlns="http://www.w3.org/2000/svg" width="144" height="144" viewBox="0 0 144 144" role="img" aria-label="台湾 / TW">
   <defs>
-    <linearGradient id="bg" x1="94" y1="50" x2="420" y2="468" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#1b1c1f"/>
-      <stop offset=".58" stop-color="#090a0c"/>
-      <stop offset="1" stop-color="#000000"/>
-    </linearGradient>
-    <radialGradient id="sheen" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(164 104) rotate(42) scale(326)">
-      <stop offset="0" stop-color="#ffffff" stop-opacity=".17"/>
-      <stop offset=".44" stop-color="#ffffff" stop-opacity=".055"/>
-      <stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
-    </radialGradient>
-    <filter id="markShadow" x="-18%" y="-18%" width="136%" height="148%">
-      <feDropShadow dx="0" dy="10" stdDeviation="12" flood-color="#000000" flood-opacity=".38"/>
+    <filter id="shadow" x="-25%" y="-25%" width="150%" height="160%">
+      <feDropShadow dx="0" dy="4" stdDeviation="4" flood-color="#000000" flood-opacity=".18"/>
     </filter>
   </defs>
-  <rect x="24" y="24" width="464" height="464" rx="118" fill="url(#bg)"/>
-  <rect x="25.5" y="25.5" width="461" height="461" rx="116.5" fill="none" stroke="#f8f3e8" stroke-width="3" stroke-opacity=".13"/>
-  <rect x="51" y="51" width="410" height="410" rx="96" fill="none" stroke="#f8f3e8" stroke-width="1.5" stroke-opacity=".07"/>
-  <circle cx="154" cy="105" r="214" fill="url(#sheen)"/>
-  <path d="M104 392c48 24 100 36 156 36 54 0 104-10 150-31" fill="none" stroke="#f8f3e8" stroke-width="10" stroke-linecap="round" stroke-opacity=".045"/>
-  <g filter="url(#markShadow)">
-
-    <clipPath id="flagClip"><rect x="120" y="166" width="272" height="181" rx="26"/></clipPath>
-    <rect x="120" y="166" width="272" height="181" rx="26" fill="#a91d2d"/>
-    <g clip-path="url(#flagClip)">
-      <rect x="120" y="166" width="136" height="91" fill="#173a72"/>
+  <g filter="url(#shadow)">
+    <clipPath id="flag"><rect x="13" y="28" width="118" height="88" rx="9"/></clipPath>
+    <rect x="13" y="28" width="118" height="88" rx="9" fill="#f8fafc"/>
+    <g clip-path="url(#flag)">
+      <rect x="13" y="28" width="118" height="88" fill="#d21f45"/>
+      <rect x="13" y="28" width="59" height="44" fill="#23477d"/>
+      <g transform="translate(42.5 50)">
+        <circle r="11" fill="#f8fafc"/>
+        <path d="M0-25v8M0 17v8M-25 0h8M17 0h8M-18-18l6 6M12 12l6 6M18-18l-6 6M-12 12l-6 6M-23-10l8 3M15 7l8 3M23-10l-8 3M-15 7l-8 3M-10-23l3 8M7 15l3 8M10-23l-3 8M-7 15l-3 8" stroke="#f8fafc" stroke-width="3.5" stroke-linecap="round"/>
+      </g>
     </g>
-    <g transform="translate(188 211)">
-      <circle r="23" fill="#f6f1e8"/>
-      <path d="M0-54v18M0 36v18M-54 0h18M36 0h18M-38-38l13 13M25 25l13 13M38-38L25-25M-25 25l-13 13M-50-21l17 7M33 14l17 7M50-21l-17 7M-33 14l-17 7M-21-50l7 17M14 33l7 17M21-50l-7 17M-14 33l-7 17" stroke="#f6f1e8" stroke-width="8" stroke-linecap="round"/>
-    </g>
-    <rect x="120" y="166" width="272" height="181" rx="26" fill="none" stroke="#f6f1e8" stroke-width="14"/>
-    <path d="M151 383h210" fill="none" stroke="#f6f1e8" stroke-width="14" stroke-linecap="round"/>
-
+    <rect x="13" y="28" width="118" height="88" rx="9" fill="none" stroke="#ffffff" stroke-width="2" stroke-opacity=".85"/>
   </g>
 </svg>

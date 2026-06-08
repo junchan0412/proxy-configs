@@ -1,36 +1,19 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" role="img" aria-label="英国 / UK">
+<svg xmlns="http://www.w3.org/2000/svg" width="144" height="144" viewBox="0 0 144 144" role="img" aria-label="英国 / UK">
   <defs>
-    <linearGradient id="bg" x1="94" y1="50" x2="420" y2="468" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#1b1c1f"/>
-      <stop offset=".58" stop-color="#090a0c"/>
-      <stop offset="1" stop-color="#000000"/>
-    </linearGradient>
-    <radialGradient id="sheen" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(164 104) rotate(42) scale(326)">
-      <stop offset="0" stop-color="#ffffff" stop-opacity=".17"/>
-      <stop offset=".44" stop-color="#ffffff" stop-opacity=".055"/>
-      <stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
-    </radialGradient>
-    <filter id="markShadow" x="-18%" y="-18%" width="136%" height="148%">
-      <feDropShadow dx="0" dy="10" stdDeviation="12" flood-color="#000000" flood-opacity=".38"/>
+    <filter id="shadow" x="-25%" y="-25%" width="150%" height="160%">
+      <feDropShadow dx="0" dy="4" stdDeviation="4" flood-color="#000000" flood-opacity=".18"/>
     </filter>
   </defs>
-  <rect x="24" y="24" width="464" height="464" rx="118" fill="url(#bg)"/>
-  <rect x="25.5" y="25.5" width="461" height="461" rx="116.5" fill="none" stroke="#f8f3e8" stroke-width="3" stroke-opacity=".13"/>
-  <rect x="51" y="51" width="410" height="410" rx="96" fill="none" stroke="#f8f3e8" stroke-width="1.5" stroke-opacity=".07"/>
-  <circle cx="154" cy="105" r="214" fill="url(#sheen)"/>
-  <path d="M104 392c48 24 100 36 156 36 54 0 104-10 150-31" fill="none" stroke="#f8f3e8" stroke-width="10" stroke-linecap="round" stroke-opacity=".045"/>
-  <g filter="url(#markShadow)">
-
-    <clipPath id="flagClip"><rect x="120" y="166" width="272" height="181" rx="26"/></clipPath>
-    <rect x="120" y="166" width="272" height="181" rx="26" fill="#102a5f"/>
-    <g clip-path="url(#flagClip)">
-      <path d="M120 166l272 181M392 166L120 347" stroke="#f6f1e8" stroke-width="39"/>
-      <path d="M120 166l272 181M392 166L120 347" stroke="#a91d2d" stroke-width="18"/>
-      <path d="M256 166v181M120 256h272" stroke="#f6f1e8" stroke-width="52"/>
-      <path d="M256 166v181M120 256h272" stroke="#a91d2d" stroke-width="26"/>
+  <g filter="url(#shadow)">
+    <clipPath id="flag"><rect x="13" y="28" width="118" height="88" rx="9"/></clipPath>
+    <rect x="13" y="28" width="118" height="88" rx="9" fill="#f8fafc"/>
+    <g clip-path="url(#flag)">
+      <rect x="13" y="28" width="118" height="88" fill="#23477d"/>
+      <path d="M13 28l118 88M131 28L13 116" stroke="#f8fafc" stroke-width="18"/>
+      <path d="M13 28l118 88M131 28L13 116" stroke="#d21f45" stroke-width="8"/>
+      <path d="M72 28v88M13 72h118" stroke="#f8fafc" stroke-width="25"/>
+      <path d="M72 28v88M13 72h118" stroke="#d21f45" stroke-width="12"/>
     </g>
-    <rect x="120" y="166" width="272" height="181" rx="26" fill="none" stroke="#f6f1e8" stroke-width="14"/>
-    <path d="M151 383h210" fill="none" stroke="#f6f1e8" stroke-width="14" stroke-linecap="round"/>
-
+    <rect x="13" y="28" width="118" height="88" rx="9" fill="none" stroke="#ffffff" stroke-width="2" stroke-opacity=".85"/>
   </g>
 </svg>

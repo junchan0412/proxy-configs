@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import html
+import json
 import shutil
 import subprocess
 from dataclasses import dataclass
@@ -10,9 +11,18 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "icons" / "surge-policy-groups"
-SIZE = 512
+SIZE = 144
 PREVIEW_SIZE = 1600
+ICON_SET = "policy-icons.json"
 ICON_URL_BASE = "https://fastly.jsdelivr.net/gh/qidewei2004/proxy-configs@main/icons/surge-policy-groups"
+
+INK = "#8f9bb3"
+INK_SOFT = "#b7c0d3"
+INK_DARK = "#59657d"
+WHITE = "#f8fafc"
+RED = "#d21f45"
+BLUE = "#23477d"
+YELLOW = "#f6d365"
 
 
 @dataclass(frozen=True)
@@ -20,7 +30,8 @@ class Icon:
     slug: str
     title: str
     aliases: tuple[str, ...]
-    glyph: str
+    body: str
+    is_flag: bool = False
 
 
 def esc(value: str) -> str:
@@ -31,218 +42,208 @@ def shell_quote(path: Path) -> str:
     return str(path)
 
 
-def icon_svg(icon: Icon) -> str:
-    return f"""<svg xmlns="http://www.w3.org/2000/svg" width="{SIZE}" height="{SIZE}" viewBox="0 0 {SIZE} {SIZE}" role="img" aria-label="{esc(icon.title)}">
+def svg_icon(icon: Icon) -> str:
+    return f"""<svg xmlns="http://www.w3.org/2000/svg" width="{SIZE}" height="{SIZE}" viewBox="0 0 144 144" role="img" aria-label="{esc(icon.title)}">
   <defs>
-    <linearGradient id="bg" x1="94" y1="50" x2="420" y2="468" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#1b1c1f"/>
-      <stop offset=".58" stop-color="#090a0c"/>
-      <stop offset="1" stop-color="#000000"/>
-    </linearGradient>
-    <radialGradient id="sheen" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(164 104) rotate(42) scale(326)">
-      <stop offset="0" stop-color="#ffffff" stop-opacity=".17"/>
-      <stop offset=".44" stop-color="#ffffff" stop-opacity=".055"/>
-      <stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
-    </radialGradient>
-    <filter id="markShadow" x="-18%" y="-18%" width="136%" height="148%">
-      <feDropShadow dx="0" dy="10" stdDeviation="12" flood-color="#000000" flood-opacity=".38"/>
+    <filter id="shadow" x="-25%" y="-25%" width="150%" height="160%">
+      <feDropShadow dx="0" dy="4" stdDeviation="4" flood-color="#000000" flood-opacity=".18"/>
     </filter>
   </defs>
-  <rect x="24" y="24" width="464" height="464" rx="118" fill="url(#bg)"/>
-  <rect x="25.5" y="25.5" width="461" height="461" rx="116.5" fill="none" stroke="#f8f3e8" stroke-width="3" stroke-opacity=".13"/>
-  <rect x="51" y="51" width="410" height="410" rx="96" fill="none" stroke="#f8f3e8" stroke-width="1.5" stroke-opacity=".07"/>
-  <circle cx="154" cy="105" r="214" fill="url(#sheen)"/>
-  <path d="M104 392c48 24 100 36 156 36 54 0 104-10 150-31" fill="none" stroke="#f8f3e8" stroke-width="10" stroke-linecap="round" stroke-opacity=".045"/>
-  <g filter="url(#markShadow)">
-{icon.glyph}
+  <g filter="url(#shadow)">
+{icon.body}
   </g>
 </svg>
 """
 
 
-def g(content: str, *, stroke: str = "#f8fafc", width: int = 24, fill: str = "none", opacity: str | None = None) -> str:
+def p(d: str, *, stroke: str = INK, width: float = 9, fill: str = "none", opacity: str | None = None) -> str:
     op = f' opacity="{opacity}"' if opacity else ""
-    return f'    <g fill="{fill}" stroke="{stroke}" stroke-width="{width}" stroke-linecap="round" stroke-linejoin="round"{op}>\n{content}\n    </g>'
+    return f'    <path d="{d}" fill="{fill}" stroke="{stroke}" stroke-width="{width}" stroke-linecap="round" stroke-linejoin="round"{op}/>'
 
 
-def line(x1: int, y1: int, x2: int, y2: int) -> str:
-    return f'      <path d="M{x1} {y1}L{x2} {y2}"/>'
+def circle(cx: float, cy: float, r: float, *, stroke: str = INK, width: float = 8, fill: str = "none") -> str:
+    return f'    <circle cx="{cx}" cy="{cy}" r="{r}" fill="{fill}" stroke="{stroke}" stroke-width="{width}"/>'
 
 
-def glyphs() -> dict[str, str]:
-    white = "#f6f1e8"
-    soft = "#aaa39a"
-    red = "#a91d2d"
-    blue = "#173a72"
-    deep_blue = "#102a5f"
+def rect(x: float, y: float, w: float, h: float, rx: float, *, stroke: str = INK, width: float = 8, fill: str = "none") -> str:
+    return f'    <rect x="{x}" y="{y}" width="{w}" height="{h}" rx="{rx}" fill="{fill}" stroke="{stroke}" stroke-width="{width}"/>'
+
+
+def mini_glyphs() -> dict[str, str]:
     return {
-        "proxy": f"""
-    <path d="M256 166v79M256 278l-95 76M256 278l95 76M161 354h190" fill="none" stroke="{white}" stroke-width="18" stroke-linecap="round" stroke-linejoin="round"/>
-    <circle cx="256" cy="144" r="34" fill="none" stroke="{white}" stroke-width="17"/>
-    <circle cx="256" cy="267" r="25" fill="#090a0c" stroke="{white}" stroke-width="15"/>
-    <circle cx="142" cy="369" r="32" fill="none" stroke="{white}" stroke-width="17"/>
-    <circle cx="370" cy="369" r="32" fill="none" stroke="{white}" stroke-width="17"/>
-    <path d="M193 213c19-15 40-23 63-23s44 8 63 23" fill="none" stroke="{soft}" stroke-width="11" stroke-linecap="round" opacity=".72"/>
-""",
-        "auto": f"""
-    <circle cx="256" cy="256" r="121" fill="none" stroke="{white}" stroke-width="16"/>
-    <circle cx="256" cy="256" r="72" fill="none" stroke="{soft}" stroke-width="8" opacity=".68"/>
-    <path d="M302 170l-36 103-100 39 103-102z" fill="{white}"/>
-    <path d="M230 287l-64 25 66-65z" fill="#090a0c" opacity=".88"/>
-    <path d="M256 116v-28M256 424v-28M116 256H88M424 256h-28" fill="none" stroke="{white}" stroke-width="13" stroke-linecap="round"/>
-    <path d="M348 139l9 22 23 9-23 9-9 22-9-22-23-9 23-9z" fill="{white}"/>
-""",
-        "final": f"""
-    <path d="M172 137v247" fill="none" stroke="{white}" stroke-width="17" stroke-linecap="round"/>
-    <path d="M172 151h202l-34 55 34 55H172z" fill="none" stroke="{white}" stroke-width="17" stroke-linejoin="round"/>
-    <path d="M173 151h67v55h-67M306 151v55M240 206v55M306 206h67" fill="none" stroke="{soft}" stroke-width="12" stroke-linecap="round" opacity=".82"/>
-    <path d="M139 395h235" fill="none" stroke="{white}" stroke-width="18" stroke-linecap="round"/>
-""",
-        "intl-services": f"""
-    <circle cx="256" cy="252" r="118" fill="none" stroke="{white}" stroke-width="16"/>
-    <path d="M138 252h236M256 134c42 47 63 86 63 118s-21 71-63 118M256 134c-42 47-63 86-63 118s21 71 63 118" fill="none" stroke="{white}" stroke-width="13" stroke-linecap="round"/>
-    <path d="M171 176c31 22 64 33 99 33 28 0 56-7 83-22M171 324c31-22 64-33 99-33 28 0 56 7 83 22" fill="none" stroke="{soft}" stroke-width="10" stroke-linecap="round" opacity=".78"/>
-    <path d="M118 309c50 40 103 60 159 60 43 0 82-10 117-29" fill="none" stroke="{white}" stroke-width="10" stroke-linecap="round" opacity=".72"/>
-    <circle cx="394" cy="340" r="16" fill="{white}"/>
-""",
-        "ai": f"""
-    <rect x="157" y="157" width="198" height="198" rx="50" fill="none" stroke="{white}" stroke-width="16"/>
-    <path d="M132 204h-33M132 256H99M132 308H99M380 204h33M380 256h33M380 308h33M204 132V99M256 132V99M308 132V99M204 380v33M256 380v33M308 380v33" fill="none" stroke="{white}" stroke-width="12" stroke-linecap="round"/>
-    <path d="M219 229l67-35M219 229l62 82M286 194l-5 117" fill="none" stroke="{soft}" stroke-width="10" stroke-linecap="round"/>
-    <circle cx="219" cy="229" r="21" fill="#090a0c" stroke="{white}" stroke-width="13"/>
-    <circle cx="286" cy="194" r="21" fill="#090a0c" stroke="{white}" stroke-width="13"/>
-    <circle cx="281" cy="311" r="23" fill="{white}"/>
-""",
-        "global-community": f"""
-    <path d="M151 173h187c30 0 54 24 54 54v59c0 30-24 54-54 54h-83l-65 48v-48h-39c-30 0-54-24-54-54v-59c0-30 24-54 54-54z" fill="none" stroke="{white}" stroke-width="16" stroke-linejoin="round"/>
-    <path d="M172 235h167M172 283h112" fill="none" stroke="{white}" stroke-width="14" stroke-linecap="round"/>
-    <circle cx="376" cy="174" r="26" fill="#090a0c" stroke="{soft}" stroke-width="12"/>
-    <circle cx="118" cy="344" r="21" fill="#090a0c" stroke="{soft}" stroke-width="11"/>
-""",
-        "chinese-content": f"""
-    <rect x="151" y="133" width="214" height="282" rx="45" fill="none" stroke="{white}" stroke-width="16"/>
-    <path d="M206 202h111M257 202v150M197 280h119" fill="none" stroke="{white}" stroke-width="20" stroke-linecap="round" stroke-linejoin="round"/>
-    <path d="M174 371h136" fill="none" stroke="{soft}" stroke-width="11" stroke-linecap="round" opacity=".75"/>
-    <path d="M340 348h39v39h-39z" fill="none" stroke="{white}" stroke-width="11" stroke-linejoin="round"/>
-""",
-        "emby": f"""
-    <rect x="128" y="160" width="256" height="173" rx="42" fill="none" stroke="{white}" stroke-width="16"/>
-    <path d="M235 209l82 47-82 47z" fill="none" stroke="{white}" stroke-width="16" stroke-linejoin="round"/>
-    <path d="M168 372h188M205 410h114" fill="none" stroke="{white}" stroke-width="16" stroke-linecap="round"/>
-    <circle cx="378" cy="158" r="18" fill="{white}"/>
-""",
-        "game": f"""
-    <path d="M166 219c-39 0-64 40-73 102-7 49 13 78 45 78 25 0 44-23 58-48h120c14 25 33 48 58 48 32 0 52-29 45-78-9-62-34-102-73-102-28 0-45 10-60 25h-91c-15-15-32-25-59-25z" fill="none" stroke="{white}" stroke-width="16" stroke-linejoin="round"/>
-    <path d="M158 287h68M192 253v68" fill="none" stroke="{white}" stroke-width="15" stroke-linecap="round"/>
-    <circle cx="328" cy="282" r="15" fill="{white}"/>
-    <circle cx="372" cy="321" r="15" fill="{white}"/>
-""",
-        "speedtest": f"""
-    <path d="M134 335a122 122 0 0 1 244 0" fill="none" stroke="{white}" stroke-width="16" stroke-linecap="round"/>
-    <path d="M158 335h-34M412 335h-34M179 258l-25-25M333 258l25-25M256 216v-35" fill="none" stroke="{soft}" stroke-width="11" stroke-linecap="round"/>
-    <path d="M256 335l81-91" fill="none" stroke="{white}" stroke-width="17" stroke-linecap="round"/>
-    <circle cx="256" cy="335" r="24" fill="#090a0c" stroke="{white}" stroke-width="14"/>
-    <path d="M177 388h181" fill="none" stroke="{white}" stroke-width="15" stroke-linecap="round"/>
-""",
-        "airport-collection": f"""
-    <path d="M256 117v274" fill="none" stroke="{white}" stroke-width="15" stroke-linecap="round"/>
-    <path d="M128 265l128-53 128 53M205 362l51-38 51 38" fill="none" stroke="{white}" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"/>
-    <circle cx="128" cy="184" r="25" fill="#090a0c" stroke="{white}" stroke-width="14"/>
-    <circle cx="384" cy="184" r="25" fill="#090a0c" stroke="{white}" stroke-width="14"/>
-    <circle cx="256" cy="408" r="24" fill="#090a0c" stroke="{white}" stroke-width="14"/>
-    <path d="M128 184h256M128 184l128 224M384 184L256 408" fill="none" stroke="{soft}" stroke-width="8" stroke-linecap="round" opacity=".62"/>
-""",
-        "singapore": f"""
-    <clipPath id="flagClip"><rect x="120" y="166" width="272" height="181" rx="26"/></clipPath>
-    <rect x="120" y="166" width="272" height="181" rx="26" fill="{white}" opacity=".96"/>
-    <g clip-path="url(#flagClip)">
-      <rect x="120" y="166" width="272" height="91" fill="{red}"/>
-      <rect x="120" y="257" width="272" height="90" fill="{white}"/>
+        "proxy": "\n".join(
+            [
+                circle(72, 72, 46, width=8),
+                p("M52 49l20 23-20 23", width=10),
+                p("M78 49l20 23-20 23", width=10),
+            ]
+        ),
+        "auto": "\n".join(
+            [
+                circle(72, 72, 45, width=8),
+                p("M90 39l-17 45-45 17 45-45z", fill=INK, width=0),
+                p("M72 19v11M72 114v11M19 72h11M114 72h11", stroke=INK_SOFT, width=7),
+                p("M101 26l4 8 8 4-8 4-4 8-4-8-8-4 8-4z", fill=INK, width=0),
+            ]
+        ),
+        "final": "\n".join(
+            [
+                p("M42 23v97", width=8),
+                p("M42 28h71l-14 22 14 22H42z", width=8),
+                p("M42 28h24v22H42M82 28v22M66 50v22M82 50h31", stroke=INK_SOFT, width=5),
+                p("M28 120h88", width=8),
+            ]
+        ),
+        "intl-services": "\n".join(
+            [
+                circle(72, 68, 44, width=8),
+                p("M28 68h88M72 24c17 18 25 33 25 44s-8 26-25 44M72 24c-17 18-25 33-25 44s8 26 25 44", width=6),
+                p("M38 43c12 9 25 13 39 13 11 0 22-3 32-9M38 93c12-9 25-13 39-13 11 0 22 3 32 9", stroke=INK_SOFT, width=5),
+                p("M26 108c21 14 42 21 64 21 12 0 23-2 33-7", stroke=INK_SOFT, width=5),
+            ]
+        ),
+        "ai": "\n".join(
+            [
+                rect(31, 31, 82, 82, 18, width=8),
+                p("M19 53h12M19 72h12M19 91h12M113 53h12M113 72h12M113 91h12M53 19v12M72 19v12M91 19v12M53 113v12M72 113v12M91 113v12", stroke=INK_SOFT, width=5),
+                p("M48 95l14-44 14 44M53 80h23", width=8),
+                p("M92 52v43", width=8),
+                p("M45 109h64", stroke=INK_SOFT, width=5),
+            ]
+        ),
+        "global-community": "\n".join(
+            [
+                p("M35 43h67c12 0 22 10 22 22v23c0 12-10 22-22 22H72l-25 19v-19H35c-12 0-22-10-22-22V65c0-12 10-22 22-22z", width=8),
+                p("M43 67h57M43 86h38", stroke=INK_SOFT, width=7),
+                circle(116, 42, 9, stroke=INK_SOFT, width=5),
+                circle(20, 111, 7, stroke=INK_SOFT, width=5),
+            ]
+        ),
+        "chinese-content": "\n".join(
+            [
+                rect(28, 24, 88, 102, 15, width=8),
+                p("M46 47h52M72 47v50M48 72h48", width=8),
+                p("M52 103h40M52 113h32", stroke=INK_SOFT, width=5),
+                p("M98 26v22c0 6 5 11 11 11h14", stroke=INK_SOFT, width=5),
+            ]
+        ),
+        "emby": "\n".join(
+            [
+                rect(22, 38, 100, 68, 18, width=8),
+                p("M64 57l31 18-31 18z", width=8),
+                p("M38 121h68M53 133h38", stroke=INK_SOFT, width=7),
+            ]
+        ),
+        "game": "\n".join(
+            [
+                p("M37 59c-16 0-26 17-30 42-3 20 5 32 18 32 10 0 18-9 24-20h46c6 11 14 20 24 20 13 0 21-12 18-32-4-25-14-42-30-42-11 0-18 4-24 10H61c-6-6-13-10-24-10z", width=8),
+                p("M30 87h28M44 73v28", width=7),
+                f'    <circle cx="101" cy="84" r="6.5" fill="{INK}"/>',
+                f'    <circle cx="118" cy="101" r="6.5" fill="{INK}"/>',
+            ]
+        ),
+        "speedtest": "\n".join(
+            [
+                p("M25 103a47 47 0 0 1 94 0", width=8),
+                p("M34 103H19M125 103h-15M42 75L31 64M102 75l11-11M72 62V47", stroke=INK_SOFT, width=5),
+                p("M72 103l31-36", width=8),
+                circle(72, 103, 9, width=6),
+                p("M43 124h58", stroke=INK_SOFT, width=6),
+            ]
+        ),
+        "airport-collection": "\n".join(
+            [
+                p("M72 18v108", width=8),
+                p("M22 77l50-22 50 22M52 117l20-16 20 16", width=8),
+                circle(22, 45, 9, width=6),
+                circle(122, 45, 9, width=6),
+                circle(72, 130, 9, width=6),
+                p("M22 45h100M22 45l50 85M122 45L72 130", stroke=INK_SOFT, width=4, opacity=".8"),
+            ]
+        ),
+        "stream": "\n".join(
+            [
+                rect(22, 36, 98, 66, 18, width=8),
+                p("M63 55l31 18-31 18z", width=8),
+                p("M38 117h68M53 130h38", stroke=INK_SOFT, width=7),
+                p("M126 47c9 8 14 17 14 28s-5 20-14 28", stroke=INK_SOFT, width=6),
+            ]
+        ),
+        "tiktok": "\n".join(
+            [
+                p("M80 26v69c0 18-14 33-34 33-16 0-29-12-29-27 0-16 13-28 30-28 5 0 9 1 13 3", width=9),
+                p("M80 26c7 20 20 31 39 34", width=9),
+                p("M63 96c0 9-7 16-17 16-7 0-13-5-13-11 0-7 6-12 14-12", stroke=INK_SOFT, width=5),
+            ]
+        ),
+    }
+
+
+def flag_frame(inner: str) -> str:
+    return f"""    <clipPath id="flag"><rect x="13" y="28" width="118" height="88" rx="9"/></clipPath>
+    <rect x="13" y="28" width="118" height="88" rx="9" fill="{WHITE}"/>
+    <g clip-path="url(#flag)">
+{inner}
     </g>
-    <rect x="120" y="166" width="272" height="181" rx="26" fill="none" stroke="{white}" stroke-width="14"/>
-    <circle cx="176" cy="211" r="31" fill="{white}"/>
-    <circle cx="189" cy="211" r="31" fill="{red}"/>
-    <path d="M233 189l5 10 11 2-8 8 2 11-10-5-10 5 2-11-8-8 11-2zM263 205l5 10 11 2-8 8 2 11-10-5-10 5 2-11-8-8 11-2zM233 230l5 10 11 2-8 8 2 11-10-5-10 5 2-11-8-8 11-2z" fill="{white}"/>
-    <path d="M151 383h210" fill="none" stroke="{white}" stroke-width="14" stroke-linecap="round"/>
-""",
-        "japan": f"""
-    <rect x="123" y="166" width="266" height="181" rx="27" fill="{white}" opacity=".96"/>
-    <rect x="123" y="166" width="266" height="181" rx="27" fill="none" stroke="{white}" stroke-width="14"/>
-    <circle cx="256" cy="256" r="54" fill="{red}"/>
-    <path d="M151 383h210" fill="none" stroke="{white}" stroke-width="14" stroke-linecap="round"/>
-""",
-        "hong-kong": f"""
-    <clipPath id="flagClip"><rect x="120" y="166" width="272" height="181" rx="26"/></clipPath>
-    <rect x="120" y="166" width="272" height="181" rx="26" fill="{red}"/>
-    <g transform="translate(256 256)">
-      <path d="M0-78c20 29 17 54-8 75 38-5 61 9 70 42 11-36 33-51 68-44-27-25-30-50-8-77-34 14-59 7-76-22-4 36-21 56-59 61 33 14 46 34 40 62-27-24-31-48-27-97z" fill="{white}"/>
-      <circle cx="32" cy="-8" r="10" fill="{red}"/>
-    </g>
-    <rect x="120" y="166" width="272" height="181" rx="26" fill="none" stroke="{white}" stroke-width="14"/>
-    <path d="M151 383h210" fill="none" stroke="{white}" stroke-width="14" stroke-linecap="round"/>
-""",
-        "taiwan": f"""
-    <clipPath id="flagClip"><rect x="120" y="166" width="272" height="181" rx="26"/></clipPath>
-    <rect x="120" y="166" width="272" height="181" rx="26" fill="{red}"/>
-    <g clip-path="url(#flagClip)">
-      <rect x="120" y="166" width="136" height="91" fill="{blue}"/>
-    </g>
-    <g transform="translate(188 211)">
-      <circle r="23" fill="{white}"/>
-      <path d="M0-54v18M0 36v18M-54 0h18M36 0h18M-38-38l13 13M25 25l13 13M38-38L25-25M-25 25l-13 13M-50-21l17 7M33 14l17 7M50-21l-17 7M-33 14l-17 7M-21-50l7 17M14 33l7 17M21-50l-7 17M-14 33l-7 17" stroke="{white}" stroke-width="8" stroke-linecap="round"/>
-    </g>
-    <rect x="120" y="166" width="272" height="181" rx="26" fill="none" stroke="{white}" stroke-width="14"/>
-    <path d="M151 383h210" fill="none" stroke="{white}" stroke-width="14" stroke-linecap="round"/>
-""",
-        "korea": f"""
-    <rect x="123" y="166" width="266" height="181" rx="27" fill="{white}" opacity=".96"/>
-    <rect x="123" y="166" width="266" height="181" rx="27" fill="none" stroke="{white}" stroke-width="14"/>
-    <circle cx="256" cy="256" r="50" fill="{blue}"/>
-    <path d="M206 256a50 50 0 0 1 100 0c-17-15-34-15-50 0s-33 15-50 0z" fill="{red}"/>
-    <path d="M206 256a50 50 0 0 0 100 0c-17-15-34-15-50 0s-33 15-50 0z" fill="{blue}"/>
-    <path d="M157 199l34-34M181 213l34-34M334 165l34 34M315 179l34 34M157 313l34 34M181 299l34 34M334 347l34-34M315 333l34-34" stroke="#121316" stroke-width="8" stroke-linecap="round"/>
-    <path d="M151 383h210" fill="none" stroke="{white}" stroke-width="14" stroke-linecap="round"/>
-""",
-        "united-states": f"""
-    <clipPath id="flagClip"><rect x="120" y="166" width="272" height="181" rx="26"/></clipPath>
-    <rect x="120" y="166" width="272" height="181" rx="26" fill="{white}"/>
-    <g clip-path="url(#flagClip)">
-      <path d="M120 185h272M120 223h272M120 261h272M120 299h272M120 337h272" stroke="{red}" stroke-width="19"/>
-      <rect x="120" y="166" width="123" height="101" fill="{blue}"/>
-    </g>
-    <path d="M181 189l9 18 20 3-14 14 3 20-18-9-18 9 3-20-14-14 20-3z" fill="{white}"/>
-    <rect x="120" y="166" width="272" height="181" rx="26" fill="none" stroke="{white}" stroke-width="14"/>
-    <path d="M151 383h210" fill="none" stroke="{white}" stroke-width="14" stroke-linecap="round"/>
-""",
-        "united-kingdom": f"""
-    <clipPath id="flagClip"><rect x="120" y="166" width="272" height="181" rx="26"/></clipPath>
-    <rect x="120" y="166" width="272" height="181" rx="26" fill="{deep_blue}"/>
-    <g clip-path="url(#flagClip)">
-      <path d="M120 166l272 181M392 166L120 347" stroke="{white}" stroke-width="39"/>
-      <path d="M120 166l272 181M392 166L120 347" stroke="{red}" stroke-width="18"/>
-      <path d="M256 166v181M120 256h272" stroke="{white}" stroke-width="52"/>
-      <path d="M256 166v181M120 256h272" stroke="{red}" stroke-width="26"/>
-    </g>
-    <rect x="120" y="166" width="272" height="181" rx="26" fill="none" stroke="{white}" stroke-width="14"/>
-    <path d="M151 383h210" fill="none" stroke="{white}" stroke-width="14" stroke-linecap="round"/>
-""",
-        "stream": f"""
-    <rect x="128" y="160" width="256" height="173" rx="42" fill="none" stroke="{white}" stroke-width="16"/>
-    <path d="M235 209l82 47-82 47z" fill="none" stroke="{white}" stroke-width="16" stroke-linejoin="round"/>
-    <path d="M168 372h188M205 410h114M400 187c23 18 35 42 35 71s-12 52-35 70" fill="none" stroke="{white}" stroke-width="14" stroke-linecap="round"/>
-""",
-        "tiktok": f"""
-    <path d="M280 136v185c0 49-37 86-88 86-44 0-78-30-78-70 0-42 33-72 78-72 13 0 24 2 35 7" fill="none" stroke="{white}" stroke-width="18" stroke-linecap="round" stroke-linejoin="round"/>
-    <path d="M280 136c17 50 49 79 95 88" fill="none" stroke="{white}" stroke-width="18" stroke-linecap="round"/>
-    <path d="M242 320c0 24-18 42-44 42-20 0-36-12-36-29 0-19 16-31 38-31" fill="none" stroke="{soft}" stroke-width="11" stroke-linecap="round"/>
-""",
+    <rect x="13" y="28" width="118" height="88" rx="9" fill="none" stroke="#ffffff" stroke-width="2" stroke-opacity=".85"/>"""
+
+
+def flag_glyphs() -> dict[str, str]:
+    return {
+        "singapore": flag_frame(
+            f"""      <rect x="13" y="28" width="118" height="44" fill="{RED}"/>
+      <rect x="13" y="72" width="118" height="44" fill="{WHITE}"/>
+      <circle cx="40" cy="50" r="16" fill="{WHITE}"/>
+      <circle cx="47" cy="50" r="16" fill="{RED}"/>
+      <path d="M67 39l2.8 5.5 6.1.9-4.4 4.3 1 6-5.5-2.9-5.4 2.9 1-6-4.5-4.3 6.2-.9zM85 49l2.8 5.5 6.1.9-4.4 4.3 1 6-5.5-2.9-5.4 2.9 1-6-4.5-4.3 6.2-.9zM67 63l2.8 5.5 6.1.9-4.4 4.3 1 6-5.5-2.9-5.4 2.9 1-6-4.5-4.3 6.2-.9z" fill="{WHITE}"/>"""
+        ),
+        "japan": flag_frame(
+            f"""      <rect x="13" y="28" width="118" height="88" fill="{WHITE}"/>
+      <circle cx="72" cy="72" r="26" fill="{RED}"/>"""
+        ),
+        "hong-kong": flag_frame(
+            f"""      <rect x="13" y="28" width="118" height="88" fill="{RED}"/>
+      <g transform="translate(72 72)">
+        <path d="M0-36c10 13 9 25-3 35 18-2 29 4 34 19 5-17 16-24 32-21-13-12-14-24-4-36-16 6-28 3-36-10-2 17-10 26-28 29 16 6 22 16 19 30-13-11-15-22-14-46z" fill="{WHITE}"/>
+        <circle cx="15" cy="-4" r="4.5" fill="{RED}"/>
+      </g>"""
+        ),
+        "taiwan": flag_frame(
+            f"""      <rect x="13" y="28" width="118" height="88" fill="{RED}"/>
+      <rect x="13" y="28" width="59" height="44" fill="{BLUE}"/>
+      <g transform="translate(42.5 50)">
+        <circle r="11" fill="{WHITE}"/>
+        <path d="M0-25v8M0 17v8M-25 0h8M17 0h8M-18-18l6 6M12 12l6 6M18-18l-6 6M-12 12l-6 6M-23-10l8 3M15 7l8 3M23-10l-8 3M-15 7l-8 3M-10-23l3 8M7 15l3 8M10-23l-3 8M-7 15l-3 8" stroke="{WHITE}" stroke-width="3.5" stroke-linecap="round"/>
+      </g>"""
+        ),
+        "korea": flag_frame(
+            f"""      <rect x="13" y="28" width="118" height="88" fill="{WHITE}"/>
+      <circle cx="72" cy="72" r="23" fill="{BLUE}"/>
+      <path d="M49 72a23 23 0 0 1 46 0c-8-7-15-7-23 0s-15 7-23 0z" fill="{RED}"/>
+      <path d="M49 72a23 23 0 0 0 46 0c-8-7-15-7-23 0s-15 7-23 0z" fill="{BLUE}"/>
+      <path d="M28 47l15-15M39 52l15-15M100 32l15 15M91 37l15 15M28 97l15 15M39 92l15 15M100 112l15-15M91 107l15-15" stroke="#111827" stroke-width="3.6" stroke-linecap="round"/>"""
+        ),
+        "united-states": flag_frame(
+            f"""      <rect x="13" y="28" width="118" height="88" fill="{WHITE}"/>
+      <path d="M13 36h118M13 52h118M13 68h118M13 84h118M13 100h118" stroke="{RED}" stroke-width="8"/>
+      <rect x="13" y="28" width="54" height="49" fill="{BLUE}"/>
+      <path d="M39 38l4 8 9 1.3-6.5 6.3 1.5 9-8-4.2-8 4.2 1.5-9-6.5-6.3 9-1.3z" fill="{WHITE}"/>"""
+        ),
+        "united-kingdom": flag_frame(
+            f"""      <rect x="13" y="28" width="118" height="88" fill="{BLUE}"/>
+      <path d="M13 28l118 88M131 28L13 116" stroke="{WHITE}" stroke-width="18"/>
+      <path d="M13 28l118 88M131 28L13 116" stroke="{RED}" stroke-width="8"/>
+      <path d="M72 28v88M13 72h118" stroke="{WHITE}" stroke-width="25"/>
+      <path d="M72 28v88M13 72h118" stroke="{RED}" stroke-width="12"/>"""
+        ),
     }
 
 
 def icons() -> list[Icon]:
-    glyph = glyphs()
+    glyph = mini_glyphs()
+    flags = flag_glyphs()
     return [
-        Icon("proxy", "PROXY", ("PROXY",), glyph["proxy"]),
+        Icon("proxy", "PROXY", ("PROXY", "Proxy"), glyph["proxy"]),
         Icon("auto", "Auto / AUTO", ("Auto", "AUTO"), glyph["auto"]),
         Icon("final", "FINAL", ("FINAL",), glyph["final"]),
         Icon("intl-services", "国际基础服务 / INTL", ("国际基础服务", "INTL"), glyph["intl-services"]),
@@ -253,13 +254,13 @@ def icons() -> list[Icon]:
         Icon("game", "Game / GAME", ("Game", "GAME"), glyph["game"]),
         Icon("speedtest", "SpeedTest / SPEEDTEST", ("SpeedTest", "SPEEDTEST"), glyph["speedtest"]),
         Icon("airport-collection", "机场合集", ("机场合集",), glyph["airport-collection"]),
-        Icon("singapore", "新加坡 / SG", ("新加坡", "SG"), glyph["singapore"]),
-        Icon("japan", "日本 / JP", ("日本", "JP"), glyph["japan"]),
-        Icon("hong-kong", "香港 / HK", ("香港", "HK"), glyph["hong-kong"]),
-        Icon("taiwan", "台湾 / TW", ("台湾", "TW"), glyph["taiwan"]),
-        Icon("korea", "韩国 / KR", ("韩国", "KR"), glyph["korea"]),
-        Icon("united-states", "美国 / US", ("美国", "US"), glyph["united-states"]),
-        Icon("united-kingdom", "英国 / UK", ("英国", "UK"), glyph["united-kingdom"]),
+        Icon("singapore", "新加坡 / SG", ("新加坡", "SG"), flags["singapore"], True),
+        Icon("japan", "日本 / JP", ("日本", "JP"), flags["japan"], True),
+        Icon("hong-kong", "香港 / HK", ("香港", "HK"), flags["hong-kong"], True),
+        Icon("taiwan", "台湾 / TW", ("台湾", "TW"), flags["taiwan"], True),
+        Icon("korea", "韩国 / KR", ("韩国", "KR"), flags["korea"], True),
+        Icon("united-states", "美国 / US", ("美国", "US"), flags["united-states"], True),
+        Icon("united-kingdom", "英国 / UK", ("英国", "UK"), flags["united-kingdom"], True),
         Icon("stream", "STREAM", ("STREAM",), glyph["stream"]),
         Icon("tiktok", "TIKTOK", ("TIKTOK",), glyph["tiktok"]),
     ]
@@ -291,12 +292,28 @@ def convert_svg_to_png(svg_path: Path, png_path: Path, size: int = SIZE) -> None
         pass
 
 
+def icon_set_json(items: list[Icon]) -> str:
+    entries = []
+    seen: set[str] = set()
+    for icon in items:
+        for alias in icon.aliases:
+            if alias in seen:
+                continue
+            seen.add(alias)
+            entries.append({"name": alias, "url": f"{ICON_URL_BASE}/{icon.slug}.png"})
+    payload = {
+        "name": "Qidewei Policy Icons",
+        "description": "Transparent mini policy-group icons for Surge, inspired by Qure mini and ColorfulStaticFlag.",
+        "icons": entries,
+    }
+    return json.dumps(payload, ensure_ascii=False, indent=2) + "\n"
+
+
 def contact_sheet_svg(items: list[Icon]) -> str:
     cols = 5
-    tile_w = 188
-    tile_h = 226
+    tile_w = 168
+    tile_h = 194
     margin = 36
-    label_h = 36
     rows = (len(items) + cols - 1) // cols
     width = margin * 2 + cols * tile_w
     height = margin * 2 + rows * tile_h
@@ -309,14 +326,15 @@ def contact_sheet_svg(items: list[Icon]) -> str:
         label = icon.aliases[0]
         cells.append(f"""
   <g transform="translate({x} {y})">
-    <rect x="0" y="0" width="164" height="204" rx="30" fill="#ffffff" opacity=".07" stroke="#ffffff" stroke-opacity=".12"/>
-    <image href="{esc(icon.slug)}.svg" x="26" y="18" width="112" height="112"/>
-    <text x="82" y="164" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="17" font-weight="700" fill="#f8fafc">{esc(label)}</text>
-    <text x="82" y="188" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="11" fill="#94a3b8">{esc(icon.slug)}.png</text>
+    <rect x="0" y="0" width="136" height="162" rx="16" fill="#111827"/>
+    <rect x="0.5" y="0.5" width="135" height="161" rx="15.5" fill="none" stroke="#ffffff" stroke-opacity=".08"/>
+    <image href="{esc(icon.slug)}.svg" x="16" y="12" width="104" height="104"/>
+    <text x="68" y="134" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="14" font-weight="700" fill="#f8fafc">{esc(label)}</text>
+    <text x="68" y="151" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="9" fill="#94a3b8">{esc(icon.slug)}.png</text>
   </g>""")
     return f"""<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" viewBox="0 0 {width} {height}">
-  <rect width="{width}" height="{height}" fill="#0f172a"/>
-  <text x="{margin}" y="26" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="18" font-weight="800" fill="#f8fafc">Surge Policy Group Icons</text>
+  <rect width="{width}" height="{height}" fill="#020617"/>
+  <text x="{margin}" y="24" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="18" font-weight="800" fill="#f8fafc">Qidewei Policy Icons</text>
 {''.join(cells)}
 </svg>
 """
@@ -327,17 +345,19 @@ def readme(items: list[Icon]) -> str:
     for icon in items:
         aliases = " / ".join(icon.aliases)
         rows.append(f"| `{aliases}` | `{icon.slug}.png` | `{ICON_URL_BASE}/{icon.slug}.png` |")
-    return """# Surge Policy Group Icons
+    return f"""# Surge Policy Group Icons
 
-统一风格的 Surge 策略组图标资产。每个图标提供 SVG 母版和 512 x 512 PNG，用于 `icon-url`。
+透明小尺寸 Surge 策略组图标资产。每个图标提供 SVG 母版和 {SIZE} x {SIZE} PNG，可直接作为 `icon-url` 使用，也可通过图标集 JSON 导入 Surge：
 
-设计约束：
+```text
+{ICON_URL_BASE}/{ICON_SET}
+```
 
-- 统一圆角底板、统一描边粗细，适合 Surge 策略组小尺寸列表展示。
-- 非区域策略组以墨黑、象牙白和灰阶为主，减少廉价彩色堆叠。
-- 区域策略组以国旗核心元素重绘，只保留低饱和红、蓝等小面积识别色。
-- 每个策略组保留独立语义：入口、智能、兜底、AI、社区、中文内容、影音、游戏、测速、节点合集和区域选择都有不同符号。
-- `小一` 和 `Baby` 保持原有外部头像图标，不在本套图标中替换。
+设计参考：
+
+- Qure mini：透明背景、单色粗线、小尺寸优先。
+- Qure Light：透明 PNG 图标集结构。
+- ColorfulStaticFlag：地区策略组使用圆角旗帜，而不是再包一层深色底板。
 
 | 策略组 | PNG | icon-url |
 |---|---|---|
@@ -348,19 +368,25 @@ def main() -> None:
     OUT.mkdir(parents=True, exist_ok=True)
     items = icons()
 
+    for stale in OUT.glob("*.png"):
+        stale.unlink()
+    for stale in OUT.glob("*.svg"):
+        stale.unlink()
+
     for icon in items:
         svg_path = OUT / f"{icon.slug}.svg"
         png_path = OUT / f"{icon.slug}.png"
-        svg_path.write_text(icon_svg(icon), encoding="utf-8")
+        svg_path.write_text(svg_icon(icon), encoding="utf-8")
         convert_svg_to_png(svg_path, png_path)
 
     sheet_svg = OUT / "preview.svg"
     sheet_png = OUT / "preview.png"
     sheet_svg.write_text(contact_sheet_svg(items), encoding="utf-8")
     convert_svg_to_png(sheet_svg, sheet_png, size=PREVIEW_SIZE)
+    (OUT / ICON_SET).write_text(icon_set_json(items), encoding="utf-8")
     (OUT / "README.md").write_text(readme(items), encoding="utf-8")
 
-    print(f"Generated {len(items)} icons in {OUT}")
+    print(f"Generated {len(items)} transparent icons and {ICON_SET} in {OUT}")
 
 
 if __name__ == "__main__":

@@ -1,32 +1,14 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" role="img" aria-label="AI">
+<svg xmlns="http://www.w3.org/2000/svg" width="144" height="144" viewBox="0 0 144 144" role="img" aria-label="AI">
   <defs>
-    <linearGradient id="bg" x1="94" y1="50" x2="420" y2="468" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#1b1c1f"/>
-      <stop offset=".58" stop-color="#090a0c"/>
-      <stop offset="1" stop-color="#000000"/>
-    </linearGradient>
-    <radialGradient id="sheen" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(164 104) rotate(42) scale(326)">
-      <stop offset="0" stop-color="#ffffff" stop-opacity=".17"/>
-      <stop offset=".44" stop-color="#ffffff" stop-opacity=".055"/>
-      <stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
-    </radialGradient>
-    <filter id="markShadow" x="-18%" y="-18%" width="136%" height="148%">
-      <feDropShadow dx="0" dy="10" stdDeviation="12" flood-color="#000000" flood-opacity=".38"/>
+    <filter id="shadow" x="-25%" y="-25%" width="150%" height="160%">
+      <feDropShadow dx="0" dy="4" stdDeviation="4" flood-color="#000000" flood-opacity=".18"/>
     </filter>
   </defs>
-  <rect x="24" y="24" width="464" height="464" rx="118" fill="url(#bg)"/>
-  <rect x="25.5" y="25.5" width="461" height="461" rx="116.5" fill="none" stroke="#f8f3e8" stroke-width="3" stroke-opacity=".13"/>
-  <rect x="51" y="51" width="410" height="410" rx="96" fill="none" stroke="#f8f3e8" stroke-width="1.5" stroke-opacity=".07"/>
-  <circle cx="154" cy="105" r="214" fill="url(#sheen)"/>
-  <path d="M104 392c48 24 100 36 156 36 54 0 104-10 150-31" fill="none" stroke="#f8f3e8" stroke-width="10" stroke-linecap="round" stroke-opacity=".045"/>
-  <g filter="url(#markShadow)">
-
-    <rect x="157" y="157" width="198" height="198" rx="50" fill="none" stroke="#f6f1e8" stroke-width="16"/>
-    <path d="M132 204h-33M132 256H99M132 308H99M380 204h33M380 256h33M380 308h33M204 132V99M256 132V99M308 132V99M204 380v33M256 380v33M308 380v33" fill="none" stroke="#f6f1e8" stroke-width="12" stroke-linecap="round"/>
-    <path d="M219 229l67-35M219 229l62 82M286 194l-5 117" fill="none" stroke="#aaa39a" stroke-width="10" stroke-linecap="round"/>
-    <circle cx="219" cy="229" r="21" fill="#090a0c" stroke="#f6f1e8" stroke-width="13"/>
-    <circle cx="286" cy="194" r="21" fill="#090a0c" stroke="#f6f1e8" stroke-width="13"/>
-    <circle cx="281" cy="311" r="23" fill="#f6f1e8"/>
-
+  <g filter="url(#shadow)">
+    <rect x="31" y="31" width="82" height="82" rx="18" fill="none" stroke="#8f9bb3" stroke-width="8"/>
+    <path d="M19 53h12M19 72h12M19 91h12M113 53h12M113 72h12M113 91h12M53 19v12M72 19v12M91 19v12M53 113v12M72 113v12M91 113v12" fill="none" stroke="#b7c0d3" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M48 95l14-44 14 44M53 80h23" fill="none" stroke="#8f9bb3" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M92 52v43" fill="none" stroke="#8f9bb3" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M45 109h64" fill="none" stroke="#b7c0d3" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
   </g>
 </svg>

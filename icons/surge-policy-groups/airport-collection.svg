@@ -1,32 +1,15 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" role="img" aria-label="机场合集">
+<svg xmlns="http://www.w3.org/2000/svg" width="144" height="144" viewBox="0 0 144 144" role="img" aria-label="机场合集">
   <defs>
-    <linearGradient id="bg" x1="94" y1="50" x2="420" y2="468" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#1b1c1f"/>
-      <stop offset=".58" stop-color="#090a0c"/>
-      <stop offset="1" stop-color="#000000"/>
-    </linearGradient>
-    <radialGradient id="sheen" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(164 104) rotate(42) scale(326)">
-      <stop offset="0" stop-color="#ffffff" stop-opacity=".17"/>
-      <stop offset=".44" stop-color="#ffffff" stop-opacity=".055"/>
-      <stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
-    </radialGradient>
-    <filter id="markShadow" x="-18%" y="-18%" width="136%" height="148%">
-      <feDropShadow dx="0" dy="10" stdDeviation="12" flood-color="#000000" flood-opacity=".38"/>
+    <filter id="shadow" x="-25%" y="-25%" width="150%" height="160%">
+      <feDropShadow dx="0" dy="4" stdDeviation="4" flood-color="#000000" flood-opacity=".18"/>
     </filter>
   </defs>
-  <rect x="24" y="24" width="464" height="464" rx="118" fill="url(#bg)"/>
-  <rect x="25.5" y="25.5" width="461" height="461" rx="116.5" fill="none" stroke="#f8f3e8" stroke-width="3" stroke-opacity=".13"/>
-  <rect x="51" y="51" width="410" height="410" rx="96" fill="none" stroke="#f8f3e8" stroke-width="1.5" stroke-opacity=".07"/>
-  <circle cx="154" cy="105" r="214" fill="url(#sheen)"/>
-  <path d="M104 392c48 24 100 36 156 36 54 0 104-10 150-31" fill="none" stroke="#f8f3e8" stroke-width="10" stroke-linecap="round" stroke-opacity=".045"/>
-  <g filter="url(#markShadow)">
-
-    <path d="M256 117v274" fill="none" stroke="#f6f1e8" stroke-width="15" stroke-linecap="round"/>
-    <path d="M128 265l128-53 128 53M205 362l51-38 51 38" fill="none" stroke="#f6f1e8" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"/>
-    <circle cx="128" cy="184" r="25" fill="#090a0c" stroke="#f6f1e8" stroke-width="14"/>
-    <circle cx="384" cy="184" r="25" fill="#090a0c" stroke="#f6f1e8" stroke-width="14"/>
-    <circle cx="256" cy="408" r="24" fill="#090a0c" stroke="#f6f1e8" stroke-width="14"/>
-    <path d="M128 184h256M128 184l128 224M384 184L256 408" fill="none" stroke="#aaa39a" stroke-width="8" stroke-linecap="round" opacity=".62"/>
-
+  <g filter="url(#shadow)">
+    <path d="M72 18v108" fill="none" stroke="#8f9bb3" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M22 77l50-22 50 22M52 117l20-16 20 16" fill="none" stroke="#8f9bb3" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="22" cy="45" r="9" fill="none" stroke="#8f9bb3" stroke-width="6"/>
+    <circle cx="122" cy="45" r="9" fill="none" stroke="#8f9bb3" stroke-width="6"/>
+    <circle cx="72" cy="130" r="9" fill="none" stroke="#8f9bb3" stroke-width="6"/>
+    <path d="M22 45h100M22 45l50 85M122 45L72 130" fill="none" stroke="#b7c0d3" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" opacity=".8"/>
   </g>
 </svg>
