@@ -8,10 +8,11 @@
 
 | 目录 | 内容 |
 |---|---|
-| `surge/` | Surge 可复用干净配置与公开规则集 |
+| `surge/` | Surge 可复用干净配置、公开规则集与功能增强模块 |
 | `shadowrocket/` | Shadowrocket 可复用干净配置 |
-| `modules/` | Surge 功能增强模块（`.sgmodule`），独立可开关，通过 `%APPEND%` / `%INSERT%` 与主配置合并 |
 | `mihomo/` | Mihomo / Clash 覆写模板（`.yaml`），作为 override 叠加到订阅配置之上 |
+| `Rules/Surge/` | Surge 专用规则集归档 |
+| `surge/modules/` | Surge 功能增强模块（`.sgmodule`），独立可开关，通过 `%APPEND%` / `%INSERT%` 与主配置合并 |
 | `icons/` | Surge 策略组图标资产，包含 SVG 母版、512 x 512 PNG 与预览图 |
 
 ## 可复用配置模板
@@ -46,18 +47,18 @@ https://fastly.jsdelivr.net/gh/qidewei2004/proxy-configs@main/icons/surge-policy
 
 | 模块 | 作用 |
 |---|---|
-| `google-redirect.sgmodule` | Google CN 全套重定向至国际版（搜索 / 地图 / 学术 / 翻译 / 书籍） |
-| `redirect-enhance.sgmodule` | Bing 国内版跳国际版、维基百科移动版跳桌面版、知乎/微博/简书外链直跳 |
-| `dns-mapping.sgmodule` | 为阿里系 / 腾讯系核心域名指定对应厂商的加密 DNS（DoH） |
+| `surge/modules/google-redirect.sgmodule` | Google CN 全套重定向至国际版（搜索 / 地图 / 学术 / 翻译 / 书籍） |
+| `surge/modules/redirect-enhance.sgmodule` | Bing 国内版跳国际版、维基百科移动版跳桌面版、知乎/微博/简书外链直跳 |
+| `surge/modules/dns-mapping.sgmodule` | 为阿里系 / 腾讯系核心域名指定对应厂商的加密 DNS（DoH） |
 
 ### 安装
 
 在 Surge 中：**Modules → 安装新模块 → 从 URL 安装**，填入对应模块的 jsdelivr 地址：
 
 ```text
-https://fastly.jsdelivr.net/gh/qidewei2004/proxy-configs@main/modules/google-redirect.sgmodule
-https://fastly.jsdelivr.net/gh/qidewei2004/proxy-configs@main/modules/redirect-enhance.sgmodule
-https://fastly.jsdelivr.net/gh/qidewei2004/proxy-configs@main/modules/dns-mapping.sgmodule
+https://fastly.jsdelivr.net/gh/qidewei2004/proxy-configs@main/surge/modules/google-redirect.sgmodule
+https://fastly.jsdelivr.net/gh/qidewei2004/proxy-configs@main/surge/modules/redirect-enhance.sgmodule
+https://fastly.jsdelivr.net/gh/qidewei2004/proxy-configs@main/surge/modules/dns-mapping.sgmodule
 ```
 
 > 走 jsdelivr CDN 而非 raw.githubusercontent.com，国内访问更稳定。
@@ -71,7 +72,7 @@ https://fastly.jsdelivr.net/gh/qidewei2004/proxy-configs@main/modules/dns-mappin
 校验任一模块：
 
 ```bash
-surge-doctor check modules/google-redirect.sgmodule
+surge-doctor check surge/modules/google-redirect.sgmodule
 ```
 
 ## Mihomo / Clash 覆写

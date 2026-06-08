@@ -20,4 +20,4 @@ jobs:
         run: uv tool install "git+https://github.com/qidewei2004/surge-doctor@v0.1.0"
 
       - name: Validate all modules
-        run: surge-doctor check modules/*.sgmodule --fail-on warning
+        run: surge-doctor check surge/modules/*.sgmodule --fail-on warning

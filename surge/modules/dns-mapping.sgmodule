@@ -2,7 +2,7 @@
 #!desc=为阿里系/腾讯系核心域名指定对应厂商的加密 DNS(DoH),提升国内服务解析准确度与速度。复用经实测的 Host 映射。
 #!category=DNS
 #!author=qidewei2004
-#!homepage=https://github.com/qidewei2004/surge-modules
+#!homepage=https://github.com/qidewei2004/proxy-configs/tree/main/surge/modules
 
 [Host]
 # 阿里系 -> 阿里 DoH
