@@ -68,7 +68,7 @@ surge-doctor check surge/modules/google-redirect.sgmodule
 
 ## Mihomo / Clash 配置
 
-`mihomo/mihomo.yaml` 是一份公有完整模板：包含 DNS（fake-ip + 分流 nameserver-policy）、sniffer、tun、地区节点筛选锚点、策略组与按场景分流的 `rule-providers` / `rules`，并保留空的 `proxies` / `proxy-providers` 占位。
+`mihomo/mihomo.yaml` 是一份公有完整模板：包含 DNS（fake-ip + 分流 nameserver-policy）、sniffer、tun、地区节点筛选锚点、策略组与按场景分流的 `rule-providers` / `rules`，并在 `proxies` / `proxy-providers` 中提供可取消注释的示范模板。
 
 完整模板可直接作为基础配置导入，再补充自己的节点或订阅：
 
