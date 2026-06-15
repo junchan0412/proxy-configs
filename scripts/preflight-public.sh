@@ -26,13 +26,13 @@ echo "[2/6] Mihomo YAML check"
   mihomo/mihomo-override.yaml
 
 echo "[3/6] public sensitivity scan"
-if "$RG" -n --glob '!scripts/preflight-public.sh' "(psk=|ca-p12 = [A-Za-z0-9+/]{40,}|sub\\.store/download|/Users/[^/]+|iCloud~com~nssurge|Mobile Documents|http-api =|external-controller-access =|snell, *[0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+)" README.md Rules surge shadowrocket mihomo scripts; then
+if "$RG" -n --glob '!scripts/preflight-public.sh' "(psk=|ca-p12 = [A-Za-z0-9+/]{40,}|sub\\.store/download|/Users/[^/]+|iCloud~com~nssurge|Mobile Documents|http-api =|external-controller-access =|snell, *[0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+)" README.md Rules surge shadowrocket quantumultx mihomo scripts; then
   echo "sensitive pattern found in public files" >&2
   exit 1
 fi
 
 echo "[4/6] private Emby rule guard"
-if "$RG" -n "emby-meta|Emby/Jellyfin metadata" README.md Rules surge shadowrocket mihomo; then
+if "$RG" -n "emby-meta|Emby/Jellyfin metadata" README.md Rules surge shadowrocket quantumultx mihomo; then
   echo "public Emby metadata reference found" >&2
   exit 1
 fi
@@ -46,7 +46,7 @@ if [[ -d icons ]] || compgen -G "scripts/generate-*policy*icon*.py" >/dev/null; 
   echo "custom policy icon artifact found" >&2
   exit 1
 fi
-if "$RG" -n --glob '!scripts/preflight-public.sh' "proxy-configs@main/.*/.*icon|qidewei2004/proxy-configs.*/.*icon" README.md Rules surge shadowrocket mihomo scripts; then
+if "$RG" -n --glob '!scripts/preflight-public.sh' "proxy-configs@main/.*/.*icon|qidewei2004/proxy-configs.*/.*icon" README.md Rules surge shadowrocket quantumultx mihomo scripts; then
   echo "repo-hosted policy icon reference found" >&2
   exit 1
 fi
@@ -61,6 +61,7 @@ for path in \
   surge/modules/google-redirect.sgmodule \
   surge/modules/redirect-enhance.sgmodule \
   surge/modules/dns-mapping.sgmodule \
+  quantumultx/quantumultx.conf \
   mihomo/mihomo.yaml \
   mihomo/mihomo-override.yaml \
   shadowrocket/shadowrocket.conf \
