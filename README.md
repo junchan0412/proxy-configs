@@ -10,7 +10,7 @@
 |---|---|
 | `surge/` | Surge 可复用干净配置、公开规则集与功能增强模块 |
 | `shadowrocket/` | Shadowrocket 可复用干净配置 |
-| `mihomo/` | Mihomo / Clash 覆写模板（`.yaml`），作为 override 叠加到订阅配置之上 |
+| `mihomo/` | Mihomo / Clash 公有完整配置与覆写模板（`.yaml`） |
 | `Rules/Surge/` | Surge 专用规则集归档 |
 | `surge/modules/` | Surge 功能增强模块（`.sgmodule`），独立可开关，通过 `%APPEND%` / `%INSERT%` 与主配置合并 |
 
@@ -20,7 +20,8 @@
 |---|---|
 | Surge | `https://fastly.jsdelivr.net/gh/qidewei2004/proxy-configs@main/surge/Surge.clean.conf` |
 | Shadowrocket | `https://fastly.jsdelivr.net/gh/qidewei2004/proxy-configs@main/shadowrocket/shadowrocket.conf` |
-| Mihomo / Clash | `https://fastly.jsdelivr.net/gh/qidewei2004/proxy-configs@main/mihomo/mihomo-override.yaml` |
+| Mihomo / Clash 完整模板 | `https://fastly.jsdelivr.net/gh/qidewei2004/proxy-configs@main/mihomo/mihomo.yaml` |
+| Mihomo / Clash 覆写模板 | `https://fastly.jsdelivr.net/gh/qidewei2004/proxy-configs@main/mihomo/mihomo-override.yaml` |
 
 公开模板使用仓库内规则集：
 
@@ -65,9 +66,17 @@ https://fastly.jsdelivr.net/gh/qidewei2004/proxy-configs@main/surge/modules/dns-
 surge-doctor check surge/modules/google-redirect.sgmodule
 ```
 
-## Mihomo / Clash 覆写
+## Mihomo / Clash 配置
 
-`mihomo/mihomo-override.yaml` 是一份覆写模板：包含 DNS（fake-ip + 分流 nameserver-policy）、sniffer、tun、地区节点筛选锚点、策略组与按场景分流的 `rule-providers` / `rules`。
+`mihomo/mihomo.yaml` 是一份公有完整模板：包含 DNS（fake-ip + 分流 nameserver-policy）、sniffer、tun、地区节点筛选锚点、策略组与按场景分流的 `rule-providers` / `rules`，并保留空的 `proxies` / `proxy-providers` 占位。
+
+完整模板可直接作为基础配置导入，再补充自己的节点或订阅：
+
+```text
+https://fastly.jsdelivr.net/gh/qidewei2004/proxy-configs@main/mihomo/mihomo.yaml
+```
+
+`mihomo/mihomo-override.yaml` 是与完整模板对应的覆写版本。
 
 作为 **override / 覆写规则** 在客户端中叠加到你的订阅配置之上即可使用：
 

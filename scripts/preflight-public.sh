@@ -21,7 +21,9 @@ echo "[1/6] Surge template check"
 "$SURGE_CLI" -c surge/Surge.clean.conf
 
 echo "[2/6] Mihomo YAML check"
-/usr/bin/ruby -e 'require "yaml"; YAML.load_file("mihomo/mihomo-override.yaml")'
+/usr/bin/ruby -e 'require "yaml"; ARGV.each { |path| YAML.load_file(path) }' \
+  mihomo/mihomo.yaml \
+  mihomo/mihomo-override.yaml
 
 echo "[3/6] public sensitivity scan"
 if "$RG" -n --glob '!scripts/preflight-public.sh' "(psk=|ca-p12 = [A-Za-z0-9+/]{40,}|sub\\.store/download|/Users/[^/]+|iCloud~com~nssurge|Mobile Documents|http-api =|external-controller-access =|snell, *[0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+)" README.md Rules surge shadowrocket mihomo scripts; then
@@ -59,6 +61,7 @@ for path in \
   surge/modules/google-redirect.sgmodule \
   surge/modules/redirect-enhance.sgmodule \
   surge/modules/dns-mapping.sgmodule \
+  mihomo/mihomo.yaml \
   mihomo/mihomo-override.yaml \
   shadowrocket/shadowrocket.conf \
   surge/Surge.clean.conf; do

@@ -21,3 +21,6 @@ jobs:
 
       - name: Validate all modules
         run: surge-doctor check surge/modules/*.sgmodule --fail-on warning
+
+      - name: Validate Mihomo YAML
+        run: ruby -e 'require "yaml"; ARGV.each { |path| YAML.load_file(path) }' mihomo/mihomo.yaml mihomo/mihomo-override.yaml
