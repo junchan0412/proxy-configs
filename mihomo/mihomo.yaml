@@ -229,17 +229,17 @@ rule-providers:
   DirectCN:
     <<: *TextRuleProviders
     path: './rules/DirectCN.list'
-    url: 'https://fastly.jsdelivr.net/gh/qidewei2004/proxy-configs@main/surge/rules/direct-cn.list'
+    url: 'https://fastly.jsdelivr.net/gh/junchan0412/proxy-configs@main/surge/rules/direct-cn.list'
 
   PreAIInfra:
     <<: *TextRuleProviders
     path: './rules/PreAIInfra.list'
-    url: 'https://fastly.jsdelivr.net/gh/qidewei2004/proxy-configs@main/surge/rules/pre-ai-infra.list'
+    url: 'https://fastly.jsdelivr.net/gh/junchan0412/proxy-configs@main/surge/rules/pre-ai-infra.list'
 
   AIMajor:
     <<: *TextRuleProviders
     path: './rules/AIMajor.list'
-    url: 'https://fastly.jsdelivr.net/gh/qidewei2004/proxy-configs@main/surge/rules/ai-major.list'
+    url: 'https://fastly.jsdelivr.net/gh/junchan0412/proxy-configs@main/surge/rules/ai-major.list'
 
   OpenAI:
     <<: *RuleProviders

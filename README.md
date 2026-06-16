@@ -19,11 +19,11 @@
 
 | 客户端 | 配置 URL |
 |---|---|
-| Surge | `https://fastly.jsdelivr.net/gh/qidewei2004/proxy-configs@main/surge/Surge.clean.conf` |
-| Shadowrocket | `https://fastly.jsdelivr.net/gh/qidewei2004/proxy-configs@main/shadowrocket/shadowrocket.conf` |
-| Quantumult X | `https://fastly.jsdelivr.net/gh/qidewei2004/proxy-configs@main/quantumultx/quantumultx.conf` |
-| Mihomo / Clash 完整模板 | `https://fastly.jsdelivr.net/gh/qidewei2004/proxy-configs@main/mihomo/mihomo.yaml` |
-| Mihomo / Clash 覆写模板 | `https://fastly.jsdelivr.net/gh/qidewei2004/proxy-configs@main/mihomo/mihomo-override.yaml` |
+| Surge | `https://fastly.jsdelivr.net/gh/junchan0412/proxy-configs@main/surge/Surge.clean.conf` |
+| Shadowrocket | `https://fastly.jsdelivr.net/gh/junchan0412/proxy-configs@main/shadowrocket/shadowrocket.conf` |
+| Quantumult X | `https://fastly.jsdelivr.net/gh/junchan0412/proxy-configs@main/quantumultx/quantumultx.conf` |
+| Mihomo / Clash 完整模板 | `https://fastly.jsdelivr.net/gh/junchan0412/proxy-configs@main/mihomo/mihomo.yaml` |
+| Mihomo / Clash 覆写模板 | `https://fastly.jsdelivr.net/gh/junchan0412/proxy-configs@main/mihomo/mihomo-override.yaml` |
 
 公开模板使用仓库内规则集：
 
@@ -49,9 +49,9 @@
 在 Surge 中：**Modules → 安装新模块 → 从 URL 安装**，填入对应模块的 jsdelivr 地址：
 
 ```text
-https://fastly.jsdelivr.net/gh/qidewei2004/proxy-configs@main/surge/modules/google-redirect.sgmodule
-https://fastly.jsdelivr.net/gh/qidewei2004/proxy-configs@main/surge/modules/redirect-enhance.sgmodule
-https://fastly.jsdelivr.net/gh/qidewei2004/proxy-configs@main/surge/modules/dns-mapping.sgmodule
+https://fastly.jsdelivr.net/gh/junchan0412/proxy-configs@main/surge/modules/google-redirect.sgmodule
+https://fastly.jsdelivr.net/gh/junchan0412/proxy-configs@main/surge/modules/redirect-enhance.sgmodule
+https://fastly.jsdelivr.net/gh/junchan0412/proxy-configs@main/surge/modules/dns-mapping.sgmodule
 ```
 
 > 走 jsdelivr CDN 而非 raw.githubusercontent.com，国内访问更稳定。
@@ -60,7 +60,7 @@ https://fastly.jsdelivr.net/gh/qidewei2004/proxy-configs@main/surge/modules/dns-
 
 - **合并而非覆盖**：模块用 `%APPEND%`（追加到列表）/ `%INSERT%`（插入到列表头部）与主配置合并。例如 `google-redirect` 的 MITM hostname 用 `%INSERT%`，只新增 Google 相关主机，不动你已有的 hostname 列表。
 - **MITM 自包含**：凡需要解密 HTTPS 才能生效的重写，模块自带对应的 `[MITM] hostname` 声明，开箱即用。
-- **可被校验**：本仓库所有 Surge 模块均通过 [surge-doctor](https://github.com/qidewei2004/surge-doctor) 校验（`#!name` 元数据完整、重写源主机均已在 MITM 声明）。
+- **可被校验**：本仓库所有 Surge 模块均通过 [surge-doctor](https://github.com/junchan0412/surge-doctor) 校验（`#!name` 元数据完整、重写源主机均已在 MITM 声明）。
 
 校验任一模块：
 
@@ -75,7 +75,7 @@ surge-doctor check surge/modules/google-redirect.sgmodule
 完整模板可直接作为基础配置导入，再补充自己的节点或订阅：
 
 ```text
-https://fastly.jsdelivr.net/gh/qidewei2004/proxy-configs@main/mihomo/mihomo.yaml
+https://fastly.jsdelivr.net/gh/junchan0412/proxy-configs@main/mihomo/mihomo.yaml
 ```
 
 `mihomo/mihomo-override.yaml` 是与完整模板对应的覆写版本。
@@ -83,7 +83,7 @@ https://fastly.jsdelivr.net/gh/qidewei2004/proxy-configs@main/mihomo/mihomo.yaml
 作为 **override / 覆写规则** 在客户端中叠加到你的订阅配置之上即可使用：
 
 ```text
-https://fastly.jsdelivr.net/gh/qidewei2004/proxy-configs@main/mihomo/mihomo-override.yaml
+https://fastly.jsdelivr.net/gh/junchan0412/proxy-configs@main/mihomo/mihomo-override.yaml
 ```
 
 > 公开版不含节点、订阅链接、本机端口和外部控制器配置，请在客户端侧自行补充。

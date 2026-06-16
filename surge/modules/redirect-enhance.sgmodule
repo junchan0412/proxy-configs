@@ -1,8 +1,8 @@
 #!name=重定向增强
 #!desc=高频体验优化:Bing 国内版跳转国际版、维基百科移动版跳桌面版、知乎/微博等外链直跳。纯 302 重定向,稳定不易失效。
 #!category=功能增强
-#!author=qidewei2004
-#!homepage=https://github.com/qidewei2004/proxy-configs/tree/main/surge/modules
+#!author=junchan0412
+#!homepage=https://github.com/junchan0412/proxy-configs/tree/main/surge/modules
 
 [URL Rewrite]
 # Bing:国内版 cn.bing.com -> 国际版 www.bing.com

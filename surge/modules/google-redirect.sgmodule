@@ -1,8 +1,8 @@
 #!name=Google 重定向
 #!desc=将 Google 各项服务的 .cn 域名重定向至国际版(搜索 / 地图 / 学术 / 翻译 / 书籍),避免被导向国内阉割版。
 #!category=功能增强
-#!author=qidewei2004
-#!homepage=https://github.com/qidewei2004/proxy-configs/tree/main/surge/modules
+#!author=junchan0412
+#!homepage=https://github.com/junchan0412/proxy-configs/tree/main/surge/modules
 
 [General]
 # 让重定向目标域名走 HTTP 引擎,确保 302 生效

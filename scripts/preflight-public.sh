@@ -46,7 +46,7 @@ if [[ -d icons ]] || compgen -G "scripts/generate-*policy*icon*.py" >/dev/null; 
   echo "custom policy icon artifact found" >&2
   exit 1
 fi
-if "$RG" -n --glob '!scripts/preflight-public.sh' "proxy-configs@main/.*/.*icon|qidewei2004/proxy-configs.*/.*icon" README.md Rules surge shadowrocket quantumultx mihomo scripts; then
+if "$RG" -n --glob '!scripts/preflight-public.sh' "proxy-configs@main/.*/.*icon|junchan0412/proxy-configs.*/.*icon" README.md Rules surge shadowrocket quantumultx mihomo scripts; then
   echo "repo-hosted policy icon reference found" >&2
   exit 1
 fi
