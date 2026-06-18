@@ -146,6 +146,7 @@ proxy-groups:
   - {name: Auto, <<: *UrlTest, filter: *FilterAll, hidden: false, icon: 'https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Auto.png'}
   - {name: FINAL, type: select, proxies: [PROXY, DIRECT], icon: 'https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Final.png'}
   - {name: 国际基础服务, type: select, proxies: [新加坡, 美国, PROXY, DIRECT], icon: 'https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Global.png'}
+  - {name: Apple服务, type: select, proxies: [国际基础服务, DIRECT, PROXY, 新加坡, 美国], icon: 'https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Apple.png'}
   - {name: AI, type: select, proxies: [美国, 新加坡, 台湾, 日本, PROXY], icon: 'https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/ChatGPT.png'}
   - {name: 国际社区, type: select, proxies: [香港, 新加坡, 美国, 台湾, 日本, PROXY], icon: 'https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Global.png'}
   - {name: Emby, <<: *UrlTest, filter: '^(?=.*((?i)🇭🇰|香港|港|Hong|HK|🇸🇬|新加坡|SG|Singapore|🇰🇷|韩国|韩|KR|Korea|🇹🇼|台湾|台|TW|Tai))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$', hidden: false, icon: 'https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Streaming.png'}
@@ -767,11 +768,25 @@ rules:
   - RULE-SET,China,DIRECT
   - GEOSITE,CN,DIRECT
 
-  # 4. Apple 直连、Microsoft 分流、Google 与支付/云基础设施
+  # 4. Apple 直连、App Store 专项、Microsoft 分流、Google 与支付/云基础设施
   - RULE-SET,iCloud,DIRECT
   - RULE-SET,AppleID,DIRECT
-  - RULE-SET,AppleMedia,DIRECT
-  - RULE-SET,AppleProxy,DIRECT
+  - DOMAIN-SUFFIX,apps.apple.com,Apple服务
+  - DOMAIN-SUFFIX,appsto.re,Apple服务
+  - DOMAIN-SUFFIX,itunes.apple.com,Apple服务
+  - DOMAIN-SUFFIX,mzstatic.com,Apple服务
+  - DOMAIN-SUFFIX,cdn-apple.com,Apple服务
+  - DOMAIN,amp-api.apps.apple.com,Apple服务
+  - DOMAIN,bag.itunes.apple.com,Apple服务
+  - DOMAIN,buy.itunes.apple.com,Apple服务
+  - DOMAIN,init.itunes.apple.com,Apple服务
+  - DOMAIN,iosapps.itunes.apple.com,Apple服务
+  - DOMAIN,lookup-api.apple.com,Apple服务
+  - DOMAIN,osxapps.itunes.apple.com,Apple服务
+  - DOMAIN,phobos.apple.com,Apple服务
+  - DOMAIN,uts-api.itunes.apple.com,Apple服务
+  - RULE-SET,AppleProxy,Apple服务
+  - RULE-SET,AppleMedia,Apple服务
   - RULE-SET,Apple,DIRECT
   - DOMAIN-SUFFIX,msftconnecttest.com,DIRECT
   - DOMAIN-SUFFIX,msftncsi.com,DIRECT

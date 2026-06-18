@@ -24,7 +24,19 @@ echo "[2/6] Mihomo YAML check"
 /usr/bin/ruby - mihomo/mihomo.yaml mihomo/mihomo-override.yaml <<'RUBY'
 require "yaml"
 
-ARGV.each { |path| YAML.load_file(path) }
+ARGV.each do |path|
+  cfg = YAML.load_file(path)
+
+  groups = cfg.fetch("proxy-groups", []).map { |group| group["name"] }
+  raise "#{path} missing Apple服务 proxy group" unless groups.include?("Apple服务")
+
+  rules = cfg.fetch("rules", [])
+  apple_proxy = rules.index("RULE-SET,AppleProxy,Apple服务")
+  apple_direct = rules.index("RULE-SET,Apple,DIRECT")
+  raise "#{path} missing AppleProxy App Store route" unless apple_proxy
+  raise "#{path} missing Apple direct fallback" unless apple_direct
+  raise "#{path} AppleProxy must be before Apple direct fallback" unless apple_proxy < apple_direct
+end
 
 cfg = YAML.load_file("mihomo/mihomo.yaml")
 raise "mihomo/mihomo.yaml proxies must be an array" unless cfg["proxies"].is_a?(Array)
