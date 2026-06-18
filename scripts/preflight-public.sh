@@ -21,9 +21,25 @@ echo "[1/6] Surge template check"
 "$SURGE_CLI" -c surge/Surge.clean.conf
 
 echo "[2/6] Mihomo YAML check"
-/usr/bin/ruby -e 'require "yaml"; ARGV.each { |path| YAML.load_file(path) }' \
-  mihomo/mihomo.yaml \
-  mihomo/mihomo-override.yaml
+/usr/bin/ruby - mihomo/mihomo.yaml mihomo/mihomo-override.yaml <<'RUBY'
+require "yaml"
+
+ARGV.each { |path| YAML.load_file(path) }
+
+cfg = YAML.load_file("mihomo/mihomo.yaml")
+raise "mihomo/mihomo.yaml proxies must be an array" unless cfg["proxies"].is_a?(Array)
+raise "missing NodeParam anchor template" unless cfg["NodeParam"].is_a?(Hash)
+providers = cfg["proxy-providers"]
+raise "proxy-providers must be a hash" unless providers.is_a?(Hash)
+%w[机场一 机场二 机场三].each do |name|
+  provider = providers[name]
+  raise "missing proxy-providers.#{name}" unless provider.is_a?(Hash)
+  raise "#{name} provider must use type: http" unless provider["type"] == "http"
+  raise "#{name} url placeholder missing" unless provider["url"].to_s.include?("replace-with-your-subscription-url")
+  raise "#{name} health-check missing" unless provider["health-check"].is_a?(Hash)
+  raise "#{name} additional-prefix missing" unless provider.dig("override", "additional-prefix").to_s.start_with?("[#{name}]")
+end
+RUBY
 
 echo "[3/6] public sensitivity scan"
 if "$RG" -n --glob '!scripts/preflight-public.sh' "(psk=|ca-p12 = [A-Za-z0-9+/]{40,}|sub\\.store/download|/Users/[^/]+|iCloud~com~nssurge|Mobile Documents|http-api =|external-controller-access =|snell, *[0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+)" README.md Rules surge shadowrocket quantumultx mihomo scripts; then

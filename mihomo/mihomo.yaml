@@ -1,7 +1,7 @@
 # Mihomo / Clash 公有完整配置模板
 # 与 mihomo-override.yaml 保持同一套 DNS、sniffer、tun、策略组和分流规则。
 # 公开版不包含节点、订阅链接、代理监听端口、外部控制器和 secret。
-# 使用前请在 proxies 或 proxy-providers 中按示例加入自己的节点/订阅。
+# 使用前请把 proxy-providers 中的示范 url 替换成你的 Mihomo / Clash 订阅链接。
 
 unified-delay: true
 geodata-mode: false
@@ -17,62 +17,33 @@ log-level: info
 ipv6: false
 udp: true
 
-proxies:
-  # 少量自建节点可放在这里。复制示例、取消注释并替换占位值即可。
-  #
-  # Shadowsocks 示例：
-  # - name: Example-SS
-  #   type: ss
-  #   server: example.com
-  #   port: 8388
-  #   cipher: aes-256-gcm
-  #   password: CHANGE_ME
-  #   udp: true
-  #
-  # Trojan 示例：
-  # - name: Example-Trojan
-  #   type: trojan
-  #   server: example.com
-  #   port: 443
-  #   password: CHANGE_ME
-  #   sni: example.com
-  #   skip-cert-verify: false
-  #   udp: true
-  #
-  # Hysteria2 示例：
-  # - name: Example-Hysteria2
-  #   type: hysteria2
-  #   server: example.com
-  #   port: 443
-  #   password: CHANGE_ME
-  #   sni: example.com
-  #   skip-cert-verify: false
-  #   udp: true
-  []
+proxies: []
 
+# 锚点 - 节点订阅的参数 [每小时更新一次订阅节点，每 5 分钟一次惰性健康检查]
+NodeParam: &NodeParam {type: http, interval: 3600, health-check: {enable: true, url: 'https://www.gstatic.com/generate_204', interval: 300, lazy: true}}
+
+# 锚点 - 节点订阅
 proxy-providers:
-  # 推荐把机场订阅或节点集合放在这里。策略组已启用 include-all-providers。
-  #
-  # 远程订阅示例：
-  # ExampleProvider:
-  #   type: http
-  #   url: "https://example.com/path/to/subscription.yaml"
-  #   interval: 86400
-  #   path: ./providers/ExampleProvider.yaml
-  #   health-check:
-  #     enable: true
-  #     interval: 600
-  #     url: https://www.gstatic.com/generate_204
-  #
-  # 本地节点集合示例：
-  # LocalProvider:
-  #   type: file
-  #   path: ./providers/local.yaml
-  #   health-check:
-  #     enable: true
-  #     interval: 600
-  #     url: https://www.gstatic.com/generate_204
-  {}
+  # 将下面的 url 替换成你的机场 / 节点订阅链接即可直接使用；不用的示范项可以删除。
+  # 策略组已启用 include-all-providers，会自动读取该订阅中的节点。
+  机场一:
+    url: 'https://example.com/replace-with-your-subscription-url-1'
+    <<: *NodeParam
+    path: './proxy_providers/airport-1.yaml'
+    override:
+      additional-prefix: '[机场一] '
+  机场二:
+    url: 'https://example.com/replace-with-your-subscription-url-2'
+    <<: *NodeParam
+    path: './proxy_providers/airport-2.yaml'
+    override:
+      additional-prefix: '[机场二] '
+  机场三:
+    url: 'https://example.com/replace-with-your-subscription-url-3'
+    <<: *NodeParam
+    path: './proxy_providers/airport-3.yaml'
+    override:
+      additional-prefix: '[机场三] '
 
 geox-url:
   geoip: 'https://raw.githubusercontent.com/Loyalsoldier/v2ray-rules-dat/release/geoip.dat'
