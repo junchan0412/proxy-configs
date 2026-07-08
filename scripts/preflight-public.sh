@@ -38,9 +38,25 @@ ARGV.each do |path|
   raise "#{path} Game group order drifted" unless by_name.dig("Game", "proxies") == expected_game_order
   expected_apple_order = %w[DIRECT 国际基础服务 PROXY 新加坡 美国]
   raise "#{path} Apple服务 group order drifted" unless by_name.dig("Apple服务", "proxies") == expected_apple_order
+  expected_speedtest_order = %w[PROXY Auto 香港 新加坡 台湾 日本 韩国 美国 英国 DIRECT]
+  raise "#{path} SpeedTest group order drifted" unless by_name.dig("SpeedTest", "proxies") == expected_speedtest_order
+
+  icon_prefix = "https://fastly.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/"
+  cfg.fetch("proxy-groups", []).each do |group|
+    icon = group["icon"].to_s
+    raise "#{path} #{group["name"]} icon must use Qure jsDelivr URL" unless icon.start_with?(icon_prefix)
+  end
+
+  urls = cfg.fetch("geox-url", {}).values
+  urls += cfg.fetch("rule-providers", {}).values.map { |provider| provider.is_a?(Hash) ? provider["url"] : nil }
+  urls += cfg.fetch("proxy-groups", []).map { |group| group["icon"] }
+  raw_urls = urls.compact.select { |url| url.to_s.include?("raw.githubusercontent.com") }
+  raise "#{path} should not use raw.githubusercontent.com URLs: #{raw_urls.join(", ")}" unless raw_urls.empty?
 
   providers = cfg.fetch("rule-providers", {}).keys.map(&:to_s)
   rules = cfg.fetch("rules", [])
+  duplicate_rules = rules.group_by { |rule| rule }.select { |_rule, instances| instances.size > 1 }.keys
+  raise "#{path} duplicate rules: #{duplicate_rules.join(" | ")}" unless duplicate_rules.empty?
   rules.grep(/^RULE-SET,/).each do |rule|
     provider = rule.split(",", 3)[1]
     raise "#{path} rule references missing provider: #{provider}" unless providers.include?(provider)

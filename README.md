@@ -76,6 +76,8 @@ surge-doctor check surge/modules/google-redirect.sgmodule
 
 App Store 与 Apple 媒体相关域名会先进入 `Apple服务` 策略组，默认直连以保证 ClashMac / macOS 原生商店加载稳定；需要外区商店时，可在客户端中把 `Apple服务` 手动切换到 `国际基础服务`、`PROXY` 或指定地区节点。
 
+Mihomo 模板中的上游规则集和 geodata 默认使用 jsDelivr 地址，减少首次导入时因 `raw.githubusercontent.com` 连接不稳定导致的规则下载失败。
+
 完整模板可直接作为基础配置导入，再补充自己的节点或订阅：
 
 ```text
