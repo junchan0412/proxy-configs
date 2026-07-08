@@ -32,8 +32,14 @@ ARGV.each do |path|
   by_name = cfg.fetch("proxy-groups", []).to_h { |group| [group["name"], group] }
   expected_proxy_order = %w[Auto 香港 新加坡 台湾 日本 韩国 美国 英国 DIRECT]
   raise "#{path} PROXY group order drifted" unless by_name.dig("PROXY", "proxies") == expected_proxy_order
+  expected_final_order = %w[PROXY DIRECT]
+  raise "#{path} FINAL group order drifted" unless by_name.dig("FINAL", "proxies") == expected_final_order
+  expected_base_order = %w[新加坡 美国 香港 PROXY DIRECT]
+  raise "#{path} 国际基础服务 group order drifted" unless by_name.dig("国际基础服务", "proxies") == expected_base_order
   expected_community_order = %w[香港 新加坡 台湾 日本 美国 PROXY]
   raise "#{path} 国际社区 group order drifted" unless by_name.dig("国际社区", "proxies") == expected_community_order
+  expected_ai_order = %w[美国 新加坡 台湾 日本 PROXY]
+  raise "#{path} AI group order drifted" unless by_name.dig("AI", "proxies") == expected_ai_order
   expected_game_order = %w[香港 日本 新加坡 台湾 韩国 美国 PROXY DIRECT]
   raise "#{path} Game group order drifted" unless by_name.dig("Game", "proxies") == expected_game_order
   expected_apple_order = %w[DIRECT 国际基础服务 PROXY 新加坡 美国]
@@ -55,6 +61,23 @@ ARGV.each do |path|
 
   providers = cfg.fetch("rule-providers", {}).keys.map(&:to_s)
   rules = cfg.fetch("rules", [])
+  builtin_policies = %w[DIRECT REJECT REJECT-DROP PASS COMPATIBLE GLOBAL]
+  group_refs = cfg.fetch("proxy-groups", []).flat_map { |group| Array(group["proxies"]).compact }.uniq
+  missing_group_refs = group_refs - groups - builtin_policies
+  raise "#{path} proxy-groups reference missing policies: #{missing_group_refs.join(", ")}" unless missing_group_refs.empty?
+
+  rule_policies = rules.map do |rule|
+    parts = rule.to_s.split(",")
+    case parts[0]
+    when "MATCH"
+      parts[1]
+    when "DOMAIN", "DOMAIN-SUFFIX", "DOMAIN-KEYWORD", "IP-CIDR", "IP-CIDR6", "PROCESS-NAME", "GEOSITE", "GEOIP", "RULE-SET"
+      parts[2]
+    end
+  end.compact.uniq
+  missing_rule_policies = rule_policies - groups - builtin_policies
+  raise "#{path} rules reference missing policies: #{missing_rule_policies.join(", ")}" unless missing_rule_policies.empty?
+
   duplicate_rules = rules.group_by { |rule| rule }.select { |_rule, instances| instances.size > 1 }.keys
   raise "#{path} duplicate rules: #{duplicate_rules.join(" | ")}" unless duplicate_rules.empty?
   rules.grep(/^RULE-SET,/).each do |rule|
