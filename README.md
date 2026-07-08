@@ -74,6 +74,8 @@ surge-doctor check surge/modules/google-redirect.sgmodule
 
 模板内置 `NodeParam` 节点订阅参数锚点，并提供 `机场一` / `机场二` / `机场三` 三个 provider 示例。用户只需要替换对应的 `url` 即可直接使用；策略组已启用 `include-all-providers`，会自动读取订阅内节点，并通过 `additional-prefix` 区分不同机场来源。
 
+App Store 与 Apple 媒体相关域名会先进入 `Apple服务` 策略组，默认直连以保证 ClashMac / macOS 原生商店加载稳定；需要外区商店时，可在客户端中把 `Apple服务` 手动切换到 `国际基础服务`、`PROXY` 或指定地区节点。
+
 完整模板可直接作为基础配置导入，再补充自己的节点或订阅：
 
 ```text

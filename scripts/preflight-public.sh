@@ -29,13 +29,51 @@ ARGV.each do |path|
 
   groups = cfg.fetch("proxy-groups", []).map { |group| group["name"] }
   raise "#{path} missing Apple服务 proxy group" unless groups.include?("Apple服务")
+  by_name = cfg.fetch("proxy-groups", []).to_h { |group| [group["name"], group] }
+  expected_proxy_order = %w[Auto 香港 新加坡 台湾 日本 韩国 美国 英国 DIRECT]
+  raise "#{path} PROXY group order drifted" unless by_name.dig("PROXY", "proxies") == expected_proxy_order
+  expected_community_order = %w[香港 新加坡 台湾 日本 美国 PROXY]
+  raise "#{path} 国际社区 group order drifted" unless by_name.dig("国际社区", "proxies") == expected_community_order
+  expected_game_order = %w[香港 日本 新加坡 台湾 韩国 美国 PROXY DIRECT]
+  raise "#{path} Game group order drifted" unless by_name.dig("Game", "proxies") == expected_game_order
+  expected_apple_order = %w[DIRECT 国际基础服务 PROXY 新加坡 美国]
+  raise "#{path} Apple服务 group order drifted" unless by_name.dig("Apple服务", "proxies") == expected_apple_order
 
+  providers = cfg.fetch("rule-providers", {}).keys.map(&:to_s)
   rules = cfg.fetch("rules", [])
+  rules.grep(/^RULE-SET,/).each do |rule|
+    provider = rule.split(",", 3)[1]
+    raise "#{path} rule references missing provider: #{provider}" unless providers.include?(provider)
+  end
+
   apple_proxy = rules.index("RULE-SET,AppleProxy,Apple服务")
   apple_direct = rules.index("RULE-SET,Apple,DIRECT")
+  china_max = rules.index("RULE-SET,ChinaMaxNoIP,DIRECT")
+  geosite_cn = rules.index("GEOSITE,CN,DIRECT")
+  required_app_store_rules = %w[
+    DOMAIN-SUFFIX,apps.apple.com,Apple服务
+    DOMAIN-SUFFIX,apps-marketplace.apple.com,Apple服务
+    DOMAIN-SUFFIX,appstore.com,Apple服务
+    DOMAIN-SUFFIX,itunes.apple.com,Apple服务
+    DOMAIN-SUFFIX,itunes.com,Apple服务
+    DOMAIN-SUFFIX,mzstatic.com,Apple服务
+    DOMAIN-SUFFIX,aaplimg.com,Apple服务
+    DOMAIN,ppq.apple.com,Apple服务
+  ]
   raise "#{path} missing AppleProxy App Store route" unless apple_proxy
   raise "#{path} missing Apple direct fallback" unless apple_direct
+  required_app_store_rules.each do |rule|
+    rule_index = rules.index(rule)
+    raise "#{path} missing App Store route: #{rule}" unless rule_index
+    raise "#{path} App Store route must be before broad China rules: #{rule}" unless china_max && geosite_cn && rule_index < china_max && rule_index < geosite_cn
+  end
   raise "#{path} AppleProxy must be before Apple direct fallback" unless apple_proxy < apple_direct
+  raise "#{path} AppleProxy must be before broad China rules" unless china_max && geosite_cn && apple_proxy < china_max && apple_proxy < geosite_cn
+
+  fake_ip_filter = cfg.dig("dns", "fake-ip-filter") || []
+  %w[+.apps.apple.com +.itunes.apple.com +.mzstatic.com +.cdn-apple.com +.aaplimg.com].each do |domain|
+    raise "#{path} missing App Store fake-ip-filter entry: #{domain}" unless fake_ip_filter.include?(domain)
+  end
 end
 
 cfg = YAML.load_file("mihomo/mihomo.yaml")
