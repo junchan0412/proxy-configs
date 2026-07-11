@@ -78,6 +78,8 @@ App Store 与 Apple 媒体相关域名会先进入 `Apple服务` 策略组，默
 
 Mihomo 模板中的上游规则集和 geodata 默认使用 jsDelivr 地址，减少首次导入时因 `raw.githubusercontent.com` 连接不稳定导致的规则下载失败。
 
+IP 类兜底规则使用 `no-resolve` 是有意设计：Mihomo 原生支持该参数，它会让 `GEOIP` / `IP-CIDR` 只检查连接中已经存在的目标 IP，避免规则走到末尾时为了匹配 IP 再额外解析域名。域名流量优先由前面的 `DOMAIN` / `GEOSITE` / `RULE-SET` 处理。
+
 完整模板可直接作为基础配置导入，再补充自己的节点或订阅：
 
 ```text

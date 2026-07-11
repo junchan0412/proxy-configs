@@ -27,6 +27,8 @@ require "yaml"
 ARGV.each do |path|
   cfg = YAML.load_file(path)
 
+  raise "#{path} contains unsupported top-level udp setting" if cfg.key?("udp")
+
   groups = cfg.fetch("proxy-groups", []).map { |group| group["name"] }
   raise "#{path} missing Apple服务 proxy group" unless groups.include?("Apple服务")
   by_name = cfg.fetch("proxy-groups", []).to_h { |group| [group["name"], group] }
@@ -61,6 +63,29 @@ ARGV.each do |path|
 
   providers = cfg.fetch("rule-providers", {}).keys.map(&:to_s)
   rules = cfg.fetch("rules", [])
+  rules.each do |rule|
+    parts = rule.to_s.split(",")
+    type = parts[0]
+    params = parts.drop(3)
+    next unless params.include?("no-resolve")
+
+    supported = %w[GEOIP IP-ASN IP-CIDR IP-CIDR6 IP-SUFFIX RULE-SET]
+    raise "#{path} no-resolve used by unsupported rule type: #{rule}" unless supported.include?(type)
+    raise "#{path} no-resolve must be the final rule parameter: #{rule}" unless parts.last == "no-resolve"
+  end
+  rules.grep(/^(GEOIP|IP-CIDR|IP-CIDR6),/).each do |rule|
+    raise "#{path} IP fallback rule must use no-resolve: #{rule}" unless rule.end_with?(",no-resolve")
+  end
+  rules.grep(/^GEOSITE,/).each do |rule|
+    payload = rule.split(",", 3)[1]
+    raise "#{path} GEOSITE payload must be lowercase: #{rule}" unless payload == payload.downcase
+  end
+
+  cfg.fetch("proxy-groups", []).each do |group|
+    if group["include-all"] && (group["include-all-proxies"] || group["include-all-providers"])
+      raise "#{path} #{group["name"]} has redundant include-all options"
+    end
+  end
   builtin_policies = %w[DIRECT REJECT REJECT-DROP PASS COMPATIBLE GLOBAL]
   group_refs = cfg.fetch("proxy-groups", []).flat_map { |group| Array(group["proxies"]).compact }.uniq
   missing_group_refs = group_refs - groups - builtin_policies
@@ -88,7 +113,7 @@ ARGV.each do |path|
   apple_proxy = rules.index("RULE-SET,AppleProxy,Apple服务")
   apple_direct = rules.index("RULE-SET,Apple,DIRECT")
   china_max = rules.index("RULE-SET,ChinaMaxNoIP,DIRECT")
-  geosite_cn = rules.index("GEOSITE,CN,DIRECT")
+  geosite_cn = rules.index("GEOSITE,cn,DIRECT")
   required_app_store_rules = %w[
     DOMAIN-SUFFIX,apps.apple.com,Apple服务
     DOMAIN-SUFFIX,apps-marketplace.apple.com,Apple服务
@@ -116,6 +141,11 @@ ARGV.each do |path|
 end
 
 cfg = YAML.load_file("mihomo/mihomo.yaml")
+override_cfg = YAML.load_file("mihomo/mihomo-override.yaml")
+override_cfg.each_key do |key|
+  raise "mihomo full/override shared section drifted: #{key}" unless cfg[key] == override_cfg[key]
+end
+
 raise "mihomo/mihomo.yaml proxies must be an array" unless cfg["proxies"].is_a?(Array)
 raise "missing NodeParam anchor template" unless cfg["NodeParam"].is_a?(Hash)
 providers = cfg["proxy-providers"]
@@ -129,6 +159,16 @@ raise "proxy-providers must be a hash" unless providers.is_a?(Hash)
   raise "#{name} additional-prefix missing" unless provider.dig("override", "additional-prefix").to_s.start_with?("[#{name}]")
 end
 RUBY
+
+MIHOMO_BIN="${MIHOMO_BIN:-$(command -v mihomo || true)}"
+if [[ -n "$MIHOMO_BIN" && -x "$MIHOMO_BIN" ]]; then
+  MIHOMO_TEST_DIR="$(mktemp -d)"
+  trap 'rm -rf "$MIHOMO_TEST_DIR"' EXIT
+  "$MIHOMO_BIN" -d "$MIHOMO_TEST_DIR" -t -f mihomo/mihomo.yaml
+  "$MIHOMO_BIN" -d "$MIHOMO_TEST_DIR" -t -f mihomo/mihomo-override.yaml
+else
+  echo "mihomo binary not found; set MIHOMO_BIN to enable native parser checks"
+fi
 
 echo "[3/6] public sensitivity scan"
 if "$RG" -n --glob '!scripts/preflight-public.sh' "(psk=|ca-p12 = [A-Za-z0-9+/]{40,}|sub\\.store/download|/Users/[^/]+|iCloud~com~nssurge|Mobile Documents|http-api =|external-controller-access =|snell, *[0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+)" README.md Rules surge shadowrocket quantumultx mihomo scripts; then
