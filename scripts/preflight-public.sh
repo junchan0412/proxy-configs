@@ -134,6 +134,26 @@ ARGV.each do |path|
   raise "#{path} AppleProxy must be before Apple direct fallback" unless apple_proxy < apple_direct
   raise "#{path} AppleProxy must be before broad China rules" unless china_max && geosite_cn && apple_proxy < china_max && apple_proxy < geosite_cn
 
+  microsoft = rules.index("RULE-SET,Microsoft,国际基础服务")
+  required_microsoft_store_rules = %w[
+    PROCESS-NAME,WinStore.App.exe,DIRECT
+    PROCESS-NAME,StoreExperienceHost.exe,DIRECT
+    DOMAIN-SUFFIX,mp.microsoft.com,DIRECT
+    DOMAIN-SUFFIX,s-microsoft.com,DIRECT
+    DOMAIN-SUFFIX,microsoftstore.com,DIRECT
+    DOMAIN-SUFFIX,onestore.ms,DIRECT
+    DOMAIN-SUFFIX,windowsmarketplace.com,DIRECT
+    DOMAIN,storeedge.microsoft.com,DIRECT
+    DOMAIN,storecorefulfillment.download.prss.microsoft.com,DIRECT
+    GEOSITE,microsoft@cn,DIRECT
+  ]
+  raise "#{path} missing broad Microsoft fallback" unless microsoft
+  required_microsoft_store_rules.each do |rule|
+    rule_index = rules.index(rule)
+    raise "#{path} missing Microsoft Store direct rule: #{rule}" unless rule_index
+    raise "#{path} Microsoft Store direct rule must precede broad Microsoft fallback: #{rule}" unless rule_index < microsoft
+  end
+
   fake_ip_filter = cfg.dig("dns", "fake-ip-filter") || []
   %w[+.apps.apple.com +.itunes.apple.com +.mzstatic.com +.cdn-apple.com +.aaplimg.com].each do |domain|
     raise "#{path} missing App Store fake-ip-filter entry: #{domain}" unless fake_ip_filter.include?(domain)

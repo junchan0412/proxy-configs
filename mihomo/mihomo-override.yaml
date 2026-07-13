@@ -729,7 +729,7 @@ rules:
   - RULE-SET,Download,PROXY
   - RULE-SET,PrivateTracker,PROXY
 
-  # 3. Apple 直连、App Store 专项、Microsoft 分流、Google 与支付/云基础设施
+  # 3. Apple 直连、App Store / Microsoft Store 专项、Microsoft 分流、Google 与支付/云基础设施
   - RULE-SET,iCloud,DIRECT
   - RULE-SET,AppleID,DIRECT
   - DOMAIN-SUFFIX,apps.apple.com,Apple服务
@@ -754,6 +754,17 @@ rules:
   - RULE-SET,AppleProxy,Apple服务
   - RULE-SET,AppleMedia,Apple服务
   - RULE-SET,Apple,DIRECT
+  # Microsoft Store 的目录、授权、购买、图片与下载链路需在宽泛 Microsoft 规则前直连。
+  - PROCESS-NAME,WinStore.App.exe,DIRECT
+  - PROCESS-NAME,StoreExperienceHost.exe,DIRECT
+  - DOMAIN-SUFFIX,mp.microsoft.com,DIRECT
+  - DOMAIN-SUFFIX,s-microsoft.com,DIRECT
+  - DOMAIN-SUFFIX,microsoftstore.com,DIRECT
+  - DOMAIN-SUFFIX,onestore.ms,DIRECT
+  - DOMAIN-SUFFIX,windowsmarketplace.com,DIRECT
+  - DOMAIN,storeedge.microsoft.com,DIRECT
+  - DOMAIN,storecorefulfillment.download.prss.microsoft.com,DIRECT
+  - GEOSITE,microsoft@cn,DIRECT
   - DOMAIN-SUFFIX,msftconnecttest.com,DIRECT
   - DOMAIN-SUFFIX,msftncsi.com,DIRECT
   - DOMAIN-SUFFIX,windowsupdate.com,DIRECT
@@ -761,8 +772,6 @@ rules:
   - DOMAIN-SUFFIX,update.microsoft.com,DIRECT
   - DOMAIN-SUFFIX,download.microsoft.com,DIRECT
   - DOMAIN-SUFFIX,download.windowsupdate.com,DIRECT
-  - DOMAIN-SUFFIX,dl.delivery.mp.microsoft.com,DIRECT
-  - DOMAIN-SUFFIX,tlu.dl.delivery.mp.microsoft.com,DIRECT
   - DOMAIN-SUFFIX,officecdn.microsoft.com,DIRECT
   - DOMAIN-SUFFIX,officecdn.microsoft.com.edgesuite.net,DIRECT
   - DOMAIN-SUFFIX,officecdn.microsoft.com.edgekey.net,DIRECT

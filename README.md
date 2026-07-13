@@ -76,6 +76,8 @@ surge-doctor check surge/modules/google-redirect.sgmodule
 
 App Store 与 Apple 媒体相关域名会先进入 `Apple服务` 策略组，默认直连以保证 ClashMac / macOS 原生商店加载稳定；需要外区商店时，可在客户端中把 `Apple服务` 手动切换到 `国际基础服务`、`PROXY` 或指定地区节点。
 
+Windows Microsoft Store 的目录、授权、购买、图片和下载端点会在宽泛的 `Microsoft` 规则前直连，避免 Store 请求被代理节点的地区、DNS 或风控状态阻断；其余 Microsoft 服务仍按原有策略分流。
+
 Mihomo 模板中的上游规则集和 geodata 默认使用 jsDelivr 地址，减少首次导入时因 `raw.githubusercontent.com` 连接不稳定导致的规则下载失败。
 
 IP 类兜底规则使用 `no-resolve` 是有意设计：Mihomo 原生支持该参数，它会让 `GEOIP` / `IP-CIDR` 只检查连接中已经存在的目标 IP，避免规则走到末尾时为了匹配 IP 再额外解析域名。域名流量优先由前面的 `DOMAIN` / `GEOSITE` / `RULE-SET` 处理。
