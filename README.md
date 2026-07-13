@@ -24,6 +24,7 @@
 | Quantumult X | `https://fastly.jsdelivr.net/gh/junchan0412/proxy-configs@main/quantumultx/quantumultx.conf` |
 | Mihomo / Clash 完整模板 | `https://fastly.jsdelivr.net/gh/junchan0412/proxy-configs@main/mihomo/mihomo.yaml` |
 | Mihomo / Clash 覆写模板 | `https://fastly.jsdelivr.net/gh/junchan0412/proxy-configs@main/mihomo/mihomo-override.yaml` |
+| Mihomo / Clash JavaScript 覆写 | `https://fastly.jsdelivr.net/gh/junchan0412/proxy-configs@main/mihomo/mihomo-override.js` |
 
 公开模板使用仓库内规则集：
 
@@ -95,6 +96,14 @@ https://fastly.jsdelivr.net/gh/junchan0412/proxy-configs@main/mihomo/mihomo.yaml
 ```text
 https://fastly.jsdelivr.net/gh/junchan0412/proxy-configs@main/mihomo/mihomo-override.yaml
 ```
+
+支持 `main(config)` 脚本覆写的客户端（如 Clash Verge Rev、Mihomo Party）也可以使用 JavaScript 版本：
+
+```text
+https://fastly.jsdelivr.net/gh/junchan0412/proxy-configs@main/mihomo/mihomo-override.js
+```
+
+JavaScript 覆写会保留订阅中的 `proxies`、`proxy-providers`、监听端口和控制器设置，只替换与 YAML override 相同的 DNS、TUN、策略组和分流配置。该文件由 `scripts/generate-mihomo-js-override.rb` 从 YAML 自动生成，避免两个版本出现规则差异。
 
 > 公开版不含节点、订阅链接、本机端口和外部控制器配置，请在客户端侧自行补充。
 

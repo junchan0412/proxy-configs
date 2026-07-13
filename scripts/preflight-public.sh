@@ -180,12 +180,61 @@ raise "proxy-providers must be a hash" unless providers.is_a?(Hash)
 end
 RUBY
 
+MIHOMO_JS_TMP="$(mktemp)"
+/usr/bin/ruby scripts/generate-mihomo-js-override.rb mihomo/mihomo-override.yaml "$MIHOMO_JS_TMP"
+if ! cmp -s "$MIHOMO_JS_TMP" mihomo/mihomo-override.js; then
+  rm -f "$MIHOMO_JS_TMP"
+  echo "mihomo/mihomo-override.js is out of sync; run scripts/generate-mihomo-js-override.rb" >&2
+  exit 1
+fi
+rm -f "$MIHOMO_JS_TMP"
+
+if command -v node >/dev/null 2>&1; then
+  node --check mihomo/mihomo-override.js
+  node <<'NODE'
+const fs = require("fs");
+const vm = require("vm");
+
+const context = {};
+vm.createContext(context);
+vm.runInContext(fs.readFileSync("mihomo/mihomo-override.js", "utf8"), context);
+
+const config = {
+  proxies: [{ name: "example-node", type: "ss" }],
+  "proxy-providers": { example: { type: "http", url: "https://example.com/sub" } },
+  "mixed-port": 7890,
+};
+const result = context.main(config);
+
+if (result !== config) throw new Error("JS override must return the original config object");
+if (result.proxies[0].name !== "example-node") throw new Error("JS override removed subscription proxies");
+if (!result["proxy-providers"].example) throw new Error("JS override removed subscription proxy-providers");
+if (result["mixed-port"] !== 7890) throw new Error("JS override removed client port settings");
+if (!result.rules.includes("GEOSITE,microsoft@cn,DIRECT")) throw new Error("JS override is missing Microsoft Store routing");
+NODE
+else
+  echo "node not found; JavaScript syntax/runtime checks skipped"
+fi
+
 MIHOMO_BIN="${MIHOMO_BIN:-$(command -v mihomo || true)}"
 if [[ -n "$MIHOMO_BIN" && -x "$MIHOMO_BIN" ]]; then
   MIHOMO_TEST_DIR="$(mktemp -d)"
   trap 'rm -rf "$MIHOMO_TEST_DIR"' EXIT
   "$MIHOMO_BIN" -d "$MIHOMO_TEST_DIR" -t -f mihomo/mihomo.yaml
   "$MIHOMO_BIN" -d "$MIHOMO_TEST_DIR" -t -f mihomo/mihomo-override.yaml
+  if command -v node >/dev/null 2>&1; then
+    MIHOMO_JS_CONFIG="$MIHOMO_TEST_DIR/mihomo-js-override.json"
+    node - "$MIHOMO_JS_CONFIG" <<'NODE'
+const fs = require("fs");
+const vm = require("vm");
+
+const context = {};
+vm.createContext(context);
+vm.runInContext(fs.readFileSync("mihomo/mihomo-override.js", "utf8"), context);
+fs.writeFileSync(process.argv[2], JSON.stringify(context.main({})));
+NODE
+    "$MIHOMO_BIN" -d "$MIHOMO_TEST_DIR" -t -f "$MIHOMO_JS_CONFIG"
+  fi
 else
   echo "mihomo binary not found; set MIHOMO_BIN to enable native parser checks"
 fi
@@ -229,6 +278,8 @@ for path in \
   quantumultx/quantumultx.conf \
   mihomo/mihomo.yaml \
   mihomo/mihomo-override.yaml \
+  mihomo/mihomo-override.js \
+  scripts/generate-mihomo-js-override.rb \
   shadowrocket/shadowrocket.conf \
   surge/Surge.clean.conf; do
   [[ -s "$path" ]] || { echo "missing or empty: $path" >&2; exit 1; }
