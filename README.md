@@ -23,7 +23,7 @@
 | Surge | `https://fastly.jsdelivr.net/gh/junchan0412/proxy-configs@main/surge/Surge.clean.conf` |
 | Shadowrocket | `https://fastly.jsdelivr.net/gh/junchan0412/proxy-configs@main/shadowrocket/shadowrocket.conf` |
 | Quantumult X | `https://fastly.jsdelivr.net/gh/junchan0412/proxy-configs@main/quantumultx/quantumultx.conf` |
-| Loon | `https://fastly.jsdelivr.net/gh/junchan0412/proxy-configs@main/loon/loon.conf` |
+| Loon | `https://fastly.jsdelivr.net/gh/junchan0412/proxy-configs@main/loon/loon.lcf` |
 | Mihomo / Clash 完整模板 | `https://fastly.jsdelivr.net/gh/junchan0412/proxy-configs@main/mihomo/mihomo.yaml` |
 | Mihomo / Clash 覆写模板 | `https://fastly.jsdelivr.net/gh/junchan0412/proxy-configs@main/mihomo/mihomo-override.yaml` |
 | Mihomo / Clash JavaScript 覆写 | `https://fastly.jsdelivr.net/gh/junchan0412/proxy-configs@main/mihomo/mihomo-override.js` |
@@ -117,7 +117,7 @@ JavaScript 覆写会保留订阅中的 `proxies`、`proxy-providers`、监听端
 
 ## Loon 配置
 
-`loon/loon.conf` 是与 Surge 源配置保持同一分流顺序的 Loon 模板，section、`Remote Filter`、`Remote Rule`、策略组和 `Mitm` 写法参考 [ProxyResource 的 Loon Lcf 模板](https://github.com/luestr/ProxyResource/tree/main/Tool/Loon/Lcf/zh-CN)。它包含 Apple 服务、AI、国际社媒、流媒体、游戏、地区测速组以及 GeoIP 兜底；模板只提供空节点和示例订阅占位，请在 Loon 中补充自己的节点后使用。
+`loon/loon.lcf` 使用 Loon 配置模板常用的 `.lcf` 后缀，section、`Remote Filter`、`Remote Rule`、策略组和 `Mitm` 写法参考 [ProxyResource 的 Loon Lcf 模板](https://github.com/luestr/ProxyResource/tree/main/Tool/Loon/Lcf/zh-CN)。配置按高优先级例外、拦截/LAN、AI/Apple、国内直连、游戏/社媒/流媒体、开发与国际基础服务、通用海外、GeoIP 和 `FINAL` 的顺序分流，并使用 Loon 原生 `.lsr` / `.list` 远程规则。模板不包含真实节点或订阅，导入后需在 Loon 中添加自己的节点。
 
 ## License
 

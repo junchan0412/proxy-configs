@@ -241,7 +241,7 @@ else
 fi
 
 echo "[3/7] Loon config check"
-/usr/bin/ruby scripts/validate-loon.rb loon/loon.conf
+/usr/bin/ruby scripts/validate-loon.rb loon/loon.lcf
 
 echo "[4/7] public sensitivity scan"
 if "$RG" -n --glob '!scripts/preflight-public.sh' "(psk=|ca-p12 = [A-Za-z0-9+/]{40,}|sub\\.store/download|/Users/[^/]+|iCloud~com~nssurge|Mobile Documents|http-api =|external-controller-access =|snell, *[0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+)" README.md Rules surge shadowrocket quantumultx mihomo loon scripts; then
@@ -280,7 +280,7 @@ for path in \
   mihomo/mihomo.yaml \
   mihomo/mihomo-override.yaml \
   mihomo/mihomo-override.js \
-  loon/loon.conf \
+  loon/loon.lcf \
   scripts/generate-mihomo-js-override.rb \
   scripts/validate-loon.rb \
   shadowrocket/shadowrocket.conf \
