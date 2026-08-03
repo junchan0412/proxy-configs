@@ -117,7 +117,7 @@ JavaScript 覆写会保留订阅中的 `proxies`、`proxy-providers`、监听端
 
 ## Loon 配置
 
-`loon/loon.conf` 是与 Surge 源配置保持同一分流顺序的 Loon 模板，包含 Apple 服务、AI、国际社媒、流媒体、游戏、地区测速组以及 GeoIP 兜底。模板只提供空节点和示例订阅占位，请在 Loon 中补充自己的节点后使用。
+`loon/loon.conf` 是与 Surge 源配置保持同一分流顺序的 Loon 模板，section、`Remote Filter`、`Remote Rule`、策略组和 `Mitm` 写法参考 [ProxyResource 的 Loon Lcf 模板](https://github.com/luestr/ProxyResource/tree/main/Tool/Loon/Lcf/zh-CN)。它包含 Apple 服务、AI、国际社媒、流媒体、游戏、地区测速组以及 GeoIP 兜底；模板只提供空节点和示例订阅占位，请在 Loon 中补充自己的节点后使用。
 
 ## License
 
