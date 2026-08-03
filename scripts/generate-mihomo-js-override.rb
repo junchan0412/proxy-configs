@@ -17,8 +17,6 @@ helper_keys = %w[
   FilterUS
   FilterAll
   UrlTest
-  FallBack
-  LoadBalance
   RuleProviders
   TextRuleProviders
 ].freeze

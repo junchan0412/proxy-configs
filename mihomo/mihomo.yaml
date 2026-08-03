@@ -166,13 +166,9 @@ FilterAll: &FilterAll '^(?=.*(.))(?!.*((?i)群|邀请|返利|循环|官网|客�
 # 策略组参数锚点
 # 锚点 - 时延优选参数 [每 5 分钟一次惰性健康检查，容差 50ms，时延超过 5 秒判定为失败，失败 3 次则自动触发健康检查]
 UrlTest: &UrlTest {type: url-test, interval: 300, tolerance: 50, lazy: true, url: 'https://www.gstatic.com/generate_204', disable-udp: false, timeout: 5000, max-failed-times: 3, hidden: true, include-all: true}
-# 锚点 - 故障转移参数 [每 5 分钟一次惰性健康检查，时延超过 5 秒判定为失败，失败 3 次则自动触发健康检查]
-FallBack: &FallBack {type: fallback, interval: 300, lazy: true, url: 'https://www.gstatic.com/generate_204', disable-udp: false, timeout: 5000, max-failed-times: 3, hidden: true, include-all: true}
-# 锚点 - 负载均衡参数 [每 5 分钟一次惰性健康检查，时延超过 5 秒判定为失败，失败 3 次则自动触发健康检查]
-LoadBalance: &LoadBalance {type: load-balance, interval: 300, lazy: true, url: 'https://www.gstatic.com/generate_204', disable-udp: false, strategy: consistent-hashing, timeout: 5000, max-failed-times: 3, hidden: true, include-all: true}
-# 锚点 - 规则参数 [每小时更新一次订阅规则]
-RuleProviders: &RuleProviders {type: http, behavior: classical, interval: 3600, format: yaml}
-TextRuleProviders: &TextRuleProviders {type: http, behavior: classical, interval: 3600, format: text}
+# 锚点 - 规则参数 [每天更新一次订阅规则]
+RuleProviders: &RuleProviders {type: http, behavior: classical, interval: 86400, format: yaml}
+TextRuleProviders: &TextRuleProviders {type: http, behavior: classical, interval: 86400, format: text}
 
 # 策略组
 proxy-groups:
@@ -183,8 +179,6 @@ proxy-groups:
   - {name: Apple服务, type: select, proxies: [DIRECT, 国际基础服务, PROXY, 新加坡, 美国], icon: 'https://fastly.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Apple.png'}
   - {name: AI, type: select, proxies: [美国, 新加坡, 台湾, 日本, PROXY], icon: 'https://fastly.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/ChatGPT.png'}
   - {name: 国际社媒, type: select, proxies: [香港, 新加坡, 台湾, 日本, 美国, PROXY], icon: 'https://fastly.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Telegram.png'}
-  # 兼容旧规则与已有客户端选择；新规则统一使用“国际社媒”。
-  - {name: 国际社区, type: select, proxies: [香港, 新加坡, 台湾, 日本, 美国, PROXY], icon: 'https://fastly.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Telegram.png'}
   - {name: Emby, <<: *UrlTest, filter: '^(?=.*((?i)🇭🇰|香港|港|Hong|HK|🇸🇬|新加坡|SG|Singapore|🇰🇷|韩国|韩|KR|Korea|🇹🇼|台湾|台|TW|Tai))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$', hidden: false, icon: 'https://fastly.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Streaming.png'}
   - {name: Game, type: select, proxies: [香港, 日本, 新加坡, 台湾, 韩国, 美国, PROXY, DIRECT], icon: 'https://fastly.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Game.png'}
   - {name: SpeedTest, type: select, proxies: [PROXY, Auto, 香港, 新加坡, 台湾, 日本, 韩国, 美国, 英国, DIRECT], icon: 'https://fastly.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Speedtest.png'}
