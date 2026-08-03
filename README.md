@@ -1,6 +1,6 @@
 # proxy-configs
 
-自用的代理客户端配置合集，覆盖 **Surge**、**Shadowrocket**、**Quantumult X** 与 **Mihomo / Clash** 生态。所有内容都以「叠加 / 增强」为原则，与你已有的主配置或订阅安全合并，**不替你做节点与订阅管理**。
+自用的代理客户端配置合集，覆盖 **Surge**、**Shadowrocket**、**Quantumult X**、**Loon** 与 **Mihomo / Clash** 生态。所有内容都以「叠加 / 增强」为原则，与你已有的主配置或订阅安全合并，**不替你做节点与订阅管理**。
 
 聚焦"小而稳"：公开版均不含节点、订阅链接、本机端口、外部控制器、证书材料、本地 iCloud 路径等隐私信息。
 
@@ -11,6 +11,7 @@
 | `surge/` | Surge 可复用干净配置、公开规则集与功能增强模块 |
 | `shadowrocket/` | Shadowrocket 可复用干净配置 |
 | `quantumultx/` | Quantumult X 可复用干净配置模版 |
+| `loon/` | Loon 可复用干净配置模板 |
 | `mihomo/` | Mihomo / Clash 公有完整配置与覆写模板（`.yaml`） |
 | `Rules/Surge/` | Surge 专用规则集归档 |
 | `surge/modules/` | Surge 功能增强模块（`.sgmodule`），独立可开关，通过 `%APPEND%` / `%INSERT%` 与主配置合并 |
@@ -22,6 +23,7 @@
 | Surge | `https://fastly.jsdelivr.net/gh/junchan0412/proxy-configs@main/surge/Surge.clean.conf` |
 | Shadowrocket | `https://fastly.jsdelivr.net/gh/junchan0412/proxy-configs@main/shadowrocket/shadowrocket.conf` |
 | Quantumult X | `https://fastly.jsdelivr.net/gh/junchan0412/proxy-configs@main/quantumultx/quantumultx.conf` |
+| Loon | `https://fastly.jsdelivr.net/gh/junchan0412/proxy-configs@main/loon/loon.conf` |
 | Mihomo / Clash 完整模板 | `https://fastly.jsdelivr.net/gh/junchan0412/proxy-configs@main/mihomo/mihomo.yaml` |
 | Mihomo / Clash 覆写模板 | `https://fastly.jsdelivr.net/gh/junchan0412/proxy-configs@main/mihomo/mihomo-override.yaml` |
 | Mihomo / Clash JavaScript 覆写 | `https://fastly.jsdelivr.net/gh/junchan0412/proxy-configs@main/mihomo/mihomo-override.js` |
@@ -111,7 +113,11 @@ JavaScript 覆写会保留订阅中的 `proxies`、`proxy-providers`、监听端
 
 `quantumultx/quantumultx.conf` 是一份公有模板：包含基础网络设置、DNS、节点示范、策略组、分流规则、URL Rewrite 与 MITM 占位。
 
-它沿用与当前 Surge / Mihomo 版本相近的分流意图：先处理本地与国内常用服务，再分流 AI、国际社区、流媒体与游戏，最后落到 `FINAL`。
+它沿用与当前 Surge / Mihomo 版本相近的分流意图：先处理本地与国内常用服务，再分流 AI、国际社媒、流媒体与游戏，最后落到 `FINAL`。
+
+## Loon 配置
+
+`loon/loon.conf` 是与 Surge 源配置保持同一分流顺序的 Loon 模板，包含 Apple 服务、AI、国际社媒、流媒体、游戏、地区测速组以及 GeoIP 兜底。模板只提供空节点和示例订阅占位，请在 Loon 中补充自己的节点后使用。
 
 ## License
 
