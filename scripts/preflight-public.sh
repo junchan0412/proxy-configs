@@ -38,8 +38,9 @@ ARGV.each do |path|
   raise "#{path} FINAL group order drifted" unless by_name.dig("FINAL", "proxies") == expected_final_order
   expected_base_order = %w[新加坡 美国 香港 PROXY DIRECT]
   raise "#{path} 国际基础服务 group order drifted" unless by_name.dig("国际基础服务", "proxies") == expected_base_order
-  expected_community_order = %w[香港 新加坡 台湾 日本 美国 PROXY]
-  raise "#{path} 国际社区 group order drifted" unless by_name.dig("国际社区", "proxies") == expected_community_order
+  expected_social_order = %w[香港 新加坡 台湾 日本 美国 PROXY]
+  raise "#{path} 国际社媒 group order drifted" unless by_name.dig("国际社媒", "proxies") == expected_social_order
+  raise "#{path} contains deprecated 国际社区 proxy group" if groups.include?("国际社区")
   expected_ai_order = %w[美国 新加坡 台湾 日本 PROXY]
   raise "#{path} AI group order drifted" unless by_name.dig("AI", "proxies") == expected_ai_order
   expected_game_order = %w[香港 日本 新加坡 台湾 韩国 美国 PROXY DIRECT]

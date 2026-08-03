@@ -242,19 +242,6 @@ function main(config) {
       "icon": "https://fastly.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Telegram.png"
     },
     {
-      "name": "国际社区",
-      "type": "select",
-      "proxies": [
-        "香港",
-        "新加坡",
-        "台湾",
-        "日本",
-        "美国",
-        "PROXY"
-      ],
-      "icon": "https://fastly.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Telegram.png"
-    },
-    {
       "name": "Emby",
       "type": "url-test",
       "interval": 300,
@@ -419,7 +406,7 @@ function main(config) {
     "DirectCN": {
       "type": "http",
       "behavior": "classical",
-      "interval": 3600,
+      "interval": 86400,
       "format": "text",
       "path": "./rules/DirectCN.list",
       "url": "https://fastly.jsdelivr.net/gh/junchan0412/proxy-configs@main/surge/rules/direct-cn.list"
@@ -427,7 +414,7 @@ function main(config) {
     "PreAIInfra": {
       "type": "http",
       "behavior": "classical",
-      "interval": 3600,
+      "interval": 86400,
       "format": "text",
       "path": "./rules/PreAIInfra.list",
       "url": "https://fastly.jsdelivr.net/gh/junchan0412/proxy-configs@main/surge/rules/pre-ai-infra.list"
@@ -435,7 +422,7 @@ function main(config) {
     "AIMajor": {
       "type": "http",
       "behavior": "classical",
-      "interval": 3600,
+      "interval": 86400,
       "format": "text",
       "path": "./rules/AIMajor.list",
       "url": "https://fastly.jsdelivr.net/gh/junchan0412/proxy-configs@main/surge/rules/ai-major.list"
@@ -443,7 +430,7 @@ function main(config) {
     "OpenAI": {
       "type": "http",
       "behavior": "classical",
-      "interval": 3600,
+      "interval": 86400,
       "format": "yaml",
       "path": "./rules/OpenAI.yaml",
       "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/OpenAI/OpenAI.yaml"
@@ -451,7 +438,7 @@ function main(config) {
     "Claude": {
       "type": "http",
       "behavior": "classical",
-      "interval": 3600,
+      "interval": 86400,
       "format": "yaml",
       "path": "./rules/Claude.yaml",
       "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Claude/Claude.yaml"
@@ -459,7 +446,7 @@ function main(config) {
     "Anthropic": {
       "type": "http",
       "behavior": "classical",
-      "interval": 3600,
+      "interval": 86400,
       "format": "yaml",
       "path": "./rules/Anthropic.yaml",
       "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Anthropic/Anthropic.yaml"
@@ -467,7 +454,7 @@ function main(config) {
     "Gemini": {
       "type": "http",
       "behavior": "classical",
-      "interval": 3600,
+      "interval": 86400,
       "format": "yaml",
       "path": "./rules/Gemini.yaml",
       "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Gemini/Gemini.yaml"
@@ -475,7 +462,7 @@ function main(config) {
     "Copilot": {
       "type": "http",
       "behavior": "classical",
-      "interval": 3600,
+      "interval": 86400,
       "format": "yaml",
       "path": "./rules/Copilot.yaml",
       "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Copilot/Copilot.yaml"
@@ -483,7 +470,7 @@ function main(config) {
     "BardAI": {
       "type": "http",
       "behavior": "classical",
-      "interval": 3600,
+      "interval": 86400,
       "format": "yaml",
       "path": "./rules/BardAI.yaml",
       "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/BardAI/BardAI.yaml"
@@ -491,7 +478,7 @@ function main(config) {
     "Lan": {
       "type": "http",
       "behavior": "classical",
-      "interval": 3600,
+      "interval": 86400,
       "format": "yaml",
       "path": "./rules/Lan.yaml",
       "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Lan/Lan.yaml"
@@ -499,7 +486,7 @@ function main(config) {
     "Direct": {
       "type": "http",
       "behavior": "classical",
-      "interval": 3600,
+      "interval": 86400,
       "format": "yaml",
       "path": "./rules/Direct.yaml",
       "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Direct/Direct.yaml"
@@ -507,7 +494,7 @@ function main(config) {
     "ChinaMaxNoIP": {
       "type": "http",
       "behavior": "classical",
-      "interval": 3600,
+      "interval": 86400,
       "format": "yaml",
       "path": "./rules/ChinaMaxNoIP.yaml",
       "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/ChinaMaxNoIP/ChinaMaxNoIP.yaml"
@@ -515,7 +502,7 @@ function main(config) {
     "ChinaNoMedia": {
       "type": "http",
       "behavior": "classical",
-      "interval": 3600,
+      "interval": 86400,
       "format": "yaml",
       "path": "./rules/ChinaNoMedia.yaml",
       "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/ChinaNoMedia/ChinaNoMedia.yaml"
@@ -523,7 +510,7 @@ function main(config) {
     "WeChat": {
       "type": "http",
       "behavior": "classical",
-      "interval": 3600,
+      "interval": 86400,
       "format": "yaml",
       "path": "./rules/WeChat.yaml",
       "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/WeChat/WeChat.yaml"
@@ -531,7 +518,7 @@ function main(config) {
     "BiliBili": {
       "type": "http",
       "behavior": "classical",
-      "interval": 3600,
+      "interval": 86400,
       "format": "yaml",
       "path": "./rules/BiliBili.yaml",
       "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/BiliBili/BiliBili.yaml"
@@ -539,7 +526,7 @@ function main(config) {
     "DouYin": {
       "type": "http",
       "behavior": "classical",
-      "interval": 3600,
+      "interval": 86400,
       "format": "yaml",
       "path": "./rules/DouYin.yaml",
       "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/DouYin/DouYin.yaml"
@@ -547,7 +534,7 @@ function main(config) {
     "XiaoHongShu": {
       "type": "http",
       "behavior": "classical",
-      "interval": 3600,
+      "interval": 86400,
       "format": "yaml",
       "path": "./rules/XiaoHongShu.yaml",
       "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/XiaoHongShu/XiaoHongShu.yaml"
@@ -555,7 +542,7 @@ function main(config) {
     "Weibo": {
       "type": "http",
       "behavior": "classical",
-      "interval": 3600,
+      "interval": 86400,
       "format": "yaml",
       "path": "./rules/Weibo.yaml",
       "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Weibo/Weibo.yaml"
@@ -563,7 +550,7 @@ function main(config) {
     "ChinaMedia": {
       "type": "http",
       "behavior": "classical",
-      "interval": 3600,
+      "interval": 86400,
       "format": "yaml",
       "path": "./rules/ChinaMedia.yaml",
       "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/ChinaMedia/ChinaMedia.yaml"
@@ -571,7 +558,7 @@ function main(config) {
     "PayPal": {
       "type": "http",
       "behavior": "classical",
-      "interval": 3600,
+      "interval": 86400,
       "format": "yaml",
       "path": "./rules/PayPal.yaml",
       "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/PayPal/PayPal.yaml"
@@ -579,7 +566,7 @@ function main(config) {
     "Oracle": {
       "type": "http",
       "behavior": "classical",
-      "interval": 3600,
+      "interval": 86400,
       "format": "yaml",
       "path": "./rules/Oracle.yaml",
       "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Oracle/Oracle.yaml"
@@ -587,7 +574,7 @@ function main(config) {
     "China": {
       "type": "http",
       "behavior": "classical",
-      "interval": 3600,
+      "interval": 86400,
       "format": "yaml",
       "path": "./rules/China.yaml",
       "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/China/China.yaml"
@@ -595,7 +582,7 @@ function main(config) {
     "Alibaba": {
       "type": "http",
       "behavior": "classical",
-      "interval": 3600,
+      "interval": 86400,
       "format": "yaml",
       "path": "./rules/Alibaba.yaml",
       "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Alibaba/Alibaba.yaml"
@@ -603,7 +590,7 @@ function main(config) {
     "AliPay": {
       "type": "http",
       "behavior": "classical",
-      "interval": 3600,
+      "interval": 86400,
       "format": "yaml",
       "path": "./rules/AliPay.yaml",
       "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/AliPay/AliPay.yaml"
@@ -611,7 +598,7 @@ function main(config) {
     "Baidu": {
       "type": "http",
       "behavior": "classical",
-      "interval": 3600,
+      "interval": 86400,
       "format": "yaml",
       "path": "./rules/Baidu.yaml",
       "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Baidu/Baidu.yaml"
@@ -619,7 +606,7 @@ function main(config) {
     "Tencent": {
       "type": "http",
       "behavior": "classical",
-      "interval": 3600,
+      "interval": 86400,
       "format": "yaml",
       "path": "./rules/Tencent.yaml",
       "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Tencent/Tencent.yaml"
@@ -627,7 +614,7 @@ function main(config) {
     "JingDong": {
       "type": "http",
       "behavior": "classical",
-      "interval": 3600,
+      "interval": 86400,
       "format": "yaml",
       "path": "./rules/JingDong.yaml",
       "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/JingDong/JingDong.yaml"
@@ -635,7 +622,7 @@ function main(config) {
     "MeiTuan": {
       "type": "http",
       "behavior": "classical",
-      "interval": 3600,
+      "interval": 86400,
       "format": "yaml",
       "path": "./rules/MeiTuan.yaml",
       "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/MeiTuan/MeiTuan.yaml"
@@ -643,7 +630,7 @@ function main(config) {
     "Eleme": {
       "type": "http",
       "behavior": "classical",
-      "interval": 3600,
+      "interval": 86400,
       "format": "yaml",
       "path": "./rules/Eleme.yaml",
       "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Eleme/Eleme.yaml"
@@ -651,7 +638,7 @@ function main(config) {
     "GaoDe": {
       "type": "http",
       "behavior": "classical",
-      "interval": 3600,
+      "interval": 86400,
       "format": "yaml",
       "path": "./rules/GaoDe.yaml",
       "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/GaoDe/GaoDe.yaml"
@@ -659,7 +646,7 @@ function main(config) {
     "DiDi": {
       "type": "http",
       "behavior": "classical",
-      "interval": 3600,
+      "interval": 86400,
       "format": "yaml",
       "path": "./rules/DiDi.yaml",
       "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/DiDi/DiDi.yaml"
@@ -667,7 +654,7 @@ function main(config) {
     "Pinduoduo": {
       "type": "http",
       "behavior": "classical",
-      "interval": 3600,
+      "interval": 86400,
       "format": "yaml",
       "path": "./rules/Pinduoduo.yaml",
       "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Pinduoduo/Pinduoduo.yaml"
@@ -675,7 +662,7 @@ function main(config) {
     "ByteDance": {
       "type": "http",
       "behavior": "classical",
-      "interval": 3600,
+      "interval": 86400,
       "format": "yaml",
       "path": "./rules/ByteDance.yaml",
       "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/ByteDance/ByteDance.yaml"
@@ -683,7 +670,7 @@ function main(config) {
     "NetEase": {
       "type": "http",
       "behavior": "classical",
-      "interval": 3600,
+      "interval": 86400,
       "format": "yaml",
       "path": "./rules/NetEase.yaml",
       "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/NetEase/NetEase.yaml"
@@ -691,7 +678,7 @@ function main(config) {
     "NetEaseMusic": {
       "type": "http",
       "behavior": "classical",
-      "interval": 3600,
+      "interval": 86400,
       "format": "yaml",
       "path": "./rules/NetEaseMusic.yaml",
       "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/NetEaseMusic/NetEaseMusic.yaml"
@@ -699,7 +686,7 @@ function main(config) {
     "Zhihu": {
       "type": "http",
       "behavior": "classical",
-      "interval": 3600,
+      "interval": 86400,
       "format": "yaml",
       "path": "./rules/Zhihu.yaml",
       "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Zhihu/Zhihu.yaml"
@@ -707,7 +694,7 @@ function main(config) {
     "Gitee": {
       "type": "http",
       "behavior": "classical",
-      "interval": 3600,
+      "interval": 86400,
       "format": "yaml",
       "path": "./rules/Gitee.yaml",
       "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Gitee/Gitee.yaml"
@@ -715,7 +702,7 @@ function main(config) {
     "CSDN": {
       "type": "http",
       "behavior": "classical",
-      "interval": 3600,
+      "interval": 86400,
       "format": "yaml",
       "path": "./rules/CSDN.yaml",
       "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/CSDN/CSDN.yaml"
@@ -723,7 +710,7 @@ function main(config) {
     "JueJin": {
       "type": "http",
       "behavior": "classical",
-      "interval": 3600,
+      "interval": 86400,
       "format": "yaml",
       "path": "./rules/JueJin.yaml",
       "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/JueJin/JueJin.yaml"
@@ -731,7 +718,7 @@ function main(config) {
     "DouBan": {
       "type": "http",
       "behavior": "classical",
-      "interval": 3600,
+      "interval": 86400,
       "format": "yaml",
       "path": "./rules/DouBan.yaml",
       "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/DouBan/DouBan.yaml"
@@ -739,7 +726,7 @@ function main(config) {
     "SMZDM": {
       "type": "http",
       "behavior": "classical",
-      "interval": 3600,
+      "interval": 86400,
       "format": "yaml",
       "path": "./rules/SMZDM.yaml",
       "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/SMZDM/SMZDM.yaml"
@@ -747,7 +734,7 @@ function main(config) {
     "12306": {
       "type": "http",
       "behavior": "classical",
-      "interval": 3600,
+      "interval": 86400,
       "format": "yaml",
       "path": "./rules/12306.yaml",
       "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/12306/12306.yaml"
@@ -755,7 +742,7 @@ function main(config) {
     "Huawei": {
       "type": "http",
       "behavior": "classical",
-      "interval": 3600,
+      "interval": 86400,
       "format": "yaml",
       "path": "./rules/Huawei.yaml",
       "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Huawei/Huawei.yaml"
@@ -763,7 +750,7 @@ function main(config) {
     "UnionPay": {
       "type": "http",
       "behavior": "classical",
-      "interval": 3600,
+      "interval": 86400,
       "format": "yaml",
       "path": "./rules/UnionPay.yaml",
       "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/UnionPay/UnionPay.yaml"
@@ -771,7 +758,7 @@ function main(config) {
     "Sina": {
       "type": "http",
       "behavior": "classical",
-      "interval": 3600,
+      "interval": 86400,
       "format": "yaml",
       "path": "./rules/Sina.yaml",
       "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Sina/Sina.yaml"
@@ -779,7 +766,7 @@ function main(config) {
     "Sohu": {
       "type": "http",
       "behavior": "classical",
-      "interval": 3600,
+      "interval": 86400,
       "format": "yaml",
       "path": "./rules/Sohu.yaml",
       "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Sohu/Sohu.yaml"
@@ -787,7 +774,7 @@ function main(config) {
     "TencentVideo": {
       "type": "http",
       "behavior": "classical",
-      "interval": 3600,
+      "interval": 86400,
       "format": "yaml",
       "path": "./rules/TencentVideo.yaml",
       "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/TencentVideo/TencentVideo.yaml"
@@ -795,7 +782,7 @@ function main(config) {
     "iQIYI": {
       "type": "http",
       "behavior": "classical",
-      "interval": 3600,
+      "interval": 86400,
       "format": "yaml",
       "path": "./rules/iQIYI.yaml",
       "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/iQIYI/iQIYI.yaml"
@@ -803,7 +790,7 @@ function main(config) {
     "Youku": {
       "type": "http",
       "behavior": "classical",
-      "interval": 3600,
+      "interval": 86400,
       "format": "yaml",
       "path": "./rules/Youku.yaml",
       "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Youku/Youku.yaml"
@@ -811,7 +798,7 @@ function main(config) {
     "Migu": {
       "type": "http",
       "behavior": "classical",
-      "interval": 3600,
+      "interval": 86400,
       "format": "yaml",
       "path": "./rules/Migu.yaml",
       "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Migu/Migu.yaml"
@@ -819,7 +806,7 @@ function main(config) {
     "Apple": {
       "type": "http",
       "behavior": "classical",
-      "interval": 3600,
+      "interval": 86400,
       "format": "yaml",
       "path": "./rules/Apple.yaml",
       "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Apple/Apple.yaml"
@@ -827,7 +814,7 @@ function main(config) {
     "iCloud": {
       "type": "http",
       "behavior": "classical",
-      "interval": 3600,
+      "interval": 86400,
       "format": "yaml",
       "path": "./rules/iCloud.yaml",
       "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/iCloud/iCloud.yaml"
@@ -835,7 +822,7 @@ function main(config) {
     "AppleID": {
       "type": "http",
       "behavior": "classical",
-      "interval": 3600,
+      "interval": 86400,
       "format": "yaml",
       "path": "./rules/AppleID.yaml",
       "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/AppleID/AppleID.yaml"
@@ -843,7 +830,7 @@ function main(config) {
     "AppleProxy": {
       "type": "http",
       "behavior": "classical",
-      "interval": 3600,
+      "interval": 86400,
       "format": "yaml",
       "path": "./rules/AppleProxy.yaml",
       "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/AppleProxy/AppleProxy.yaml"
@@ -851,7 +838,7 @@ function main(config) {
     "AppleMedia": {
       "type": "http",
       "behavior": "classical",
-      "interval": 3600,
+      "interval": 86400,
       "format": "yaml",
       "path": "./rules/AppleMedia.yaml",
       "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/AppleMedia/AppleMedia.yaml"
@@ -859,7 +846,7 @@ function main(config) {
     "Microsoft": {
       "type": "http",
       "behavior": "classical",
-      "interval": 3600,
+      "interval": 86400,
       "format": "yaml",
       "path": "./rules/Microsoft.yaml",
       "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Microsoft/Microsoft.yaml"
@@ -867,7 +854,7 @@ function main(config) {
     "OneDrive": {
       "type": "http",
       "behavior": "classical",
-      "interval": 3600,
+      "interval": 86400,
       "format": "yaml",
       "path": "./rules/OneDrive.yaml",
       "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/OneDrive/OneDrive.yaml"
@@ -875,7 +862,7 @@ function main(config) {
     "Bing": {
       "type": "http",
       "behavior": "classical",
-      "interval": 3600,
+      "interval": 86400,
       "format": "yaml",
       "path": "./rules/Bing.yaml",
       "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Bing/Bing.yaml"
@@ -883,7 +870,7 @@ function main(config) {
     "Google": {
       "type": "http",
       "behavior": "classical",
-      "interval": 3600,
+      "interval": 86400,
       "format": "yaml",
       "path": "./rules/Google.yaml",
       "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Google/Google.yaml"
@@ -891,7 +878,7 @@ function main(config) {
     "Telegram": {
       "type": "http",
       "behavior": "classical",
-      "interval": 3600,
+      "interval": 86400,
       "format": "yaml",
       "path": "./rules/Telegram.yaml",
       "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Telegram/Telegram.yaml"
@@ -899,7 +886,7 @@ function main(config) {
     "Facebook": {
       "type": "http",
       "behavior": "classical",
-      "interval": 3600,
+      "interval": 86400,
       "format": "yaml",
       "path": "./rules/Facebook.yaml",
       "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Facebook/Facebook.yaml"
@@ -907,7 +894,7 @@ function main(config) {
     "Instagram": {
       "type": "http",
       "behavior": "classical",
-      "interval": 3600,
+      "interval": 86400,
       "format": "yaml",
       "path": "./rules/Instagram.yaml",
       "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Instagram/Instagram.yaml"
@@ -915,7 +902,7 @@ function main(config) {
     "Threads": {
       "type": "http",
       "behavior": "classical",
-      "interval": 3600,
+      "interval": 86400,
       "format": "yaml",
       "path": "./rules/Threads.yaml",
       "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Threads/Threads.yaml"
@@ -923,7 +910,7 @@ function main(config) {
     "Whatsapp": {
       "type": "http",
       "behavior": "classical",
-      "interval": 3600,
+      "interval": 86400,
       "format": "yaml",
       "path": "./rules/Whatsapp.yaml",
       "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Whatsapp/Whatsapp.yaml"
@@ -931,7 +918,7 @@ function main(config) {
     "Twitter": {
       "type": "http",
       "behavior": "classical",
-      "interval": 3600,
+      "interval": 86400,
       "format": "yaml",
       "path": "./rules/Twitter.yaml",
       "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Twitter/Twitter.yaml"
@@ -939,7 +926,7 @@ function main(config) {
     "Snap": {
       "type": "http",
       "behavior": "classical",
-      "interval": 3600,
+      "interval": 86400,
       "format": "yaml",
       "path": "./rules/Snap.yaml",
       "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Snap/Snap.yaml"
@@ -947,7 +934,7 @@ function main(config) {
     "Reddit": {
       "type": "http",
       "behavior": "classical",
-      "interval": 3600,
+      "interval": 86400,
       "format": "yaml",
       "path": "./rules/Reddit.yaml",
       "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Reddit/Reddit.yaml"
@@ -955,7 +942,7 @@ function main(config) {
     "Discord": {
       "type": "http",
       "behavior": "classical",
-      "interval": 3600,
+      "interval": 86400,
       "format": "yaml",
       "path": "./rules/Discord.yaml",
       "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Discord/Discord.yaml"
@@ -963,7 +950,7 @@ function main(config) {
     "Netflix": {
       "type": "http",
       "behavior": "classical",
-      "interval": 3600,
+      "interval": 86400,
       "format": "yaml",
       "path": "./rules/Netflix.yaml",
       "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Netflix/Netflix.yaml"
@@ -971,7 +958,7 @@ function main(config) {
     "YouTube": {
       "type": "http",
       "behavior": "classical",
-      "interval": 3600,
+      "interval": 86400,
       "format": "yaml",
       "path": "./rules/YouTube.yaml",
       "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/YouTube/YouTube.yaml"
@@ -979,7 +966,7 @@ function main(config) {
     "Spotify": {
       "type": "http",
       "behavior": "classical",
-      "interval": 3600,
+      "interval": 86400,
       "format": "yaml",
       "path": "./rules/Spotify.yaml",
       "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Spotify/Spotify.yaml"
@@ -987,7 +974,7 @@ function main(config) {
     "TikTok": {
       "type": "http",
       "behavior": "classical",
-      "interval": 3600,
+      "interval": 86400,
       "format": "yaml",
       "path": "./rules/TikTok.yaml",
       "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/TikTok/TikTok.yaml"
@@ -995,7 +982,7 @@ function main(config) {
     "Disney": {
       "type": "http",
       "behavior": "classical",
-      "interval": 3600,
+      "interval": 86400,
       "format": "yaml",
       "path": "./rules/Disney.yaml",
       "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Disney/Disney.yaml"
@@ -1003,7 +990,7 @@ function main(config) {
     "HBO": {
       "type": "http",
       "behavior": "classical",
-      "interval": 3600,
+      "interval": 86400,
       "format": "yaml",
       "path": "./rules/HBO.yaml",
       "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/HBO/HBO.yaml"
@@ -1011,7 +998,7 @@ function main(config) {
     "Bahamut": {
       "type": "http",
       "behavior": "classical",
-      "interval": 3600,
+      "interval": 86400,
       "format": "yaml",
       "path": "./rules/Bahamut.yaml",
       "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Bahamut/Bahamut.yaml"
@@ -1019,7 +1006,7 @@ function main(config) {
     "GitHub": {
       "type": "http",
       "behavior": "classical",
-      "interval": 3600,
+      "interval": 86400,
       "format": "yaml",
       "path": "./rules/GitHub.yaml",
       "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/GitHub/GitHub.yaml"
@@ -1027,7 +1014,7 @@ function main(config) {
     "GitLab": {
       "type": "http",
       "behavior": "classical",
-      "interval": 3600,
+      "interval": 86400,
       "format": "yaml",
       "path": "./rules/GitLab.yaml",
       "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/GitLab/GitLab.yaml"
@@ -1035,7 +1022,7 @@ function main(config) {
     "Developer": {
       "type": "http",
       "behavior": "classical",
-      "interval": 3600,
+      "interval": 86400,
       "format": "yaml",
       "path": "./rules/Developer.yaml",
       "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Developer/Developer.yaml"
@@ -1043,7 +1030,7 @@ function main(config) {
     "Docker": {
       "type": "http",
       "behavior": "classical",
-      "interval": 3600,
+      "interval": 86400,
       "format": "yaml",
       "path": "./rules/Docker.yaml",
       "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Docker/Docker.yaml"
@@ -1051,7 +1038,7 @@ function main(config) {
     "Figma": {
       "type": "http",
       "behavior": "classical",
-      "interval": 3600,
+      "interval": 86400,
       "format": "yaml",
       "path": "./rules/Figma.yaml",
       "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Figma/Figma.yaml"
@@ -1059,7 +1046,7 @@ function main(config) {
     "DigitalOcean": {
       "type": "http",
       "behavior": "classical",
-      "interval": 3600,
+      "interval": 86400,
       "format": "yaml",
       "path": "./rules/DigitalOcean.yaml",
       "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/DigitalOcean/DigitalOcean.yaml"
@@ -1067,7 +1054,7 @@ function main(config) {
     "Amazon": {
       "type": "http",
       "behavior": "classical",
-      "interval": 3600,
+      "interval": 86400,
       "format": "yaml",
       "path": "./rules/Amazon.yaml",
       "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Amazon/Amazon.yaml"
@@ -1075,7 +1062,7 @@ function main(config) {
     "Scholar": {
       "type": "http",
       "behavior": "classical",
-      "interval": 3600,
+      "interval": 86400,
       "format": "yaml",
       "path": "./rules/Scholar.yaml",
       "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Scholar/Scholar.yaml"
@@ -1083,7 +1070,7 @@ function main(config) {
     "GlobalScholar": {
       "type": "http",
       "behavior": "classical",
-      "interval": 3600,
+      "interval": 86400,
       "format": "yaml",
       "path": "./rules/GlobalScholar.yaml",
       "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/GlobalScholar/GlobalScholar.yaml"
@@ -1091,7 +1078,7 @@ function main(config) {
     "Notion": {
       "type": "http",
       "behavior": "classical",
-      "interval": 3600,
+      "interval": 86400,
       "format": "yaml",
       "path": "./rules/Notion.yaml",
       "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Notion/Notion.yaml"
@@ -1099,7 +1086,7 @@ function main(config) {
     "Wikipedia": {
       "type": "http",
       "behavior": "classical",
-      "interval": 3600,
+      "interval": 86400,
       "format": "yaml",
       "path": "./rules/Wikipedia.yaml",
       "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Wikipedia/Wikipedia.yaml"
@@ -1107,7 +1094,7 @@ function main(config) {
     "Dropbox": {
       "type": "http",
       "behavior": "classical",
-      "interval": 3600,
+      "interval": 86400,
       "format": "yaml",
       "path": "./rules/Dropbox.yaml",
       "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Dropbox/Dropbox.yaml"
@@ -1115,7 +1102,7 @@ function main(config) {
     "Cloudflare": {
       "type": "http",
       "behavior": "classical",
-      "interval": 3600,
+      "interval": 86400,
       "format": "yaml",
       "path": "./rules/Cloudflare.yaml",
       "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Cloudflare/Cloudflare.yaml"
@@ -1123,7 +1110,7 @@ function main(config) {
     "AOL": {
       "type": "http",
       "behavior": "classical",
-      "interval": 3600,
+      "interval": 86400,
       "format": "yaml",
       "path": "./rules/AOL.yaml",
       "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/AOL/AOL.yaml"
@@ -1131,7 +1118,7 @@ function main(config) {
     "Protonmail": {
       "type": "http",
       "behavior": "classical",
-      "interval": 3600,
+      "interval": 86400,
       "format": "yaml",
       "path": "./rules/Protonmail.yaml",
       "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Protonmail/Protonmail.yaml"
@@ -1139,7 +1126,7 @@ function main(config) {
     "Speedtest": {
       "type": "http",
       "behavior": "classical",
-      "interval": 3600,
+      "interval": 86400,
       "format": "yaml",
       "path": "./rules/Speedtest.yaml",
       "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Speedtest/Speedtest.yaml"
@@ -1147,7 +1134,7 @@ function main(config) {
     "EA": {
       "type": "http",
       "behavior": "classical",
-      "interval": 3600,
+      "interval": 86400,
       "format": "yaml",
       "path": "./rules/EA.yaml",
       "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/EA/EA.yaml"
@@ -1155,7 +1142,7 @@ function main(config) {
     "Epic": {
       "type": "http",
       "behavior": "classical",
-      "interval": 3600,
+      "interval": 86400,
       "format": "yaml",
       "path": "./rules/Epic.yaml",
       "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Epic/Epic.yaml"
@@ -1163,7 +1150,7 @@ function main(config) {
     "Gog": {
       "type": "http",
       "behavior": "classical",
-      "interval": 3600,
+      "interval": 86400,
       "format": "yaml",
       "path": "./rules/Gog.yaml",
       "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Gog/Gog.yaml"
@@ -1171,7 +1158,7 @@ function main(config) {
     "Origin": {
       "type": "http",
       "behavior": "classical",
-      "interval": 3600,
+      "interval": 86400,
       "format": "yaml",
       "path": "./rules/Origin.yaml",
       "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Origin/Origin.yaml"
@@ -1179,7 +1166,7 @@ function main(config) {
     "PlayStation": {
       "type": "http",
       "behavior": "classical",
-      "interval": 3600,
+      "interval": 86400,
       "format": "yaml",
       "path": "./rules/PlayStation.yaml",
       "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/PlayStation/PlayStation.yaml"
@@ -1187,7 +1174,7 @@ function main(config) {
     "Steam": {
       "type": "http",
       "behavior": "classical",
-      "interval": 3600,
+      "interval": 86400,
       "format": "yaml",
       "path": "./rules/Steam.yaml",
       "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Steam/Steam.yaml"
@@ -1195,7 +1182,7 @@ function main(config) {
     "Xbox": {
       "type": "http",
       "behavior": "classical",
-      "interval": 3600,
+      "interval": 86400,
       "format": "yaml",
       "path": "./rules/Xbox.yaml",
       "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Xbox/Xbox.yaml"
@@ -1203,7 +1190,7 @@ function main(config) {
     "Blizzard": {
       "type": "http",
       "behavior": "classical",
-      "interval": 3600,
+      "interval": 86400,
       "format": "yaml",
       "path": "./rules/Blizzard.yaml",
       "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Blizzard/Blizzard.yaml"
@@ -1211,7 +1198,7 @@ function main(config) {
     "Nintendo": {
       "type": "http",
       "behavior": "classical",
-      "interval": 3600,
+      "interval": 86400,
       "format": "yaml",
       "path": "./rules/Nintendo.yaml",
       "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Nintendo/Nintendo.yaml"
@@ -1219,7 +1206,7 @@ function main(config) {
     "Game": {
       "type": "http",
       "behavior": "classical",
-      "interval": 3600,
+      "interval": 86400,
       "format": "yaml",
       "path": "./rules/Game.yaml",
       "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Game/Game.yaml"
@@ -1227,7 +1214,7 @@ function main(config) {
     "Download": {
       "type": "http",
       "behavior": "classical",
-      "interval": 3600,
+      "interval": 86400,
       "format": "yaml",
       "path": "./rules/Download.yaml",
       "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Download/Download.yaml"
@@ -1235,7 +1222,7 @@ function main(config) {
     "PrivateTracker": {
       "type": "http",
       "behavior": "classical",
-      "interval": 3600,
+      "interval": 86400,
       "format": "yaml",
       "path": "./rules/PrivateTracker.yaml",
       "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/PrivateTracker/PrivateTracker.yaml"
@@ -1243,7 +1230,7 @@ function main(config) {
     "GlobalMedia": {
       "type": "http",
       "behavior": "classical",
-      "interval": 3600,
+      "interval": 86400,
       "format": "yaml",
       "path": "./rules/GlobalMedia.yaml",
       "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/GlobalMedia/GlobalMedia.yaml"
@@ -1251,7 +1238,7 @@ function main(config) {
     "Proxy": {
       "type": "http",
       "behavior": "classical",
-      "interval": 3600,
+      "interval": 86400,
       "format": "yaml",
       "path": "./rules/Proxy.yaml",
       "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Proxy/Proxy.yaml"
@@ -1259,7 +1246,7 @@ function main(config) {
     "Global": {
       "type": "http",
       "behavior": "classical",
-      "interval": 3600,
+      "interval": 86400,
       "format": "yaml",
       "path": "./rules/Global.yaml",
       "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Global/Global.yaml"
