@@ -1,4 +1,4 @@
-# Official or large-scale AI providers. Shared dependencies belong in pre-ai-infra.list.
+# Official or large-scale AI providers. Shared dependencies belong in Pre-AI / pre-ai-infra.
 DOMAIN-SUFFIX,chatgpt.com
 DOMAIN-SUFFIX,chat.com
 DOMAIN-SUFFIX,openai.com
@@ -6,7 +6,6 @@ DOMAIN-SUFFIX,openaiapi.com
 DOMAIN-SUFFIX,oaistatic.com
 DOMAIN-SUFFIX,oaiusercontent.com
 DOMAIN-SUFFIX,sora.com
-DOMAIN-KEYWORD,openai
 DOMAIN-SUFFIX,anthropic.com
 DOMAIN-SUFFIX,claude.ai
 DOMAIN-SUFFIX,claude.com
