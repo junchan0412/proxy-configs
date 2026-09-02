@@ -1,0 +1,167 @@
+#!name=Applications
+#!desc = macOS 常见应用按进程分流；基于当前 Surge.conf 策略组
+#!category=#5网络模块
+#!system = macOS
+
+[Rule]
+# 中国大陆应用与系统服务：保持直连，避免区域、登录和推送异常
+PROCESS-NAME,/Applications/WeChat.app/,DIRECT // WeChat #!MACOS-ONLY
+PROCESS-NAME,/Applications/抖音.app/,DIRECT // 抖音 #!MACOS-ONLY
+PROCESS-NAME,/Applications/QQ.app/,DIRECT // QQ #!MACOS-ONLY
+PROCESS-NAME,/Applications/DingTalk.app/,DIRECT // DingTalk #!MACOS-ONLY
+PROCESS-NAME,/Applications/Lark.app/,DIRECT // Lark 国内版 #!MACOS-ONLY
+PROCESS-NAME,/Applications/Feishu.app/,DIRECT // 飞书 #!MACOS-ONLY
+PROCESS-NAME,/Applications/TencentMeeting.app/,DIRECT // 腾讯会议 #!MACOS-ONLY
+PROCESS-NAME,/Applications/网易云音乐.app/,DIRECT // 网易云音乐 #!MACOS-ONLY
+PROCESS-NAME,/Applications/NetEase Cloud Music.app/,DIRECT // NetEase Cloud Music #!MACOS-ONLY
+PROCESS-NAME,/Applications/Bilibili.app/,DIRECT // 哔哩哔哩 #!MACOS-ONLY
+PROCESS-NAME,/Applications/iQIYI.app/,DIRECT // 爱奇艺 #!MACOS-ONLY
+PROCESS-NAME,/Applications/Youku.app/,DIRECT // 优酷 #!MACOS-ONLY
+PROCESS-NAME,/Applications/Taobao.app/,DIRECT // 淘宝 #!MACOS-ONLY
+PROCESS-NAME,/Applications/Alipay.app/,DIRECT // 支付宝 #!MACOS-ONLY
+PROCESS-NAME,/Applications/Quark.app/,DIRECT // 夸克 #!MACOS-ONLY
+PROCESS-NAME,/Applications/QuarkCloudDrive.app/,DIRECT // 夸克网盘 #!MACOS-ONLY
+PROCESS-NAME,/Applications/QiuChenAppStore.app/,DIRECT // 秋城应用商店 #!MACOS-ONLY
+
+# AI 应用：沿用主配置中的 AI 策略组
+PROCESS-NAME,/Applications/Codex.app/,AI // Codex(App) #!MACOS-ONLY
+PROCESS-NAME,/Applications/ChatGPT.app/,AI // ChatGPT #!MACOS-ONLY
+PROCESS-NAME,/Applications/Claude.app/,AI // Claude #!MACOS-ONLY
+PROCESS-NAME,/Applications/Claude Code.app/,AI // Claude Code #!MACOS-ONLY
+PROCESS-NAME,/Applications/Claude Code URL Handler.app/,AI // Claude Code URL Handler #!MACOS-ONLY
+PROCESS-NAME,/Applications/Google Gemini.app/,AI // Gemini #!MACOS-ONLY
+PROCESS-NAME,/Applications/Google AI Studio.app/,AI // Google AI Studio #!MACOS-ONLY
+PROCESS-NAME,/Applications/Perplexity.app/,AI // Perplexity #!MACOS-ONLY
+PROCESS-NAME,/Applications/Cursor.app/,AI // Cursor #!MACOS-ONLY
+PROCESS-NAME,/Applications/Windsurf.app/,AI // Windsurf #!MACOS-ONLY
+PROCESS-NAME,/Applications/Chatbox.app/,AI // Chatbox #!MACOS-ONLY
+PROCESS-NAME,/Applications/Cherry Studio.app/,AI // Cherry Studio #!MACOS-ONLY
+PROCESS-NAME,/Applications/LM Studio.app/,AI // LM Studio #!MACOS-ONLY
+PROCESS-NAME,/Applications/Ollama.app/,AI // Ollama #!MACOS-ONLY
+PROCESS-NAME,/Applications/SnapAI.app/,AI // SnapAI #!MACOS-ONLY
+
+# 国际通信与社交：沿用国际社媒策略组
+PROCESS-NAME,/Applications/AyuGram.app/,国际社媒 // AyuGram #!MACOS-ONLY
+PROCESS-NAME,/Applications/Telegram.app/,国际社媒 // Telegram #!MACOS-ONLY
+PROCESS-NAME,/Applications/Telegram Beta.app/,国际社媒 // Telegram Beta #!MACOS-ONLY
+PROCESS-NAME,/Applications/Discord.app/,国际社媒 // Discord #!MACOS-ONLY
+PROCESS-NAME,/Applications/WhatsApp.app/,国际社媒 // WhatsApp #!MACOS-ONLY
+PROCESS-NAME,/Applications/Signal.app/,国际社媒 // Signal #!MACOS-ONLY
+PROCESS-NAME,/Applications/Slack.app/,国际社媒 // Slack #!MACOS-ONLY
+PROCESS-NAME,/Applications/Microsoft Teams.app/,国际社媒 // Microsoft Teams #!MACOS-ONLY
+PROCESS-NAME,/Applications/Zoom.app/,国际社媒 // Zoom #!MACOS-ONLY
+PROCESS-NAME,/Applications/Skype.app/,国际社媒 // Skype #!MACOS-ONLY
+PROCESS-NAME,/Applications/LINE.app/,国际社媒 // LINE #!MACOS-ONLY
+PROCESS-NAME,/Applications/Messenger.app/,国际社媒 // Messenger #!MACOS-ONLY
+PROCESS-NAME,/Applications/Reddit.app/,国际社媒 // Reddit #!MACOS-ONLY
+PROCESS-NAME,/Applications/X.app/,国际社媒 // X #!MACOS-ONLY
+PROCESS-NAME,/Applications/Twitter.app/,国际社媒 // Twitter #!MACOS-ONLY
+
+# 海外流媒体：按主配置的地区与机场策略组分流
+PROCESS-NAME,/Applications/Spotify.app/,日本 // Spotify #!MACOS-ONLY
+PROCESS-NAME,/Applications/Apple Music.app/,DIRECT // Apple Music #!MACOS-ONLY
+PROCESS-NAME,/Applications/YouTube Music.app/,国际社媒 // YouTube Music #!MACOS-ONLY
+PROCESS-NAME,/Applications/Netflix.app/,机场合集 // Netflix #!MACOS-ONLY
+PROCESS-NAME,/Applications/Disney+.app/,机场合集 // Disney+ #!MACOS-ONLY
+PROCESS-NAME,/Applications/HBO Max.app/,机场合集 // HBO Max #!MACOS-ONLY
+PROCESS-NAME,/Applications/Amazon Prime Video.app/,机场合集 // Prime Video #!MACOS-ONLY
+PROCESS-NAME,/Applications/Twitch.app/,国际社媒 // Twitch #!MACOS-ONLY
+PROCESS-NAME,/Applications/Elmedia Player.app/,DIRECT // Elmedia Player #!MACOS-ONLY
+PROCESS-NAME,/Applications/SenPlayer.app/,DIRECT // SenPlayer #!MACOS-ONLY
+
+# 游戏与游戏平台：沿用 Game 策略组
+PROCESS-NAME,/Applications/Steam.app/,Game // Steam #!MACOS-ONLY
+PROCESS-NAME,/Applications/Epic Games Launcher.app/,Game // Epic Games #!MACOS-ONLY
+PROCESS-NAME,/Applications/Battle.net.app/,Game // Battle.net #!MACOS-ONLY
+PROCESS-NAME,/Applications/Blizzard Battle.net.app/,Game // Blizzard Battle.net #!MACOS-ONLY
+PROCESS-NAME,/Applications/Origin.app/,Game // Origin #!MACOS-ONLY
+PROCESS-NAME,/Applications/EA app.app/,Game // EA app #!MACOS-ONLY
+PROCESS-NAME,/Applications/Ubisoft Connect.app/,Game // Ubisoft Connect #!MACOS-ONLY
+PROCESS-NAME,/Applications/Riot Client.app/,Game // Riot Client #!MACOS-ONLY
+PROCESS-NAME,/Applications/League of Legends.app/,Game // League of Legends #!MACOS-ONLY
+PROCESS-NAME,/Applications/Minecraft.app/,Game // Minecraft #!MACOS-ONLY
+PROCESS-NAME,/Applications/PlayCover.app/,Game // PlayCover #!MACOS-ONLY
+PROCESS-NAME,/Applications/GeForce NOW.app/,Game // GeForce NOW #!MACOS-ONLY
+
+# 开发、云服务与国际基础设施
+PROCESS-NAME,/Applications/Visual Studio Code.app/,国际基础服务 // Visual Studio Code #!MACOS-ONLY
+PROCESS-NAME,/Applications/Visual Studio Code - Insiders.app/,国际基础服务 // VS Code Insiders #!MACOS-ONLY
+PROCESS-NAME,/Applications/Xcode.app/,国际基础服务 // Xcode #!MACOS-ONLY
+PROCESS-NAME,/Applications/Xcode-beta.app/,国际基础服务 // Xcode beta #!MACOS-ONLY
+PROCESS-NAME,/Applications/Android Studio.app/,国际基础服务 // Android Studio #!MACOS-ONLY
+PROCESS-NAME,/Applications/JetBrains Toolbox.app/,国际基础服务 // JetBrains Toolbox #!MACOS-ONLY
+PROCESS-NAME,/Applications/GitHub Desktop.app/,国际基础服务 // GitHub Desktop #!MACOS-ONLY
+PROCESS-NAME,/Applications/Docker.app/,国际基础服务 // Docker Desktop #!MACOS-ONLY
+PROCESS-NAME,/Applications/OrbStack.app/,国际基础服务 // OrbStack #!MACOS-ONLY
+PROCESS-NAME,/Applications/Postman.app/,国际基础服务 // Postman #!MACOS-ONLY
+PROCESS-NAME,/Applications/Insomnia.app/,国际基础服务 // Insomnia #!MACOS-ONLY
+PROCESS-NAME,/Applications/Charles.app/,国际基础服务 // Charles #!MACOS-ONLY
+PROCESS-NAME,/Applications/Proxyman.app/,国际基础服务 // Proxyman #!MACOS-ONLY
+PROCESS-NAME,/Applications/Notion.app/,国际基础服务 // Notion #!MACOS-ONLY
+PROCESS-NAME,/Applications/Obsidian.app/,国际基础服务 // Obsidian #!MACOS-ONLY
+PROCESS-NAME,/Applications/Dropbox.app/,国际基础服务 // Dropbox #!MACOS-ONLY
+PROCESS-NAME,/Applications/Google Drive.app/,国际基础服务 // Google Drive #!MACOS-ONLY
+PROCESS-NAME,/Applications/OneDrive.app/,国际基础服务 // OneDrive #!MACOS-ONLY
+PROCESS-NAME,/Applications/CloudMounter.app/,国际基础服务 // CloudMounter #!MACOS-ONLY
+PROCESS-NAME,/Applications/Raycast.app/,国际基础服务 // Raycast #!MACOS-ONLY
+PROCESS-NAME,/Applications/1Password.app/,国际基础服务 // 1Password #!MACOS-ONLY
+PROCESS-NAME,/Applications/Bitwarden.app/,国际基础服务 // Bitwarden #!MACOS-ONLY
+PROCESS-NAME,/Applications/SafeInCloud Password Manager.app/,国际基础服务 // SafeInCloud #!MACOS-ONLY
+PROCESS-NAME,/Applications/Canary Mail.app/,国际基础服务 // Canary Mail #!MACOS-ONLY
+PROCESS-NAME,/Applications/BrowSync.app/,PROXY // BrowSync #!MACOS-ONLY
+PROCESS-NAME,/Applications/Safari.app/,PROXY // Safari #!MACOS-ONLY
+PROCESS-NAME,/Applications/Google Chrome.app/,PROXY // Google Chrome #!MACOS-ONLY
+PROCESS-NAME,/Applications/Firefox.app/,PROXY // Firefox #!MACOS-ONLY
+PROCESS-NAME,/Applications/Arc.app/,PROXY // Arc #!MACOS-ONLY
+PROCESS-NAME,/Applications/Microsoft Edge.app/,PROXY // Microsoft Edge #!MACOS-ONLY
+PROCESS-NAME,/Applications/Brave Browser.app/,PROXY // Brave Browser #!MACOS-ONLY
+PROCESS-NAME,/Applications/Opera.app/,PROXY // Opera #!MACOS-ONLY
+PROCESS-NAME,/Applications/Vivaldi.app/,PROXY // Vivaldi #!MACOS-ONLY
+PROCESS-NAME,/Applications/Orion.app/,PROXY // Orion #!MACOS-ONLY
+
+# 当前设备上的常用工具：默认直连，避免本地 UI、更新和系统辅助服务受影响
+PROCESS-NAME,/Applications/Surge.app/,DIRECT // Surge #!MACOS-ONLY
+PROCESS-NAME,/Applications/Surge Relay.app/,DIRECT // Surge Relay #!MACOS-ONLY
+PROCESS-NAME,/Applications/App Cleaner 9.app/,DIRECT // App Cleaner #!MACOS-ONLY
+PROCESS-NAME,/Applications/AppPorts.app/,DIRECT // AppPorts #!MACOS-ONLY
+PROCESS-NAME,/Applications/Apparency.app/,DIRECT // Apparency #!MACOS-ONLY
+PROCESS-NAME,/Applications/Beyond Compare.app/,DIRECT // Beyond Compare #!MACOS-ONLY
+PROCESS-NAME,/Applications/BuhoCleaner.app/,DIRECT // BuhoCleaner #!MACOS-ONLY
+PROCESS-NAME,/Applications/CC Switch.app/,DIRECT // CC Switch #!MACOS-ONLY
+PROCESS-NAME,/Applications/Caffeine.app/,DIRECT // Caffeine #!MACOS-ONLY
+PROCESS-NAME,/Applications/CotEditor.app/,DIRECT // CotEditor #!MACOS-ONLY
+PROCESS-NAME,/Applications/Disk Relocator.app/,DIRECT // Disk Relocator #!MACOS-ONLY
+PROCESS-NAME,/Applications/Immersive Translate.app/,DIRECT // Immersive Translate #!MACOS-ONLY
+PROCESS-NAME,/Applications/Keka.app/,DIRECT // Keka #!MACOS-ONLY
+PROCESS-NAME,/Applications/Mac Mouse Fix.app/,DIRECT // Mac Mouse Fix #!MACOS-ONLY
+PROCESS-NAME,/Applications/Microsoft Excel.app/,DIRECT // Microsoft Excel #!MACOS-ONLY
+PROCESS-NAME,/Applications/Microsoft PowerPoint.app/,DIRECT // Microsoft PowerPoint #!MACOS-ONLY
+PROCESS-NAME,/Applications/Microsoft Word.app/,DIRECT // Microsoft Word #!MACOS-ONLY
+PROCESS-NAME,/Applications/Mole.app/,DIRECT // Mole #!MACOS-ONLY
+PROCESS-NAME,/Applications/Otty.app/,DIRECT // Otty #!MACOS-ONLY
+PROCESS-NAME,/Applications/Paste – Limitless Clipboard.app/,DIRECT // Paste #!MACOS-ONLY
+PROCESS-NAME,/Applications/Pastel.app/,DIRECT // Pastel #!MACOS-ONLY
+PROCESS-NAME,/Applications/Permute 4.app/,DIRECT // Permute #!MACOS-ONLY
+PROCESS-NAME,/Applications/Pin.app/,DIRECT // Pin #!MACOS-ONLY
+PROCESS-NAME,/Applications/QuickRight.app/,DIRECT // QuickRight #!MACOS-ONLY
+PROCESS-NAME,/Applications/QuitAll.app/,DIRECT // QuitAll #!MACOS-ONLY
+PROCESS-NAME,/Applications/Sidefy.app/,DIRECT // Sidefy #!MACOS-ONLY
+PROCESS-NAME,/Applications/Snip Halo.app/,DIRECT // Snip Halo #!MACOS-ONLY
+PROCESS-NAME,/Applications/Starcat.app/,DIRECT // Starcat #!MACOS-ONLY
+PROCESS-NAME,/Applications/Surfed.app/,DIRECT // Surfed #!MACOS-ONLY
+PROCESS-NAME,/Applications/Tabs Saver.app/,DIRECT // Tabs Saver #!MACOS-ONLY
+PROCESS-NAME,/Applications/Tampermonkey.app/,DIRECT // Tampermonkey #!MACOS-ONLY
+PROCESS-NAME,/Applications/TestFlight.app/,DIRECT // TestFlight #!MACOS-ONLY
+PROCESS-NAME,/Applications/Updatest.app/,DIRECT // Updatest #!MACOS-ONLY
+PROCESS-NAME,/Applications/Vorssaint.app/,DIRECT // Vorssaint #!MACOS-ONLY
+PROCESS-NAME,/Applications/Wake.app/,DIRECT // Wake #!MACOS-ONLY
+PROCESS-NAME,/Applications/Wins.app/,DIRECT // Wins #!MACOS-ONLY
+PROCESS-NAME,/Applications/Wipr.app/,DIRECT // Wipr #!MACOS-ONLY
+PROCESS-NAME,/Applications/Yoink.app/,DIRECT // Yoink #!MACOS-ONLY
+PROCESS-NAME,/Applications/iShot.app/,DIRECT // iShot #!MACOS-ONLY
+PROCESS-NAME,/Applications/iStat Menus.app/,DIRECT // iStat Menus #!MACOS-ONLY
+PROCESS-NAME,/Applications/Angel Live.app/,DIRECT // Angel Live #!MACOS-ONLY
+PROCESS-NAME,/Applications/Frset.app/,DIRECT // Frset #!MACOS-ONLY
+
+# 模块规则必须以 FINAL 收尾；主配置中的既有规则仍按其原有顺序生效
+FINAL,FINAL
