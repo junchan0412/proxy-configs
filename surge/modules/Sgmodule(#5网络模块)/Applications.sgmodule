@@ -67,7 +67,6 @@ PROCESS-NAME,/Applications/HBO Max.app/,机场合集 // HBO Max #!MACOS-ONLY
 PROCESS-NAME,/Applications/Amazon Prime Video.app/,机场合集 // Prime Video #!MACOS-ONLY
 PROCESS-NAME,/Applications/Twitch.app/,国际社媒 // Twitch #!MACOS-ONLY
 PROCESS-NAME,/Applications/Elmedia Player.app/,DIRECT // Elmedia Player #!MACOS-ONLY
-PROCESS-NAME,/Applications/SenPlayer.app/,DIRECT // SenPlayer #!MACOS-ONLY
 
 # 游戏与游戏平台：沿用 Game 策略组
 PROCESS-NAME,/Applications/Steam.app/,Game // Steam #!MACOS-ONLY
@@ -110,7 +109,6 @@ PROCESS-NAME,/Applications/SafeInCloud Password Manager.app/,国际基础服务 
 PROCESS-NAME,/Applications/Canary Mail.app/,国际基础服务 // Canary Mail #!MACOS-ONLY
 PROCESS-NAME,/Applications/BrowSync.app/,PROXY // BrowSync #!MACOS-ONLY
 PROCESS-NAME,/Applications/Safari.app/,PROXY // Safari #!MACOS-ONLY
-PROCESS-NAME,/Applications/Google Chrome.app/,PROXY // Google Chrome #!MACOS-ONLY
 PROCESS-NAME,/Applications/Firefox.app/,PROXY // Firefox #!MACOS-ONLY
 PROCESS-NAME,/Applications/Arc.app/,PROXY // Arc #!MACOS-ONLY
 PROCESS-NAME,/Applications/Microsoft Edge.app/,PROXY // Microsoft Edge #!MACOS-ONLY
@@ -162,6 +160,3 @@ PROCESS-NAME,/Applications/iShot.app/,DIRECT // iShot #!MACOS-ONLY
 PROCESS-NAME,/Applications/iStat Menus.app/,DIRECT // iStat Menus #!MACOS-ONLY
 PROCESS-NAME,/Applications/Angel Live.app/,DIRECT // Angel Live #!MACOS-ONLY
 PROCESS-NAME,/Applications/Frset.app/,DIRECT // Frset #!MACOS-ONLY
-
-# 模块规则必须以 FINAL 收尾；主配置中的既有规则仍按其原有顺序生效
-FINAL,FINAL
