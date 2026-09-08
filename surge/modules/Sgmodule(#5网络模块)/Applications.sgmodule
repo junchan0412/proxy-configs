@@ -1,6 +1,6 @@
-#!name=Applications
+#!name = Applications
 #!desc = macOS 常见应用按进程分流；基于当前 Surge.conf 策略组
-#!category=#5网络模块
+#!category = #5网络模块
 #!system = macOS
 
 [Rule]
@@ -118,14 +118,11 @@ PROCESS-NAME,/Applications/Vivaldi.app/,PROXY // Vivaldi #!MACOS-ONLY
 PROCESS-NAME,/Applications/Orion.app/,PROXY // Orion #!MACOS-ONLY
 
 # 当前设备上的常用工具：默认直连，避免本地 UI、更新和系统辅助服务受影响
-PROCESS-NAME,/Applications/Surge.app/,DIRECT // Surge #!MACOS-ONLY
-PROCESS-NAME,/Applications/Surge Relay.app/,DIRECT // Surge Relay #!MACOS-ONLY
 PROCESS-NAME,/Applications/App Cleaner 9.app/,DIRECT // App Cleaner #!MACOS-ONLY
 PROCESS-NAME,/Applications/AppPorts.app/,DIRECT // AppPorts #!MACOS-ONLY
 PROCESS-NAME,/Applications/Apparency.app/,DIRECT // Apparency #!MACOS-ONLY
 PROCESS-NAME,/Applications/Beyond Compare.app/,DIRECT // Beyond Compare #!MACOS-ONLY
 PROCESS-NAME,/Applications/BuhoCleaner.app/,DIRECT // BuhoCleaner #!MACOS-ONLY
-PROCESS-NAME,/Applications/CC Switch.app/,DIRECT // CC Switch #!MACOS-ONLY
 PROCESS-NAME,/Applications/Caffeine.app/,DIRECT // Caffeine #!MACOS-ONLY
 PROCESS-NAME,/Applications/CotEditor.app/,DIRECT // CotEditor #!MACOS-ONLY
 PROCESS-NAME,/Applications/Disk Relocator.app/,DIRECT // Disk Relocator #!MACOS-ONLY
