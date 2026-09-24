@@ -14,3 +14,6 @@ icons/
 # Generated caches
 __pycache__/
 *.py[cod]
+
+# Private root-source configs (contain node credentials, subscription URLs, CA material)
+根配置/

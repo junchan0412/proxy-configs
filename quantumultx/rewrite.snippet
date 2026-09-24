@@ -1,0 +1,18 @@
+# Quantumult X 远端重写片段（在 quantumultx.conf 的 [rewrite_remote] 中引用）。
+# Google .cn 跳国际版 + 知乎/微博/简书外链直跳（与 surge/modules 的两枚重定向模块同意图）。
+
+[rewrite_local]
+^https?://(www\.)?(g|google)\.cn https://www.google.com 302
+^(http|https):\/\/(ditu|maps)\.google\.cn https://maps.google.com 302
+^https?:\/\/scholar\.google\.cn https://scholar.google.com 302
+^https?:\/\/translate\.google\.cn https://translate.google.com 302
+^https?:\/\/books\.google\.cn https://books.google.com 302
+^https?:\/\/cn\.bing\.com https://www.bing.com 302
+^https?:\/\/zh\.m\.wikipedia\.org https://zh.wikipedia.org 302
+^https?:\/\/en\.m\.wikipedia\.org https://en.wikipedia.org 302
+^https?:\/\/link\.zhihu\.com\/\?target=(.+) $1 302
+^https?:\/\/weibo\.cn\/sinaurl\?(?:toasturl|u)=(.+) $1 302
+^https?:\/\/links\.jianshu\.com\/go\?to=(.+) $1 302
+
+[mitm]
+hostname = *.google.cn, *.bing.com, *.wikipedia.org, link.zhihu.com, weibo.cn, links.jianshu.com

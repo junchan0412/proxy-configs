@@ -1,0 +1,20 @@
+#!name=重定向增强
+#!desc=Google .cn 跳国际版、Bing 国内版跳国际版、维基移动版跳桌面版、知乎/微博/简书外链直跳（与 surge/modules 的两枚重定向模块同意图）。
+#!author=junchan0412
+#!homepage=https://github.com/junchan0412/proxy-configs/tree/main/loon/plugin
+
+[Rewrite]
+^https?://(www\.)?(g|google)\.cn https://www.google.com 302
+^(http|https):\/\/(ditu|maps)\.google\.cn https://maps.google.com 302
+^https?:\/\/scholar\.google\.cn https://scholar.google.com 302
+^https?:\/\/translate\.google\.cn https://translate.google.com 302
+^https?:\/\/books\.google\.cn https://books.google.com 302
+^https?:\/\/cn\.bing\.com https://www.bing.com 302
+^https?:\/\/zh\.m\.wikipedia\.org https://zh.wikipedia.org 302
+^https?:\/\/en\.m\.wikipedia\.org https://en.wikipedia.org 302
+^https?:\/\/link\.zhihu\.com\/\?target=(.+) $1 302
+^https?:\/\/weibo\.cn\/sinaurl\?(?:toasturl|u)=(.+) $1 302
+^https?:\/\/links\.jianshu\.com\/go\?to=(.+) $1 302
+
+[Mitm]
+hostname = g.cn,www.g.cn,google.cn,www.google.cn,scholar.google.cn,translate.google.cn,books.google.cn,cn.bing.com,zh.m.wikipedia.org,en.m.wikipedia.org,link.zhihu.com,weibo.cn,links.jianshu.com

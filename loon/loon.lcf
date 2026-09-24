@@ -45,19 +45,19 @@ Emby节点=NameRegex, FilterKey="^(?=.*((?i)🇭🇰|香港|🇹🇼|台湾|🇸
 全球节点=NameRegex, FilterKey="^(?=.*(.))(?!.*((?i)群|邀请|返利|循环|官网|客服|网站|网址|获取|订阅|流量|到期|机场|下次|版本|官址|备用|过期|已用|联系|邮箱|工单|贩卖|通知|倒卖|国内|地址|频道|无法|说明|使用|提示|访问|教程|关注|更新|作者|加入|超时|收藏|福利|好友|失联|(\b(USE|USED|TOTAL|EXPIRE|EMAIL|Panel|Channel|Author|Traffic)(\d+)?\b|(\d{4}-\d{2}-\d{2}|\dG)))).*$"
 
 [Proxy Group]
-代理策略=select,Auto,香港,台湾,新加坡,日本,美国,韩国,英国,DIRECT,img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/Proxy.png
+代理策略=select,Auto,香港,台湾,新加坡,日本,美国,韩国,英国,DIRECT,img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/Static.png
 Auto=url-test,全球节点,interval=600,tolerance=100,img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/Auto.png
 兜底策略=select,代理策略,DIRECT,img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/Global.png
 国际基础服务=select,新加坡,美国,香港,代理策略,DIRECT,img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/Global.png
 Apple服务=select,DIRECT,国际基础服务,代理策略,新加坡,美国,img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/Apple.png
-AI=select,美国,新加坡,台湾,日本,代理策略,img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/ChatGPT.png
+AI=select,美国,新加坡,台湾,日本,代理策略,img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/OpenAI.png
 国际社媒=select,香港,新加坡,台湾,日本,美国,英国,代理策略,img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/Telegram.png
 国际流媒体=select,新加坡,香港,台湾,美国,日本,代理策略,img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/Streaming.png
 Emby=url-test,Emby节点,interval=600,tolerance=50,img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/Streaming.png
 Game=select,香港,日本,美国,台湾,新加坡,韩国,代理策略,DIRECT,img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/GAME.png
 SpeedTest=select,代理策略,Auto,香港,新加坡,美国,DIRECT,img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/Speedtest.png
-国内下载=select,DIRECT,代理策略,img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/Download.png
-国际下载=select,代理策略,DIRECT,img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/Download.png
+国内下载=select,DIRECT,代理策略,img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Alpha/download.png
+国际下载=select,代理策略,DIRECT,img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Alpha/download.png
 香港=url-test,香港节点,interval=600,tolerance=100,img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/HK.png
 台湾=url-test,台湾节点,interval=600,tolerance=100,img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/TW.png
 新加坡=url-test,新加坡节点,interval=600,tolerance=100,img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/SG.png
@@ -280,9 +280,12 @@ https://kelee.one/Tool/Loon/Lsr/REGION_SPLITTER.lsr, policy=DIRECT, tag=CN REGIO
 [Script]
 
 [Plugin]
+# 按需启用本仓库插件（去掉行首 # 即生效）：
+# https://fastly.jsdelivr.net/gh/junchan0412/proxy-configs@main/loon/plugin/redirect.plugin, enabled=true
+# https://fastly.jsdelivr.net/gh/junchan0412/proxy-configs@main/loon/plugin/dns-mapping.plugin, enabled=true
 
 [Mitm]
-hostname=g.cn,www.g.cn,google.cn,www.google.cn,ditu.google.cn,maps.google.cn
+hostname=g.cn,www.g.cn,google.cn,www.google.cn,ditu.google.cn,maps.google.cn,scholar.google.cn,translate.google.cn,books.google.cn
 ca-p12=
 ca-passphrase=
 skip-server-cert-verify=false
