@@ -345,7 +345,7 @@ function main(config) {
       "max-failed-times": 3,
       "hidden": true,
       "include-all": true,
-      "filter": "^(?=.*((?i)🇯🇵|日本|川日|东京|大阪|泉日|埼玉|(\\b(JP|JPN|Japan)(\\d+)?\\b)))(?!.*((?i)回国|校园|游戏|🎮|(\\b(GAME)\\b))).*$",
+      "filter": "^(?=.*((?i)🇯🇵|日本|东京|大阪|埼玉|(\\b(JP|JPN|Japan)(\\d+)?\\b)))(?!.*((?i)回国|校园|游戏|🎮|(\\b(GAME)\\b))).*$",
       "icon": "https://fastly.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/JP.png"
     },
     {

@@ -13,14 +13,18 @@ jobs:
     steps:
       - uses: actions/checkout@v5
 
-      - name: Install uv
-        uses: astral-sh/setup-uv@v8.1.0
-
-      - name: Install surge-doctor
-        run: uv tool install "git+https://github.com/qidewei2004/surge-doctor@v0.1.0"
-
-      - name: Validate all modules
-        run: surge-doctor check surge/modules/*.sgmodule --fail-on warning
-
       - name: Validate Mihomo YAML
         run: ruby -e 'require "yaml"; ARGV.each { |path| YAML.load_file(path) }' mihomo/mihomo.yaml mihomo/mihomo-override.yaml
+
+      - name: Validate Mihomo JS override sync
+        run: |
+          ruby scripts/generate-mihomo-js-override.rb mihomo/mihomo-override.yaml /tmp/mihomo-override.check.js
+          cmp /tmp/mihomo-override.check.js mihomo/mihomo-override.js
+
+      - name: Validate Loon config
+        run: ruby scripts/validate-loon.rb loon/loon.lcf
+
+      - name: Public sensitivity scan
+        run: |
+          ! rg -n --glob '!scripts/preflight-public.sh' "(psk=|ca-p12 = [A-Za-z0-9+/]{40,}|sub\\.store/download|/Users/[^/]+|iCloud~com~nssurge|Mobile Documents|http-api =|external-controller-access =|snell, *[0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+)" \
+            README.md Rules surge shadowrocket quantumultx mihomo loon egern scripts

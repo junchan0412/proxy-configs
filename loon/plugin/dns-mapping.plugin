@@ -1,0 +1,20 @@
+#!name=国内 DNS 映射
+#!desc=为阿里系/腾讯系核心域名指定对应厂商的公共 DNS，提升国内服务解析准确度（与 surge/modules/dns-mapping.sgmodule 同意图）。
+#!author=junchan0412
+#!homepage=https://github.com/junchan0412/proxy-configs/tree/main/loon/plugin
+
+[Host]
+*.taobao.com = server:223.5.5.5
+*.tmall.com = server:223.5.5.5
+*.tbcache.com = server:223.5.5.5
+*.alipay.com = server:223.5.5.5
+*.alipay.com.cn = server:223.5.5.5
+*.alipaydns.com = server:223.5.5.5
+*.jd.com = server:119.29.29.29
+*.qq.com = server:119.29.29.29
+*.tencent.com = server:119.29.29.29
+*.weixin.qq.com = server:119.29.29.29
+*.weixin.com = server:119.29.29.29
+*.wechat.com = server:119.29.29.29
+*.servicewechat.com = server:119.29.29.29
+*.bilibili.com = server:119.29.29.29
