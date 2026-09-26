@@ -277,14 +277,24 @@ for path in \
   Rules/Surge/AI.txt \
   Rules/Surge/Pre-AI.txt \
   quantumultx/quantumultx.conf \
+  quantumultx/rewrite.snippet \
   mihomo/mihomo.yaml \
   mihomo/mihomo-override.yaml \
   mihomo/mihomo-override.js \
   loon/loon.lcf \
+  loon/plugin/redirect.plugin \
+  loon/plugin/dns-mapping.plugin \
+  egern/egern.conf \
   scripts/generate-mihomo-js-override.rb \
   scripts/validate-loon.rb \
+  scripts/sync-check.py \
   shadowrocket/shadowrocket.conf \
-  surge/Surge.clean.conf; do
+  shadowrocket/rewrite.snippet \
+  surge/Surge.clean.conf \
+  surge/modules/Applications.sgmodule \
+  surge/modules/google-redirect.sgmodule \
+  surge/modules/redirect-enhance.sgmodule \
+  surge/modules/dns-mapping.sgmodule; do
   [[ -s "$path" ]] || { echo "missing or empty: $path" >&2; exit 1; }
 done
 

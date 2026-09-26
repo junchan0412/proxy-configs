@@ -394,6 +394,108 @@ function main(config) {
       "icon": "https://fastly.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/UK.png"
     }
   ],
+  "rules": [
+    "RULE-SET,AdvertisingLite,REJECT",
+    "RULE-SET,iCloud,DIRECT",
+    "RULE-SET,PreAIInfra,国际基础服务",
+    "RULE-SET,AIMajor,AI",
+    "RULE-SET,DirectCN,DIRECT",
+    "RULE-SET,AppleMedia,DIRECT",
+    "RULE-SET,Lan,DIRECT",
+    "GEOSITE,private,DIRECT",
+    "RULE-SET,AdBlock,REJECT",
+    "RULE-SET,Special,DIRECT",
+    "RULE-SET,Netflix,国际社媒",
+    "RULE-SET,Disney Plus,国际社媒",
+    "RULE-SET,YouTube,国际社媒",
+    "RULE-SET,Max,国际社媒",
+    "RULE-SET,Spotify,日本",
+    "RULE-SET,Abema TV,国际社媒",
+    "RULE-SET,Bahamut,国际社媒",
+    "RULE-SET,DMM,国际社媒",
+    "RULE-SET,Fox+,国际社媒",
+    "RULE-SET,Hulu Japan,国际社媒",
+    "RULE-SET,IQ,国际社媒",
+    "RULE-SET,Japonx,国际社媒",
+    "RULE-SET,JOOX,国际社媒",
+    "RULE-SET,KKBOX,国际社媒",
+    "RULE-SET,KKTV,国际社媒",
+    "RULE-SET,Line TV,国际社媒",
+    "RULE-SET,myTV SUPER,国际社媒",
+    "RULE-SET,Niconico,国际社媒",
+    "RULE-SET,ViuTV,国际社媒",
+    "RULE-SET,ABC,PROXY",
+    "RULE-SET,Amazon,PROXY",
+    "RULE-SET,BBC iPlayer,PROXY",
+    "RULE-SET,DAZN,PROXY",
+    "RULE-SET,Discovery Plus,PROXY",
+    "RULE-SET,encoreTVB,PROXY",
+    "RULE-SET,F1 TV,PROXY",
+    "RULE-SET,Fox Now,PROXY",
+    "RULE-SET,Hulu,PROXY",
+    "RULE-SET,Pandora,PROXY",
+    "RULE-SET,PBS,PROXY",
+    "RULE-SET,Pornhub,PROXY",
+    "RULE-SET,Soundcloud,PROXY",
+    "RULE-SET,Bilibili,DIRECT",
+    "RULE-SET,IQIYI,DIRECT",
+    "RULE-SET,Letv,DIRECT",
+    "RULE-SET,Netease Music,DIRECT",
+    "RULE-SET,Tencent Video,DIRECT",
+    "RULE-SET,WeTV,DIRECT",
+    "RULE-SET,Youku,DIRECT",
+    "RULE-SET,Telegram,国际社媒",
+    "RULE-SET,Crypto,PROXY",
+    "RULE-SET,Discord,国际社媒",
+    "RULE-SET,Google FCM,国际基础服务",
+    "RULE-SET,Microsoft,国际基础服务",
+    "RULE-SET,AI Suite,AI",
+    "RULE-SET,PayPal,DIRECT",
+    "RULE-SET,Scholar,国际基础服务",
+    "RULE-SET,Speedtest,SpeedTest",
+    "RULE-SET,Steam,Game",
+    "RULE-SET,TikTok,国际社媒",
+    "RULE-SET,Apple Music,Apple服务",
+    "RULE-SET,Apple News,Apple服务",
+    "RULE-SET,Apple TV,Apple服务",
+    "RULE-SET,Apple Push,Apple服务",
+    "RULE-SET,Apple,Apple服务",
+    "RULE-SET,miHoYo,Game",
+    "RULE-SET,PROXY,PROXY",
+    "RULE-SET,Domestic,DIRECT",
+    "RULE-SET,Domestic IPs,DIRECT",
+    "RULE-SET,LAN,DIRECT",
+    "DOMAIN-SUFFIX,apps.apple.com,Apple服务",
+    "DOMAIN-SUFFIX,apps-marketplace.apple.com,Apple服务",
+    "DOMAIN-SUFFIX,appstore.com,Apple服务",
+    "DOMAIN-SUFFIX,itunes.apple.com,Apple服务",
+    "DOMAIN-SUFFIX,mzstatic.com,Apple服务",
+    "DOMAIN-SUFFIX,aaplimg.com,Apple服务",
+    "DOMAIN,ppq.apple.com,Apple服务",
+    "RULE-SET,AppleProxy,Apple服务",
+    "RULE-SET,Apple,DIRECT",
+    "PROCESS-NAME,WinStore.App.exe,DIRECT",
+    "PROCESS-NAME,StoreExperienceHost.exe,DIRECT",
+    "DOMAIN-SUFFIX,mp.microsoft.com,DIRECT",
+    "DOMAIN-SUFFIX,s-microsoft.com,DIRECT",
+    "DOMAIN-SUFFIX,microsoftstore.com,DIRECT",
+    "DOMAIN-SUFFIX,onestore.ms,DIRECT",
+    "DOMAIN-SUFFIX,windowsmarketplace.com,DIRECT",
+    "DOMAIN,storeedge.microsoft.com,DIRECT",
+    "DOMAIN,storecorefulfillment.download.prss.microsoft.com,DIRECT",
+    "GEOSITE,microsoft@cn,DIRECT",
+    "RULE-SET,Proxy,PROXY",
+    "RULE-SET,Global,PROXY",
+    "GEOSITE,geolocation-!cn,PROXY",
+    "GEOIP,CN,DIRECT,no-resolve",
+    "GEOIP,SG,新加坡,no-resolve",
+    "GEOIP,TW,台湾,no-resolve",
+    "GEOIP,HK,香港,no-resolve",
+    "GEOIP,JP,日本,no-resolve",
+    "GEOIP,KR,韩国,no-resolve",
+    "GEOIP,US,美国,no-resolve",
+    "MATCH,FINAL"
+  ],
   "rule-providers": {
     "AdvertisingLite": {
       "type": "http",
@@ -427,54 +529,6 @@ function main(config) {
       "path": "./rules/AIMajor.list",
       "url": "https://fastly.jsdelivr.net/gh/junchan0412/proxy-configs@main/surge/rules/ai-major.list"
     },
-    "OpenAI": {
-      "type": "http",
-      "behavior": "classical",
-      "interval": 86400,
-      "format": "yaml",
-      "path": "./rules/OpenAI.yaml",
-      "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/OpenAI/OpenAI.yaml"
-    },
-    "Claude": {
-      "type": "http",
-      "behavior": "classical",
-      "interval": 86400,
-      "format": "yaml",
-      "path": "./rules/Claude.yaml",
-      "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Claude/Claude.yaml"
-    },
-    "Anthropic": {
-      "type": "http",
-      "behavior": "classical",
-      "interval": 86400,
-      "format": "yaml",
-      "path": "./rules/Anthropic.yaml",
-      "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Anthropic/Anthropic.yaml"
-    },
-    "Gemini": {
-      "type": "http",
-      "behavior": "classical",
-      "interval": 86400,
-      "format": "yaml",
-      "path": "./rules/Gemini.yaml",
-      "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Gemini/Gemini.yaml"
-    },
-    "Copilot": {
-      "type": "http",
-      "behavior": "classical",
-      "interval": 86400,
-      "format": "yaml",
-      "path": "./rules/Copilot.yaml",
-      "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Copilot/Copilot.yaml"
-    },
-    "BardAI": {
-      "type": "http",
-      "behavior": "classical",
-      "interval": 86400,
-      "format": "yaml",
-      "path": "./rules/BardAI.yaml",
-      "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/BardAI/BardAI.yaml"
-    },
     "Lan": {
       "type": "http",
       "behavior": "classical",
@@ -483,334 +537,6 @@ function main(config) {
       "path": "./rules/Lan.yaml",
       "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Lan/Lan.yaml"
     },
-    "Direct": {
-      "type": "http",
-      "behavior": "classical",
-      "interval": 86400,
-      "format": "yaml",
-      "path": "./rules/Direct.yaml",
-      "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Direct/Direct.yaml"
-    },
-    "ChinaMaxNoIP": {
-      "type": "http",
-      "behavior": "classical",
-      "interval": 86400,
-      "format": "yaml",
-      "path": "./rules/ChinaMaxNoIP.yaml",
-      "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/ChinaMaxNoIP/ChinaMaxNoIP.yaml"
-    },
-    "ChinaNoMedia": {
-      "type": "http",
-      "behavior": "classical",
-      "interval": 86400,
-      "format": "yaml",
-      "path": "./rules/ChinaNoMedia.yaml",
-      "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/ChinaNoMedia/ChinaNoMedia.yaml"
-    },
-    "WeChat": {
-      "type": "http",
-      "behavior": "classical",
-      "interval": 86400,
-      "format": "yaml",
-      "path": "./rules/WeChat.yaml",
-      "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/WeChat/WeChat.yaml"
-    },
-    "BiliBili": {
-      "type": "http",
-      "behavior": "classical",
-      "interval": 86400,
-      "format": "yaml",
-      "path": "./rules/BiliBili.yaml",
-      "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/BiliBili/BiliBili.yaml"
-    },
-    "DouYin": {
-      "type": "http",
-      "behavior": "classical",
-      "interval": 86400,
-      "format": "yaml",
-      "path": "./rules/DouYin.yaml",
-      "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/DouYin/DouYin.yaml"
-    },
-    "XiaoHongShu": {
-      "type": "http",
-      "behavior": "classical",
-      "interval": 86400,
-      "format": "yaml",
-      "path": "./rules/XiaoHongShu.yaml",
-      "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/XiaoHongShu/XiaoHongShu.yaml"
-    },
-    "Weibo": {
-      "type": "http",
-      "behavior": "classical",
-      "interval": 86400,
-      "format": "yaml",
-      "path": "./rules/Weibo.yaml",
-      "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Weibo/Weibo.yaml"
-    },
-    "ChinaMedia": {
-      "type": "http",
-      "behavior": "classical",
-      "interval": 86400,
-      "format": "yaml",
-      "path": "./rules/ChinaMedia.yaml",
-      "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/ChinaMedia/ChinaMedia.yaml"
-    },
-    "PayPal": {
-      "type": "http",
-      "behavior": "classical",
-      "interval": 86400,
-      "format": "yaml",
-      "path": "./rules/PayPal.yaml",
-      "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/PayPal/PayPal.yaml"
-    },
-    "Oracle": {
-      "type": "http",
-      "behavior": "classical",
-      "interval": 86400,
-      "format": "yaml",
-      "path": "./rules/Oracle.yaml",
-      "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Oracle/Oracle.yaml"
-    },
-    "China": {
-      "type": "http",
-      "behavior": "classical",
-      "interval": 86400,
-      "format": "yaml",
-      "path": "./rules/China.yaml",
-      "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/China/China.yaml"
-    },
-    "Alibaba": {
-      "type": "http",
-      "behavior": "classical",
-      "interval": 86400,
-      "format": "yaml",
-      "path": "./rules/Alibaba.yaml",
-      "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Alibaba/Alibaba.yaml"
-    },
-    "AliPay": {
-      "type": "http",
-      "behavior": "classical",
-      "interval": 86400,
-      "format": "yaml",
-      "path": "./rules/AliPay.yaml",
-      "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/AliPay/AliPay.yaml"
-    },
-    "Baidu": {
-      "type": "http",
-      "behavior": "classical",
-      "interval": 86400,
-      "format": "yaml",
-      "path": "./rules/Baidu.yaml",
-      "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Baidu/Baidu.yaml"
-    },
-    "Tencent": {
-      "type": "http",
-      "behavior": "classical",
-      "interval": 86400,
-      "format": "yaml",
-      "path": "./rules/Tencent.yaml",
-      "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Tencent/Tencent.yaml"
-    },
-    "JingDong": {
-      "type": "http",
-      "behavior": "classical",
-      "interval": 86400,
-      "format": "yaml",
-      "path": "./rules/JingDong.yaml",
-      "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/JingDong/JingDong.yaml"
-    },
-    "MeiTuan": {
-      "type": "http",
-      "behavior": "classical",
-      "interval": 86400,
-      "format": "yaml",
-      "path": "./rules/MeiTuan.yaml",
-      "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/MeiTuan/MeiTuan.yaml"
-    },
-    "Eleme": {
-      "type": "http",
-      "behavior": "classical",
-      "interval": 86400,
-      "format": "yaml",
-      "path": "./rules/Eleme.yaml",
-      "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Eleme/Eleme.yaml"
-    },
-    "GaoDe": {
-      "type": "http",
-      "behavior": "classical",
-      "interval": 86400,
-      "format": "yaml",
-      "path": "./rules/GaoDe.yaml",
-      "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/GaoDe/GaoDe.yaml"
-    },
-    "DiDi": {
-      "type": "http",
-      "behavior": "classical",
-      "interval": 86400,
-      "format": "yaml",
-      "path": "./rules/DiDi.yaml",
-      "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/DiDi/DiDi.yaml"
-    },
-    "Pinduoduo": {
-      "type": "http",
-      "behavior": "classical",
-      "interval": 86400,
-      "format": "yaml",
-      "path": "./rules/Pinduoduo.yaml",
-      "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Pinduoduo/Pinduoduo.yaml"
-    },
-    "ByteDance": {
-      "type": "http",
-      "behavior": "classical",
-      "interval": 86400,
-      "format": "yaml",
-      "path": "./rules/ByteDance.yaml",
-      "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/ByteDance/ByteDance.yaml"
-    },
-    "NetEase": {
-      "type": "http",
-      "behavior": "classical",
-      "interval": 86400,
-      "format": "yaml",
-      "path": "./rules/NetEase.yaml",
-      "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/NetEase/NetEase.yaml"
-    },
-    "NetEaseMusic": {
-      "type": "http",
-      "behavior": "classical",
-      "interval": 86400,
-      "format": "yaml",
-      "path": "./rules/NetEaseMusic.yaml",
-      "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/NetEaseMusic/NetEaseMusic.yaml"
-    },
-    "Zhihu": {
-      "type": "http",
-      "behavior": "classical",
-      "interval": 86400,
-      "format": "yaml",
-      "path": "./rules/Zhihu.yaml",
-      "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Zhihu/Zhihu.yaml"
-    },
-    "Gitee": {
-      "type": "http",
-      "behavior": "classical",
-      "interval": 86400,
-      "format": "yaml",
-      "path": "./rules/Gitee.yaml",
-      "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Gitee/Gitee.yaml"
-    },
-    "CSDN": {
-      "type": "http",
-      "behavior": "classical",
-      "interval": 86400,
-      "format": "yaml",
-      "path": "./rules/CSDN.yaml",
-      "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/CSDN/CSDN.yaml"
-    },
-    "JueJin": {
-      "type": "http",
-      "behavior": "classical",
-      "interval": 86400,
-      "format": "yaml",
-      "path": "./rules/JueJin.yaml",
-      "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/JueJin/JueJin.yaml"
-    },
-    "DouBan": {
-      "type": "http",
-      "behavior": "classical",
-      "interval": 86400,
-      "format": "yaml",
-      "path": "./rules/DouBan.yaml",
-      "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/DouBan/DouBan.yaml"
-    },
-    "SMZDM": {
-      "type": "http",
-      "behavior": "classical",
-      "interval": 86400,
-      "format": "yaml",
-      "path": "./rules/SMZDM.yaml",
-      "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/SMZDM/SMZDM.yaml"
-    },
-    "12306": {
-      "type": "http",
-      "behavior": "classical",
-      "interval": 86400,
-      "format": "yaml",
-      "path": "./rules/12306.yaml",
-      "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/12306/12306.yaml"
-    },
-    "Huawei": {
-      "type": "http",
-      "behavior": "classical",
-      "interval": 86400,
-      "format": "yaml",
-      "path": "./rules/Huawei.yaml",
-      "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Huawei/Huawei.yaml"
-    },
-    "UnionPay": {
-      "type": "http",
-      "behavior": "classical",
-      "interval": 86400,
-      "format": "yaml",
-      "path": "./rules/UnionPay.yaml",
-      "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/UnionPay/UnionPay.yaml"
-    },
-    "Sina": {
-      "type": "http",
-      "behavior": "classical",
-      "interval": 86400,
-      "format": "yaml",
-      "path": "./rules/Sina.yaml",
-      "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Sina/Sina.yaml"
-    },
-    "Sohu": {
-      "type": "http",
-      "behavior": "classical",
-      "interval": 86400,
-      "format": "yaml",
-      "path": "./rules/Sohu.yaml",
-      "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Sohu/Sohu.yaml"
-    },
-    "TencentVideo": {
-      "type": "http",
-      "behavior": "classical",
-      "interval": 86400,
-      "format": "yaml",
-      "path": "./rules/TencentVideo.yaml",
-      "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/TencentVideo/TencentVideo.yaml"
-    },
-    "iQIYI": {
-      "type": "http",
-      "behavior": "classical",
-      "interval": 86400,
-      "format": "yaml",
-      "path": "./rules/iQIYI.yaml",
-      "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/iQIYI/iQIYI.yaml"
-    },
-    "Youku": {
-      "type": "http",
-      "behavior": "classical",
-      "interval": 86400,
-      "format": "yaml",
-      "path": "./rules/Youku.yaml",
-      "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Youku/Youku.yaml"
-    },
-    "Migu": {
-      "type": "http",
-      "behavior": "classical",
-      "interval": 86400,
-      "format": "yaml",
-      "path": "./rules/Migu.yaml",
-      "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Migu/Migu.yaml"
-    },
-    "Apple": {
-      "type": "http",
-      "behavior": "classical",
-      "interval": 86400,
-      "format": "yaml",
-      "path": "./rules/Apple.yaml",
-      "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Apple/Apple.yaml"
-    },
     "iCloud": {
       "type": "http",
       "behavior": "classical",
@@ -818,14 +544,6 @@ function main(config) {
       "format": "yaml",
       "path": "./rules/iCloud.yaml",
       "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/iCloud/iCloud.yaml"
-    },
-    "AppleID": {
-      "type": "http",
-      "behavior": "classical",
-      "interval": 86400,
-      "format": "yaml",
-      "path": "./rules/AppleID.yaml",
-      "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/AppleID/AppleID.yaml"
     },
     "AppleProxy": {
       "type": "http",
@@ -843,398 +561,6 @@ function main(config) {
       "path": "./rules/AppleMedia.yaml",
       "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/AppleMedia/AppleMedia.yaml"
     },
-    "Microsoft": {
-      "type": "http",
-      "behavior": "classical",
-      "interval": 86400,
-      "format": "yaml",
-      "path": "./rules/Microsoft.yaml",
-      "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Microsoft/Microsoft.yaml"
-    },
-    "OneDrive": {
-      "type": "http",
-      "behavior": "classical",
-      "interval": 86400,
-      "format": "yaml",
-      "path": "./rules/OneDrive.yaml",
-      "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/OneDrive/OneDrive.yaml"
-    },
-    "Bing": {
-      "type": "http",
-      "behavior": "classical",
-      "interval": 86400,
-      "format": "yaml",
-      "path": "./rules/Bing.yaml",
-      "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Bing/Bing.yaml"
-    },
-    "Google": {
-      "type": "http",
-      "behavior": "classical",
-      "interval": 86400,
-      "format": "yaml",
-      "path": "./rules/Google.yaml",
-      "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Google/Google.yaml"
-    },
-    "Telegram": {
-      "type": "http",
-      "behavior": "classical",
-      "interval": 86400,
-      "format": "yaml",
-      "path": "./rules/Telegram.yaml",
-      "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Telegram/Telegram.yaml"
-    },
-    "Facebook": {
-      "type": "http",
-      "behavior": "classical",
-      "interval": 86400,
-      "format": "yaml",
-      "path": "./rules/Facebook.yaml",
-      "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Facebook/Facebook.yaml"
-    },
-    "Instagram": {
-      "type": "http",
-      "behavior": "classical",
-      "interval": 86400,
-      "format": "yaml",
-      "path": "./rules/Instagram.yaml",
-      "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Instagram/Instagram.yaml"
-    },
-    "Threads": {
-      "type": "http",
-      "behavior": "classical",
-      "interval": 86400,
-      "format": "yaml",
-      "path": "./rules/Threads.yaml",
-      "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Threads/Threads.yaml"
-    },
-    "Whatsapp": {
-      "type": "http",
-      "behavior": "classical",
-      "interval": 86400,
-      "format": "yaml",
-      "path": "./rules/Whatsapp.yaml",
-      "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Whatsapp/Whatsapp.yaml"
-    },
-    "Twitter": {
-      "type": "http",
-      "behavior": "classical",
-      "interval": 86400,
-      "format": "yaml",
-      "path": "./rules/Twitter.yaml",
-      "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Twitter/Twitter.yaml"
-    },
-    "Snap": {
-      "type": "http",
-      "behavior": "classical",
-      "interval": 86400,
-      "format": "yaml",
-      "path": "./rules/Snap.yaml",
-      "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Snap/Snap.yaml"
-    },
-    "Reddit": {
-      "type": "http",
-      "behavior": "classical",
-      "interval": 86400,
-      "format": "yaml",
-      "path": "./rules/Reddit.yaml",
-      "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Reddit/Reddit.yaml"
-    },
-    "Discord": {
-      "type": "http",
-      "behavior": "classical",
-      "interval": 86400,
-      "format": "yaml",
-      "path": "./rules/Discord.yaml",
-      "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Discord/Discord.yaml"
-    },
-    "Netflix": {
-      "type": "http",
-      "behavior": "classical",
-      "interval": 86400,
-      "format": "yaml",
-      "path": "./rules/Netflix.yaml",
-      "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Netflix/Netflix.yaml"
-    },
-    "YouTube": {
-      "type": "http",
-      "behavior": "classical",
-      "interval": 86400,
-      "format": "yaml",
-      "path": "./rules/YouTube.yaml",
-      "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/YouTube/YouTube.yaml"
-    },
-    "Spotify": {
-      "type": "http",
-      "behavior": "classical",
-      "interval": 86400,
-      "format": "yaml",
-      "path": "./rules/Spotify.yaml",
-      "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Spotify/Spotify.yaml"
-    },
-    "TikTok": {
-      "type": "http",
-      "behavior": "classical",
-      "interval": 86400,
-      "format": "yaml",
-      "path": "./rules/TikTok.yaml",
-      "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/TikTok/TikTok.yaml"
-    },
-    "Disney": {
-      "type": "http",
-      "behavior": "classical",
-      "interval": 86400,
-      "format": "yaml",
-      "path": "./rules/Disney.yaml",
-      "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Disney/Disney.yaml"
-    },
-    "HBO": {
-      "type": "http",
-      "behavior": "classical",
-      "interval": 86400,
-      "format": "yaml",
-      "path": "./rules/HBO.yaml",
-      "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/HBO/HBO.yaml"
-    },
-    "Bahamut": {
-      "type": "http",
-      "behavior": "classical",
-      "interval": 86400,
-      "format": "yaml",
-      "path": "./rules/Bahamut.yaml",
-      "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Bahamut/Bahamut.yaml"
-    },
-    "GitHub": {
-      "type": "http",
-      "behavior": "classical",
-      "interval": 86400,
-      "format": "yaml",
-      "path": "./rules/GitHub.yaml",
-      "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/GitHub/GitHub.yaml"
-    },
-    "GitLab": {
-      "type": "http",
-      "behavior": "classical",
-      "interval": 86400,
-      "format": "yaml",
-      "path": "./rules/GitLab.yaml",
-      "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/GitLab/GitLab.yaml"
-    },
-    "Developer": {
-      "type": "http",
-      "behavior": "classical",
-      "interval": 86400,
-      "format": "yaml",
-      "path": "./rules/Developer.yaml",
-      "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Developer/Developer.yaml"
-    },
-    "Docker": {
-      "type": "http",
-      "behavior": "classical",
-      "interval": 86400,
-      "format": "yaml",
-      "path": "./rules/Docker.yaml",
-      "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Docker/Docker.yaml"
-    },
-    "Figma": {
-      "type": "http",
-      "behavior": "classical",
-      "interval": 86400,
-      "format": "yaml",
-      "path": "./rules/Figma.yaml",
-      "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Figma/Figma.yaml"
-    },
-    "DigitalOcean": {
-      "type": "http",
-      "behavior": "classical",
-      "interval": 86400,
-      "format": "yaml",
-      "path": "./rules/DigitalOcean.yaml",
-      "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/DigitalOcean/DigitalOcean.yaml"
-    },
-    "Amazon": {
-      "type": "http",
-      "behavior": "classical",
-      "interval": 86400,
-      "format": "yaml",
-      "path": "./rules/Amazon.yaml",
-      "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Amazon/Amazon.yaml"
-    },
-    "Scholar": {
-      "type": "http",
-      "behavior": "classical",
-      "interval": 86400,
-      "format": "yaml",
-      "path": "./rules/Scholar.yaml",
-      "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Scholar/Scholar.yaml"
-    },
-    "GlobalScholar": {
-      "type": "http",
-      "behavior": "classical",
-      "interval": 86400,
-      "format": "yaml",
-      "path": "./rules/GlobalScholar.yaml",
-      "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/GlobalScholar/GlobalScholar.yaml"
-    },
-    "Notion": {
-      "type": "http",
-      "behavior": "classical",
-      "interval": 86400,
-      "format": "yaml",
-      "path": "./rules/Notion.yaml",
-      "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Notion/Notion.yaml"
-    },
-    "Wikipedia": {
-      "type": "http",
-      "behavior": "classical",
-      "interval": 86400,
-      "format": "yaml",
-      "path": "./rules/Wikipedia.yaml",
-      "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Wikipedia/Wikipedia.yaml"
-    },
-    "Dropbox": {
-      "type": "http",
-      "behavior": "classical",
-      "interval": 86400,
-      "format": "yaml",
-      "path": "./rules/Dropbox.yaml",
-      "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Dropbox/Dropbox.yaml"
-    },
-    "Cloudflare": {
-      "type": "http",
-      "behavior": "classical",
-      "interval": 86400,
-      "format": "yaml",
-      "path": "./rules/Cloudflare.yaml",
-      "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Cloudflare/Cloudflare.yaml"
-    },
-    "AOL": {
-      "type": "http",
-      "behavior": "classical",
-      "interval": 86400,
-      "format": "yaml",
-      "path": "./rules/AOL.yaml",
-      "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/AOL/AOL.yaml"
-    },
-    "Protonmail": {
-      "type": "http",
-      "behavior": "classical",
-      "interval": 86400,
-      "format": "yaml",
-      "path": "./rules/Protonmail.yaml",
-      "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Protonmail/Protonmail.yaml"
-    },
-    "Speedtest": {
-      "type": "http",
-      "behavior": "classical",
-      "interval": 86400,
-      "format": "yaml",
-      "path": "./rules/Speedtest.yaml",
-      "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Speedtest/Speedtest.yaml"
-    },
-    "EA": {
-      "type": "http",
-      "behavior": "classical",
-      "interval": 86400,
-      "format": "yaml",
-      "path": "./rules/EA.yaml",
-      "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/EA/EA.yaml"
-    },
-    "Epic": {
-      "type": "http",
-      "behavior": "classical",
-      "interval": 86400,
-      "format": "yaml",
-      "path": "./rules/Epic.yaml",
-      "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Epic/Epic.yaml"
-    },
-    "Gog": {
-      "type": "http",
-      "behavior": "classical",
-      "interval": 86400,
-      "format": "yaml",
-      "path": "./rules/Gog.yaml",
-      "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Gog/Gog.yaml"
-    },
-    "Origin": {
-      "type": "http",
-      "behavior": "classical",
-      "interval": 86400,
-      "format": "yaml",
-      "path": "./rules/Origin.yaml",
-      "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Origin/Origin.yaml"
-    },
-    "PlayStation": {
-      "type": "http",
-      "behavior": "classical",
-      "interval": 86400,
-      "format": "yaml",
-      "path": "./rules/PlayStation.yaml",
-      "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/PlayStation/PlayStation.yaml"
-    },
-    "Steam": {
-      "type": "http",
-      "behavior": "classical",
-      "interval": 86400,
-      "format": "yaml",
-      "path": "./rules/Steam.yaml",
-      "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Steam/Steam.yaml"
-    },
-    "Xbox": {
-      "type": "http",
-      "behavior": "classical",
-      "interval": 86400,
-      "format": "yaml",
-      "path": "./rules/Xbox.yaml",
-      "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Xbox/Xbox.yaml"
-    },
-    "Blizzard": {
-      "type": "http",
-      "behavior": "classical",
-      "interval": 86400,
-      "format": "yaml",
-      "path": "./rules/Blizzard.yaml",
-      "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Blizzard/Blizzard.yaml"
-    },
-    "Nintendo": {
-      "type": "http",
-      "behavior": "classical",
-      "interval": 86400,
-      "format": "yaml",
-      "path": "./rules/Nintendo.yaml",
-      "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Nintendo/Nintendo.yaml"
-    },
-    "Game": {
-      "type": "http",
-      "behavior": "classical",
-      "interval": 86400,
-      "format": "yaml",
-      "path": "./rules/Game.yaml",
-      "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Game/Game.yaml"
-    },
-    "Download": {
-      "type": "http",
-      "behavior": "classical",
-      "interval": 86400,
-      "format": "yaml",
-      "path": "./rules/Download.yaml",
-      "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Download/Download.yaml"
-    },
-    "PrivateTracker": {
-      "type": "http",
-      "behavior": "classical",
-      "interval": 86400,
-      "format": "yaml",
-      "path": "./rules/PrivateTracker.yaml",
-      "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/PrivateTracker/PrivateTracker.yaml"
-    },
-    "GlobalMedia": {
-      "type": "http",
-      "behavior": "classical",
-      "interval": 86400,
-      "format": "yaml",
-      "path": "./rules/GlobalMedia.yaml",
-      "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/GlobalMedia/GlobalMedia.yaml"
-    },
     "Proxy": {
       "type": "http",
       "behavior": "classical",
@@ -1250,209 +576,504 @@ function main(config) {
       "format": "yaml",
       "path": "./rules/Global.yaml",
       "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Global/Global.yaml"
+    },
+    "AdBlock": {
+      "type": "http",
+      "behavior": "classical",
+      "interval": 86400,
+      "format": "yaml",
+      "path": "./rules/AdBlock.yaml",
+      "url": "https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/AdBlock.yaml"
+    },
+    "Special": {
+      "type": "http",
+      "behavior": "classical",
+      "interval": 86400,
+      "format": "yaml",
+      "path": "./rules/Special.yaml",
+      "url": "https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Special.yaml"
+    },
+    "PROXY": {
+      "type": "http",
+      "behavior": "classical",
+      "interval": 86400,
+      "format": "yaml",
+      "path": "./rules/PROXY.yaml",
+      "url": "https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Proxy.yaml"
+    },
+    "Domestic": {
+      "type": "http",
+      "behavior": "classical",
+      "interval": 86400,
+      "format": "yaml",
+      "path": "./rules/Domestic.yaml",
+      "url": "https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Domestic.yaml"
+    },
+    "Domestic IPs": {
+      "type": "http",
+      "behavior": "classical",
+      "interval": 86400,
+      "format": "yaml",
+      "path": "./rules/Domestic_IPs.yaml",
+      "url": "https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Domestic%20IPs.yaml"
+    },
+    "LAN": {
+      "type": "http",
+      "behavior": "classical",
+      "interval": 86400,
+      "format": "yaml",
+      "path": "./rules/LAN.yaml",
+      "url": "https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/LAN.yaml"
+    },
+    "Netflix": {
+      "type": "http",
+      "behavior": "classical",
+      "interval": 86400,
+      "format": "yaml",
+      "path": "./rules/Netflix.yaml",
+      "url": "https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Media/Netflix.yaml"
+    },
+    "Spotify": {
+      "type": "http",
+      "behavior": "classical",
+      "interval": 86400,
+      "format": "yaml",
+      "path": "./rules/Spotify.yaml",
+      "url": "https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Media/Spotify.yaml"
+    },
+    "YouTube": {
+      "type": "http",
+      "behavior": "classical",
+      "interval": 86400,
+      "format": "yaml",
+      "path": "./rules/YouTube.yaml",
+      "url": "https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Media/YouTube.yaml"
+    },
+    "Max": {
+      "type": "http",
+      "behavior": "classical",
+      "interval": 86400,
+      "format": "yaml",
+      "path": "./rules/Max.yaml",
+      "url": "https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Media/Max.yaml"
+    },
+    "Bilibili": {
+      "type": "http",
+      "behavior": "classical",
+      "interval": 86400,
+      "format": "yaml",
+      "path": "./rules/Bilibili.yaml",
+      "url": "https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Media/Bilibili.yaml"
+    },
+    "IQ": {
+      "type": "http",
+      "behavior": "classical",
+      "interval": 86400,
+      "format": "yaml",
+      "path": "./rules/IQ.yaml",
+      "url": "https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Media/IQ.yaml"
+    },
+    "IQIYI": {
+      "type": "http",
+      "behavior": "classical",
+      "interval": 86400,
+      "format": "yaml",
+      "path": "./rules/IQIYI.yaml",
+      "url": "https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Media/IQIYI.yaml"
+    },
+    "Letv": {
+      "type": "http",
+      "behavior": "classical",
+      "interval": 86400,
+      "format": "yaml",
+      "path": "./rules/Letv.yaml",
+      "url": "https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Media/Letv.yaml"
+    },
+    "Netease Music": {
+      "type": "http",
+      "behavior": "classical",
+      "interval": 86400,
+      "format": "yaml",
+      "path": "./rules/Netease_Music.yaml",
+      "url": "https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Media/Netease%20Music.yaml"
+    },
+    "Tencent Video": {
+      "type": "http",
+      "behavior": "classical",
+      "interval": 86400,
+      "format": "yaml",
+      "path": "./rules/Tencent_Video.yaml",
+      "url": "https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Media/Tencent%20Video.yaml"
+    },
+    "Youku": {
+      "type": "http",
+      "behavior": "classical",
+      "interval": 86400,
+      "format": "yaml",
+      "path": "./rules/Youku.yaml",
+      "url": "https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Media/Youku.yaml"
+    },
+    "WeTV": {
+      "type": "http",
+      "behavior": "classical",
+      "interval": 86400,
+      "format": "yaml",
+      "path": "./rules/WeTV.yaml",
+      "url": "https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Media/WeTV.yaml"
+    },
+    "ABC": {
+      "type": "http",
+      "behavior": "classical",
+      "interval": 86400,
+      "format": "yaml",
+      "path": "./rules/ABC.yaml",
+      "url": "https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Media/ABC.yaml"
+    },
+    "Abema TV": {
+      "type": "http",
+      "behavior": "classical",
+      "interval": 86400,
+      "format": "yaml",
+      "path": "./rules/Abema_TV.yaml",
+      "url": "https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Media/Abema%20TV.yaml"
+    },
+    "Amazon": {
+      "type": "http",
+      "behavior": "classical",
+      "interval": 86400,
+      "format": "yaml",
+      "path": "./rules/Amazon.yaml",
+      "url": "https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Media/Amazon.yaml"
+    },
+    "Apple Music": {
+      "type": "http",
+      "behavior": "classical",
+      "interval": 86400,
+      "format": "yaml",
+      "path": "./rules/Apple_Music.yaml",
+      "url": "https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Media/Apple%20Music.yaml"
+    },
+    "Apple News": {
+      "type": "http",
+      "behavior": "classical",
+      "interval": 86400,
+      "format": "yaml",
+      "path": "./rules/Apple_News.yaml",
+      "url": "https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Media/Apple%20News.yaml"
+    },
+    "Apple TV": {
+      "type": "http",
+      "behavior": "classical",
+      "interval": 86400,
+      "format": "yaml",
+      "path": "./rules/Apple_TV.yaml",
+      "url": "https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Media/Apple%20TV.yaml"
+    },
+    "Bahamut": {
+      "type": "http",
+      "behavior": "classical",
+      "interval": 86400,
+      "format": "yaml",
+      "path": "./rules/Bahamut.yaml",
+      "url": "https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Media/Bahamut.yaml"
+    },
+    "BBC iPlayer": {
+      "type": "http",
+      "behavior": "classical",
+      "interval": 86400,
+      "format": "yaml",
+      "path": "./rules/BBC_iPlayer.yaml",
+      "url": "https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Media/BBC%20iPlayer.yaml"
+    },
+    "DAZN": {
+      "type": "http",
+      "behavior": "classical",
+      "interval": 86400,
+      "format": "yaml",
+      "path": "./rules/DAZN.yaml",
+      "url": "https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Media/DAZN.yaml"
+    },
+    "Discovery Plus": {
+      "type": "http",
+      "behavior": "classical",
+      "interval": 86400,
+      "format": "yaml",
+      "path": "./rules/Discovery_Plus.yaml",
+      "url": "https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Media/Discovery%20Plus.yaml"
+    },
+    "Disney Plus": {
+      "type": "http",
+      "behavior": "classical",
+      "interval": 86400,
+      "format": "yaml",
+      "path": "./rules/Disney_Plus.yaml",
+      "url": "https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Media/Disney%20Plus.yaml"
+    },
+    "DMM": {
+      "type": "http",
+      "behavior": "classical",
+      "interval": 86400,
+      "format": "yaml",
+      "path": "./rules/DMM.yaml",
+      "url": "https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Media/DMM.yaml"
+    },
+    "encoreTVB": {
+      "type": "http",
+      "behavior": "classical",
+      "interval": 86400,
+      "format": "yaml",
+      "path": "./rules/encoreTVB.yaml",
+      "url": "https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Media/encoreTVB.yaml"
+    },
+    "F1 TV": {
+      "type": "http",
+      "behavior": "classical",
+      "interval": 86400,
+      "format": "yaml",
+      "path": "./rules/F1_TV.yaml",
+      "url": "https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Media/F1%20TV.yaml"
+    },
+    "Fox Now": {
+      "type": "http",
+      "behavior": "classical",
+      "interval": 86400,
+      "format": "yaml",
+      "path": "./rules/Fox_Now.yaml",
+      "url": "https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Media/Fox%20Now.yaml"
+    },
+    "Fox+": {
+      "type": "http",
+      "behavior": "classical",
+      "interval": 86400,
+      "format": "yaml",
+      "path": "./rules/FoxPlus.yaml",
+      "url": "https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Media/Fox%2B.yaml"
+    },
+    "Hulu Japan": {
+      "type": "http",
+      "behavior": "classical",
+      "interval": 86400,
+      "format": "yaml",
+      "path": "./rules/Hulu_Japan.yaml",
+      "url": "https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Media/Hulu%20Japan.yaml"
+    },
+    "Hulu": {
+      "type": "http",
+      "behavior": "classical",
+      "interval": 86400,
+      "format": "yaml",
+      "path": "./rules/Hulu.yaml",
+      "url": "https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Media/Hulu.yaml"
+    },
+    "Japonx": {
+      "type": "http",
+      "behavior": "classical",
+      "interval": 86400,
+      "format": "yaml",
+      "path": "./rules/Japonx.yaml",
+      "url": "https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Media/Japonx.yaml"
+    },
+    "JOOX": {
+      "type": "http",
+      "behavior": "classical",
+      "interval": 86400,
+      "format": "yaml",
+      "path": "./rules/JOOX.yaml",
+      "url": "https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Media/JOOX.yaml"
+    },
+    "KKBOX": {
+      "type": "http",
+      "behavior": "classical",
+      "interval": 86400,
+      "format": "yaml",
+      "path": "./rules/KKBOX.yaml",
+      "url": "https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Media/KKBOX.yaml"
+    },
+    "KKTV": {
+      "type": "http",
+      "behavior": "classical",
+      "interval": 86400,
+      "format": "yaml",
+      "path": "./rules/KKTV.yaml",
+      "url": "https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Media/KKTV.yaml"
+    },
+    "Line TV": {
+      "type": "http",
+      "behavior": "classical",
+      "interval": 86400,
+      "format": "yaml",
+      "path": "./rules/Line_TV.yaml",
+      "url": "https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Media/Line%20TV.yaml"
+    },
+    "myTV SUPER": {
+      "type": "http",
+      "behavior": "classical",
+      "interval": 86400,
+      "format": "yaml",
+      "path": "./rules/myTV_SUPER.yaml",
+      "url": "https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Media/myTV%20SUPER.yaml"
+    },
+    "Niconico": {
+      "type": "http",
+      "behavior": "classical",
+      "interval": 86400,
+      "format": "yaml",
+      "path": "./rules/Niconico.yaml",
+      "url": "https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Media/Niconico.yaml"
+    },
+    "Pandora": {
+      "type": "http",
+      "behavior": "classical",
+      "interval": 86400,
+      "format": "yaml",
+      "path": "./rules/Pandora.yaml",
+      "url": "https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Media/Pandora.yaml"
+    },
+    "PBS": {
+      "type": "http",
+      "behavior": "classical",
+      "interval": 86400,
+      "format": "yaml",
+      "path": "./rules/PBS.yaml",
+      "url": "https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Media/PBS.yaml"
+    },
+    "Pornhub": {
+      "type": "http",
+      "behavior": "classical",
+      "interval": 86400,
+      "format": "yaml",
+      "path": "./rules/Pornhub.yaml",
+      "url": "https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Media/Pornhub.yaml"
+    },
+    "Soundcloud": {
+      "type": "http",
+      "behavior": "classical",
+      "interval": 86400,
+      "format": "yaml",
+      "path": "./rules/Soundcloud.yaml",
+      "url": "https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Media/Soundcloud.yaml"
+    },
+    "ViuTV": {
+      "type": "http",
+      "behavior": "classical",
+      "interval": 86400,
+      "format": "yaml",
+      "path": "./rules/ViuTV.yaml",
+      "url": "https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Media/ViuTV.yaml"
+    },
+    "Telegram": {
+      "type": "http",
+      "behavior": "classical",
+      "interval": 86400,
+      "format": "yaml",
+      "path": "./rules/Telegram.yaml",
+      "url": "https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Telegram.yaml"
+    },
+    "Crypto": {
+      "type": "http",
+      "behavior": "classical",
+      "interval": 86400,
+      "format": "yaml",
+      "path": "./rules/Crypto.yaml",
+      "url": "https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Crypto.yaml"
+    },
+    "Discord": {
+      "type": "http",
+      "behavior": "classical",
+      "interval": 86400,
+      "format": "yaml",
+      "path": "./rules/Discord.yaml",
+      "url": "https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Discord.yaml"
+    },
+    "Steam": {
+      "type": "http",
+      "behavior": "classical",
+      "interval": 86400,
+      "format": "yaml",
+      "path": "./rules/Steam.yaml",
+      "url": "https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Steam.yaml"
+    },
+    "TikTok": {
+      "type": "http",
+      "behavior": "classical",
+      "interval": 86400,
+      "format": "yaml",
+      "path": "./rules/TikTok.yaml",
+      "url": "https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/TikTok.yaml"
+    },
+    "Speedtest": {
+      "type": "http",
+      "behavior": "classical",
+      "interval": 86400,
+      "format": "yaml",
+      "path": "./rules/Speedtest.yaml",
+      "url": "https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Speedtest.yaml"
+    },
+    "PayPal": {
+      "type": "http",
+      "behavior": "classical",
+      "interval": 86400,
+      "format": "yaml",
+      "path": "./rules/PayPal.yaml",
+      "url": "https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/PayPal.yaml"
+    },
+    "Microsoft": {
+      "type": "http",
+      "behavior": "classical",
+      "interval": 86400,
+      "format": "yaml",
+      "path": "./rules/Microsoft.yaml",
+      "url": "https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Microsoft.yaml"
+    },
+    "AI Suite": {
+      "type": "http",
+      "behavior": "classical",
+      "interval": 86400,
+      "format": "yaml",
+      "path": "./rules/AI_Suite.yaml",
+      "url": "https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/AI%20Suite.yaml"
+    },
+    "Apple": {
+      "type": "http",
+      "behavior": "classical",
+      "interval": 86400,
+      "format": "yaml",
+      "path": "./rules/Apple.yaml",
+      "url": "https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Apple.yaml"
+    },
+    "Apple Push": {
+      "type": "http",
+      "behavior": "classical",
+      "interval": 86400,
+      "format": "yaml",
+      "path": "./rules/Apple_Push.yaml",
+      "url": "https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Apple%20Push.yaml"
+    },
+    "Google FCM": {
+      "type": "http",
+      "behavior": "classical",
+      "interval": 86400,
+      "format": "yaml",
+      "path": "./rules/Google_FCM.yaml",
+      "url": "https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Google%20FCM.yaml"
+    },
+    "Scholar": {
+      "type": "http",
+      "behavior": "classical",
+      "interval": 86400,
+      "format": "yaml",
+      "path": "./rules/Scholar.yaml",
+      "url": "https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Scholar.yaml"
+    },
+    "miHoYo": {
+      "type": "http",
+      "behavior": "classical",
+      "interval": 86400,
+      "format": "yaml",
+      "path": "./rules/miHoYo.yaml",
+      "url": "https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/miHoYo.yaml"
     }
-  },
-  "rules": [
-    "IP-CIDR,0.0.0.0/32,REJECT,no-resolve",
-    "RULE-SET,AdvertisingLite,REJECT",
-    "RULE-SET,PreAIInfra,国际基础服务",
-    "DOMAIN-SUFFIX,fonts.gstatic.com,国际基础服务",
-    "DOMAIN-SUFFIX,ssl.gstatic.com,国际基础服务",
-    "DOMAIN-SUFFIX,maps.gstatic.com,国际基础服务",
-    "RULE-SET,AIMajor,AI",
-    "RULE-SET,OpenAI,AI",
-    "RULE-SET,Claude,AI",
-    "RULE-SET,Anthropic,AI",
-    "RULE-SET,Gemini,AI",
-    "RULE-SET,Copilot,AI",
-    "RULE-SET,BardAI,AI",
-    "RULE-SET,Lan,DIRECT",
-    "GEOSITE,private,DIRECT",
-    "RULE-SET,Download,PROXY",
-    "RULE-SET,PrivateTracker,PROXY",
-    "RULE-SET,iCloud,DIRECT",
-    "RULE-SET,AppleID,DIRECT",
-    "DOMAIN-SUFFIX,apps.apple.com,Apple服务",
-    "DOMAIN-SUFFIX,apps-marketplace.apple.com,Apple服务",
-    "DOMAIN-SUFFIX,appstore.com,Apple服务",
-    "DOMAIN-SUFFIX,appsto.re,Apple服务",
-    "DOMAIN-SUFFIX,itunes.apple.com,Apple服务",
-    "DOMAIN-SUFFIX,itunes.com,Apple服务",
-    "DOMAIN-SUFFIX,mzstatic.com,Apple服务",
-    "DOMAIN-SUFFIX,aaplimg.com,Apple服务",
-    "DOMAIN-SUFFIX,cdn-apple.com,Apple服务",
-    "DOMAIN,amp-api.apps.apple.com,Apple服务",
-    "DOMAIN,bag.itunes.apple.com,Apple服务",
-    "DOMAIN,buy.itunes.apple.com,Apple服务",
-    "DOMAIN,init.itunes.apple.com,Apple服务",
-    "DOMAIN,iosapps.itunes.apple.com,Apple服务",
-    "DOMAIN,lookup-api.apple.com,Apple服务",
-    "DOMAIN,osxapps.itunes.apple.com,Apple服务",
-    "DOMAIN,phobos.apple.com,Apple服务",
-    "DOMAIN,ppq.apple.com,Apple服务",
-    "DOMAIN,uts-api.itunes.apple.com,Apple服务",
-    "RULE-SET,AppleProxy,Apple服务",
-    "RULE-SET,AppleMedia,Apple服务",
-    "RULE-SET,Apple,DIRECT",
-    "PROCESS-NAME,WinStore.App.exe,DIRECT",
-    "PROCESS-NAME,StoreExperienceHost.exe,DIRECT",
-    "DOMAIN-SUFFIX,mp.microsoft.com,DIRECT",
-    "DOMAIN-SUFFIX,s-microsoft.com,DIRECT",
-    "DOMAIN-SUFFIX,microsoftstore.com,DIRECT",
-    "DOMAIN-SUFFIX,onestore.ms,DIRECT",
-    "DOMAIN-SUFFIX,windowsmarketplace.com,DIRECT",
-    "DOMAIN,storeedge.microsoft.com,DIRECT",
-    "DOMAIN,storecorefulfillment.download.prss.microsoft.com,DIRECT",
-    "GEOSITE,microsoft@cn,DIRECT",
-    "DOMAIN-SUFFIX,msftconnecttest.com,DIRECT",
-    "DOMAIN-SUFFIX,msftncsi.com,DIRECT",
-    "DOMAIN-SUFFIX,windowsupdate.com,DIRECT",
-    "DOMAIN-SUFFIX,windowsupdate.microsoft.com,DIRECT",
-    "DOMAIN-SUFFIX,update.microsoft.com,DIRECT",
-    "DOMAIN-SUFFIX,download.microsoft.com,DIRECT",
-    "DOMAIN-SUFFIX,download.windowsupdate.com,DIRECT",
-    "DOMAIN-SUFFIX,officecdn.microsoft.com,DIRECT",
-    "DOMAIN-SUFFIX,officecdn.microsoft.com.edgesuite.net,DIRECT",
-    "DOMAIN-SUFFIX,officecdn.microsoft.com.edgekey.net,DIRECT",
-    "DOMAIN-SUFFIX,microsoft.com.cn,DIRECT",
-    "DOMAIN-SUFFIX,microsoftstore.com.cn,DIRECT",
-    "DOMAIN-SUFFIX,msauth.cn,DIRECT",
-    "DOMAIN-SUFFIX,msftauth.cn,DIRECT",
-    "DOMAIN-SUFFIX,msftauthimages.cn,DIRECT",
-    "DOMAIN-SUFFIX,azure.cn,DIRECT",
-    "DOMAIN-SUFFIX,azure-api.cn,DIRECT",
-    "DOMAIN-SUFFIX,chinacloudapi.cn,DIRECT",
-    "DOMAIN-SUFFIX,chinacloudapp.cn,DIRECT",
-    "DOMAIN-SUFFIX,chinacloudsites.cn,DIRECT",
-    "DOMAIN-SUFFIX,microsoftonline.cn,DIRECT",
-    "DOMAIN-SUFFIX,partner.microsoftonline.cn,DIRECT",
-    "DOMAIN-SUFFIX,sharepoint.cn,DIRECT",
-    "DOMAIN-SUFFIX,21vbc.com,DIRECT",
-    "DOMAIN-SUFFIX,21vbluecloud.com,DIRECT",
-    "DOMAIN-SUFFIX,21vbluecloud.net,DIRECT",
-    "RULE-SET,Bing,国际基础服务",
-    "RULE-SET,OneDrive,国际基础服务",
-    "RULE-SET,Microsoft,国际基础服务",
-    "RULE-SET,Google,国际基础服务",
-    "RULE-SET,PayPal,DIRECT",
-    "RULE-SET,Oracle,DIRECT",
-    "RULE-SET,Amazon,国际基础服务",
-    "RULE-SET,Cloudflare,PROXY",
-    "RULE-SET,DirectCN,DIRECT",
-    "RULE-SET,Direct,DIRECT",
-    "RULE-SET,WeChat,DIRECT",
-    "RULE-SET,Alibaba,DIRECT",
-    "RULE-SET,AliPay,DIRECT",
-    "RULE-SET,Baidu,DIRECT",
-    "RULE-SET,Tencent,DIRECT",
-    "RULE-SET,JingDong,DIRECT",
-    "RULE-SET,MeiTuan,DIRECT",
-    "RULE-SET,Eleme,DIRECT",
-    "RULE-SET,GaoDe,DIRECT",
-    "RULE-SET,DiDi,DIRECT",
-    "RULE-SET,Pinduoduo,DIRECT",
-    "RULE-SET,ByteDance,DIRECT",
-    "RULE-SET,DouYin,DIRECT",
-    "RULE-SET,XiaoHongShu,DIRECT",
-    "RULE-SET,Weibo,DIRECT",
-    "RULE-SET,Sina,DIRECT",
-    "RULE-SET,Sohu,DIRECT",
-    "RULE-SET,Zhihu,DIRECT",
-    "RULE-SET,DouBan,DIRECT",
-    "RULE-SET,SMZDM,DIRECT",
-    "RULE-SET,CSDN,DIRECT",
-    "RULE-SET,JueJin,DIRECT",
-    "RULE-SET,Gitee,DIRECT",
-    "RULE-SET,NetEase,DIRECT",
-    "RULE-SET,NetEaseMusic,DIRECT",
-    "RULE-SET,Huawei,DIRECT",
-    "RULE-SET,UnionPay,DIRECT",
-    "RULE-SET,12306,DIRECT",
-    "RULE-SET,BiliBili,DIRECT",
-    "RULE-SET,TencentVideo,DIRECT",
-    "RULE-SET,iQIYI,DIRECT",
-    "RULE-SET,Youku,DIRECT",
-    "RULE-SET,Migu,DIRECT",
-    "RULE-SET,ChinaMedia,DIRECT",
-    "DOMAIN-SUFFIX,uy5.net,DIRECT",
-    "DOMAIN-SUFFIX,crxsoso.com,DIRECT",
-    "RULE-SET,ChinaNoMedia,DIRECT",
-    "RULE-SET,ChinaMaxNoIP,DIRECT",
-    "RULE-SET,China,DIRECT",
-    "GEOSITE,cn,DIRECT",
-    "RULE-SET,Telegram,国际社媒",
-    "RULE-SET,Facebook,国际社媒",
-    "RULE-SET,Instagram,国际社媒",
-    "RULE-SET,Threads,国际社媒",
-    "RULE-SET,Whatsapp,国际社媒",
-    "RULE-SET,Twitter,国际社媒",
-    "RULE-SET,Snap,国际社媒",
-    "RULE-SET,Reddit,国际社媒",
-    "RULE-SET,Discord,国际社媒",
-    "RULE-SET,Netflix,PROXY",
-    "RULE-SET,YouTube,国际社媒",
-    "RULE-SET,Spotify,日本",
-    "RULE-SET,TikTok,国际社媒",
-    "RULE-SET,Disney,PROXY",
-    "RULE-SET,HBO,PROXY",
-    "RULE-SET,Bahamut,国际社媒",
-    "RULE-SET,GlobalMedia,PROXY",
-    "RULE-SET,GitHub,国际基础服务",
-    "RULE-SET,GitLab,国际基础服务",
-    "RULE-SET,Developer,国际社媒",
-    "RULE-SET,Docker,国际社媒",
-    "RULE-SET,Figma,国际社媒",
-    "RULE-SET,DigitalOcean,国际社媒",
-    "RULE-SET,Notion,国际基础服务",
-    "RULE-SET,Wikipedia,新加坡",
-    "RULE-SET,Scholar,国际基础服务",
-    "RULE-SET,GlobalScholar,国际社媒",
-    "RULE-SET,Dropbox,国际基础服务",
-    "RULE-SET,AOL,国际基础服务",
-    "RULE-SET,Protonmail,国际基础服务",
-    "DOMAIN-SUFFIX,githubusercontent.com,国际社媒",
-    "DOMAIN-SUFFIX,githubassets.com,国际社媒",
-    "DOMAIN-SUFFIX,github.io,国际社媒",
-    "DOMAIN-SUFFIX,npmjs.com,国际社媒",
-    "DOMAIN-SUFFIX,registry.npmjs.org,国际社媒",
-    "DOMAIN-SUFFIX,pypi.org,国际社媒",
-    "DOMAIN-SUFFIX,pythonhosted.org,国际社媒",
-    "DOMAIN-SUFFIX,rust-lang.org,国际社媒",
-    "DOMAIN-SUFFIX,crates.io,国际社媒",
-    "DOMAIN-SUFFIX,docker.com,国际社媒",
-    "DOMAIN-SUFFIX,docker.io,国际社媒",
-    "DOMAIN-SUFFIX,ghcr.io,国际社媒",
-    "DOMAIN-SUFFIX,vercel.app,PROXY",
-    "DOMAIN-SUFFIX,parallels.com,PROXY",
-    "DOMAIN-SUFFIX,nssurge.com,PROXY",
-    "DOMAIN,plugins.jetbrains.com,PROXY",
-    "DOMAIN,jike.teracloud.jp,日本",
-    "DOMAIN-SUFFIX,infini-cloud.net,日本",
-    "DOMAIN-SUFFIX,giffgaff.com,英国",
-    "DOMAIN-SUFFIX,yahoo.com,国际基础服务",
-    "RULE-SET,EA,Game",
-    "RULE-SET,Epic,Game",
-    "RULE-SET,Gog,Game",
-    "RULE-SET,Origin,Game",
-    "RULE-SET,PlayStation,Game",
-    "RULE-SET,Steam,Game",
-    "RULE-SET,Xbox,Game",
-    "RULE-SET,Blizzard,Game",
-    "RULE-SET,Nintendo,Game",
-    "RULE-SET,Game,Game",
-    "RULE-SET,Speedtest,SpeedTest",
-    "RULE-SET,Proxy,PROXY",
-    "RULE-SET,Global,PROXY",
-    "GEOSITE,geolocation-!cn,PROXY",
-    "GEOIP,CN,DIRECT,no-resolve",
-    "GEOIP,SG,新加坡,no-resolve",
-    "GEOIP,TW,台湾,no-resolve",
-    "GEOIP,HK,香港,no-resolve",
-    "GEOIP,JP,日本,no-resolve",
-    "GEOIP,KR,韩国,no-resolve",
-    "GEOIP,US,美国,no-resolve",
-    "MATCH,FINAL"
-  ]
+  }
 };
 
   Object.assign(config, override);

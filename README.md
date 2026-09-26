@@ -4,11 +4,31 @@
 
 聚焦「小而稳」：公开版均不含节点、订阅链接、本机端口、外部控制器、证书材料、本地 iCloud 路径等隐私信息。
 
-## 分流基准（源配置意图）
+## 分流基准（源配置：`根配置/Surge源配置.conf`，其余目录为各客户端参考实现）
 
-- 先拦截（`reject.txt`）与局域网，再处理 iCloud 网关与自有规则；
-- `pre-ai-infra.list`（共享基础设施）→ `ai-major.list`（官方/大规模 AI）→ `direct-cn.list`（大陆直连兜底）；
-- 再按国内服务 → 游戏/测速 → Apple/Microsoft/国际基础服务 → 国际社媒 → 流媒体 → 开发工具 → 通用海外兜底（`gfw.txt` + `Proxy_All_No_Resolve`）→ IP/GeoIP → `FINAL` 的顺序分流。
+源配置 `[Rule]` 的分流顺序（公开模板完整保留，仅做脱敏与本地路径改写）：
+
+1. `AdBlock.list` 拦截 → iCloud 网关直连 → `Apple Music` 直连 → `Rules/Pre-AI.txt`（国际基础服务）→ `Rules/AI.txt`（AI）→ `Rules/DIRECT.txt`（直连）；
+2. 局域网/邮件端口/授时直连 → 大陆服务（`Special` + Bilibili/IQIYI/Letv/网易云/腾讯视频/Youku/WeTV + 微信/抖音/小红书/微博/PayPal/Oracle/ChinaMedia/ChinaMax）；
+3. 游戏/测速（Speedtest → EA/Epic/Gog/Origin/PlayStation/Steam/steamcontent/Xbox）；
+4. Apple（AppleTV/iCloud/AppleID/Apple）直连 → Microsoft/Google FCM/Google（国际基础服务）→ Cloudflare → `AI Suite`（AI）→ GitHub/GitLab；
+5. 海外通信与国际社媒（Telegram + ASN 62014 → Facebook/Instagram/Threads/Whatsapp/Twitter/Snap/Reddit/Discord）；
+6. 海外流媒体（Netflix/Disney+/Spotify→日本/TikTok/Max/YouTube/YouTube Music/Amazon/Pornhub → 国际社媒）；
+7. 开发工具（Notion/Scholar→国际基础服务，Wikipedia→新加坡，Dropbox → 国际基础服务，Crypto→PROXY，AOL/Protonmail → 国际基础服务）；
+8. 通用兜底（`gfw.txt` → `Proxy` → `Domestic` → `Domestic IPs` → `ASN.China`）→ IP 层（Telegram CIDR/ChinaIPs/cncidr/skk reject+stream）→ GeoIP（CN 直连，SG/TW/HK/JP/KR/US 分流）→ `FINAL`。
+
+各客户端映射关系：
+
+| 源概念 | Surge/Egern | Mihomo | Loon | Quantumult X | Shadowrocket |
+|---|---|---|---|---|---|
+| AdBlock 拦截 | `AdBlock.list` → REJECT | `AdvertisingLite` + dler `AdBlock` → REJECT | Advertising → REJECT | AdBlock filter（GeQ1an） | AdBlock + Advertising → REJECT |
+| Pre-AI/AI/DIRECT | 仓库 `surge/rules/*.list` | `PreAIInfra`/`AIMajor`/`DirectCN`（同源） | 同源三规则集 | 本地 host 兜底（`filter_local` §1-3） | 同源三规则集 |
+| 大陆服务 | dler Special/媒体 + blackmatrix | dler Clash Provider（同名） | Loon 原生 list（BiliBili/iQIYI/LeTV/NetEaseMusic/WeChat/DouYin/ChinaMedia/ChinaMax） | GeQ1an China Media + Mainland/Domestic | dler Special/媒体 + blackmatrix SR/QX |
+| 游戏/测速 | Speedtest/Game 各平台 | `Speedtest`/`Steam` 等 Clash Provider | Game/SpeedtestIntl + Steam/Xbox/PlayStation | Speedtest filter | SR Game/Speedtest |
+| Apple/Microsoft/AI | Apple/Microsoft/GoogleFCM/AISuite | 同名 Clash Provider | Apple 系列 + Microsoft/Google lsr | Apple/AI Suite/Microsoft filter | 同名 SR 规则 |
+| 社媒/流媒体 | Telegram/Discord/Netflix 等 | 同名 Clash Provider（策略见映射表） | Telegram/TikTok/Twitter…/Netflix/Disney/Spotify | Telegram/Crypto/Discord/Netflix/YouTube… | 同名 SR 规则 |
+| 兜底 | gfw/Proxy/Domestic/DomesticIPs/ASN.China + GeoIP + FINAL | `Proxy`/`Global`/`GEOSITE:geolocation-!cn` + GEOIP + MATCH | Global Proxy + CN REGION + GeoIP + FINAL | Outside/Mainland/LAN + Others | gfw/Global/Proxy + GEOIP + FINAL |
+| 策略组命名差异 | 国际社媒/PROXY/DIRECT/FINAL | 同左（另有 Apple服务） | 代理策略/兜底策略/国内下载/国际下载/国际流媒体 | Outside/Mainland/Others/AdBlock/Apple/Apple Push/AI Suite/China Media/Asian Media/Global Media/Netflix/Disney+/YouTube/Max/Spotify/Telegram/Crypto/Discord/Microsoft/PayPal/Speedtest | 同 Surge（无 Emby，Apple服务保留） |
 
 ## 目录结构
 
@@ -167,7 +187,10 @@ https://fastly.jsdelivr.net/gh/junchan0412/proxy-configs@main/shadowrocket/rewri
 ruby -e 'require "yaml"; YAML.load_file("mihomo/mihomo.yaml"); YAML.load_file("mihomo/mihomo-override.yaml")'
 ruby scripts/generate-mihomo-js-override.rb mihomo/mihomo-override.yaml /tmp/check.js && cmp /tmp/check.js mihomo/mihomo-override.js
 ruby scripts/validate-loon.rb loon/loon.lcf
+python3 scripts/sync-check.py
 ```
+
+`scripts/sync-check.py` 按「源配置概念 → 各客户端实现」逐项断言：Surge/Egern 规则一致、Shadowrocket/QX/Loon/Mihomo 覆盖源 §0-§11 全部概念。
 
 CI（`.github/workflows/validate.yml`）在每次 push / PR 时运行同样的 YAML 解析、JS 同步、Loon 校验与公开敏感信息扫描。
 

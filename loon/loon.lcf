@@ -192,11 +192,12 @@ GEOIP,GB,英国
 FINAL,兜底策略
 
 [Remote Rule]
+
 # 拦截和局域网
 https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Loon/Advertising/Advertising.list, policy=REJECT, tag=Advertising, enabled=true
 https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Loon/Lan/Lan.list, policy=DIRECT, tag=LAN, enabled=true
 
-# AI 与 Apple：资源及写法均来自 ProxyResource Lcf 模板
+# AI 与 Apple（Surge源 §1；iCloud 网关见 [Rule] 本地规则）
 https://fastly.jsdelivr.net/gh/junchan0412/proxy-configs@main/surge/rules/pre-ai-infra.list, policy=国际基础服务, tag=Pre AI Infrastructure, enabled=true
 https://fastly.jsdelivr.net/gh/junchan0412/proxy-configs@main/surge/rules/ai-major.list, policy=AI, tag=AI Major, enabled=true
 https://kelee.one/Tool/Loon/Lsr/AI.lsr, policy=AI, tag=AI, enabled=true
@@ -206,16 +207,27 @@ https://kelee.one/Tool/Loon/Lsr/AppStore.lsr, policy=Apple服务, tag=App Store,
 https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Loon/AppleProxy/AppleProxy.list, policy=Apple服务, tag=Apple Proxy, enabled=true
 https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Loon/Apple/Apple.list, policy=DIRECT, tag=Apple Direct, enabled=true
 
-# 国内服务与下载 CDN
+# 国内服务与下载 CDN（Surge源 §3；含仓库 direct-cn 兜底）
 https://kelee.one/Tool/Loon/Lsr/ChinaDownloadCDN.lsr, policy=国内下载, tag=China Download CDN, enabled=true
 https://fastly.jsdelivr.net/gh/junchan0412/proxy-configs@main/surge/rules/direct-cn.list, policy=DIRECT, tag=China Direct, enabled=true
 https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Loon/ChinaMaxNoIP/ChinaMaxNoIP.list, policy=DIRECT, tag=China Domains, enabled=true
+https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Loon/BiliBili/BiliBili.list, policy=DIRECT, tag=BiliBili, enabled=true
+https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Loon/iQIYI/iQIYI.list, policy=DIRECT, tag=iQIYI, enabled=true
+https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Loon/LeTV/LeTV.list, policy=DIRECT, tag=LeTV, enabled=true
+https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Loon/NetEaseMusic/NetEaseMusic.list, policy=DIRECT, tag=NetEase Music, enabled=true
+https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Loon/WeChat/WeChat.list, policy=DIRECT, tag=WeChat, enabled=true
+https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Loon/DouYin/DouYin.list, policy=DIRECT, tag=DouYin, enabled=true
+https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Loon/ChinaMedia/ChinaMedia.list, policy=DIRECT, tag=China Media, enabled=true
+https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Loon/ChinaMax/ChinaMax.list, policy=DIRECT, tag=China Max, enabled=true
 
-# 游戏和测速
+# 游戏和测速（Surge源 §4）
 https://kelee.one/Tool/Loon/Lsr/SpeedtestInternational.lsr, policy=SpeedTest, tag=Speedtest Intl, enabled=true
 https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Loon/Game/Game.list, policy=Game, tag=Game, enabled=true
+https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Loon/Steam/Steam.list, policy=Game, tag=Steam, enabled=true
+https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Loon/Xbox/Xbox.list, policy=Game, tag=Xbox, enabled=true
+https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Loon/PlayStation/PlayStation.list, policy=Game, tag=PlayStation, enabled=true
 
-# 社交与通信
+# 社交与通信（Surge源 §6）
 https://rule.kelee.one/Loon/Telegram.lsr, policy=国际社媒, tag=Telegram, enabled=true
 https://kelee.one/Tool/Loon/Lsr/TikTok.lsr, policy=国际社媒, tag=TikTok, enabled=true
 https://rule.kelee.one/Loon/Twitter.lsr, policy=国际社媒, tag=Twitter, enabled=true
@@ -227,7 +239,7 @@ https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Loon/Sna
 https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Loon/Reddit/Reddit.list, policy=国际社媒, tag=Reddit, enabled=true
 https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Loon/Discord/Discord.list, policy=国际社媒, tag=Discord, enabled=true
 
-# 流媒体
+# 流媒体（Surge源 §7；Netflix/Disney/Max/YouTube 系走国际社媒或流媒体组）
 https://rule.kelee.one/Loon/Netflix.lsr, policy=国际流媒体, tag=Netflix, enabled=true
 https://rule.kelee.one/Loon/Disney.lsr, policy=国际流媒体, tag=Disney Plus, enabled=true
 https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Loon/HBO/HBO.list, policy=国际流媒体, tag=HBO Max, enabled=true
@@ -235,7 +247,10 @@ https://rule.kelee.one/Loon/YouTube.lsr, policy=国际社媒, tag=YouTube, enabl
 https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Loon/YouTubeMusic/YouTubeMusic.list, policy=国际社媒, tag=YouTube Music, enabled=true
 https://rule.kelee.one/Loon/Spotify.lsr, policy=日本, tag=Spotify, enabled=true
 
-# 开发、云服务、研究与金融
+# Apple 影音与开发工具（Surge源 §5/§8）
+https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Loon/AppleTV/AppleTV.list, policy=DIRECT, tag=Apple TV, enabled=true
+https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Loon/iCloud/iCloud.list, policy=DIRECT, tag=iCloud, enabled=true
+https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Loon/AppleID/AppleID.list, policy=DIRECT, tag=Apple ID, enabled=true
 https://rule.kelee.one/Loon/GitHub.lsr, policy=国际基础服务, tag=GitHub, enabled=true
 https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Loon/GitLab/GitLab.list, policy=国际基础服务, tag=GitLab, enabled=true
 https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Loon/Notion/Notion.list, policy=国际基础服务, tag=Notion, enabled=true
@@ -249,7 +264,7 @@ https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Loon/Pro
 https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Loon/Cloudflare/Cloudflare.list, policy=国际基础服务, tag=Cloudflare, enabled=true
 https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Loon/Developer/Developer.list, policy=国际基础服务, tag=Developer, enabled=true
 
-# Microsoft、Google 与通用海外兜底
+# Microsoft、Google 与通用海外兜底（Surge源 §5/§9）
 https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Loon/Microsoft/Microsoft.list, policy=国际基础服务, tag=Microsoft, enabled=true
 https://rule.kelee.one/Loon/Google.lsr, policy=国际基础服务, tag=Google, enabled=true
 https://kelee.one/Tool/Loon/Lsr/InternationalDownloadCDN.lsr, policy=国际下载, tag=International Download CDN, enabled=true

@@ -163,6 +163,122 @@ proxy-groups:
   - {name: 英国, <<: *UrlTest, filter: '^(?=.*((?i)🇬🇧|英国|英格兰|GBR|United Kingdom|UK|England|Britain|British))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$', icon: 'https://fastly.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/UK.png'}
 
 
+rules:
+  # 0. 安全拦截 (Surge源: AdBlock -> REJECT)
+  - RULE-SET,AdvertisingLite,REJECT
+
+  # 1. iCloud / Pre-AI / AI / DIRECT (Surge源 §1, Rules/*.txt -> 仓库规则集)
+  - RULE-SET,iCloud,DIRECT
+  - RULE-SET,PreAIInfra,国际基础服务
+  - RULE-SET,AIMajor,AI
+  - RULE-SET,DirectCN,DIRECT
+  - RULE-SET,AppleMedia,DIRECT
+
+  # 2. 局域网直连 (Surge源 §2)
+  - RULE-SET,Lan,DIRECT
+  - GEOSITE,private,DIRECT
+
+  # 3-8. 业务分流 (dler Clash Rule.yaml 概念 -> 本仓库策略组; 与 Surge源 §3-§8 对齐)
+  - RULE-SET,AdBlock,REJECT
+  - RULE-SET,Special,DIRECT
+  - RULE-SET,Netflix,国际社媒
+  - RULE-SET,Disney Plus,国际社媒
+  - RULE-SET,YouTube,国际社媒
+  - RULE-SET,Max,国际社媒
+  - RULE-SET,Spotify,日本
+  - RULE-SET,Abema TV,国际社媒
+  - RULE-SET,Bahamut,国际社媒
+  - RULE-SET,DMM,国际社媒
+  - RULE-SET,Fox+,国际社媒
+  - RULE-SET,Hulu Japan,国际社媒
+  - RULE-SET,IQ,国际社媒
+  - RULE-SET,Japonx,国际社媒
+  - RULE-SET,JOOX,国际社媒
+  - RULE-SET,KKBOX,国际社媒
+  - RULE-SET,KKTV,国际社媒
+  - RULE-SET,Line TV,国际社媒
+  - RULE-SET,myTV SUPER,国际社媒
+  - RULE-SET,Niconico,国际社媒
+  - RULE-SET,ViuTV,国际社媒
+  - RULE-SET,ABC,PROXY
+  - RULE-SET,Amazon,PROXY
+  - RULE-SET,BBC iPlayer,PROXY
+  - RULE-SET,DAZN,PROXY
+  - RULE-SET,Discovery Plus,PROXY
+  - RULE-SET,encoreTVB,PROXY
+  - RULE-SET,F1 TV,PROXY
+  - RULE-SET,Fox Now,PROXY
+  - RULE-SET,Hulu,PROXY
+  - RULE-SET,Pandora,PROXY
+  - RULE-SET,PBS,PROXY
+  - RULE-SET,Pornhub,PROXY
+  - RULE-SET,Soundcloud,PROXY
+  - RULE-SET,Bilibili,DIRECT
+  - RULE-SET,IQIYI,DIRECT
+  - RULE-SET,Letv,DIRECT
+  - RULE-SET,Netease Music,DIRECT
+  - RULE-SET,Tencent Video,DIRECT
+  - RULE-SET,WeTV,DIRECT
+  - RULE-SET,Youku,DIRECT
+  - RULE-SET,Telegram,国际社媒
+  - RULE-SET,Crypto,PROXY
+  - RULE-SET,Discord,国际社媒
+  - RULE-SET,Google FCM,国际基础服务
+  - RULE-SET,Microsoft,国际基础服务
+  - RULE-SET,AI Suite,AI
+  - RULE-SET,PayPal,DIRECT
+  - RULE-SET,Scholar,国际基础服务
+  - RULE-SET,Speedtest,SpeedTest
+  - RULE-SET,Steam,Game
+  - RULE-SET,TikTok,国际社媒
+  - RULE-SET,Apple Music,Apple服务
+  - RULE-SET,Apple News,Apple服务
+  - RULE-SET,Apple TV,Apple服务
+  - RULE-SET,Apple Push,Apple服务
+  - RULE-SET,Apple,Apple服务
+  - RULE-SET,miHoYo,Game
+  - RULE-SET,PROXY,PROXY
+  - RULE-SET,Domestic,DIRECT
+  - RULE-SET,Domestic IPs,DIRECT
+  - RULE-SET,LAN,DIRECT
+
+  # Apple Store / Microsoft Store 定向例外 (Surge源分流意图, Mihomo 侧保留)
+  - DOMAIN-SUFFIX,apps.apple.com,Apple服务
+  - DOMAIN-SUFFIX,apps-marketplace.apple.com,Apple服务
+  - DOMAIN-SUFFIX,appstore.com,Apple服务
+  - DOMAIN-SUFFIX,itunes.apple.com,Apple服务
+  - DOMAIN-SUFFIX,mzstatic.com,Apple服务
+  - DOMAIN-SUFFIX,aaplimg.com,Apple服务
+  - DOMAIN,ppq.apple.com,Apple服务
+  - RULE-SET,AppleProxy,Apple服务
+  - RULE-SET,Apple,DIRECT
+  - PROCESS-NAME,WinStore.App.exe,DIRECT
+  - PROCESS-NAME,StoreExperienceHost.exe,DIRECT
+  - DOMAIN-SUFFIX,mp.microsoft.com,DIRECT
+  - DOMAIN-SUFFIX,s-microsoft.com,DIRECT
+  - DOMAIN-SUFFIX,microsoftstore.com,DIRECT
+  - DOMAIN-SUFFIX,onestore.ms,DIRECT
+  - DOMAIN-SUFFIX,windowsmarketplace.com,DIRECT
+  - DOMAIN,storeedge.microsoft.com,DIRECT
+  - DOMAIN,storecorefulfillment.download.prss.microsoft.com,DIRECT
+  - GEOSITE,microsoft@cn,DIRECT
+
+  # 9. 通用海外兜底 (Surge源 §9: gfw + Proxy)
+  - RULE-SET,Proxy,PROXY
+  - RULE-SET,Global,PROXY
+  - GEOSITE,geolocation-!cn,PROXY
+
+  # 10. IP 与 GeoIP 兜底 (Surge源 Part 2 + §10)
+  - GEOIP,CN,DIRECT,no-resolve
+  - GEOIP,SG,新加坡,no-resolve
+  - GEOIP,TW,台湾,no-resolve
+  - GEOIP,HK,香港,no-resolve
+  - GEOIP,JP,日本,no-resolve
+  - GEOIP,KR,韩国,no-resolve
+  - GEOIP,US,美国,no-resolve
+
+  # 11. 最终兜底
+  - MATCH,FINAL
 rule-providers:
   AdvertisingLite:
     <<: *RuleProviders
@@ -185,255 +301,15 @@ rule-providers:
     path: './rules/AIMajor.list'
     url: 'https://fastly.jsdelivr.net/gh/junchan0412/proxy-configs@main/surge/rules/ai-major.list'
 
-  OpenAI:
-    <<: *RuleProviders
-    path: './rules/OpenAI.yaml'
-    url: 'https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/OpenAI/OpenAI.yaml'
-
-  Claude:
-    <<: *RuleProviders
-    path: './rules/Claude.yaml'
-    url: 'https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Claude/Claude.yaml'
-
-  Anthropic:
-    <<: *RuleProviders
-    path: './rules/Anthropic.yaml'
-    url: 'https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Anthropic/Anthropic.yaml'
-
-  Gemini:
-    <<: *RuleProviders
-    path: './rules/Gemini.yaml'
-    url: 'https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Gemini/Gemini.yaml'
-
-  Copilot:
-    <<: *RuleProviders
-    path: './rules/Copilot.yaml'
-    url: 'https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Copilot/Copilot.yaml'
-
-  BardAI:
-    <<: *RuleProviders
-    path: './rules/BardAI.yaml'
-    url: 'https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/BardAI/BardAI.yaml'
-
   Lan:
     <<: *RuleProviders
     path: './rules/Lan.yaml'
     url: 'https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Lan/Lan.yaml'
 
-  Direct:
-    <<: *RuleProviders
-    path: './rules/Direct.yaml'
-    url: 'https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Direct/Direct.yaml'
-
-  ChinaMaxNoIP:
-    <<: *RuleProviders
-    path: './rules/ChinaMaxNoIP.yaml'
-    url: 'https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/ChinaMaxNoIP/ChinaMaxNoIP.yaml'
-
-  ChinaNoMedia:
-    <<: *RuleProviders
-    path: './rules/ChinaNoMedia.yaml'
-    url: 'https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/ChinaNoMedia/ChinaNoMedia.yaml'
-
-  WeChat:
-    <<: *RuleProviders
-    path: './rules/WeChat.yaml'
-    url: 'https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/WeChat/WeChat.yaml'
-
-  BiliBili:
-    <<: *RuleProviders
-    path: './rules/BiliBili.yaml'
-    url: 'https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/BiliBili/BiliBili.yaml'
-
-  DouYin:
-    <<: *RuleProviders
-    path: './rules/DouYin.yaml'
-    url: 'https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/DouYin/DouYin.yaml'
-
-  XiaoHongShu:
-    <<: *RuleProviders
-    path: './rules/XiaoHongShu.yaml'
-    url: 'https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/XiaoHongShu/XiaoHongShu.yaml'
-
-  Weibo:
-    <<: *RuleProviders
-    path: './rules/Weibo.yaml'
-    url: 'https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Weibo/Weibo.yaml'
-
-  ChinaMedia:
-    <<: *RuleProviders
-    path: './rules/ChinaMedia.yaml'
-    url: 'https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/ChinaMedia/ChinaMedia.yaml'
-
-  PayPal:
-    <<: *RuleProviders
-    path: './rules/PayPal.yaml'
-    url: 'https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/PayPal/PayPal.yaml'
-
-  Oracle:
-    <<: *RuleProviders
-    path: './rules/Oracle.yaml'
-    url: 'https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Oracle/Oracle.yaml'
-
-  China:
-    <<: *RuleProviders
-    path: './rules/China.yaml'
-    url: 'https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/China/China.yaml'
-
-  Alibaba:
-    <<: *RuleProviders
-    path: './rules/Alibaba.yaml'
-    url: 'https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Alibaba/Alibaba.yaml'
-
-  AliPay:
-    <<: *RuleProviders
-    path: './rules/AliPay.yaml'
-    url: 'https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/AliPay/AliPay.yaml'
-
-  Baidu:
-    <<: *RuleProviders
-    path: './rules/Baidu.yaml'
-    url: 'https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Baidu/Baidu.yaml'
-
-  Tencent:
-    <<: *RuleProviders
-    path: './rules/Tencent.yaml'
-    url: 'https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Tencent/Tencent.yaml'
-
-  JingDong:
-    <<: *RuleProviders
-    path: './rules/JingDong.yaml'
-    url: 'https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/JingDong/JingDong.yaml'
-
-  MeiTuan:
-    <<: *RuleProviders
-    path: './rules/MeiTuan.yaml'
-    url: 'https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/MeiTuan/MeiTuan.yaml'
-
-  Eleme:
-    <<: *RuleProviders
-    path: './rules/Eleme.yaml'
-    url: 'https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Eleme/Eleme.yaml'
-
-  GaoDe:
-    <<: *RuleProviders
-    path: './rules/GaoDe.yaml'
-    url: 'https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/GaoDe/GaoDe.yaml'
-
-  DiDi:
-    <<: *RuleProviders
-    path: './rules/DiDi.yaml'
-    url: 'https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/DiDi/DiDi.yaml'
-
-  Pinduoduo:
-    <<: *RuleProviders
-    path: './rules/Pinduoduo.yaml'
-    url: 'https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Pinduoduo/Pinduoduo.yaml'
-
-  ByteDance:
-    <<: *RuleProviders
-    path: './rules/ByteDance.yaml'
-    url: 'https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/ByteDance/ByteDance.yaml'
-
-  NetEase:
-    <<: *RuleProviders
-    path: './rules/NetEase.yaml'
-    url: 'https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/NetEase/NetEase.yaml'
-
-  NetEaseMusic:
-    <<: *RuleProviders
-    path: './rules/NetEaseMusic.yaml'
-    url: 'https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/NetEaseMusic/NetEaseMusic.yaml'
-
-  Zhihu:
-    <<: *RuleProviders
-    path: './rules/Zhihu.yaml'
-    url: 'https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Zhihu/Zhihu.yaml'
-
-  Gitee:
-    <<: *RuleProviders
-    path: './rules/Gitee.yaml'
-    url: 'https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Gitee/Gitee.yaml'
-
-  CSDN:
-    <<: *RuleProviders
-    path: './rules/CSDN.yaml'
-    url: 'https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/CSDN/CSDN.yaml'
-
-  JueJin:
-    <<: *RuleProviders
-    path: './rules/JueJin.yaml'
-    url: 'https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/JueJin/JueJin.yaml'
-
-  DouBan:
-    <<: *RuleProviders
-    path: './rules/DouBan.yaml'
-    url: 'https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/DouBan/DouBan.yaml'
-
-  SMZDM:
-    <<: *RuleProviders
-    path: './rules/SMZDM.yaml'
-    url: 'https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/SMZDM/SMZDM.yaml'
-
-  '12306':
-    <<: *RuleProviders
-    path: './rules/12306.yaml'
-    url: 'https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/12306/12306.yaml'
-
-  Huawei:
-    <<: *RuleProviders
-    path: './rules/Huawei.yaml'
-    url: 'https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Huawei/Huawei.yaml'
-
-  UnionPay:
-    <<: *RuleProviders
-    path: './rules/UnionPay.yaml'
-    url: 'https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/UnionPay/UnionPay.yaml'
-
-  Sina:
-    <<: *RuleProviders
-    path: './rules/Sina.yaml'
-    url: 'https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Sina/Sina.yaml'
-
-  Sohu:
-    <<: *RuleProviders
-    path: './rules/Sohu.yaml'
-    url: 'https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Sohu/Sohu.yaml'
-
-  TencentVideo:
-    <<: *RuleProviders
-    path: './rules/TencentVideo.yaml'
-    url: 'https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/TencentVideo/TencentVideo.yaml'
-
-  iQIYI:
-    <<: *RuleProviders
-    path: './rules/iQIYI.yaml'
-    url: 'https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/iQIYI/iQIYI.yaml'
-
-  Youku:
-    <<: *RuleProviders
-    path: './rules/Youku.yaml'
-    url: 'https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Youku/Youku.yaml'
-
-  Migu:
-    <<: *RuleProviders
-    path: './rules/Migu.yaml'
-    url: 'https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Migu/Migu.yaml'
-
-  Apple:
-    <<: *RuleProviders
-    path: './rules/Apple.yaml'
-    url: 'https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Apple/Apple.yaml'
-
   iCloud:
     <<: *RuleProviders
     path: './rules/iCloud.yaml'
     url: 'https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/iCloud/iCloud.yaml'
-
-  AppleID:
-    <<: *RuleProviders
-    path: './rules/AppleID.yaml'
-    url: 'https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/AppleID/AppleID.yaml'
 
   AppleProxy:
     <<: *RuleProviders
@@ -445,251 +321,6 @@ rule-providers:
     path: './rules/AppleMedia.yaml'
     url: 'https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/AppleMedia/AppleMedia.yaml'
 
-  Microsoft:
-    <<: *RuleProviders
-    path: './rules/Microsoft.yaml'
-    url: 'https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Microsoft/Microsoft.yaml'
-
-  OneDrive:
-    <<: *RuleProviders
-    path: './rules/OneDrive.yaml'
-    url: 'https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/OneDrive/OneDrive.yaml'
-
-  Bing:
-    <<: *RuleProviders
-    path: './rules/Bing.yaml'
-    url: 'https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Bing/Bing.yaml'
-
-  Google:
-    <<: *RuleProviders
-    path: './rules/Google.yaml'
-    url: 'https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Google/Google.yaml'
-
-  Telegram:
-    <<: *RuleProviders
-    path: './rules/Telegram.yaml'
-    url: 'https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Telegram/Telegram.yaml'
-
-  Facebook:
-    <<: *RuleProviders
-    path: './rules/Facebook.yaml'
-    url: 'https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Facebook/Facebook.yaml'
-
-  Instagram:
-    <<: *RuleProviders
-    path: './rules/Instagram.yaml'
-    url: 'https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Instagram/Instagram.yaml'
-
-  Threads:
-    <<: *RuleProviders
-    path: './rules/Threads.yaml'
-    url: 'https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Threads/Threads.yaml'
-
-  Whatsapp:
-    <<: *RuleProviders
-    path: './rules/Whatsapp.yaml'
-    url: 'https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Whatsapp/Whatsapp.yaml'
-
-  Twitter:
-    <<: *RuleProviders
-    path: './rules/Twitter.yaml'
-    url: 'https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Twitter/Twitter.yaml'
-
-  Snap:
-    <<: *RuleProviders
-    path: './rules/Snap.yaml'
-    url: 'https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Snap/Snap.yaml'
-
-  Reddit:
-    <<: *RuleProviders
-    path: './rules/Reddit.yaml'
-    url: 'https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Reddit/Reddit.yaml'
-
-  Discord:
-    <<: *RuleProviders
-    path: './rules/Discord.yaml'
-    url: 'https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Discord/Discord.yaml'
-
-  Netflix:
-    <<: *RuleProviders
-    path: './rules/Netflix.yaml'
-    url: 'https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Netflix/Netflix.yaml'
-
-  YouTube:
-    <<: *RuleProviders
-    path: './rules/YouTube.yaml'
-    url: 'https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/YouTube/YouTube.yaml'
-
-  Spotify:
-    <<: *RuleProviders
-    path: './rules/Spotify.yaml'
-    url: 'https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Spotify/Spotify.yaml'
-
-  TikTok:
-    <<: *RuleProviders
-    path: './rules/TikTok.yaml'
-    url: 'https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/TikTok/TikTok.yaml'
-
-  Disney:
-    <<: *RuleProviders
-    path: './rules/Disney.yaml'
-    url: 'https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Disney/Disney.yaml'
-
-  HBO:
-    <<: *RuleProviders
-    path: './rules/HBO.yaml'
-    url: 'https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/HBO/HBO.yaml'
-
-  Bahamut:
-    <<: *RuleProviders
-    path: './rules/Bahamut.yaml'
-    url: 'https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Bahamut/Bahamut.yaml'
-
-  GitHub:
-    <<: *RuleProviders
-    path: './rules/GitHub.yaml'
-    url: 'https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/GitHub/GitHub.yaml'
-
-  GitLab:
-    <<: *RuleProviders
-    path: './rules/GitLab.yaml'
-    url: 'https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/GitLab/GitLab.yaml'
-
-  Developer:
-    <<: *RuleProviders
-    path: './rules/Developer.yaml'
-    url: 'https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Developer/Developer.yaml'
-
-  Docker:
-    <<: *RuleProviders
-    path: './rules/Docker.yaml'
-    url: 'https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Docker/Docker.yaml'
-
-  Figma:
-    <<: *RuleProviders
-    path: './rules/Figma.yaml'
-    url: 'https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Figma/Figma.yaml'
-
-  DigitalOcean:
-    <<: *RuleProviders
-    path: './rules/DigitalOcean.yaml'
-    url: 'https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/DigitalOcean/DigitalOcean.yaml'
-
-  Amazon:
-    <<: *RuleProviders
-    path: './rules/Amazon.yaml'
-    url: 'https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Amazon/Amazon.yaml'
-
-  Scholar:
-    <<: *RuleProviders
-    path: './rules/Scholar.yaml'
-    url: 'https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Scholar/Scholar.yaml'
-
-  GlobalScholar:
-    <<: *RuleProviders
-    path: './rules/GlobalScholar.yaml'
-    url: 'https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/GlobalScholar/GlobalScholar.yaml'
-
-  Notion:
-    <<: *RuleProviders
-    path: './rules/Notion.yaml'
-    url: 'https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Notion/Notion.yaml'
-
-  Wikipedia:
-    <<: *RuleProviders
-    path: './rules/Wikipedia.yaml'
-    url: 'https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Wikipedia/Wikipedia.yaml'
-
-  Dropbox:
-    <<: *RuleProviders
-    path: './rules/Dropbox.yaml'
-    url: 'https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Dropbox/Dropbox.yaml'
-
-  Cloudflare:
-    <<: *RuleProviders
-    path: './rules/Cloudflare.yaml'
-    url: 'https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Cloudflare/Cloudflare.yaml'
-
-  AOL:
-    <<: *RuleProviders
-    path: './rules/AOL.yaml'
-    url: 'https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/AOL/AOL.yaml'
-
-  Protonmail:
-    <<: *RuleProviders
-    path: './rules/Protonmail.yaml'
-    url: 'https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Protonmail/Protonmail.yaml'
-
-  Speedtest:
-    <<: *RuleProviders
-    path: './rules/Speedtest.yaml'
-    url: 'https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Speedtest/Speedtest.yaml'
-
-  EA:
-    <<: *RuleProviders
-    path: './rules/EA.yaml'
-    url: 'https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/EA/EA.yaml'
-
-  Epic:
-    <<: *RuleProviders
-    path: './rules/Epic.yaml'
-    url: 'https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Epic/Epic.yaml'
-
-  Gog:
-    <<: *RuleProviders
-    path: './rules/Gog.yaml'
-    url: 'https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Gog/Gog.yaml'
-
-  Origin:
-    <<: *RuleProviders
-    path: './rules/Origin.yaml'
-    url: 'https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Origin/Origin.yaml'
-
-  PlayStation:
-    <<: *RuleProviders
-    path: './rules/PlayStation.yaml'
-    url: 'https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/PlayStation/PlayStation.yaml'
-
-  Steam:
-    <<: *RuleProviders
-    path: './rules/Steam.yaml'
-    url: 'https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Steam/Steam.yaml'
-
-  Xbox:
-    <<: *RuleProviders
-    path: './rules/Xbox.yaml'
-    url: 'https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Xbox/Xbox.yaml'
-
-  Blizzard:
-    <<: *RuleProviders
-    path: './rules/Blizzard.yaml'
-    url: 'https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Blizzard/Blizzard.yaml'
-
-  Nintendo:
-    <<: *RuleProviders
-    path: './rules/Nintendo.yaml'
-    url: 'https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Nintendo/Nintendo.yaml'
-
-  Game:
-    <<: *RuleProviders
-    path: './rules/Game.yaml'
-    url: 'https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Game/Game.yaml'
-
-  Download:
-    <<: *RuleProviders
-    path: './rules/Download.yaml'
-    url: 'https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Download/Download.yaml'
-
-  PrivateTracker:
-    <<: *RuleProviders
-    path: './rules/PrivateTracker.yaml'
-    url: 'https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/PrivateTracker/PrivateTracker.yaml'
-
-  GlobalMedia:
-    <<: *RuleProviders
-    path: './rules/GlobalMedia.yaml'
-    url: 'https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/GlobalMedia/GlobalMedia.yaml'
-
   Proxy:
     <<: *RuleProviders
     path: './rules/Proxy.yaml'
@@ -700,230 +331,374 @@ rule-providers:
     path: './rules/Global.yaml'
     url: 'https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Global/Global.yaml'
 
+  AdBlock:
+    <<: *RuleProviders
+    path: './rules/AdBlock.yaml'
+    url: 'https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/AdBlock.yaml'
+    interval: 86400
 
-rules:
-  # 0. 安全拦截与预匹配
-  - IP-CIDR,0.0.0.0/32,REJECT,no-resolve
-  - RULE-SET,AdvertisingLite,REJECT
+  Special:
+    <<: *RuleProviders
+    path: './rules/Special.yaml'
+    url: 'https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Special.yaml'
+    interval: 86400
 
-  # 1. Pre-AI 共享基础设施与官方/大规模 AI 服务
-  - RULE-SET,PreAIInfra,国际基础服务
-  - DOMAIN-SUFFIX,fonts.gstatic.com,国际基础服务
-  - DOMAIN-SUFFIX,ssl.gstatic.com,国际基础服务
-  - DOMAIN-SUFFIX,maps.gstatic.com,国际基础服务
-  - RULE-SET,AIMajor,AI
-  - RULE-SET,OpenAI,AI
-  - RULE-SET,Claude,AI
-  - RULE-SET,Anthropic,AI
-  - RULE-SET,Gemini,AI
-  - RULE-SET,Copilot,AI
-  - RULE-SET,BardAI,AI
+  PROXY:
+    <<: *RuleProviders
+    path: './rules/PROXY.yaml'
+    url: 'https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Proxy.yaml'
+    interval: 86400
 
-  # 2. 局域网、系统直连与下载进程
-  - RULE-SET,Lan,DIRECT
-  - GEOSITE,private,DIRECT
-  - RULE-SET,Download,PROXY
-  - RULE-SET,PrivateTracker,PROXY
+  Domestic:
+    <<: *RuleProviders
+    path: './rules/Domestic.yaml'
+    url: 'https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Domestic.yaml'
+    interval: 86400
 
-  # 3. Apple 直连、App Store / Microsoft Store 专项、Microsoft 分流、Google 与支付/云基础设施
-  - RULE-SET,iCloud,DIRECT
-  - RULE-SET,AppleID,DIRECT
-  - DOMAIN-SUFFIX,apps.apple.com,Apple服务
-  - DOMAIN-SUFFIX,apps-marketplace.apple.com,Apple服务
-  - DOMAIN-SUFFIX,appstore.com,Apple服务
-  - DOMAIN-SUFFIX,appsto.re,Apple服务
-  - DOMAIN-SUFFIX,itunes.apple.com,Apple服务
-  - DOMAIN-SUFFIX,itunes.com,Apple服务
-  - DOMAIN-SUFFIX,mzstatic.com,Apple服务
-  - DOMAIN-SUFFIX,aaplimg.com,Apple服务
-  - DOMAIN-SUFFIX,cdn-apple.com,Apple服务
-  - DOMAIN,amp-api.apps.apple.com,Apple服务
-  - DOMAIN,bag.itunes.apple.com,Apple服务
-  - DOMAIN,buy.itunes.apple.com,Apple服务
-  - DOMAIN,init.itunes.apple.com,Apple服务
-  - DOMAIN,iosapps.itunes.apple.com,Apple服务
-  - DOMAIN,lookup-api.apple.com,Apple服务
-  - DOMAIN,osxapps.itunes.apple.com,Apple服务
-  - DOMAIN,phobos.apple.com,Apple服务
-  - DOMAIN,ppq.apple.com,Apple服务
-  - DOMAIN,uts-api.itunes.apple.com,Apple服务
-  - RULE-SET,AppleProxy,Apple服务
-  - RULE-SET,AppleMedia,Apple服务
-  - RULE-SET,Apple,DIRECT
-  # Microsoft Store 的目录、授权、购买、图片与下载链路需在宽泛 Microsoft 规则前直连。
-  - PROCESS-NAME,WinStore.App.exe,DIRECT
-  - PROCESS-NAME,StoreExperienceHost.exe,DIRECT
-  - DOMAIN-SUFFIX,mp.microsoft.com,DIRECT
-  - DOMAIN-SUFFIX,s-microsoft.com,DIRECT
-  - DOMAIN-SUFFIX,microsoftstore.com,DIRECT
-  - DOMAIN-SUFFIX,onestore.ms,DIRECT
-  - DOMAIN-SUFFIX,windowsmarketplace.com,DIRECT
-  - DOMAIN,storeedge.microsoft.com,DIRECT
-  - DOMAIN,storecorefulfillment.download.prss.microsoft.com,DIRECT
-  - GEOSITE,microsoft@cn,DIRECT
-  - DOMAIN-SUFFIX,msftconnecttest.com,DIRECT
-  - DOMAIN-SUFFIX,msftncsi.com,DIRECT
-  - DOMAIN-SUFFIX,windowsupdate.com,DIRECT
-  - DOMAIN-SUFFIX,windowsupdate.microsoft.com,DIRECT
-  - DOMAIN-SUFFIX,update.microsoft.com,DIRECT
-  - DOMAIN-SUFFIX,download.microsoft.com,DIRECT
-  - DOMAIN-SUFFIX,download.windowsupdate.com,DIRECT
-  - DOMAIN-SUFFIX,officecdn.microsoft.com,DIRECT
-  - DOMAIN-SUFFIX,officecdn.microsoft.com.edgesuite.net,DIRECT
-  - DOMAIN-SUFFIX,officecdn.microsoft.com.edgekey.net,DIRECT
-  - DOMAIN-SUFFIX,microsoft.com.cn,DIRECT
-  - DOMAIN-SUFFIX,microsoftstore.com.cn,DIRECT
-  - DOMAIN-SUFFIX,msauth.cn,DIRECT
-  - DOMAIN-SUFFIX,msftauth.cn,DIRECT
-  - DOMAIN-SUFFIX,msftauthimages.cn,DIRECT
-  - DOMAIN-SUFFIX,azure.cn,DIRECT
-  - DOMAIN-SUFFIX,azure-api.cn,DIRECT
-  - DOMAIN-SUFFIX,chinacloudapi.cn,DIRECT
-  - DOMAIN-SUFFIX,chinacloudapp.cn,DIRECT
-  - DOMAIN-SUFFIX,chinacloudsites.cn,DIRECT
-  - DOMAIN-SUFFIX,microsoftonline.cn,DIRECT
-  - DOMAIN-SUFFIX,partner.microsoftonline.cn,DIRECT
-  - DOMAIN-SUFFIX,sharepoint.cn,DIRECT
-  - DOMAIN-SUFFIX,21vbc.com,DIRECT
-  - DOMAIN-SUFFIX,21vbluecloud.com,DIRECT
-  - DOMAIN-SUFFIX,21vbluecloud.net,DIRECT
-  - RULE-SET,Bing,国际基础服务
-  - RULE-SET,OneDrive,国际基础服务
-  - RULE-SET,Microsoft,国际基础服务
-  - RULE-SET,Google,国际基础服务
-  - RULE-SET,PayPal,DIRECT
-  - RULE-SET,Oracle,DIRECT
-  - RULE-SET,Amazon,国际基础服务
-  - RULE-SET,Cloudflare,PROXY
+  Domestic IPs:
+    <<: *RuleProviders
+    path: './rules/Domestic_IPs.yaml'
+    url: 'https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Domestic%20IPs.yaml'
+    interval: 86400
 
-  # 4. 国内常用服务与内容平台
-  - RULE-SET,DirectCN,DIRECT
-  - RULE-SET,Direct,DIRECT
-  - RULE-SET,WeChat,DIRECT
-  - RULE-SET,Alibaba,DIRECT
-  - RULE-SET,AliPay,DIRECT
-  - RULE-SET,Baidu,DIRECT
-  - RULE-SET,Tencent,DIRECT
-  - RULE-SET,JingDong,DIRECT
-  - RULE-SET,MeiTuan,DIRECT
-  - RULE-SET,Eleme,DIRECT
-  - RULE-SET,GaoDe,DIRECT
-  - RULE-SET,DiDi,DIRECT
-  - RULE-SET,Pinduoduo,DIRECT
-  - RULE-SET,ByteDance,DIRECT
-  - RULE-SET,DouYin,DIRECT
-  - RULE-SET,XiaoHongShu,DIRECT
-  - RULE-SET,Weibo,DIRECT
-  - RULE-SET,Sina,DIRECT
-  - RULE-SET,Sohu,DIRECT
-  - RULE-SET,Zhihu,DIRECT
-  - RULE-SET,DouBan,DIRECT
-  - RULE-SET,SMZDM,DIRECT
-  - RULE-SET,CSDN,DIRECT
-  - RULE-SET,JueJin,DIRECT
-  - RULE-SET,Gitee,DIRECT
-  - RULE-SET,NetEase,DIRECT
-  - RULE-SET,NetEaseMusic,DIRECT
-  - RULE-SET,Huawei,DIRECT
-  - RULE-SET,UnionPay,DIRECT
-  - RULE-SET,12306,DIRECT
-  - RULE-SET,BiliBili,DIRECT
-  - RULE-SET,TencentVideo,DIRECT
-  - RULE-SET,iQIYI,DIRECT
-  - RULE-SET,Youku,DIRECT
-  - RULE-SET,Migu,DIRECT
-  - RULE-SET,ChinaMedia,DIRECT
-  - DOMAIN-SUFFIX,uy5.net,DIRECT
-  - DOMAIN-SUFFIX,crxsoso.com,DIRECT
-  - RULE-SET,ChinaNoMedia,DIRECT
-  - RULE-SET,ChinaMaxNoIP,DIRECT
-  - RULE-SET,China,DIRECT
-  - GEOSITE,cn,DIRECT
+  LAN:
+    <<: *RuleProviders
+    path: './rules/LAN.yaml'
+    url: 'https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/LAN.yaml'
+    interval: 86400
 
-  # 5. 海外通信、社交与社区
-  - RULE-SET,Telegram,国际社媒
-  - RULE-SET,Facebook,国际社媒
-  - RULE-SET,Instagram,国际社媒
-  - RULE-SET,Threads,国际社媒
-  - RULE-SET,Whatsapp,国际社媒
-  - RULE-SET,Twitter,国际社媒
-  - RULE-SET,Snap,国际社媒
-  - RULE-SET,Reddit,国际社媒
-  - RULE-SET,Discord,国际社媒
+  Netflix:
+    <<: *RuleProviders
+    path: './rules/Netflix.yaml'
+    url: 'https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Media/Netflix.yaml'
+    interval: 86400
 
-  # 6. 海外流媒体与影音平台
-  - RULE-SET,Netflix,PROXY
-  - RULE-SET,YouTube,国际社媒
-  - RULE-SET,Spotify,日本
-  - RULE-SET,TikTok,国际社媒
-  - RULE-SET,Disney,PROXY
-  - RULE-SET,HBO,PROXY
-  - RULE-SET,Bahamut,国际社媒
-  - RULE-SET,GlobalMedia,PROXY
+  Spotify:
+    <<: *RuleProviders
+    path: './rules/Spotify.yaml'
+    url: 'https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Media/Spotify.yaml'
+    interval: 86400
 
-  # 7. 开发、知识、生产力与云服务
-  - RULE-SET,GitHub,国际基础服务
-  - RULE-SET,GitLab,国际基础服务
-  - RULE-SET,Developer,国际社媒
-  - RULE-SET,Docker,国际社媒
-  - RULE-SET,Figma,国际社媒
-  - RULE-SET,DigitalOcean,国际社媒
-  - RULE-SET,Notion,国际基础服务
-  - RULE-SET,Wikipedia,新加坡
-  - RULE-SET,Scholar,国际基础服务
-  - RULE-SET,GlobalScholar,国际社媒
-  - RULE-SET,Dropbox,国际基础服务
-  - RULE-SET,AOL,国际基础服务
-  - RULE-SET,Protonmail,国际基础服务
-  - DOMAIN-SUFFIX,githubusercontent.com,国际社媒
-  - DOMAIN-SUFFIX,githubassets.com,国际社媒
-  - DOMAIN-SUFFIX,github.io,国际社媒
-  - DOMAIN-SUFFIX,npmjs.com,国际社媒
-  - DOMAIN-SUFFIX,registry.npmjs.org,国际社媒
-  - DOMAIN-SUFFIX,pypi.org,国际社媒
-  - DOMAIN-SUFFIX,pythonhosted.org,国际社媒
-  - DOMAIN-SUFFIX,rust-lang.org,国际社媒
-  - DOMAIN-SUFFIX,crates.io,国际社媒
-  - DOMAIN-SUFFIX,docker.com,国际社媒
-  - DOMAIN-SUFFIX,docker.io,国际社媒
-  - DOMAIN-SUFFIX,ghcr.io,国际社媒
-  - DOMAIN-SUFFIX,vercel.app,PROXY
-  - DOMAIN-SUFFIX,parallels.com,PROXY
-  - DOMAIN-SUFFIX,nssurge.com,PROXY
-  - DOMAIN,plugins.jetbrains.com,PROXY
-  - DOMAIN,jike.teracloud.jp,日本
-  - DOMAIN-SUFFIX,infini-cloud.net,日本
-  - DOMAIN-SUFFIX,giffgaff.com,英国
-  - DOMAIN-SUFFIX,yahoo.com,国际基础服务
+  YouTube:
+    <<: *RuleProviders
+    path: './rules/YouTube.yaml'
+    url: 'https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Media/YouTube.yaml'
+    interval: 86400
 
-  # 8. 游戏平台
-  - RULE-SET,EA,Game
-  - RULE-SET,Epic,Game
-  - RULE-SET,Gog,Game
-  - RULE-SET,Origin,Game
-  - RULE-SET,PlayStation,Game
-  - RULE-SET,Steam,Game
-  - RULE-SET,Xbox,Game
-  - RULE-SET,Blizzard,Game
-  - RULE-SET,Nintendo,Game
-  - RULE-SET,Game,Game
+  Max:
+    <<: *RuleProviders
+    path: './rules/Max.yaml'
+    url: 'https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Media/Max.yaml'
+    interval: 86400
 
-  # 9. 测速与通用海外域名
-  - RULE-SET,Speedtest,SpeedTest
-  - RULE-SET,Proxy,PROXY
-  - RULE-SET,Global,PROXY
-  - GEOSITE,geolocation-!cn,PROXY
+  Bilibili:
+    <<: *RuleProviders
+    path: './rules/Bilibili.yaml'
+    url: 'https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Media/Bilibili.yaml'
+    interval: 86400
 
-  # 10. IP 规则与 GeoIP 兜底
-  # Mihomo 支持 no-resolve；这里保留它，使 IP 类兜底只匹配已有目标 IP，
-  # 不为尚未命中的域名额外触发 DNS 解析。
-  - GEOIP,CN,DIRECT,no-resolve
-  - GEOIP,SG,新加坡,no-resolve
-  - GEOIP,TW,台湾,no-resolve
-  - GEOIP,HK,香港,no-resolve
-  - GEOIP,JP,日本,no-resolve
-  - GEOIP,KR,韩国,no-resolve
-  - GEOIP,US,美国,no-resolve
+  IQ:
+    <<: *RuleProviders
+    path: './rules/IQ.yaml'
+    url: 'https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Media/IQ.yaml'
+    interval: 86400
 
-  # 11. 最终兜底
-  - MATCH,FINAL
+  IQIYI:
+    <<: *RuleProviders
+    path: './rules/IQIYI.yaml'
+    url: 'https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Media/IQIYI.yaml'
+    interval: 86400
+
+  Letv:
+    <<: *RuleProviders
+    path: './rules/Letv.yaml'
+    url: 'https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Media/Letv.yaml'
+    interval: 86400
+
+  Netease Music:
+    <<: *RuleProviders
+    path: './rules/Netease_Music.yaml'
+    url: 'https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Media/Netease%20Music.yaml'
+    interval: 86400
+
+  Tencent Video:
+    <<: *RuleProviders
+    path: './rules/Tencent_Video.yaml'
+    url: 'https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Media/Tencent%20Video.yaml'
+    interval: 86400
+
+  Youku:
+    <<: *RuleProviders
+    path: './rules/Youku.yaml'
+    url: 'https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Media/Youku.yaml'
+    interval: 86400
+
+  WeTV:
+    <<: *RuleProviders
+    path: './rules/WeTV.yaml'
+    url: 'https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Media/WeTV.yaml'
+    interval: 86400
+
+  ABC:
+    <<: *RuleProviders
+    path: './rules/ABC.yaml'
+    url: 'https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Media/ABC.yaml'
+    interval: 86400
+
+  Abema TV:
+    <<: *RuleProviders
+    path: './rules/Abema_TV.yaml'
+    url: 'https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Media/Abema%20TV.yaml'
+    interval: 86400
+
+  Amazon:
+    <<: *RuleProviders
+    path: './rules/Amazon.yaml'
+    url: 'https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Media/Amazon.yaml'
+    interval: 86400
+
+  Apple Music:
+    <<: *RuleProviders
+    path: './rules/Apple_Music.yaml'
+    url: 'https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Media/Apple%20Music.yaml'
+    interval: 86400
+
+  Apple News:
+    <<: *RuleProviders
+    path: './rules/Apple_News.yaml'
+    url: 'https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Media/Apple%20News.yaml'
+    interval: 86400
+
+  Apple TV:
+    <<: *RuleProviders
+    path: './rules/Apple_TV.yaml'
+    url: 'https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Media/Apple%20TV.yaml'
+    interval: 86400
+
+  Bahamut:
+    <<: *RuleProviders
+    path: './rules/Bahamut.yaml'
+    url: 'https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Media/Bahamut.yaml'
+    interval: 86400
+
+  BBC iPlayer:
+    <<: *RuleProviders
+    path: './rules/BBC_iPlayer.yaml'
+    url: 'https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Media/BBC%20iPlayer.yaml'
+    interval: 86400
+
+  DAZN:
+    <<: *RuleProviders
+    path: './rules/DAZN.yaml'
+    url: 'https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Media/DAZN.yaml'
+    interval: 86400
+
+  Discovery Plus:
+    <<: *RuleProviders
+    path: './rules/Discovery_Plus.yaml'
+    url: 'https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Media/Discovery%20Plus.yaml'
+    interval: 86400
+
+  Disney Plus:
+    <<: *RuleProviders
+    path: './rules/Disney_Plus.yaml'
+    url: 'https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Media/Disney%20Plus.yaml'
+    interval: 86400
+
+  DMM:
+    <<: *RuleProviders
+    path: './rules/DMM.yaml'
+    url: 'https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Media/DMM.yaml'
+    interval: 86400
+
+  encoreTVB:
+    <<: *RuleProviders
+    path: './rules/encoreTVB.yaml'
+    url: 'https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Media/encoreTVB.yaml'
+    interval: 86400
+
+  F1 TV:
+    <<: *RuleProviders
+    path: './rules/F1_TV.yaml'
+    url: 'https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Media/F1%20TV.yaml'
+    interval: 86400
+
+  Fox Now:
+    <<: *RuleProviders
+    path: './rules/Fox_Now.yaml'
+    url: 'https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Media/Fox%20Now.yaml'
+    interval: 86400
+
+  Fox+:
+    <<: *RuleProviders
+    path: './rules/FoxPlus.yaml'
+    url: 'https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Media/Fox%2B.yaml'
+    interval: 86400
+
+  Hulu Japan:
+    <<: *RuleProviders
+    path: './rules/Hulu_Japan.yaml'
+    url: 'https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Media/Hulu%20Japan.yaml'
+    interval: 86400
+
+  Hulu:
+    <<: *RuleProviders
+    path: './rules/Hulu.yaml'
+    url: 'https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Media/Hulu.yaml'
+    interval: 86400
+
+  Japonx:
+    <<: *RuleProviders
+    path: './rules/Japonx.yaml'
+    url: 'https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Media/Japonx.yaml'
+    interval: 86400
+
+  JOOX:
+    <<: *RuleProviders
+    path: './rules/JOOX.yaml'
+    url: 'https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Media/JOOX.yaml'
+    interval: 86400
+
+  KKBOX:
+    <<: *RuleProviders
+    path: './rules/KKBOX.yaml'
+    url: 'https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Media/KKBOX.yaml'
+    interval: 86400
+
+  KKTV:
+    <<: *RuleProviders
+    path: './rules/KKTV.yaml'
+    url: 'https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Media/KKTV.yaml'
+    interval: 86400
+
+  Line TV:
+    <<: *RuleProviders
+    path: './rules/Line_TV.yaml'
+    url: 'https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Media/Line%20TV.yaml'
+    interval: 86400
+
+  myTV SUPER:
+    <<: *RuleProviders
+    path: './rules/myTV_SUPER.yaml'
+    url: 'https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Media/myTV%20SUPER.yaml'
+    interval: 86400
+
+  Niconico:
+    <<: *RuleProviders
+    path: './rules/Niconico.yaml'
+    url: 'https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Media/Niconico.yaml'
+    interval: 86400
+
+  Pandora:
+    <<: *RuleProviders
+    path: './rules/Pandora.yaml'
+    url: 'https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Media/Pandora.yaml'
+    interval: 86400
+
+  PBS:
+    <<: *RuleProviders
+    path: './rules/PBS.yaml'
+    url: 'https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Media/PBS.yaml'
+    interval: 86400
+
+  Pornhub:
+    <<: *RuleProviders
+    path: './rules/Pornhub.yaml'
+    url: 'https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Media/Pornhub.yaml'
+    interval: 86400
+
+  Soundcloud:
+    <<: *RuleProviders
+    path: './rules/Soundcloud.yaml'
+    url: 'https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Media/Soundcloud.yaml'
+    interval: 86400
+
+  ViuTV:
+    <<: *RuleProviders
+    path: './rules/ViuTV.yaml'
+    url: 'https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Media/ViuTV.yaml'
+    interval: 86400
+
+  Telegram:
+    <<: *RuleProviders
+    path: './rules/Telegram.yaml'
+    url: 'https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Telegram.yaml'
+    interval: 86400
+
+  Crypto:
+    <<: *RuleProviders
+    path: './rules/Crypto.yaml'
+    url: 'https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Crypto.yaml'
+    interval: 86400
+
+  Discord:
+    <<: *RuleProviders
+    path: './rules/Discord.yaml'
+    url: 'https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Discord.yaml'
+    interval: 86400
+
+  Steam:
+    <<: *RuleProviders
+    path: './rules/Steam.yaml'
+    url: 'https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Steam.yaml'
+    interval: 86400
+
+  TikTok:
+    <<: *RuleProviders
+    path: './rules/TikTok.yaml'
+    url: 'https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/TikTok.yaml'
+    interval: 86400
+
+  Speedtest:
+    <<: *RuleProviders
+    path: './rules/Speedtest.yaml'
+    url: 'https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Speedtest.yaml'
+    interval: 86400
+
+  PayPal:
+    <<: *RuleProviders
+    path: './rules/PayPal.yaml'
+    url: 'https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/PayPal.yaml'
+    interval: 86400
+
+  Microsoft:
+    <<: *RuleProviders
+    path: './rules/Microsoft.yaml'
+    url: 'https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Microsoft.yaml'
+    interval: 86400
+
+  AI Suite:
+    <<: *RuleProviders
+    path: './rules/AI_Suite.yaml'
+    url: 'https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/AI%20Suite.yaml'
+    interval: 86400
+
+  Apple:
+    <<: *RuleProviders
+    path: './rules/Apple.yaml'
+    url: 'https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Apple.yaml'
+    interval: 86400
+
+  Apple Push:
+    <<: *RuleProviders
+    path: './rules/Apple_Push.yaml'
+    url: 'https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Apple%20Push.yaml'
+    interval: 86400
+
+  Google FCM:
+    <<: *RuleProviders
+    path: './rules/Google_FCM.yaml'
+    url: 'https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Google%20FCM.yaml'
+    interval: 86400
+
+  Scholar:
+    <<: *RuleProviders
+    path: './rules/Scholar.yaml'
+    url: 'https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Scholar.yaml'
+    interval: 86400
+
+  miHoYo:
+    <<: *RuleProviders
+    path: './rules/miHoYo.yaml'
+    url: 'https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/miHoYo.yaml'
+    interval: 86400
