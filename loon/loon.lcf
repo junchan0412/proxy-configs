@@ -17,8 +17,8 @@ allow-wifi-access=false
 interface-mode=auto
 test-timeout=5
 disconnect-on-policy-change=false
-internet-test-url=http://connectivitycheck.platform.hicloud.com/generate_204
-proxy-test-url=http://www.gstatic.com/generate_204
+internet-test-url=http://connectivitycheck.gstatic.com/generate_204
+proxy-test-url=http://cp.cloudflare.com/generate_204
 resource-parser=https://raw.githubusercontent.com/sub-store-org/Sub-Store/release/sub-store-parser.loon.min.js
 geoip-url=https://fastly.jsdelivr.net/gh/Loyalsoldier/geoip@release/Country.mmdb
 ipasn-url=https://geodata.kelee.one/GeoLite2-ASN-P3TERX.mmdb
@@ -46,25 +46,25 @@ Emby节点=NameRegex, FilterKey="^(?=.*((?i)🇭🇰|香港|🇹🇼|台湾|🇸
 
 [Proxy Group]
 代理策略=select,Auto,香港,台湾,新加坡,日本,美国,韩国,英国,DIRECT,img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/Static.png
-Auto=url-test,全球节点,interval=600,tolerance=100,img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/Auto.png
+Auto=url-test,全球节点,interval=300,tolerance=50,img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/Auto.png
 兜底策略=select,代理策略,DIRECT,img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/Global.png
-国际基础服务=select,新加坡,美国,香港,代理策略,DIRECT,img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/Global.png
+国际基础服务=select,新加坡,美国,代理策略,img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/Global.png
 Apple服务=select,DIRECT,国际基础服务,代理策略,新加坡,美国,img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/Apple.png
-AI=select,美国,新加坡,台湾,日本,代理策略,img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/OpenAI.png
-国际社媒=select,香港,新加坡,台湾,日本,美国,英国,代理策略,img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/Telegram.png
+AI=select,台湾,美国,新加坡,代理策略,img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/OpenAI.png
+国际社媒=select,新加坡,美国,台湾,代理策略,img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/Telegram.png
 国际流媒体=select,新加坡,香港,台湾,美国,日本,代理策略,img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/Streaming.png
-Emby=url-test,Emby节点,interval=600,tolerance=50,img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/Streaming.png
-Game=select,香港,日本,美国,台湾,新加坡,韩国,代理策略,DIRECT,img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/GAME.png
-SpeedTest=select,代理策略,Auto,香港,新加坡,美国,DIRECT,img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/Speedtest.png
+Emby=url-test,Emby节点,interval=300,tolerance=50,img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/Streaming.png
+Game=select,香港,日本,美国,台湾,代理策略,DIRECT,img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/GAME.png
+SpeedTest=select,香港,新加坡,美国,DIRECT,img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/Speedtest.png
 国内下载=select,DIRECT,代理策略,img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Alpha/download.png
 国际下载=select,代理策略,DIRECT,img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Alpha/download.png
-香港=url-test,香港节点,interval=600,tolerance=100,img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/HK.png
-台湾=url-test,台湾节点,interval=600,tolerance=100,img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/TW.png
-新加坡=url-test,新加坡节点,interval=600,tolerance=100,img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/SG.png
-日本=url-test,日本节点,interval=600,tolerance=100,img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/JP.png
-韩国=url-test,韩国节点,interval=600,tolerance=100,img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/KR.png
-美国=url-test,美国节点,interval=600,tolerance=100,img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/US.png
-英国=url-test,英国节点,interval=600,tolerance=100,img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/UK.png
+香港=url-test,香港节点,interval=300,tolerance=50,img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/HK.png
+台湾=url-test,台湾节点,interval=300,tolerance=50,img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/TW.png
+新加坡=url-test,新加坡节点,interval=300,tolerance=50,img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/SG.png
+日本=url-test,日本节点,interval=300,tolerance=50,img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/JP.png
+韩国=url-test,韩国节点,interval=300,tolerance=50,img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/KR.png
+美国=url-test,美国节点,interval=300,tolerance=50,img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/US.png
+英国=url-test,英国节点,interval=300,tolerance=50,img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/UK.png
 
 [Rule]
 # 本地规则只保留需要抢在远程聚合规则前处理的例外。
@@ -170,16 +170,6 @@ DOMAIN-SUFFIX,chinacloudapi.cn,DIRECT
 DOMAIN-SUFFIX,microsoftonline.cn,DIRECT
 DOMAIN-SUFFIX,sharepoint.cn,DIRECT
 
-# 定向业务例外
-DOMAIN-SUFFIX,steamcontent.com,Game
-DOMAIN-SUFFIX,vercel.app,代理策略
-DOMAIN-SUFFIX,parallels.com,代理策略
-DOMAIN-SUFFIX,nssurge.com,代理策略
-DOMAIN,plugins.jetbrains.com,代理策略
-DOMAIN,jike.teracloud.jp,日本
-DOMAIN-SUFFIX,infini-cloud.net,日本
-DOMAIN-SUFFIX,giffgaff.com,英国
-DOMAIN-SUFFIX,yahoo.com,国际基础服务
 
 GEOIP,CN,DIRECT
 GEOIP,SG,新加坡
@@ -192,11 +182,12 @@ GEOIP,GB,英国
 FINAL,兜底策略
 
 [Remote Rule]
+
 # 拦截和局域网
 https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Loon/Advertising/Advertising.list, policy=REJECT, tag=Advertising, enabled=true
 https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Loon/Lan/Lan.list, policy=DIRECT, tag=LAN, enabled=true
 
-# AI 与 Apple：资源及写法均来自 ProxyResource Lcf 模板
+# AI 与 Apple（Surge源 §1；iCloud 网关见 [Rule] 本地规则）
 https://fastly.jsdelivr.net/gh/junchan0412/proxy-configs@main/surge/rules/pre-ai-infra.list, policy=国际基础服务, tag=Pre AI Infrastructure, enabled=true
 https://fastly.jsdelivr.net/gh/junchan0412/proxy-configs@main/surge/rules/ai-major.list, policy=AI, tag=AI Major, enabled=true
 https://kelee.one/Tool/Loon/Lsr/AI.lsr, policy=AI, tag=AI, enabled=true
@@ -206,16 +197,27 @@ https://kelee.one/Tool/Loon/Lsr/AppStore.lsr, policy=Apple服务, tag=App Store,
 https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Loon/AppleProxy/AppleProxy.list, policy=Apple服务, tag=Apple Proxy, enabled=true
 https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Loon/Apple/Apple.list, policy=DIRECT, tag=Apple Direct, enabled=true
 
-# 国内服务与下载 CDN
+# 国内服务与下载 CDN（Surge源 §3；含仓库 direct-cn 兜底）
 https://kelee.one/Tool/Loon/Lsr/ChinaDownloadCDN.lsr, policy=国内下载, tag=China Download CDN, enabled=true
 https://fastly.jsdelivr.net/gh/junchan0412/proxy-configs@main/surge/rules/direct-cn.list, policy=DIRECT, tag=China Direct, enabled=true
 https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Loon/ChinaMaxNoIP/ChinaMaxNoIP.list, policy=DIRECT, tag=China Domains, enabled=true
+https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Loon/BiliBili/BiliBili.list, policy=DIRECT, tag=BiliBili, enabled=true
+https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Loon/iQIYI/iQIYI.list, policy=DIRECT, tag=iQIYI, enabled=true
+https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Loon/LeTV/LeTV.list, policy=DIRECT, tag=LeTV, enabled=true
+https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Loon/NetEaseMusic/NetEaseMusic.list, policy=DIRECT, tag=NetEase Music, enabled=true
+https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Loon/WeChat/WeChat.list, policy=DIRECT, tag=WeChat, enabled=true
+https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Loon/DouYin/DouYin.list, policy=DIRECT, tag=DouYin, enabled=true
+https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Loon/ChinaMedia/ChinaMedia.list, policy=DIRECT, tag=China Media, enabled=true
+https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Loon/ChinaMax/ChinaMax.list, policy=DIRECT, tag=China Max, enabled=true
 
-# 游戏和测速
+# 游戏和测速（Surge源 §4）
 https://kelee.one/Tool/Loon/Lsr/SpeedtestInternational.lsr, policy=SpeedTest, tag=Speedtest Intl, enabled=true
 https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Loon/Game/Game.list, policy=Game, tag=Game, enabled=true
+https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Loon/Steam/Steam.list, policy=Game, tag=Steam, enabled=true
+https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Loon/Xbox/Xbox.list, policy=Game, tag=Xbox, enabled=true
+https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Loon/PlayStation/PlayStation.list, policy=Game, tag=PlayStation, enabled=true
 
-# 社交与通信
+# 社交与通信（Surge源 §6）
 https://rule.kelee.one/Loon/Telegram.lsr, policy=国际社媒, tag=Telegram, enabled=true
 https://kelee.one/Tool/Loon/Lsr/TikTok.lsr, policy=国际社媒, tag=TikTok, enabled=true
 https://rule.kelee.one/Loon/Twitter.lsr, policy=国际社媒, tag=Twitter, enabled=true
@@ -227,7 +229,7 @@ https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Loon/Sna
 https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Loon/Reddit/Reddit.list, policy=国际社媒, tag=Reddit, enabled=true
 https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Loon/Discord/Discord.list, policy=国际社媒, tag=Discord, enabled=true
 
-# 流媒体
+# 流媒体（Surge源 §7；Netflix/Disney/Max/YouTube 系走国际社媒或流媒体组）
 https://rule.kelee.one/Loon/Netflix.lsr, policy=国际流媒体, tag=Netflix, enabled=true
 https://rule.kelee.one/Loon/Disney.lsr, policy=国际流媒体, tag=Disney Plus, enabled=true
 https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Loon/HBO/HBO.list, policy=国际流媒体, tag=HBO Max, enabled=true
@@ -235,7 +237,10 @@ https://rule.kelee.one/Loon/YouTube.lsr, policy=国际社媒, tag=YouTube, enabl
 https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Loon/YouTubeMusic/YouTubeMusic.list, policy=国际社媒, tag=YouTube Music, enabled=true
 https://rule.kelee.one/Loon/Spotify.lsr, policy=日本, tag=Spotify, enabled=true
 
-# 开发、云服务、研究与金融
+# Apple 影音与开发工具（Surge源 §5/§8）
+https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Loon/AppleTV/AppleTV.list, policy=DIRECT, tag=Apple TV, enabled=true
+https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Loon/iCloud/iCloud.list, policy=DIRECT, tag=iCloud, enabled=true
+https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Loon/AppleID/AppleID.list, policy=DIRECT, tag=Apple ID, enabled=true
 https://rule.kelee.one/Loon/GitHub.lsr, policy=国际基础服务, tag=GitHub, enabled=true
 https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Loon/GitLab/GitLab.list, policy=国际基础服务, tag=GitLab, enabled=true
 https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Loon/Notion/Notion.list, policy=国际基础服务, tag=Notion, enabled=true
@@ -249,7 +254,7 @@ https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Loon/Pro
 https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Loon/Cloudflare/Cloudflare.list, policy=国际基础服务, tag=Cloudflare, enabled=true
 https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Loon/Developer/Developer.list, policy=国际基础服务, tag=Developer, enabled=true
 
-# Microsoft、Google 与通用海外兜底
+# Microsoft、Google 与通用海外兜底（Surge源 §5/§9）
 https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Loon/Microsoft/Microsoft.list, policy=国际基础服务, tag=Microsoft, enabled=true
 https://rule.kelee.one/Loon/Google.lsr, policy=国际基础服务, tag=Google, enabled=true
 https://kelee.one/Tool/Loon/Lsr/InternationalDownloadCDN.lsr, policy=国际下载, tag=International Download CDN, enabled=true
@@ -274,10 +279,20 @@ https://kelee.one/Tool/Loon/Lsr/REGION_SPLITTER.lsr, policy=DIRECT, tag=CN REGIO
 *.bilibili.com = server:119.29.29.29
 
 [Rewrite]
+# Google 服务重定向（源配置 §URL Rewrite）
 ^https?://(www\.)?(g|google)\.cn https://www.google.com 302
 ^(http|https):\/\/(ditu|maps)\.google\.cn https://maps.google.com 302
+# 国内站点规范化（源配置 §URL Rewrite；需对应主机在 [Mitm] 中）
+^https?:\/\/(www\.)?taobao\.com\/ https://taobao.com/ 302
+^https?:\/\/(www\.)?jd\.com\/ https://www.jd.com/ 302
+^https?:\/\/(www\.)?mi\.com\/ https://www.mi.com/ 302
+^https?:\/\/you\.163\.com\/ https://you.163.com/ 302
+^https?:\/\/(www\.)?suning\.com\/ https://suning.com/ 302
+^https?:\/\/(www\.)?yhd\.com\/ https://yhd.com/ 302
 
 [Script]
+# 定时任务示例（默认注释；Loon 原生 cron 写法，取消注释即启用）。
+# 每天60秒读懂世界 = type=cron,cronexp=0 30 9 * * *,wake-system=1,script-path=https://raw.githubusercontent.com/Yuheng0101/X/main/Tasks/60s.js,timeout=60
 
 [Plugin]
 # 按需启用本仓库插件（去掉行首 # 即生效）：

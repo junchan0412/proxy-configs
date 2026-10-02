@@ -24,7 +24,20 @@ jobs:
       - name: Validate Loon config
         run: ruby scripts/validate-loon.rb loon/loon.lcf
 
+      - name: Validate Egern YAML
+        run: |
+          ruby -ryaml -e '
+            d = YAML.load_file("egern/egern.yaml")
+            raise "missing policy_groups" unless d["policy_groups"].is_a?(Array) && d["policy_groups"].size >= 17
+            raise "missing rules" unless d["rules"].is_a?(Array) && d["rules"].size >= 90
+            raise "uses Surge syntax" if File.read("egern/egern.yaml").include?("RULE-SET,")
+            puts "egern-yaml-ok"
+          '
+
+      - name: Cross-client source sync check
+        run: python3 scripts/sync-check.py
+
       - name: Public sensitivity scan
         run: |
-          ! rg -n --glob '!scripts/preflight-public.sh' "(psk=|ca-p12 = [A-Za-z0-9+/]{40,}|sub\\.store/download|/Users/[^/]+|iCloud~com~nssurge|Mobile Documents|http-api =|external-controller-access =|snell, *[0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+)" \
-            README.md Rules surge shadowrocket quantumultx mihomo loon egern scripts
+          ! rg -n --glob '!scripts/preflight-public.sh' --glob '!scripts/sync-check.py' "(psk=|ca-p12 = [A-Za-z0-9+/]{40,}|sub\\.store/download|/Users/[^/]+|iCloud~com~nssurge|Mobile Documents|http-api =|external-controller-access =|snell, *[0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+)" \
+            README.md surge shadowrocket quantumultx mihomo loon egern scripts

@@ -1,0 +1,689 @@
+# Egern 原生 YAML 配置（由 根配置/Surge源配置.conf 按 Egern 原生语法映射生成）。
+# 不含节点凭据、订阅链接（订阅池为占位 URL）、控制接口与证书材料。
+# 结构参考 根配置/Egern/Head.yaml + Provider/；策略组与分流顺序与 Surge 源配置一致。
+ipv6: false
+http_port: 8888
+socks_port: 8889
+allow_external_connections: true
+hijack_dns:
+- 8.8.8.8:53
+- 8.8.4.4:53
+- 1.1.1.1:53
+- 1.0.0.1:53
+- 45.14.70.14:53
+geoip_db_url: https://fastly.jsdelivr.net/gh/Masaiki/GeoIP2-CN/raw/refs/heads@release/Country.mmdb
+proxy_latency_test_url: http://cp.cloudflare.com/generate_204
+direct_latency_test_url: http://connectivitycheck.gstatic.com/generate_204
+udp_latency_test_url: apple.com@64.6.64.6
+compat_route: false
+include_all_networks: false
+vif_excluded_routes:
+- 0.0.0.0/8
+- 10.0.0.0/8
+- 17.0.0.0/8
+- 100.64.0.0/10
+- 127.0.0.0/8
+- 169.254.0.0/16
+- 172.16.0.0/12
+- 192.0.0.0/24
+- 192.0.2.0/24
+- 192.168.0.0/16
+- 192.88.99.0/24
+- 198.18.0.0/15
+- 198.51.100.0/24
+- 203.0.113.0/24
+- 224.0.0.0/4
+- 240.0.0.0/4
+- 255.255.255.255/32
+real_ip_domains:
+- '*.msftncsi.com'
+- '*.msftconnecttest.com'
+- dns.msftncsi.com
+- '*.stun.playstation.net'
+- 'xbox.*.microsoft.com'
+- '*.xboxlive.com'
+- '*.srv.nintendo.net'
+- '*.stun.twilio.com'
+- '*.turn.twilio.com'
+- 'time.*.com'
+- 'time.*.gov'
+- 'time.*.edu.cn'
+- 'time.*.apple.com'
+- 'time?.*.com'
+- 'ntp.*.com'
+- 'ntp?.*.com'
+- '*.time.edu.cn'
+- '*.ntp.org.cn'
+- '*.pool.ntp.org'
+- 'time*.cloud.tencent.com'
+- 'ntp?.aliyun.com'
+
+dns:
+  bootstrap:
+  - 223.5.5.5
+  - 119.29.29.29
+  upstreams:
+    Alibaba:
+    - https://dns.alidns.com/dns-query
+    Tencent:
+    - https://doh.pub/dns-query
+    Cloudflare:
+    - https://cloudflare-dns.com/dns-query
+    China:
+    - 223.5.5.5
+    - 119.29.29.29
+    - https://dns.alidns.com/dns-query
+    - https://doh.pub/dns-query
+    Global:
+    - https://cloudflare-dns.com/dns-query
+    - https://1.1.1.1/dns-query
+  forward:
+  # 源 [Host]：按域名指定厂商 DoH
+  - domain_wildcard:
+      match: '*.taobao.com'
+      value: Alibaba
+  - domain_wildcard:
+      match: '*.tmall.com'
+      value: Alibaba
+  - domain_wildcard:
+      match: '*.tbcache.com'
+      value: Alibaba
+  - domain_wildcard:
+      match: tb.cn
+      value: Alibaba
+  - domain_wildcard:
+      match: '*.alipay.com'
+      value: Alibaba
+  - domain_wildcard:
+      match: '*.alipay.com.cn'
+      value: Alibaba
+  - domain_wildcard:
+      match: '*.alipaydns.com'
+      value: Alibaba
+  - domain_wildcard:
+      match: '*.alicdn.com'
+      value: Alibaba
+  - domain_wildcard:
+      match: '*.aliyun.com'
+      value: Alibaba
+  - domain_wildcard:
+      match: '*.qq.com'
+      value: Tencent
+  - domain_wildcard:
+      match: '*.weixin.qq.com'
+      value: Tencent
+  - domain_wildcard:
+      match: '*.wx.qq.com'
+      value: Tencent
+  - domain_wildcard:
+      match: '*.weixin.com'
+      value: Tencent
+  - domain_wildcard:
+      match: '*.wechat.com'
+      value: Tencent
+  - domain_wildcard:
+      match: '*.servicewechat.com'
+      value: Tencent
+  - domain_wildcard:
+      match: url.cn
+      value: Tencent
+  - domain_wildcard:
+      match: '*.jd.com'
+      value: Tencent
+  - domain_wildcard:
+      match: '*.tencent.com'
+      value: Tencent
+  - domain_wildcard:
+      match: '*.bilibili.com'
+      value: Tencent
+  - domain_wildcard:
+      match: hdslb.com
+      value: Tencent
+  - domain_wildcard:
+      match: '*.163.com'
+      value: Tencent
+  - domain_wildcard:
+      match: '*.126.com'
+      value: Tencent
+  - domain_wildcard:
+      match: '*.126.net'
+      value: Tencent
+  - domain_wildcard:
+      match: '*.127.net'
+      value: Tencent
+  - domain_wildcard:
+      match: '*.netease.com'
+      value: Tencent
+  - domain_wildcard:
+      match: '*.mi.com'
+      value: Tencent
+  - domain_wildcard:
+      match: '*.xiaomi.com'
+      value: Tencent
+  - domain_wildcard:
+      match: dl.google.com
+      value: Tencent
+  - domain_wildcard:
+      match: dl.l.google.com
+      value: Tencent
+  - domain_wildcard:
+      match: update.googleapis.com
+      value: Tencent
+  # 仓库规则集分流：大陆直连 -> 国内 DoH；Pre-AI/AI -> 跨境 DoH
+  - proxy_rule_set:
+      match: https://fastly.jsdelivr.net/gh/junchan0412/proxy-configs@main/surge/rules/direct-cn.list
+      value: China
+  - proxy_rule_set:
+      match: https://fastly.jsdelivr.net/gh/junchan0412/proxy-configs@main/surge/rules/pre-ai-infra.list
+      value: Global
+  - proxy_rule_set:
+      match: https://fastly.jsdelivr.net/gh/junchan0412/proxy-configs@main/surge/rules/ai-major.list
+      value: Global
+  - domain_wildcard:
+      match: '*'
+      value: China
+  proxy_nameservers:
+  - https://dns.alidns.com/dns-query
+  - https://doh.pub/dns-query
+  public_ip_lookup_url: https://ifconfig.me/ip
+
+policy_groups:
+# 节点订阅池：换成你自己的订阅地址（源配置的 Sub-Store 订阅池在公开版中为占位）
+- external:
+    name: 订阅池
+    type: select
+    urls:
+    - https://example.com/replace-with-your-subscription
+    update_interval: 3600
+    hidden: true
+    icon: https://fastly.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Available.png
+- smart:
+    name: 香港
+    policies:
+    - 订阅池
+    flatten: true
+    filter: '(🇭🇰|香港|港|虚通|HKG|\bHK\b|Hong Kong|HongKong)'
+    interval: 300
+    tolerance: 50
+    latency_test_url: http://cp.cloudflare.com/generate_204
+    icon: https://fastly.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/HK.png
+- smart:
+    name: 台湾
+    policies:
+    - 订阅池
+    flatten: true
+    filter: '(🇹🇼|台湾|臺灣|台北|台中|高雄|\bTW\b|Taipei|Taiwan)'
+    interval: 300
+    tolerance: 50
+    latency_test_url: http://cp.cloudflare.com/generate_204
+    icon: https://fastly.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/TW.png
+- smart:
+    name: 新加坡
+    policies:
+    - 订阅池
+    flatten: true
+    filter: '(🇸🇬|新加坡|Singapore|\bSG\b|SGP)'
+    interval: 300
+    tolerance: 50
+    latency_test_url: http://cp.cloudflare.com/generate_204
+    icon: https://fastly.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/SG.png
+- smart:
+    name: 日本
+    policies:
+    - 订阅池
+    flatten: true
+    filter: '(🇯🇵|日本|东京|大阪|埼玉|JP|Japan)'
+    interval: 300
+    tolerance: 50
+    latency_test_url: http://cp.cloudflare.com/generate_204
+    icon: https://fastly.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/JP.png
+- smart:
+    name: 韩国
+    policies:
+    - 订阅池
+    flatten: true
+    filter: '(🇰🇷|韩国|韓國|首尔|首爾|\bKR\b|Korea)'
+    interval: 300
+    tolerance: 50
+    latency_test_url: http://cp.cloudflare.com/generate_204
+    icon: https://fastly.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/KR.png
+- smart:
+    name: 美国
+    policies:
+    - 订阅池
+    flatten: true
+    filter: '(🇺🇸|美国|美國|美西|美东|美南|美北|洛杉矶|旧金山|圣何塞|西雅图|芝加哥|达拉斯|亚特兰大|硅谷|拉斯维加斯|波特兰|俄勒冈|凤凰城|费利蒙|圣克拉拉|United States|\bUSA\b|\bUS[-_ ])'
+    interval: 300
+    tolerance: 50
+    latency_test_url: http://cp.cloudflare.com/generate_204
+    icon: https://fastly.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/US.png
+- smart:
+    name: 英国
+    policies:
+    - 订阅池
+    flatten: true
+    filter: '(🇬🇧|英国|英國|英格兰|英格蘭|London|United Kingdom|\bUK\b|\bGB\b|Britain|British)'
+    interval: 300
+    tolerance: 50
+    latency_test_url: http://cp.cloudflare.com/generate_204
+    icon: https://fastly.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/UK.png
+# Auto：只在区域组上优选，避免 订阅池->节点 的过深嵌套（同源配置）
+- smart:
+    name: Auto
+    policies:
+    - 香港
+    - 台湾
+    - 新加坡
+    - 日本
+    - 美国
+    - 韩国
+    flatten: false
+    interval: 300
+    tolerance: 50
+    latency_test_url: http://cp.cloudflare.com/generate_204
+    icon: https://fastly.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Auto.png
+- select:
+    name: PROXY
+    policies:
+    - Auto
+    - 香港
+    - 台湾
+    - 新加坡
+    - 日本
+    - 美国
+    - 韩国
+    - 英国
+    icon: https://fastly.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Proxy.png
+- select:
+    name: FINAL
+    policies:
+    - PROXY
+    - DIRECT
+    icon: https://fastly.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/World_Map.png
+- select:
+    name: 国际基础服务
+    policies:
+    - 新加坡
+    - 美国
+    - PROXY
+    icon: https://fastly.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Global.png
+- select:
+    name: AI
+    policies:
+    - 台湾
+    - 美国
+    - 新加坡
+    - PROXY
+    icon: https://raw.githubusercontent.com/lige47/QuanX-icon-rule/main/icon/04ProxySoft/chatgpt4.0.png
+- select:
+    name: 国际社媒
+    policies:
+    - 新加坡
+    - 美国
+    - 台湾
+    - PROXY
+    icon: https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/apps/meta.png
+- smart:
+    name: Emby
+    policies:
+    - 订阅池
+    flatten: true
+    filter: '(?:🇭🇰|香港|港|Hong|HK|🇸🇬|新加坡|SG|Singapore|🇰🇷|韩国|韩|KR|Korea|🇹🇼|台湾|台|TW|Tai)'
+    interval: 300
+    tolerance: 50
+    latency_test_url: http://cp.cloudflare.com/generate_204
+    icon: https://raw.githubusercontent.com/lige47/QuanX-icon-rule/main/icon/04ProxySoft/emby.png
+- select:
+    name: Game
+    policies:
+    - 香港
+    - 日本
+    - 美国
+    - 台湾
+    - PROXY
+    - DIRECT
+    icon: https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/apps/Apple_GameCenter.png
+- select:
+    name: SpeedTest
+    policies:
+    - 香港
+    - 新加坡
+    - 美国
+    - DIRECT
+    icon: https://raw.githubusercontent.com/lige47/QuanX-icon-rule/main/icon/04ProxySoft/01Country/US.png
+
+rules:
+# Part 1: 域名、进程与逻辑规则
+
+# 0. 安全拦截与预匹配
+- rule_set:
+    match: 'https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Surge/Surge%203/Provider/AdBlock.list'
+    policy: REJECT
+
+# 1. 自定义优先规则（iCloud 网关与 iCloud 规则）
+- domain_suffix:
+    match: gateway.icloud.com
+    policy: DIRECT
+- domain_suffix:
+    match: gateway.icloud.com.cn
+    policy: DIRECT
+- domain_suffix:
+    match: icloud.com
+    policy: DIRECT
+- domain_suffix:
+    match: icloud.com.cn
+    policy: DIRECT
+- domain_suffix:
+    match: apple-cloudkit.com
+    policy: DIRECT
+- rule_set:
+    match: 'https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Surge/Surge%203/Provider/Media/Apple%20Music.list'
+    policy: DIRECT
+# Pre-AI 共享基础设施保护（iCloud 规则）
+- rule_set:
+    match: 'https://fastly.jsdelivr.net/gh/junchan0412/proxy-configs@main/surge/rules/pre-ai-infra.list'
+    policy: 国际基础服务
+- rule_set:
+    match: 'https://fastly.jsdelivr.net/gh/junchan0412/proxy-configs@main/surge/rules/ai-major.list'
+    policy: AI
+- rule_set:
+    match: 'https://fastly.jsdelivr.net/gh/junchan0412/proxy-configs@main/surge/rules/direct-cn.list'
+    policy: DIRECT
+
+# 2. 本地、系统与局域网直连
+- rule_set:
+    match: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Lan/Lan.list'
+    policy: DIRECT
+# 源配置的端口/组合逻辑规则（Egern 无等价项，由默认策略处理）: OR,((DEST-PORT,25), (DEST-PORT,110), (DEST-PORT,143), (DEST-PORT,465), (DEST-PORT,587)),DIRECT
+# 源配置的端口/组合逻辑规则（Egern 无等价项，由默认策略处理）: AND,((OR,((DOMAIN,time-ios.apple.com), (DOMAIN,time.apple.com), (DOMAIN-SUFFIX,pool.ntp.org))), (DEST-PORT,123)),DIRECT
+
+# 3. 中国大陆服务
+- rule_set:
+    match: 'https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Surge/Surge%203/Provider/Special.list'
+    policy: DIRECT
+- rule_set:
+    match: 'https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Surge/Surge%203/Provider/Media/Bilibili.list'
+    policy: DIRECT
+- rule_set:
+    match: 'https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Surge/Surge%203/Provider/Media/IQIYI.list'
+    policy: DIRECT
+- rule_set:
+    match: 'https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Surge/Surge%203/Provider/Media/Letv.list'
+    policy: DIRECT
+- rule_set:
+    match: 'https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Surge/Surge%203/Provider/Media/Netease%20Music.list'
+    policy: DIRECT
+- rule_set:
+    match: 'https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Surge/Surge%203/Provider/Media/Tencent%20Video.list'
+    policy: DIRECT
+- rule_set:
+    match: 'https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Surge/Surge%203/Provider/Media/Youku.list'
+    policy: DIRECT
+- rule_set:
+    match: 'https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Surge/Surge%203/Provider/Media/WeTV.list'
+    policy: DIRECT
+- rule_set:
+    match: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/WeChat/WeChat.list'
+    policy: DIRECT
+- rule_set:
+    match: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/DouYin/DouYin.list'
+    policy: DIRECT
+- rule_set:
+    match: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/XiaoHongShu/XiaoHongShu.list'
+    policy: DIRECT
+- rule_set:
+    match: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Weibo/Weibo.list'
+    policy: DIRECT
+- rule_set:
+    match: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/PayPal/PayPal.list'
+    policy: DIRECT
+- rule_set:
+    match: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Oracle/Oracle.list'
+    policy: DIRECT
+- rule_set:
+    match: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/ChinaMedia/ChinaMedia.list'
+    policy: DIRECT
+- rule_set:
+    match: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/ChinaMax/ChinaMax_All_No_Resolve.list'
+    policy: DIRECT
+
+# 4. 游戏与测速优先
+- rule_set:
+    match: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Speedtest/Speedtest.list'
+    policy: SpeedTest
+- rule_set:
+    match: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/EA/EA.list'
+    policy: Game
+- rule_set:
+    match: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Epic/Epic.list'
+    policy: Game
+- rule_set:
+    match: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Gog/Gog.list'
+    policy: Game
+- rule_set:
+    match: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Origin/Origin.list'
+    policy: Game
+- rule_set:
+    match: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/PlayStation/PlayStation.list'
+    policy: Game
+- rule_set:
+    match: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Steam/Steam.list'
+    policy: Game
+- domain_suffix:
+    match: steamcontent.com
+    policy: Game
+- rule_set:
+    match: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Xbox/Xbox.list'
+    policy: Game
+
+# 5. Apple、Microsoft 与国际基础服务
+- rule_set:
+    match: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/AppleTV/AppleTV.list'
+    policy: DIRECT
+- rule_set:
+    match: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/iCloud/iCloud.list'
+    policy: DIRECT
+- rule_set:
+    match: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/AppleID/AppleID.list'
+    policy: DIRECT
+- rule_set:
+    match: 'https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Surge/Surge%203/Provider/Apple.list'
+    policy: DIRECT
+- rule_set:
+    match: 'https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Surge/Surge%203/Provider/Microsoft.list'
+    policy: 国际基础服务
+- rule_set:
+    match: 'https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Surge/Surge%203/Provider/Google%20FCM.list'
+    policy: 国际基础服务
+- rule_set:
+    match: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Google/Google.list'
+    policy: 国际基础服务
+- rule_set:
+    match: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Cloudflare/Cloudflare.list'
+    policy: 国际基础服务
+- rule_set:
+    match: 'https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Surge/Surge%203/Provider/AI%20Suite.list'
+    policy: AI
+- rule_set:
+    match: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/GitHub/GitHub.list'
+    policy: 国际基础服务
+- rule_set:
+    match: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/GitLab/GitLab.list'
+    policy: 国际基础服务
+
+# 6. 海外通信与国际社媒
+- rule_set:
+    match: 'https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Surge/Surge%203/Provider/Telegram.list'
+    policy: 国际社媒
+- ip_asn:
+    match: 62014
+    policy: 国际社媒
+    no_resolve: true
+- ip_cidr:
+    match: 95.161.76.100/31
+    policy: REJECT
+    no_resolve: true
+- rule_set:
+    match: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Facebook/Facebook.list'
+    policy: 国际社媒
+- rule_set:
+    match: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Instagram/Instagram.list'
+    policy: 国际社媒
+- rule_set:
+    match: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Threads/Threads.list'
+    policy: 国际社媒
+- rule_set:
+    match: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Whatsapp/Whatsapp_Resolve.list'
+    policy: 国际社媒
+- rule_set:
+    match: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Twitter/Twitter.list'
+    policy: 国际社媒
+- rule_set:
+    match: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Snap/Snap.list'
+    policy: 国际社媒
+- rule_set:
+    match: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Reddit/Reddit.list'
+    policy: 国际社媒
+- rule_set:
+    match: 'https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Surge/Surge%203/Provider/Discord.list'
+    policy: 国际社媒
+
+# 7. 海外流媒体
+- rule_set:
+    match: 'https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Surge/Surge%203/Provider/Media/Netflix.list'
+    policy: 国际社媒
+- rule_set:
+    match: 'https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Surge/Surge%203/Provider/Media/Disney%20Plus.list'
+    policy: 国际社媒
+- rule_set:
+    match: 'https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Surge/Surge%203/Provider/Media/Spotify.list'
+    policy: 日本
+- rule_set:
+    match: 'https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Surge/Surge%203/Provider/TikTok.list'
+    policy: 国际社媒
+- rule_set:
+    match: 'https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Surge/Surge%203/Provider/Media/Max.list'
+    policy: 国际社媒
+- rule_set:
+    match: 'https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Surge/Surge%203/Provider/Media/YouTube.list'
+    policy: 国际社媒
+- rule_set:
+    match: 'https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Surge/Surge%203/Provider/Media/YouTube%20Music.list'
+    policy: 国际社媒
+- rule_set:
+    match: 'https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Surge/Surge%203/Provider/Media/Amazon.list'
+    policy: 国际社媒
+- rule_set:
+    match: 'https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Surge/Surge%203/Provider/Media/Pornhub.list'
+    policy: 国际社媒
+
+# 8. 开发、学术、金融与工具服务
+- rule_set:
+    match: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Notion/Notion.list'
+    policy: 国际基础服务
+- rule_set:
+    match: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Scholar/Scholar.list'
+    policy: 国际基础服务
+- rule_set:
+    match: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Wikipedia/Wikipedia.list'
+    policy: 新加坡
+- rule_set:
+    match: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Dropbox/Dropbox.list'
+    policy: 国际基础服务
+- rule_set:
+    match: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Crypto/Crypto.list'
+    policy: PROXY
+- rule_set:
+    match: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/AOL/AOL.list'
+    policy: 国际基础服务
+- rule_set:
+    match: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Protonmail/Protonmail.list'
+    policy: 国际基础服务
+
+# 9. 通用域名兜底
+- rule_set:
+    match: 'https://raw.githubusercontent.com/Loyalsoldier/surge-rules/release/gfw.txt'
+    policy: PROXY
+- rule_set:
+    match: 'https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Surge/Surge%203/Provider/Proxy.list'
+    policy: PROXY
+- rule_set:
+    match: 'https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Surge/Surge%203/Provider/Domestic.list'
+    policy: DIRECT
+- rule_set:
+    match: 'https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Surge/Surge%203/Provider/Domestic%20IPs.list'
+    policy: DIRECT
+- rule_set:
+    match: 'https://fastly.jsdelivr.net/gh/VirgilClyne/GetSomeFries@main/ruleset/ASN.China.list'
+    policy: DIRECT
+
+# Part 2: IP 规则层
+- rule_set:
+    match: 'https://raw.githubusercontent.com/Loyalsoldier/surge-rules/release/telegramcidr.txt'
+    policy: 国际社媒
+- rule_set:
+    match: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Lan/Lan.list'
+    policy: DIRECT
+- rule_set:
+    match: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/ChinaIPs/ChinaIPs.list'
+    policy: DIRECT
+- rule_set:
+    match: 'https://raw.githubusercontent.com/Loyalsoldier/surge-rules/release/cncidr.txt'
+    policy: DIRECT
+- rule_set:
+    match: 'https://ruleset.skk.moe/List/ip/reject.conf'
+    policy: REJECT
+- rule_set:
+    match: 'https://ruleset.skk.moe/List/ip/stream.conf'
+    policy: PROXY
+
+# 10. GeoIP 兜底（依赖完整 Country MMDB）
+- geoip:
+    match: CN
+    policy: DIRECT
+    no_resolve: true
+- geoip:
+    match: SG
+    policy: 新加坡
+    no_resolve: true
+- geoip:
+    match: TW
+    policy: 台湾
+    no_resolve: true
+- geoip:
+    match: HK
+    policy: 香港
+    no_resolve: true
+- geoip:
+    match: JP
+    policy: 日本
+    no_resolve: true
+- geoip:
+    match: KR
+    policy: 韩国
+    no_resolve: true
+- geoip:
+    match: US
+    policy: 美国
+    no_resolve: true
+
+# 11. 最终兜底
+# dns-failed 时进入 FINAL 组（PROXY/DIRECT），便于观察与手动切换
+- default:
+    policy: FINAL
+
+
+
+mitm:
+  hostnames:
+    includes:
+    - g.cn
+    - www.g.cn
+    - google.cn
+    - www.google.cn
+    - scholar.google.cn
+    - translate.google.cn
+    - books.google.cn
+    excludes:
+    - gateway.icloud.com
+    - gateway.icloud.com.cn
