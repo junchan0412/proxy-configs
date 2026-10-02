@@ -19,7 +19,7 @@ ipv6: false
 proxies: []
 
 # 锚点 - 节点订阅的参数 [每小时更新一次订阅节点，每 5 分钟一次惰性健康检查]
-NodeParam: &NodeParam {type: http, interval: 3600, health-check: {enable: true, url: 'https://www.gstatic.com/generate_204', interval: 300, lazy: true}}
+NodeParam: &NodeParam {type: http, interval: 3600, health-check: {enable: true, url: 'http://cp.cloudflare.com/generate_204', interval: 300, lazy: true}}
 
 # 锚点 - 节点订阅
 proxy-providers:
@@ -153,6 +153,101 @@ dns:
     "geosite:geolocation-!cn":
       - https://1.1.1.1/dns-query
       - https://8.8.8.8/dns-query
+    # 源 [Host]：按域名指定厂商 DoH / 系统 DNS
+    "+.taobao.com":
+      - https://dns.alidns.com/dns-query
+    "+.tmall.com":
+      - https://dns.alidns.com/dns-query
+    "+.tbcache.com":
+      - https://dns.alidns.com/dns-query
+    "tb.cn":
+      - https://dns.alidns.com/dns-query
+    "+.alipay.com":
+      - https://dns.alidns.com/dns-query
+    "+.alipay.com.cn":
+      - https://dns.alidns.com/dns-query
+    "+.alipaydns.com":
+      - https://dns.alidns.com/dns-query
+    "+.alicdn.com":
+      - https://dns.alidns.com/dns-query
+    "+.aliyun.com":
+      - https://dns.alidns.com/dns-query
+    "+.qq.com":
+      - https://doh.pub/dns-query
+    "+.weixin.qq.com":
+      - https://doh.pub/dns-query
+    "+.wx.qq.com":
+      - https://doh.pub/dns-query
+    "+.weixin.com":
+      - https://doh.pub/dns-query
+    "+.wechat.com":
+      - https://doh.pub/dns-query
+    "+.servicewechat.com":
+      - https://doh.pub/dns-query
+    "url.cn":
+      - https://doh.pub/dns-query
+    "+.jd.com":
+      - https://doh.pub/dns-query
+    "+.tencent.com":
+      - https://doh.pub/dns-query
+    "+.bilibili.com":
+      - https://doh.pub/dns-query
+    "hdslb.com":
+      - https://doh.pub/dns-query
+    "+.163.com":
+      - https://doh.pub/dns-query
+    "+.126.com":
+      - https://doh.pub/dns-query
+    "+.126.net":
+      - https://doh.pub/dns-query
+    "+.127.net":
+      - https://doh.pub/dns-query
+    "+.netease.com":
+      - https://doh.pub/dns-query
+    "+.mi.com":
+      - https://doh.pub/dns-query
+    "+.xiaomi.com":
+      - https://doh.pub/dns-query
+    "dl.google.com":
+      - https://doh.pub/dns-query
+    "dl.l.google.com":
+      - https://doh.pub/dns-query
+    "update.googleapis.com":
+      - https://doh.pub/dns-query
+    "+.testflight.apple.com":
+      - https://cloudflare-dns.com/dns-query
+    "amplifi.lan":
+      - system://
+    "router.synology.com":
+      - system://
+    "sila.razer.com":
+      - system://
+    "router.asus.com":
+      - system://
+    "routerlogin.net":
+      - system://
+    "orbilogin.com":
+      - system://
+    "www.LinksysSmartWiFi.com":
+      - system://
+    "LinksysSmartWiFi.com":
+      - system://
+    "myrouter.local":
+      - system://
+    "www.miwifi.com":
+      - system://
+    "miwifi.com":
+      - system://
+    "mediarouter.home":
+      - system://
+    "tplogin.cn":
+      - system://
+    "tplinklogin.net":
+      - system://
+    "melogin.cn":
+      - system://
+    "falogin.cn":
+      - system://
 
 # 锚点 - 节点筛选组
 FilterHK: &FilterHK '^(?=.*((?i)🇭🇰|香港|(\b(HK|HKG|Hong)(\d+)?\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$'
@@ -165,23 +260,23 @@ FilterAll: &FilterAll '^(?=.*(.))(?!.*((?i)群|邀请|返利|循环|官网|客�
 
 # 策略组参数锚点
 # 锚点 - 时延优选参数 [每 5 分钟一次惰性健康检查，容差 50ms，时延超过 5 秒判定为失败，失败 3 次则自动触发健康检查]
-UrlTest: &UrlTest {type: url-test, interval: 300, tolerance: 50, lazy: true, url: 'https://www.gstatic.com/generate_204', disable-udp: false, timeout: 5000, max-failed-times: 3, hidden: true, include-all: true}
+UrlTest: &UrlTest {type: url-test, interval: 300, tolerance: 50, lazy: true, url: 'http://cp.cloudflare.com/generate_204', disable-udp: false, timeout: 5000, max-failed-times: 3, hidden: true, include-all: true}
 # 锚点 - 规则参数 [每天更新一次订阅规则]
 RuleProviders: &RuleProviders {type: http, behavior: classical, interval: 86400, format: yaml}
 TextRuleProviders: &TextRuleProviders {type: http, behavior: classical, interval: 86400, format: text}
 
 # 策略组
 proxy-groups:
-  - {name: PROXY, type: select, include-all: true, filter: *FilterAll, proxies: [Auto, 香港, 新加坡, 台湾, 日本, 韩国, 美国, 英国, DIRECT], icon: 'https://fastly.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Proxy.png'}
+  - {name: PROXY, type: select, include-all: true, filter: *FilterAll, proxies: [Auto, 香港, 台湾, 新加坡, 日本, 美国, 韩国, 英国, DIRECT], icon: 'https://fastly.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Proxy.png'}
   - {name: Auto, <<: *UrlTest, filter: *FilterAll, hidden: false, icon: 'https://fastly.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Auto.png'}
   - {name: FINAL, type: select, proxies: [PROXY, DIRECT], icon: 'https://fastly.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/World_Map.png'}
-  - {name: 国际基础服务, type: select, proxies: [新加坡, 美国, 香港, PROXY, DIRECT], icon: 'https://fastly.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Global.png'}
+  - {name: 国际基础服务, type: select, proxies: [新加坡, 美国, PROXY], icon: 'https://fastly.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Global.png'}
   - {name: Apple服务, type: select, proxies: [DIRECT, 国际基础服务, PROXY, 新加坡, 美国], icon: 'https://fastly.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Apple.png'}
-  - {name: AI, type: select, proxies: [美国, 新加坡, 台湾, 日本, PROXY], icon: 'https://fastly.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/ChatGPT.png'}
-  - {name: 国际社媒, type: select, proxies: [香港, 新加坡, 台湾, 日本, 美国, PROXY], icon: 'https://fastly.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Telegram.png'}
+  - {name: AI, type: select, proxies: [台湾, 美国, 新加坡, PROXY], icon: 'https://fastly.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/ChatGPT.png'}
+  - {name: 国际社媒, type: select, proxies: [新加坡, 美国, 台湾, PROXY], icon: 'https://fastly.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Telegram.png'}
   - {name: Emby, <<: *UrlTest, filter: '^(?=.*((?i)🇭🇰|香港|港|Hong|HK|🇸🇬|新加坡|SG|Singapore|🇰🇷|韩国|韩|KR|Korea|🇹🇼|台湾|台|TW|Tai))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$', hidden: false, icon: 'https://fastly.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Streaming.png'}
-  - {name: Game, type: select, proxies: [香港, 日本, 新加坡, 台湾, 韩国, 美国, PROXY, DIRECT], icon: 'https://fastly.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Game.png'}
-  - {name: SpeedTest, type: select, proxies: [PROXY, Auto, 香港, 新加坡, 台湾, 日本, 韩国, 美国, 英国, DIRECT], icon: 'https://fastly.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Speedtest.png'}
+  - {name: Game, type: select, proxies: [香港, 日本, 美国, 台湾, PROXY, DIRECT], icon: 'https://fastly.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Game.png'}
+  - {name: SpeedTest, type: select, proxies: [香港, 新加坡, 美国, DIRECT], icon: 'https://fastly.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Speedtest.png'}
   # 地区策略
   - {name: 香港, <<: *UrlTest, filter: *FilterHK, icon: 'https://fastly.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/HK.png'}
   - {name: 台湾, <<: *UrlTest, filter: *FilterTW, icon: 'https://fastly.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/TW.png'}
@@ -253,34 +348,7 @@ rules:
   - RULE-SET,Crypto,PROXY
   - RULE-SET,Discord,国际社媒
   - RULE-SET,Google FCM,国际基础服务
-  - RULE-SET,Microsoft,国际基础服务
-  - RULE-SET,AI Suite,AI
-  - RULE-SET,PayPal,DIRECT
-  - RULE-SET,Scholar,国际基础服务
-  - RULE-SET,Speedtest,SpeedTest
-  - RULE-SET,Steam,Game
-  - RULE-SET,TikTok,国际社媒
-  - RULE-SET,Apple Music,Apple服务
-  - RULE-SET,Apple News,Apple服务
-  - RULE-SET,Apple TV,Apple服务
-  - RULE-SET,Apple Push,Apple服务
-  - RULE-SET,Apple,Apple服务
-  - RULE-SET,miHoYo,Game
-  - RULE-SET,PROXY,PROXY
-  - RULE-SET,Domestic,DIRECT
-  - RULE-SET,Domestic IPs,DIRECT
-  - RULE-SET,LAN,DIRECT
-
-  # Apple Store / Microsoft Store 定向例外 (Surge源分流意图, Mihomo 侧保留)
-  - DOMAIN-SUFFIX,apps.apple.com,Apple服务
-  - DOMAIN-SUFFIX,apps-marketplace.apple.com,Apple服务
-  - DOMAIN-SUFFIX,appstore.com,Apple服务
-  - DOMAIN-SUFFIX,itunes.apple.com,Apple服务
-  - DOMAIN-SUFFIX,mzstatic.com,Apple服务
-  - DOMAIN-SUFFIX,aaplimg.com,Apple服务
-  - DOMAIN,ppq.apple.com,Apple服务
-  - RULE-SET,AppleProxy,Apple服务
-  - RULE-SET,Apple,DIRECT
+  # Microsoft Store 定向直连：必须在宽泛 Microsoft 规则之前（源 §5 意图）
   - PROCESS-NAME,WinStore.App.exe,DIRECT
   - PROCESS-NAME,StoreExperienceHost.exe,DIRECT
   - DOMAIN-SUFFIX,mp.microsoft.com,DIRECT
@@ -291,6 +359,38 @@ rules:
   - DOMAIN,storeedge.microsoft.com,DIRECT
   - DOMAIN,storecorefulfillment.download.prss.microsoft.com,DIRECT
   - GEOSITE,microsoft@cn,DIRECT
+  - RULE-SET,Microsoft,国际基础服务
+  - RULE-SET,AI Suite,AI
+  - RULE-SET,PayPal,DIRECT
+  - RULE-SET,Scholar,国际基础服务
+  - RULE-SET,Speedtest,SpeedTest
+  - RULE-SET,Steam,Game
+  - RULE-SET,TikTok,国际社媒
+  # App Store / Apple 路由：在宽泛中国规则之前（源 §5 意图）
+  - DOMAIN-SUFFIX,apps.apple.com,Apple服务
+  - DOMAIN-SUFFIX,apps-marketplace.apple.com,Apple服务
+  - DOMAIN-SUFFIX,appstore.com,Apple服务
+  - DOMAIN-SUFFIX,itunes.apple.com,Apple服务
+  - DOMAIN-SUFFIX,itunes.com,Apple服务
+  - DOMAIN-SUFFIX,appsto.re,Apple服务
+  - DOMAIN-SUFFIX,mzstatic.com,Apple服务
+  - DOMAIN-SUFFIX,aaplimg.com,Apple服务
+  - DOMAIN,ppq.apple.com,Apple服务
+  - RULE-SET,AppleProxy,Apple服务
+  - RULE-SET,Apple,DIRECT
+  - RULE-SET,Apple Music,Apple服务
+  - RULE-SET,Apple News,Apple服务
+  - RULE-SET,Apple TV,Apple服务
+  - RULE-SET,Apple Push,Apple服务
+  - RULE-SET,Apple,Apple服务
+  - RULE-SET,miHoYo,Game
+  - RULE-SET,PROXY,PROXY
+  - RULE-SET,Domestic,DIRECT
+  - RULE-SET,Domestic IPs,DIRECT
+  - RULE-SET,ChinaMaxNoIP,DIRECT
+  - GEOSITE,cn,DIRECT
+  - RULE-SET,LAN,DIRECT
+
 
   # 9. 通用海外兜底 (Surge源 §9: gfw + Proxy)
   - RULE-SET,Proxy,PROXY
@@ -359,6 +459,11 @@ rule-providers:
     <<: *RuleProviders
     path: './rules/Global.yaml'
     url: 'https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Global/Global.yaml'
+
+  ChinaMaxNoIP:
+    <<: *RuleProviders
+    path: './rules/ChinaMaxNoIP.yaml'
+    url: 'https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/ChinaMaxNoIP/ChinaMaxNoIP.yaml'
 
   AdBlock:
     <<: *RuleProviders

@@ -1,8 +1,8 @@
 .DS_Store
 **/.DS_Store
 
-# Private runtime configs and local overrides
-Surge.conf
+# Private runtime configs and local overrides（仅仓库根目录的私有副本；surge/Surge.conf 为公开脱敏版）
+/Surge.conf
 *.private.conf
 *.local.conf
 *.override.local.yaml

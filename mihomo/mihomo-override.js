@@ -146,6 +146,147 @@ function main(config) {
       "geosite:geolocation-!cn": [
         "https://1.1.1.1/dns-query",
         "https://8.8.8.8/dns-query"
+      ],
+      "+.taobao.com": [
+        "https://dns.alidns.com/dns-query"
+      ],
+      "+.tmall.com": [
+        "https://dns.alidns.com/dns-query"
+      ],
+      "+.tbcache.com": [
+        "https://dns.alidns.com/dns-query"
+      ],
+      "tb.cn": [
+        "https://dns.alidns.com/dns-query"
+      ],
+      "+.alipay.com": [
+        "https://dns.alidns.com/dns-query"
+      ],
+      "+.alipay.com.cn": [
+        "https://dns.alidns.com/dns-query"
+      ],
+      "+.alipaydns.com": [
+        "https://dns.alidns.com/dns-query"
+      ],
+      "+.alicdn.com": [
+        "https://dns.alidns.com/dns-query"
+      ],
+      "+.aliyun.com": [
+        "https://dns.alidns.com/dns-query"
+      ],
+      "+.qq.com": [
+        "https://doh.pub/dns-query"
+      ],
+      "+.weixin.qq.com": [
+        "https://doh.pub/dns-query"
+      ],
+      "+.wx.qq.com": [
+        "https://doh.pub/dns-query"
+      ],
+      "+.weixin.com": [
+        "https://doh.pub/dns-query"
+      ],
+      "+.wechat.com": [
+        "https://doh.pub/dns-query"
+      ],
+      "+.servicewechat.com": [
+        "https://doh.pub/dns-query"
+      ],
+      "url.cn": [
+        "https://doh.pub/dns-query"
+      ],
+      "+.jd.com": [
+        "https://doh.pub/dns-query"
+      ],
+      "+.tencent.com": [
+        "https://doh.pub/dns-query"
+      ],
+      "+.bilibili.com": [
+        "https://doh.pub/dns-query"
+      ],
+      "hdslb.com": [
+        "https://doh.pub/dns-query"
+      ],
+      "+.163.com": [
+        "https://doh.pub/dns-query"
+      ],
+      "+.126.com": [
+        "https://doh.pub/dns-query"
+      ],
+      "+.126.net": [
+        "https://doh.pub/dns-query"
+      ],
+      "+.127.net": [
+        "https://doh.pub/dns-query"
+      ],
+      "+.netease.com": [
+        "https://doh.pub/dns-query"
+      ],
+      "+.mi.com": [
+        "https://doh.pub/dns-query"
+      ],
+      "+.xiaomi.com": [
+        "https://doh.pub/dns-query"
+      ],
+      "dl.google.com": [
+        "https://doh.pub/dns-query"
+      ],
+      "dl.l.google.com": [
+        "https://doh.pub/dns-query"
+      ],
+      "update.googleapis.com": [
+        "https://doh.pub/dns-query"
+      ],
+      "+.testflight.apple.com": [
+        "https://cloudflare-dns.com/dns-query"
+      ],
+      "amplifi.lan": [
+        "system://"
+      ],
+      "router.synology.com": [
+        "system://"
+      ],
+      "sila.razer.com": [
+        "system://"
+      ],
+      "router.asus.com": [
+        "system://"
+      ],
+      "routerlogin.net": [
+        "system://"
+      ],
+      "orbilogin.com": [
+        "system://"
+      ],
+      "www.LinksysSmartWiFi.com": [
+        "system://"
+      ],
+      "LinksysSmartWiFi.com": [
+        "system://"
+      ],
+      "myrouter.local": [
+        "system://"
+      ],
+      "www.miwifi.com": [
+        "system://"
+      ],
+      "miwifi.com": [
+        "system://"
+      ],
+      "mediarouter.home": [
+        "system://"
+      ],
+      "tplogin.cn": [
+        "system://"
+      ],
+      "tplinklogin.net": [
+        "system://"
+      ],
+      "melogin.cn": [
+        "system://"
+      ],
+      "falogin.cn": [
+        "system://"
       ]
     }
   },
@@ -158,11 +299,11 @@ function main(config) {
       "proxies": [
         "Auto",
         "香港",
-        "新加坡",
         "台湾",
+        "新加坡",
         "日本",
-        "韩国",
         "美国",
+        "韩国",
         "英国",
         "DIRECT"
       ],
@@ -174,7 +315,7 @@ function main(config) {
       "interval": 300,
       "tolerance": 50,
       "lazy": true,
-      "url": "https://www.gstatic.com/generate_204",
+      "url": "http://cp.cloudflare.com/generate_204",
       "disable-udp": false,
       "timeout": 5000,
       "max-failed-times": 3,
@@ -198,9 +339,7 @@ function main(config) {
       "proxies": [
         "新加坡",
         "美国",
-        "香港",
-        "PROXY",
-        "DIRECT"
+        "PROXY"
       ],
       "icon": "https://fastly.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Global.png"
     },
@@ -220,10 +359,9 @@ function main(config) {
       "name": "AI",
       "type": "select",
       "proxies": [
+        "台湾",
         "美国",
         "新加坡",
-        "台湾",
-        "日本",
         "PROXY"
       ],
       "icon": "https://fastly.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/ChatGPT.png"
@@ -232,11 +370,9 @@ function main(config) {
       "name": "国际社媒",
       "type": "select",
       "proxies": [
-        "香港",
         "新加坡",
-        "台湾",
-        "日本",
         "美国",
+        "台湾",
         "PROXY"
       ],
       "icon": "https://fastly.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Telegram.png"
@@ -247,7 +383,7 @@ function main(config) {
       "interval": 300,
       "tolerance": 50,
       "lazy": true,
-      "url": "https://www.gstatic.com/generate_204",
+      "url": "http://cp.cloudflare.com/generate_204",
       "disable-udp": false,
       "timeout": 5000,
       "max-failed-times": 3,
@@ -262,10 +398,8 @@ function main(config) {
       "proxies": [
         "香港",
         "日本",
-        "新加坡",
-        "台湾",
-        "韩国",
         "美国",
+        "台湾",
         "PROXY",
         "DIRECT"
       ],
@@ -275,15 +409,9 @@ function main(config) {
       "name": "SpeedTest",
       "type": "select",
       "proxies": [
-        "PROXY",
-        "Auto",
         "香港",
         "新加坡",
-        "台湾",
-        "日本",
-        "韩国",
         "美国",
-        "英国",
         "DIRECT"
       ],
       "icon": "https://fastly.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Speedtest.png"
@@ -294,7 +422,7 @@ function main(config) {
       "interval": 300,
       "tolerance": 50,
       "lazy": true,
-      "url": "https://www.gstatic.com/generate_204",
+      "url": "http://cp.cloudflare.com/generate_204",
       "disable-udp": false,
       "timeout": 5000,
       "max-failed-times": 3,
@@ -309,7 +437,7 @@ function main(config) {
       "interval": 300,
       "tolerance": 50,
       "lazy": true,
-      "url": "https://www.gstatic.com/generate_204",
+      "url": "http://cp.cloudflare.com/generate_204",
       "disable-udp": false,
       "timeout": 5000,
       "max-failed-times": 3,
@@ -324,7 +452,7 @@ function main(config) {
       "interval": 300,
       "tolerance": 50,
       "lazy": true,
-      "url": "https://www.gstatic.com/generate_204",
+      "url": "http://cp.cloudflare.com/generate_204",
       "disable-udp": false,
       "timeout": 5000,
       "max-failed-times": 3,
@@ -339,7 +467,7 @@ function main(config) {
       "interval": 300,
       "tolerance": 50,
       "lazy": true,
-      "url": "https://www.gstatic.com/generate_204",
+      "url": "http://cp.cloudflare.com/generate_204",
       "disable-udp": false,
       "timeout": 5000,
       "max-failed-times": 3,
@@ -354,7 +482,7 @@ function main(config) {
       "interval": 300,
       "tolerance": 50,
       "lazy": true,
-      "url": "https://www.gstatic.com/generate_204",
+      "url": "http://cp.cloudflare.com/generate_204",
       "disable-udp": false,
       "timeout": 5000,
       "max-failed-times": 3,
@@ -369,7 +497,7 @@ function main(config) {
       "interval": 300,
       "tolerance": 50,
       "lazy": true,
-      "url": "https://www.gstatic.com/generate_204",
+      "url": "http://cp.cloudflare.com/generate_204",
       "disable-udp": false,
       "timeout": 5000,
       "max-failed-times": 3,
@@ -384,7 +512,7 @@ function main(config) {
       "interval": 300,
       "tolerance": 50,
       "lazy": true,
-      "url": "https://www.gstatic.com/generate_204",
+      "url": "http://cp.cloudflare.com/generate_204",
       "disable-udp": false,
       "timeout": 5000,
       "max-failed-times": 3,
@@ -448,32 +576,6 @@ function main(config) {
     "RULE-SET,Crypto,PROXY",
     "RULE-SET,Discord,国际社媒",
     "RULE-SET,Google FCM,国际基础服务",
-    "RULE-SET,Microsoft,国际基础服务",
-    "RULE-SET,AI Suite,AI",
-    "RULE-SET,PayPal,DIRECT",
-    "RULE-SET,Scholar,国际基础服务",
-    "RULE-SET,Speedtest,SpeedTest",
-    "RULE-SET,Steam,Game",
-    "RULE-SET,TikTok,国际社媒",
-    "RULE-SET,Apple Music,Apple服务",
-    "RULE-SET,Apple News,Apple服务",
-    "RULE-SET,Apple TV,Apple服务",
-    "RULE-SET,Apple Push,Apple服务",
-    "RULE-SET,Apple,Apple服务",
-    "RULE-SET,miHoYo,Game",
-    "RULE-SET,PROXY,PROXY",
-    "RULE-SET,Domestic,DIRECT",
-    "RULE-SET,Domestic IPs,DIRECT",
-    "RULE-SET,LAN,DIRECT",
-    "DOMAIN-SUFFIX,apps.apple.com,Apple服务",
-    "DOMAIN-SUFFIX,apps-marketplace.apple.com,Apple服务",
-    "DOMAIN-SUFFIX,appstore.com,Apple服务",
-    "DOMAIN-SUFFIX,itunes.apple.com,Apple服务",
-    "DOMAIN-SUFFIX,mzstatic.com,Apple服务",
-    "DOMAIN-SUFFIX,aaplimg.com,Apple服务",
-    "DOMAIN,ppq.apple.com,Apple服务",
-    "RULE-SET,AppleProxy,Apple服务",
-    "RULE-SET,Apple,DIRECT",
     "PROCESS-NAME,WinStore.App.exe,DIRECT",
     "PROCESS-NAME,StoreExperienceHost.exe,DIRECT",
     "DOMAIN-SUFFIX,mp.microsoft.com,DIRECT",
@@ -484,6 +586,36 @@ function main(config) {
     "DOMAIN,storeedge.microsoft.com,DIRECT",
     "DOMAIN,storecorefulfillment.download.prss.microsoft.com,DIRECT",
     "GEOSITE,microsoft@cn,DIRECT",
+    "RULE-SET,Microsoft,国际基础服务",
+    "RULE-SET,AI Suite,AI",
+    "RULE-SET,PayPal,DIRECT",
+    "RULE-SET,Scholar,国际基础服务",
+    "RULE-SET,Speedtest,SpeedTest",
+    "RULE-SET,Steam,Game",
+    "RULE-SET,TikTok,国际社媒",
+    "DOMAIN-SUFFIX,apps.apple.com,Apple服务",
+    "DOMAIN-SUFFIX,apps-marketplace.apple.com,Apple服务",
+    "DOMAIN-SUFFIX,appstore.com,Apple服务",
+    "DOMAIN-SUFFIX,itunes.apple.com,Apple服务",
+    "DOMAIN-SUFFIX,itunes.com,Apple服务",
+    "DOMAIN-SUFFIX,appsto.re,Apple服务",
+    "DOMAIN-SUFFIX,mzstatic.com,Apple服务",
+    "DOMAIN-SUFFIX,aaplimg.com,Apple服务",
+    "DOMAIN,ppq.apple.com,Apple服务",
+    "RULE-SET,AppleProxy,Apple服务",
+    "RULE-SET,Apple,DIRECT",
+    "RULE-SET,Apple Music,Apple服务",
+    "RULE-SET,Apple News,Apple服务",
+    "RULE-SET,Apple TV,Apple服务",
+    "RULE-SET,Apple Push,Apple服务",
+    "RULE-SET,Apple,Apple服务",
+    "RULE-SET,miHoYo,Game",
+    "RULE-SET,PROXY,PROXY",
+    "RULE-SET,Domestic,DIRECT",
+    "RULE-SET,Domestic IPs,DIRECT",
+    "RULE-SET,ChinaMaxNoIP,DIRECT",
+    "GEOSITE,cn,DIRECT",
+    "RULE-SET,LAN,DIRECT",
     "RULE-SET,Proxy,PROXY",
     "RULE-SET,Global,PROXY",
     "GEOSITE,geolocation-!cn,PROXY",
@@ -576,6 +708,14 @@ function main(config) {
       "format": "yaml",
       "path": "./rules/Global.yaml",
       "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Global/Global.yaml"
+    },
+    "ChinaMaxNoIP": {
+      "type": "http",
+      "behavior": "classical",
+      "interval": 86400,
+      "format": "yaml",
+      "path": "./rules/ChinaMaxNoIP.yaml",
+      "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/ChinaMaxNoIP/ChinaMaxNoIP.yaml"
     },
     "AdBlock": {
       "type": "http",

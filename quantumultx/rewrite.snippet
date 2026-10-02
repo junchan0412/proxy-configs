@@ -1,18 +1,18 @@
-# Quantumult X 远端重写片段（在 quantumultx.conf 的 [rewrite_remote] 中引用）。
-# Google .cn 跳国际版 + 知乎/微博/简书外链直跳（与 surge/modules 的两枚重定向模块同意图）。
+# Quantumult X 远端重写片段：内容与 Surge 源配置 §URL Rewrite / §Header Rewrite 一致（QX 原生语法）。
+# 在 quantumultx.conf 的 [rewrite_remote] 中引用。
 
 [rewrite_local]
-^https?://(www\.)?(g|google)\.cn https://www.google.com 302
-^(http|https):\/\/(ditu|maps)\.google\.cn https://maps.google.com 302
-^https?:\/\/scholar\.google\.cn https://scholar.google.com 302
-^https?:\/\/translate\.google\.cn https://translate.google.com 302
-^https?:\/\/books\.google\.cn https://books.google.com 302
-^https?:\/\/cn\.bing\.com https://www.bing.com 302
-^https?:\/\/zh\.m\.wikipedia\.org https://zh.wikipedia.org 302
-^https?:\/\/en\.m\.wikipedia\.org https://en.wikipedia.org 302
-^https?:\/\/link\.zhihu\.com\/\?target=(.+) $1 302
-^https?:\/\/weibo\.cn\/sinaurl\?(?:toasturl|u)=(.+) $1 302
-^https?:\/\/links\.jianshu\.com\/go\?to=(.+) $1 302
+^https?://(www\.)?(g|google)\.cn url 302 https://www.google.com
+^(http|https):\/\/(ditu|maps)\.google\.cn url 302 https://maps.google.com
+^https?:\/\/(www\.)?taobao\.com\/ url 302 https://taobao.com/
+^https?:\/\/(www\.)?jd\.com\/ url 302 https://www.jd.com/
+^https?:\/\/(www\.)?mi\.com\/ url 302 https://www.mi.com/
+^https?:\/\/you\.163\.com\/ url 302 https://you.163.com/
+^https?:\/\/(www\.)?suning\.com\/ url 302 https://suning.com/
+^https?:\/\/(www\.)?yhd\.com\/ url 302 https://yhd.com/
+^https?:\/\/api\.abema\.io\/v\d\/ip\/check url reject
+^https:\/\/github\.com\/ url request-header (\r\n)Accept-Language:.+(\r\n) request-header $1Accept-Language: en-us$2
+^https:\/\/(raw|gist)\.githubusercontent\.com\/ url request-header (\r\n)Accept-Language:.+(\r\n) request-header $1Accept-Language: en-us$2
 
 [mitm]
-hostname = *.google.cn, *.bing.com, *.wikipedia.org, link.zhihu.com, weibo.cn, links.jianshu.com
+hostname = g.cn, www.g.cn, google.cn, www.google.cn, ditu.google.cn, maps.google.cn, api.abema.io, github.com, *.githubusercontent.com

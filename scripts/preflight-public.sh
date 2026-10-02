@@ -17,10 +17,10 @@ if ! command -v "$RG" >/dev/null 2>&1; then
   exit 1
 fi
 
-echo "[1/7] Surge template check"
-"$SURGE_CLI" -c surge/Surge.clean.conf
+echo "[1/9] Surge template check"
+"$SURGE_CLI" -c surge/Surge.conf
 
-echo "[2/7] Mihomo YAML check"
+echo "[2/9] Mihomo YAML check"
 /usr/bin/ruby - mihomo/mihomo.yaml mihomo/mihomo-override.yaml <<'RUBY'
 require "yaml"
 
@@ -32,22 +32,22 @@ ARGV.each do |path|
   groups = cfg.fetch("proxy-groups", []).map { |group| group["name"] }
   raise "#{path} missing Apple服务 proxy group" unless groups.include?("Apple服务")
   by_name = cfg.fetch("proxy-groups", []).to_h { |group| [group["name"], group] }
-  expected_proxy_order = %w[Auto 香港 新加坡 台湾 日本 韩国 美国 英国 DIRECT]
+  expected_proxy_order = %w[Auto 香港 台湾 新加坡 日本 美国 韩国 英国 DIRECT]
   raise "#{path} PROXY group order drifted" unless by_name.dig("PROXY", "proxies") == expected_proxy_order
   expected_final_order = %w[PROXY DIRECT]
   raise "#{path} FINAL group order drifted" unless by_name.dig("FINAL", "proxies") == expected_final_order
-  expected_base_order = %w[新加坡 美国 香港 PROXY DIRECT]
+  expected_base_order = %w[新加坡 美国 PROXY]
   raise "#{path} 国际基础服务 group order drifted" unless by_name.dig("国际基础服务", "proxies") == expected_base_order
-  expected_social_order = %w[香港 新加坡 台湾 日本 美国 PROXY]
+  expected_social_order = %w[新加坡 美国 台湾 PROXY]
   raise "#{path} 国际社媒 group order drifted" unless by_name.dig("国际社媒", "proxies") == expected_social_order
   raise "#{path} contains deprecated 国际社区 proxy group" if groups.include?("国际社区")
-  expected_ai_order = %w[美国 新加坡 台湾 日本 PROXY]
+  expected_ai_order = %w[台湾 美国 新加坡 PROXY]
   raise "#{path} AI group order drifted" unless by_name.dig("AI", "proxies") == expected_ai_order
-  expected_game_order = %w[香港 日本 新加坡 台湾 韩国 美国 PROXY DIRECT]
+  expected_game_order = %w[香港 日本 美国 台湾 PROXY DIRECT]
   raise "#{path} Game group order drifted" unless by_name.dig("Game", "proxies") == expected_game_order
   expected_apple_order = %w[DIRECT 国际基础服务 PROXY 新加坡 美国]
   raise "#{path} Apple服务 group order drifted" unless by_name.dig("Apple服务", "proxies") == expected_apple_order
-  expected_speedtest_order = %w[PROXY Auto 香港 新加坡 台湾 日本 韩国 美国 英国 DIRECT]
+  expected_speedtest_order = %w[香港 新加坡 美国 DIRECT]
   raise "#{path} SpeedTest group order drifted" unless by_name.dig("SpeedTest", "proxies") == expected_speedtest_order
 
   icon_prefix = "https://fastly.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/"
@@ -240,16 +240,16 @@ else
   echo "mihomo binary not found; set MIHOMO_BIN to enable native parser checks"
 fi
 
-echo "[3/7] Loon config check"
+echo "[3/9] Loon config check"
 /usr/bin/ruby scripts/validate-loon.rb loon/loon.lcf
 
-echo "[4/7] public sensitivity scan"
-if "$RG" -n --glob '!scripts/preflight-public.sh' "(psk=|ca-p12 = [A-Za-z0-9+/]{40,}|sub\\.store/download|/Users/[^/]+|iCloud~com~nssurge|Mobile Documents|http-api =|external-controller-access =|snell, *[0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+)" README.md Rules surge shadowrocket quantumultx mihomo loon scripts; then
+echo "[4/9] public sensitivity scan"
+if "$RG" -n --glob '!scripts/preflight-public.sh' --glob '!scripts/sync-check.py' "(psk=|ca-p12 = [A-Za-z0-9+/]{40,}|sub\\.store/download|/Users/[^/]+|iCloud~com~nssurge|Mobile Documents|http-api =|external-controller-access =|snell, *[0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+)" README.md surge shadowrocket quantumultx mihomo loon egern scripts; then
   echo "sensitive pattern found in public files" >&2
   exit 1
 fi
 
-echo "[5/7] private Emby rule guard"
+echo "[5/9] private Emby rule guard"
 if "$RG" -n "emby-meta|Emby/Jellyfin metadata" README.md Rules surge shadowrocket quantumultx mihomo loon; then
   echo "public Emby metadata reference found" >&2
   exit 1
@@ -259,23 +259,41 @@ if [[ -e surge/rules/emby-meta.list ]]; then
   exit 1
 fi
 
-echo "[6/7] custom icon artifact guard"
+echo "[6/9] custom icon artifact guard"
 if [[ -d icons ]] || compgen -G "scripts/generate-*policy*icon*.py" >/dev/null; then
   echo "custom policy icon artifact found" >&2
   exit 1
 fi
-if "$RG" -n --glob '!scripts/preflight-public.sh' "proxy-configs@main/.*/.*icon|junchan0412/proxy-configs.*/.*icon" README.md Rules surge shadowrocket quantumultx mihomo loon scripts; then
+if "$RG" -n --glob '!scripts/preflight-public.sh' --glob '!scripts/sync-check.py' "proxy-configs@main/.*/.*icon|junchan0412/proxy-configs.*/.*icon" README.md surge shadowrocket quantumultx mihomo loon egern scripts; then
   echo "repo-hosted policy icon reference found" >&2
   exit 1
 fi
 
-echo "[7/7] required public files"
+echo "[7/9] Egern YAML parse"
+/usr/bin/ruby -ryaml -e '
+d = YAML.load_file("egern/egern.yaml")
+raise "egern missing policy_groups" unless d["policy_groups"].is_a?(Array) && d["policy_groups"].size >= 17
+raise "egern missing rules" unless d["rules"].is_a?(Array) && d["rules"].size >= 90
+raise "egern uses Surge RULE-SET syntax" if File.read("egern/egern.yaml").include?("RULE-SET,")
+puts "egern-yaml-ok groups=#{d["policy_groups"].size} rules=#{d["rules"].size}"
+'
+
+echo "[8/9] cross-client sync check"
+python3 scripts/sync-check.py
+
+echo "[9/9] required public files"
 for path in \
+  surge/Surge.conf \
   surge/rules/ai-major.list \
   surge/rules/pre-ai-infra.list \
   surge/rules/direct-cn.list \
-  Rules/Surge/AI.txt \
-  Rules/Surge/Pre-AI.txt \
+  surge/modules/Applications.sgmodule \
+  surge/modules/google-redirect.sgmodule \
+  surge/modules/redirect-enhance.sgmodule \
+  surge/modules/dns-mapping.sgmodule \
+  egern/egern.yaml \
+  egern/module/google-redirect.sgmodule \
+  egern/module/redirect-enhance.sgmodule \
   quantumultx/quantumultx.conf \
   quantumultx/rewrite.snippet \
   mihomo/mihomo.yaml \
@@ -284,17 +302,11 @@ for path in \
   loon/loon.lcf \
   loon/plugin/redirect.plugin \
   loon/plugin/dns-mapping.plugin \
-  egern/egern.conf \
-  scripts/generate-mihomo-js-override.rb \
-  scripts/validate-loon.rb \
-  scripts/sync-check.py \
   shadowrocket/shadowrocket.conf \
   shadowrocket/rewrite.snippet \
-  surge/Surge.clean.conf \
-  surge/modules/Applications.sgmodule \
-  surge/modules/google-redirect.sgmodule \
-  surge/modules/redirect-enhance.sgmodule \
-  surge/modules/dns-mapping.sgmodule; do
+  scripts/generate-mihomo-js-override.rb \
+  scripts/validate-loon.rb \
+  scripts/sync-check.py; do
   [[ -s "$path" ]] || { echo "missing or empty: $path" >&2; exit 1; }
 done
 
