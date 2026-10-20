@@ -1,6 +1,6 @@
-#!name=Applications
+#!name = Applications
 #!desc = macOS 常见应用按进程分流；基于当前 Surge.conf 策略组
-#!category=#5网络模块
+#!category = #5网络模块
 #!system = macOS
 
 [Rule]
