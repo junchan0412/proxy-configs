@@ -1,0 +1,15 @@
+{
+  "Mihomo": {
+    "URL-REGEX": 41,
+    "USER-AGENT": 74
+  },
+  "Quantumult X": {
+    "URL-REGEX": 41,
+    "OR": 1,
+    "AND": 1,
+    "PROCESS-NAME": 127
+  },
+  "Egern": {
+    "PROCESS-NAME": 127
+  }
+}

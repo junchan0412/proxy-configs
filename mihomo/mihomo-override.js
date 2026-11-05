@@ -1,301 +1,98 @@
-// Generated from mihomo-override.yaml by scripts/generate-mihomo-js-override.rb.
-// Keep subscription proxies, proxy-providers, ports and controller settings intact.
 function main(config) {
-  const override = {
-  "unified-delay": true,
-  "geodata-mode": false,
-  "geodata-loader": "standard",
-  "geo-auto-update": true,
-  "geo-update-interval": 24,
-  "tcp-concurrent": true,
-  "find-process-mode": "strict",
-  "allow-lan": true,
-  "mode": "rule",
-  "log-level": "info",
-  "ipv6": false,
-  "geox-url": {
-    "geoip": "https://fastly.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/geoip.dat",
-    "geosite": "https://fastly.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/geosite.dat",
-    "mmdb": "https://fastly.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/country.mmdb",
-    "asn": "https://fastly.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/GeoLite2-ASN.mmdb"
-  },
-  "profile": {
-    "store-selected": true,
-    "store-fake-ip": true
-  },
-  "sniffer": {
-    "enable": true,
-    "force-dns-mapping": true,
-    "parse-pure-ip": true,
-    "override-destination": true,
-    "sniff": {
-      "HTTP": {
-        "ports": [
-          80,
-          "8080-8880"
-        ],
-        "override-destination": true
-      },
-      "TLS": {
-        "ports": [
-          443,
-          8443
-        ]
-      },
-      "QUIC": {
-        "ports": [
-          443,
-          8443
-        ]
-      }
-    },
-    "force-domain": [
-      "+.v2ex.com"
-    ],
-    "skip-domain": [
-      "Mijia Cloud"
-    ]
-  },
-  "tun": {
-    "enable": true,
-    "stack": "system",
-    "dns-hijack": [
-      "any:53"
-    ],
-    "auto-route": true,
-    "auto-detect-interface": true
-  },
+  return Object.assign(config, {
   "dns": {
     "enable": true,
-    "prefer-h3": false,
-    "respect-rules": true,
-    "listen": "0.0.0.0:1053",
     "ipv6": false,
     "enhanced-mode": "fake-ip",
     "fake-ip-range": "198.18.0.1/16",
-    "fake-ip-filter": [
-      "+.lan",
-      "+.local",
-      "+.localdomain",
-      "localhost",
-      "*.localhost",
-      "*.local",
-      "*.localdomain",
-      "+.home.arpa",
-      "+.msftconnecttest.com",
-      "+.msftncsi.com",
-      "+.srv.nintendo.net",
-      "+.stun.playstation.net",
-      "+.stun.stunprotocol.org",
-      "+.stun.voip.blackberry.com",
-      "+.xboxlive.com",
-      "time.*.com",
-      "time.*.gov",
-      "time.*.edu.cn",
-      "time.*.apple.com",
-      "time1.*.com",
-      "time2.*.com",
-      "time3.*.com",
-      "time4.*.com",
-      "time5.*.com",
-      "time6.*.com",
-      "time7.*.com",
-      "+.apps.apple.com",
-      "+.itunes.apple.com",
-      "+.mzstatic.com",
-      "+.cdn-apple.com",
-      "+.aaplimg.com",
-      "+.ntp.org.cn",
-      "+.pool.ntp.org"
-    ],
     "default-nameserver": [
       "223.5.5.5",
-      "223.6.6.6",
       "119.29.29.29"
     ],
-    "proxy-server-nameserver": [
-      "https://223.5.5.5/dns-query",
-      "https://doh.pub/dns-query"
-    ],
-    "direct-nameserver": [
-      "https://223.5.5.5/dns-query",
-      "https://doh.pub/dns-query"
-    ],
-    "direct-nameserver-follow-policy": false,
     "nameserver": [
       "https://223.5.5.5/dns-query",
-      "https://doh.pub/dns-query"
+      "https://1.12.12.12/dns-query",
+      "https://120.53.53.53/dns-query"
     ],
-    "fallback": [
-      "https://1.1.1.1/dns-query",
-      "https://8.8.8.8/dns-query",
-      "tls://1.0.0.1:853"
-    ],
-    "fallback-filter": {
-      "geoip": true,
-      "geoip-code": "CN",
-      "ipcidr": [
-        "240.0.0.0/4"
-      ]
-    },
     "nameserver-policy": {
-      "geosite:cn,private": [
-        "https://223.5.5.5/dns-query",
-        "https://doh.pub/dns-query"
-      ],
-      "geosite:geolocation-!cn": [
-        "https://1.1.1.1/dns-query",
-        "https://8.8.8.8/dns-query"
-      ],
-      "+.taobao.com": [
-        "https://dns.alidns.com/dns-query"
-      ],
-      "+.tmall.com": [
-        "https://dns.alidns.com/dns-query"
-      ],
-      "+.tbcache.com": [
-        "https://dns.alidns.com/dns-query"
-      ],
-      "tb.cn": [
-        "https://dns.alidns.com/dns-query"
-      ],
-      "+.alipay.com": [
-        "https://dns.alidns.com/dns-query"
-      ],
-      "+.alipay.com.cn": [
-        "https://dns.alidns.com/dns-query"
-      ],
-      "+.alipaydns.com": [
-        "https://dns.alidns.com/dns-query"
-      ],
-      "+.alicdn.com": [
-        "https://dns.alidns.com/dns-query"
-      ],
-      "+.aliyun.com": [
-        "https://dns.alidns.com/dns-query"
-      ],
-      "+.qq.com": [
-        "https://doh.pub/dns-query"
-      ],
-      "+.weixin.qq.com": [
-        "https://doh.pub/dns-query"
-      ],
-      "+.wx.qq.com": [
-        "https://doh.pub/dns-query"
-      ],
-      "+.weixin.com": [
-        "https://doh.pub/dns-query"
-      ],
-      "+.wechat.com": [
-        "https://doh.pub/dns-query"
-      ],
-      "+.servicewechat.com": [
-        "https://doh.pub/dns-query"
-      ],
-      "url.cn": [
-        "https://doh.pub/dns-query"
-      ],
-      "+.jd.com": [
-        "https://doh.pub/dns-query"
-      ],
-      "+.tencent.com": [
-        "https://doh.pub/dns-query"
-      ],
-      "+.bilibili.com": [
-        "https://doh.pub/dns-query"
-      ],
-      "hdslb.com": [
-        "https://doh.pub/dns-query"
-      ],
-      "+.163.com": [
-        "https://doh.pub/dns-query"
-      ],
-      "+.126.com": [
-        "https://doh.pub/dns-query"
-      ],
-      "+.126.net": [
-        "https://doh.pub/dns-query"
-      ],
-      "+.127.net": [
-        "https://doh.pub/dns-query"
-      ],
-      "+.netease.com": [
-        "https://doh.pub/dns-query"
-      ],
-      "+.mi.com": [
-        "https://doh.pub/dns-query"
-      ],
-      "+.xiaomi.com": [
-        "https://doh.pub/dns-query"
-      ],
-      "dl.google.com": [
-        "https://doh.pub/dns-query"
-      ],
-      "dl.l.google.com": [
-        "https://doh.pub/dns-query"
-      ],
-      "update.googleapis.com": [
-        "https://doh.pub/dns-query"
-      ],
-      "+.testflight.apple.com": [
-        "https://cloudflare-dns.com/dns-query"
-      ],
-      "amplifi.lan": [
-        "system://"
-      ],
-      "router.synology.com": [
-        "system://"
-      ],
-      "sila.razer.com": [
-        "system://"
-      ],
-      "router.asus.com": [
-        "system://"
-      ],
-      "routerlogin.net": [
-        "system://"
-      ],
-      "orbilogin.com": [
-        "system://"
-      ],
-      "www.LinksysSmartWiFi.com": [
-        "system://"
-      ],
-      "LinksysSmartWiFi.com": [
-        "system://"
-      ],
-      "myrouter.local": [
-        "system://"
-      ],
-      "www.miwifi.com": [
-        "system://"
-      ],
-      "miwifi.com": [
-        "system://"
-      ],
-      "mediarouter.home": [
-        "system://"
-      ],
-      "tplogin.cn": [
-        "system://"
-      ],
-      "tplinklogin.net": [
-        "system://"
-      ],
-      "melogin.cn": [
-        "system://"
-      ],
-      "falogin.cn": [
-        "system://"
-      ]
-    }
+      "*.taobao.com": "https://223.5.5.5/dns-query",
+      "*.tmall.com": "https://223.5.5.5/dns-query",
+      "*.tbcache.com": "https://223.5.5.5/dns-query",
+      "tb.cn": "https://223.5.5.5/dns-query",
+      "*.alipay.com": "https://223.5.5.5/dns-query",
+      "*.alipay.com.cn": "https://223.5.5.5/dns-query",
+      "*.alipaydns.com": "https://223.5.5.5/dns-query",
+      "*.qq.com": "https://1.12.12.12/dns-query",
+      "*.weixin.com": "https://1.12.12.12/dns-query",
+      "*.wechat.com": "https://1.12.12.12/dns-query",
+      "*.servicewechat.com": "https://1.12.12.12/dns-query",
+      "url.cn": "https://1.12.12.12/dns-query",
+      "*.alicdn.com": "https://223.5.5.5/dns-query",
+      "*.aliyun.com": "https://223.5.5.5/dns-query",
+      "*.jd.com": "https://1.12.12.12/dns-query",
+      "*.tencent.com": "https://1.12.12.12/dns-query",
+      "*.bilibili.com": "https://1.12.12.12/dns-query",
+      "hdslb.com": "https://1.12.12.12/dns-query",
+      "*.163.com": "https://1.12.12.12/dns-query",
+      "*.126.com": "https://1.12.12.12/dns-query",
+      "*.126.net": "https://1.12.12.12/dns-query",
+      "*.127.net": "https://1.12.12.12/dns-query",
+      "*.netease.com": "https://1.12.12.12/dns-query",
+      "*.mi.com": "https://1.12.12.12/dns-query",
+      "*.xiaomi.com": "https://1.12.12.12/dns-query",
+      "dl.google.com": "https://1.12.12.12/dns-query",
+      "dl.l.google.com": "https://1.12.12.12/dns-query",
+      "update.googleapis.com": "https://1.12.12.12/dns-query",
+      "amplifi.lan": "system://",
+      "router.synology.com": "system://",
+      "sila.razer.com": "system://",
+      "router.asus.com": "system://",
+      "routerlogin.net": "system://",
+      "orbilogin.com": "system://",
+      "www.LinksysSmartWiFi.com": "system://",
+      "LinksysSmartWiFi.com": "system://",
+      "myrouter.local": "system://",
+      "www.miwifi.com": "system://",
+      "miwifi.com": "system://",
+      "mediarouter.home": "system://",
+      "tplogin.cn": "system://",
+      "tplinklogin.net": "system://",
+      "melogin.cn": "system://",
+      "falogin.cn": "system://"
+    },
+    "fake-ip-filter-mode": "rule",
+    "fake-ip-filter": [
+      "DOMAIN-REGEX,^.*\\.msftncsi\\.com$,real-ip",
+      "DOMAIN-REGEX,^.*\\.msftconnecttest\\.com$,real-ip",
+      "DOMAIN-REGEX,^dns\\.msftncsi\\.com$,real-ip",
+      "DOMAIN-REGEX,^.*\\.stun\\.playstation\\.net$,real-ip",
+      "DOMAIN-REGEX,^xbox\\..*\\.microsoft\\.com$,real-ip",
+      "DOMAIN-REGEX,^.*\\.xboxlive\\.com$,real-ip",
+      "DOMAIN-REGEX,^.*\\.srv\\.nintendo\\.net$,real-ip",
+      "DOMAIN-REGEX,^.*\\.stun\\.twilio\\.com$,real-ip",
+      "DOMAIN-REGEX,^.*\\.turn\\.twilio\\.com$,real-ip",
+      "DOMAIN-REGEX,^time\\..*\\.com$,real-ip",
+      "DOMAIN-REGEX,^time\\..*\\.gov$,real-ip",
+      "DOMAIN-REGEX,^time\\..*\\.edu\\.cn$,real-ip",
+      "DOMAIN-REGEX,^time\\..*\\.apple\\.com$,real-ip",
+      "DOMAIN-REGEX,^time.\\..*\\.com$,real-ip",
+      "DOMAIN-REGEX,^ntp\\..*\\.com$,real-ip",
+      "DOMAIN-REGEX,^ntp.\\..*\\.com$,real-ip",
+      "DOMAIN-REGEX,^.*\\.time\\.edu\\.cn$,real-ip",
+      "DOMAIN-REGEX,^.*\\.ntp\\.org\\.cn$,real-ip",
+      "DOMAIN-REGEX,^.*\\.pool\\.ntp\\.org$,real-ip",
+      "DOMAIN-REGEX,^time.*\\.cloud\\.tencent\\.com$,real-ip",
+      "DOMAIN-REGEX,^ntp.\\.aliyun\\.com$,real-ip",
+      "DOMAIN-SUFFIX,local,real-ip",
+      "DOMAIN-SUFFIX,lan,real-ip",
+      "DOMAIN,localhost,real-ip",
+      "MATCH,fake-ip"
+    ]
   },
   "proxy-groups": [
     {
       "name": "PROXY",
       "type": "select",
-      "include-all": true,
-      "filter": "^(?=.*(.))(?!.*((?i)群|邀请|返利|循环|官网|客服|网站|网址|获取|订阅|流量|到期|机场|下次|版本|官址|备用|过期|已用|联系|邮箱|工单|贩卖|通知|倒卖|防止|国内|地址|频道|无法|说明|使用|提示|特别|访问|支持|教程|关注|更新|作者|加入|超时|收藏|福利|邀请|好友|失联|(\\b(USE|USED|TOTAL|EXPIRE|EMAIL|Panel|Channel|Author|Traffic)(\\d+)?\\b|(\\d{4}-\\d{2}-\\d{2}|\\dG)))).*$",
       "proxies": [
         "Auto",
         "香港",
@@ -304,93 +101,80 @@ function main(config) {
         "日本",
         "美国",
         "韩国",
-        "英国",
-        "DIRECT"
+        "英国"
       ],
-      "icon": "https://fastly.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Proxy.png"
+      "icon": "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Proxy.png",
+      "hidden": false
     },
     {
       "name": "Auto",
       "type": "url-test",
-      "interval": 300,
-      "tolerance": 50,
-      "lazy": true,
-      "url": "http://cp.cloudflare.com/generate_204",
-      "disable-udp": false,
-      "timeout": 5000,
-      "max-failed-times": 3,
-      "hidden": false,
+      "proxies": [
+        "REJECT"
+      ],
       "include-all": true,
-      "filter": "^(?=.*(.))(?!.*((?i)群|邀请|返利|循环|官网|客服|网站|网址|获取|订阅|流量|到期|机场|下次|版本|官址|备用|过期|已用|联系|邮箱|工单|贩卖|通知|倒卖|防止|国内|地址|频道|无法|说明|使用|提示|特别|访问|支持|教程|关注|更新|作者|加入|超时|收藏|福利|邀请|好友|失联|(\\b(USE|USED|TOTAL|EXPIRE|EMAIL|Panel|Channel|Author|Traffic)(\\d+)?\\b|(\\d{4}-\\d{2}-\\d{2}|\\dG)))).*$",
-      "icon": "https://fastly.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Auto.png"
+      "filter": "(?:^(?=.*(?:(🇭🇰|香港|港|虚通|HKG|\\bHK\\b|Hong Kong|HongKong)))(?=(?:^(?!.*(官网|套餐|重置|剩余|导航|通知|更新|刷新|付费解锁|免费用户|防失联|电报|文档|签到|白嫖网|维护|用户|https:|com|org|net|top|co)).*)).*|^(?=.*(?:(🇹🇼|台湾|臺灣|台北|台中|高雄|\\bTW\\b|Taipei|Taiwan)))(?=(?:^(?!.*(官网|套餐|重置|剩余|导航|通知|更新|刷新|付费解锁|免费用户|防失联|电报|文档|签到|白嫖网|维护|用户|https:|com|org|net|top|co)).*)).*|^(?=.*(?:(🇸🇬|新加坡|Singapore|\\bSG\\b|SGP)))(?=(?:^(?!.*(官网|套餐|重置|剩余|导航|通知|更新|刷新|付费解锁|免费用户|防失联|电报|文档|签到|白嫖网|维护|用户|https:|com|org|net|top|co)).*)).*|^(?=.*(?:(🇯🇵|日本|东京|大阪|埼玉|JP|Japan)))(?=(?:^(?!.*(官网|套餐|重置|剩余|导航|通知|更新|刷新|付费解锁|免费用户|防失联|电报|文档|签到|白嫖网|维护|用户|https:|com|org|net|top|co)).*)).*|^(?=.*(?:(🇺🇸|美国|美國|美西|美东|美南|美北|洛杉矶|旧金山|圣何塞|西雅图|芝加哥|达拉斯|亚特兰大|硅谷|拉斯维加斯|波特兰|俄勒冈|凤凰城|费利蒙|圣克拉拉|United States|\\bUSA\\b|\\bUS[-_ ])))(?=(?:^(?!.*(官网|套餐|重置|剩余|导航|通知|更新|刷新|付费解锁|免费用户|防失联|电报|文档|签到|白嫖网|维护|用户|https:|com|org|net|top|co)).*)).*|^(?=.*(?:(🇰🇷|韩国|韓國|首尔|首爾|\\bKR\\b|Korea)))(?=(?:^(?!.*(官网|套餐|重置|剩余|导航|通知|更新|刷新|付费解锁|免费用户|防失联|电报|文档|签到|白嫖网|维护|用户|https:|com|org|net|top|co)).*)).*)",
+      "url": "http://cp.cloudflare.com/generate_204",
+      "interval": 300,
+      "lazy": true,
+      "tolerance": 50,
+      "icon": "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Auto.png",
+      "hidden": false
     },
     {
-      "name": "FINAL",
+      "name": "兜底",
       "type": "select",
       "proxies": [
         "PROXY",
         "DIRECT"
       ],
-      "icon": "https://fastly.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/World_Map.png"
+      "icon": "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Final.png",
+      "hidden": false
     },
     {
       "name": "国际基础服务",
       "type": "select",
       "proxies": [
-        "新加坡",
-        "美国",
-        "PROXY"
+        "账号出口",
+        "REJECT"
       ],
-      "icon": "https://fastly.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Global.png"
-    },
-    {
-      "name": "Apple服务",
-      "type": "select",
-      "proxies": [
-        "DIRECT",
-        "国际基础服务",
-        "PROXY",
-        "新加坡",
-        "美国"
-      ],
-      "icon": "https://fastly.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Apple.png"
+      "hidden": false
     },
     {
       "name": "AI",
       "type": "select",
       "proxies": [
-        "台湾",
-        "美国",
-        "新加坡",
-        "PROXY"
+        "账号出口",
+        "REJECT"
       ],
-      "icon": "https://fastly.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/ChatGPT.png"
+      "icon": "https://raw.githubusercontent.com/lige47/QuanX-icon-rule/main/icon/04ProxySoft/chatgpt4.0.png",
+      "hidden": false
     },
     {
       "name": "国际社媒",
       "type": "select",
       "proxies": [
-        "新加坡",
-        "美国",
-        "台湾",
-        "PROXY"
+        "PROXY",
+        "账号出口",
+        "REJECT"
       ],
-      "icon": "https://fastly.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Telegram.png"
+      "icon": "https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/apps/meta.png",
+      "hidden": false
     },
     {
       "name": "Emby",
       "type": "url-test",
-      "interval": 300,
-      "tolerance": 50,
-      "lazy": true,
-      "url": "http://cp.cloudflare.com/generate_204",
-      "disable-udp": false,
-      "timeout": 5000,
-      "max-failed-times": 3,
-      "hidden": false,
+      "proxies": [
+        "REJECT"
+      ],
       "include-all": true,
-      "filter": "^(?=.*((?i)🇭🇰|香港|港|Hong|HK|🇸🇬|新加坡|SG|Singapore|🇰🇷|韩国|韩|KR|Korea|🇹🇼|台湾|台|TW|Tai))(?!.*((?i)回国|校园|游戏|🎮|(\\b(GAME)\\b))).*$",
-      "icon": "https://fastly.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Streaming.png"
+      "filter": "(?:^(?!.*(官网|套餐|重置|剩余|导航|通知|更新|刷新|付费解锁|免费用户|防失联|电报|文档|签到|白嫖网|维护|用户|https:|com|org|net|top|co)).*)",
+      "url": "http://cp.cloudflare.com/generate_204",
+      "interval": 300,
+      "lazy": true,
+      "tolerance": 50,
+      "icon": "https://raw.githubusercontent.com/lige47/QuanX-icon-rule/main/icon/04ProxySoft/emby.png",
+      "hidden": false
     },
     {
       "name": "Game",
@@ -400,822 +184,617 @@ function main(config) {
         "日本",
         "美国",
         "台湾",
+        "Auto",
         "PROXY",
         "DIRECT"
       ],
-      "icon": "https://fastly.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Game.png"
+      "icon": "https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/apps/Apple_GameCenter.png",
+      "hidden": false
     },
     {
       "name": "SpeedTest",
       "type": "select",
       "proxies": [
-        "香港",
-        "新加坡",
-        "美国",
+        "测速节点",
         "DIRECT"
       ],
-      "icon": "https://fastly.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Speedtest.png"
+      "icon": "https://raw.githubusercontent.com/lige47/QuanX-icon-rule/main/icon/03CNSoft/speedtest(3).png",
+      "hidden": false
     },
     {
-      "name": "香港",
-      "type": "url-test",
-      "interval": 300,
-      "tolerance": 50,
-      "lazy": true,
-      "url": "http://cp.cloudflare.com/generate_204",
-      "disable-udp": false,
-      "timeout": 5000,
-      "max-failed-times": 3,
-      "hidden": true,
+      "name": "机场合集",
+      "type": "select",
+      "proxies": [
+        "REJECT"
+      ],
       "include-all": true,
-      "filter": "^(?=.*((?i)🇭🇰|香港|(\\b(HK|HKG|Hong)(\\d+)?\\b)))(?!.*((?i)回国|校园|游戏|🎮|(\\b(GAME)\\b))).*$",
-      "icon": "https://fastly.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/HK.png"
-    },
-    {
-      "name": "台湾",
-      "type": "url-test",
-      "interval": 300,
-      "tolerance": 50,
-      "lazy": true,
-      "url": "http://cp.cloudflare.com/generate_204",
-      "disable-udp": false,
-      "timeout": 5000,
-      "max-failed-times": 3,
-      "hidden": true,
-      "include-all": true,
-      "filter": "^(?=.*((?i)🇹🇼|台湾|(\\b(TW|TWN|Tai|Taiwan)(\\d+)?\\b)))(?!.*((?i)回国|校园|游戏|🎮|(\\b(GAME)\\b))).*$",
-      "icon": "https://fastly.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/TW.png"
+      "filter": "^(?!.*(官网|套餐|重置|剩余|导航|通知|更新|刷新|付费解锁|免费用户|防失联|电报|文档|签到|白嫖网|维护|用户|https:|com|org|net|top|co)).*",
+      "hidden": true
     },
     {
       "name": "新加坡",
       "type": "url-test",
-      "interval": 300,
-      "tolerance": 50,
-      "lazy": true,
-      "url": "http://cp.cloudflare.com/generate_204",
-      "disable-udp": false,
-      "timeout": 5000,
-      "max-failed-times": 3,
-      "hidden": true,
+      "proxies": [
+        "REJECT"
+      ],
       "include-all": true,
-      "filter": "^(?=.*((?i)🇸🇬|新加坡|狮|(\\b(SG|SGP|Singapore)(\\d+)?\\b)))(?!.*((?i)回国|校园|游戏|🎮|(\\b(GAME)\\b))).*$",
-      "icon": "https://fastly.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/SG.png"
+      "filter": "^(?=.*(?:(🇸🇬|新加坡|Singapore|\\bSG\\b|SGP)))(?=(?:^(?!.*(官网|套餐|重置|剩余|导航|通知|更新|刷新|付费解锁|免费用户|防失联|电报|文档|签到|白嫖网|维护|用户|https:|com|org|net|top|co)).*)).*",
+      "url": "http://cp.cloudflare.com/generate_204",
+      "interval": 300,
+      "lazy": true,
+      "tolerance": 50,
+      "hidden": true
     },
     {
       "name": "日本",
       "type": "url-test",
-      "interval": 300,
-      "tolerance": 50,
-      "lazy": true,
-      "url": "http://cp.cloudflare.com/generate_204",
-      "disable-udp": false,
-      "timeout": 5000,
-      "max-failed-times": 3,
-      "hidden": true,
+      "proxies": [
+        "REJECT"
+      ],
       "include-all": true,
-      "filter": "^(?=.*((?i)🇯🇵|日本|东京|大阪|埼玉|(\\b(JP|JPN|Japan)(\\d+)?\\b)))(?!.*((?i)回国|校园|游戏|🎮|(\\b(GAME)\\b))).*$",
-      "icon": "https://fastly.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/JP.png"
+      "filter": "^(?=.*(?:(🇯🇵|日本|东京|大阪|埼玉|JP|Japan)))(?=(?:^(?!.*(官网|套餐|重置|剩余|导航|通知|更新|刷新|付费解锁|免费用户|防失联|电报|文档|签到|白嫖网|维护|用户|https:|com|org|net|top|co)).*)).*",
+      "url": "http://cp.cloudflare.com/generate_204",
+      "interval": 300,
+      "lazy": true,
+      "tolerance": 50,
+      "hidden": true
+    },
+    {
+      "name": "香港",
+      "type": "url-test",
+      "proxies": [
+        "REJECT"
+      ],
+      "include-all": true,
+      "filter": "^(?=.*(?:(🇭🇰|香港|港|虚通|HKG|\\bHK\\b|Hong Kong|HongKong)))(?=(?:^(?!.*(官网|套餐|重置|剩余|导航|通知|更新|刷新|付费解锁|免费用户|防失联|电报|文档|签到|白嫖网|维护|用户|https:|com|org|net|top|co)).*)).*",
+      "url": "http://cp.cloudflare.com/generate_204",
+      "interval": 300,
+      "lazy": true,
+      "tolerance": 50,
+      "hidden": true
+    },
+    {
+      "name": "台湾",
+      "type": "url-test",
+      "proxies": [
+        "REJECT"
+      ],
+      "include-all": true,
+      "filter": "^(?=.*(?:(🇹🇼|台湾|臺灣|台北|台中|高雄|\\bTW\\b|Taipei|Taiwan)))(?=(?:^(?!.*(官网|套餐|重置|剩余|导航|通知|更新|刷新|付费解锁|免费用户|防失联|电报|文档|签到|白嫖网|维护|用户|https:|com|org|net|top|co)).*)).*",
+      "url": "http://cp.cloudflare.com/generate_204",
+      "interval": 300,
+      "lazy": true,
+      "tolerance": 50,
+      "hidden": true
     },
     {
       "name": "韩国",
-      "type": "url-test",
-      "interval": 300,
-      "tolerance": 50,
-      "lazy": true,
-      "url": "http://cp.cloudflare.com/generate_204",
-      "disable-udp": false,
-      "timeout": 5000,
-      "max-failed-times": 3,
-      "hidden": true,
+      "type": "select",
+      "proxies": [
+        "REJECT"
+      ],
       "include-all": true,
-      "filter": "^(?=.*((?i)🇰🇷|韩国|韓|首尔|(\\b(KR|KOR|Korea)(\\d+)?\\b)))(?!.*((?i)回国|校园|游戏|🎮|(\\b(GAME)\\b))).*$",
-      "icon": "https://fastly.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/KR.png"
+      "filter": "^(?=.*(?:(🇰🇷|韩国|韓國|首尔|首爾|\\bKR\\b|Korea)))(?=(?:^(?!.*(官网|套餐|重置|剩余|导航|通知|更新|刷新|付费解锁|免费用户|防失联|电报|文档|签到|白嫖网|维护|用户|https:|com|org|net|top|co)).*)).*",
+      "hidden": true
     },
     {
       "name": "美国",
       "type": "url-test",
-      "interval": 300,
-      "tolerance": 50,
-      "lazy": true,
-      "url": "http://cp.cloudflare.com/generate_204",
-      "disable-udp": false,
-      "timeout": 5000,
-      "max-failed-times": 3,
-      "hidden": true,
+      "proxies": [
+        "REJECT"
+      ],
       "include-all": true,
-      "filter": "^(?=.*((?i)🇺🇸|美国|波特兰|达拉斯|俄勒冈|凤凰城|费利蒙|硅谷|拉斯维加斯|洛杉矶|圣何塞|圣克拉拉|西雅图|芝加哥|(\\b(US|USA|United States)(\\d+)?\\b)))(?!.*((?i)回国|校园|游戏|🎮|(\\b(GAME)\\b))).*$",
-      "icon": "https://fastly.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/US.png"
+      "filter": "^(?=.*(?:(🇺🇸|美国|美國|美西|美东|美南|美北|洛杉矶|旧金山|圣何塞|西雅图|芝加哥|达拉斯|亚特兰大|硅谷|拉斯维加斯|波特兰|俄勒冈|凤凰城|费利蒙|圣克拉拉|United States|\\bUSA\\b|\\bUS[-_ ])))(?=(?:^(?!.*(官网|套餐|重置|剩余|导航|通知|更新|刷新|付费解锁|免费用户|防失联|电报|文档|签到|白嫖网|维护|用户|https:|com|org|net|top|co)).*)).*",
+      "url": "http://cp.cloudflare.com/generate_204",
+      "interval": 300,
+      "lazy": true,
+      "tolerance": 50,
+      "hidden": true
     },
     {
       "name": "英国",
       "type": "url-test",
-      "interval": 300,
-      "tolerance": 50,
-      "lazy": true,
-      "url": "http://cp.cloudflare.com/generate_204",
-      "disable-udp": false,
-      "timeout": 5000,
-      "max-failed-times": 3,
-      "hidden": true,
+      "proxies": [
+        "REJECT"
+      ],
       "include-all": true,
-      "filter": "^(?=.*((?i)🇬🇧|英国|英格兰|GBR|United Kingdom|UK|England|Britain|British))(?!.*((?i)回国|校园|游戏|🎮|(\\b(GAME)\\b))).*$",
-      "icon": "https://fastly.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/UK.png"
+      "filter": "^(?=.*(?:(🇬🇧|英国|英國|英格兰|英格蘭|London|United Kingdom|\\bUK\\b|\\bGB\\b|Britain|British)))(?=(?:^(?!.*(官网|套餐|重置|剩余|导航|通知|更新|刷新|付费解锁|免费用户|防失联|电报|文档|签到|白嫖网|维护|用户|https:|com|org|net|top|co)).*)).*",
+      "url": "http://cp.cloudflare.com/generate_204",
+      "interval": 300,
+      "lazy": true,
+      "tolerance": 50,
+      "hidden": true
+    },
+    {
+      "name": "账号-新加坡",
+      "type": "fallback",
+      "proxies": [
+        "REJECT"
+      ],
+      "include-all": true,
+      "filter": "(?:^(?=.*(?:(🇸🇬|新加坡|Singapore|\\bSG\\b|SGP)))(?=(?:^(?!.*(官网|套餐|重置|剩余|导航|通知|更新|刷新|付费解锁|免费用户|防失联|电报|文档|签到|白嫖网|维护|用户|https:|com|org|net|top|co)).*)).*)",
+      "url": "http://cp.cloudflare.com/generate_204",
+      "interval": 600,
+      "lazy": true,
+      "icon": "https://gitlab.com/lodepuly/iconlibrary/-/raw/main/Flag_icon/120px/SG.png",
+      "hidden": true
+    },
+    {
+      "name": "账号-台湾",
+      "type": "fallback",
+      "proxies": [
+        "REJECT"
+      ],
+      "include-all": true,
+      "filter": "(?:^(?=.*(?:(🇹🇼|台湾|臺灣|台北|台中|高雄|\\bTW\\b|Taipei|Taiwan)))(?=(?:^(?!.*(官网|套餐|重置|剩余|导航|通知|更新|刷新|付费解锁|免费用户|防失联|电报|文档|签到|白嫖网|维护|用户|https:|com|org|net|top|co)).*)).*)",
+      "url": "http://cp.cloudflare.com/generate_204",
+      "interval": 600,
+      "lazy": true,
+      "icon": "https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/flag/TW_01.png",
+      "hidden": true
+    },
+    {
+      "name": "账号-美国",
+      "type": "fallback",
+      "proxies": [
+        "REJECT"
+      ],
+      "include-all": true,
+      "filter": "(?:^(?=.*(?:(🇺🇸|美国|美國|美西|美东|美南|美北|洛杉矶|旧金山|圣何塞|西雅图|芝加哥|达拉斯|亚特兰大|硅谷|拉斯维加斯|波特兰|俄勒冈|凤凰城|费利蒙|圣克拉拉|United States|\\bUSA\\b|\\bUS[-_ ])))(?=(?:^(?!.*(官网|套餐|重置|剩余|导航|通知|更新|刷新|付费解锁|免费用户|防失联|电报|文档|签到|白嫖网|维护|用户|https:|com|org|net|top|co)).*)).*)",
+      "url": "http://cp.cloudflare.com/generate_204",
+      "interval": 600,
+      "lazy": true,
+      "icon": "https://gitlab.com/lodepuly/iconlibrary/-/raw/main/Flag_icon/120px/US.png",
+      "hidden": true
+    },
+    {
+      "name": "账号出口",
+      "type": "select",
+      "proxies": [
+        "账号-新加坡",
+        "账号-台湾",
+        "账号-美国",
+        "REJECT"
+      ],
+      "icon": "https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/apps/Apple_Safari.png",
+      "hidden": false
+    },
+    {
+      "name": "测速节点",
+      "type": "select",
+      "proxies": [
+        "REJECT"
+      ],
+      "include-all": true,
+      "filter": "(?:^(?!.*(官网|套餐|重置|剩余|导航|通知|更新|刷新|付费解锁|免费用户|防失联|电报|文档|签到|白嫖网|维护|用户|https:|com|org|net|top|co)).*)",
+      "icon": "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Speedtest.png",
+      "hidden": false
     }
-  ],
-  "rules": [
-    "RULE-SET,AdvertisingLite,REJECT",
-    "RULE-SET,iCloud,DIRECT",
-    "RULE-SET,PreAIInfra,国际基础服务",
-    "RULE-SET,AIMajor,AI",
-    "RULE-SET,DirectCN,DIRECT",
-    "RULE-SET,AppleMedia,DIRECT",
-    "RULE-SET,Lan,DIRECT",
-    "GEOSITE,private,DIRECT",
-    "RULE-SET,AdBlock,REJECT",
-    "RULE-SET,Special,DIRECT",
-    "RULE-SET,Netflix,国际社媒",
-    "RULE-SET,Disney Plus,国际社媒",
-    "RULE-SET,YouTube,国际社媒",
-    "RULE-SET,Max,国际社媒",
-    "RULE-SET,Spotify,日本",
-    "RULE-SET,Abema TV,国际社媒",
-    "RULE-SET,Bahamut,国际社媒",
-    "RULE-SET,DMM,国际社媒",
-    "RULE-SET,Fox+,国际社媒",
-    "RULE-SET,Hulu Japan,国际社媒",
-    "RULE-SET,IQ,国际社媒",
-    "RULE-SET,Japonx,国际社媒",
-    "RULE-SET,JOOX,国际社媒",
-    "RULE-SET,KKBOX,国际社媒",
-    "RULE-SET,KKTV,国际社媒",
-    "RULE-SET,Line TV,国际社媒",
-    "RULE-SET,myTV SUPER,国际社媒",
-    "RULE-SET,Niconico,国际社媒",
-    "RULE-SET,ViuTV,国际社媒",
-    "RULE-SET,ABC,PROXY",
-    "RULE-SET,Amazon,PROXY",
-    "RULE-SET,BBC iPlayer,PROXY",
-    "RULE-SET,DAZN,PROXY",
-    "RULE-SET,Discovery Plus,PROXY",
-    "RULE-SET,encoreTVB,PROXY",
-    "RULE-SET,F1 TV,PROXY",
-    "RULE-SET,Fox Now,PROXY",
-    "RULE-SET,Hulu,PROXY",
-    "RULE-SET,Pandora,PROXY",
-    "RULE-SET,PBS,PROXY",
-    "RULE-SET,Pornhub,PROXY",
-    "RULE-SET,Soundcloud,PROXY",
-    "RULE-SET,Bilibili,DIRECT",
-    "RULE-SET,IQIYI,DIRECT",
-    "RULE-SET,Letv,DIRECT",
-    "RULE-SET,Netease Music,DIRECT",
-    "RULE-SET,Tencent Video,DIRECT",
-    "RULE-SET,WeTV,DIRECT",
-    "RULE-SET,Youku,DIRECT",
-    "RULE-SET,Telegram,国际社媒",
-    "RULE-SET,Crypto,PROXY",
-    "RULE-SET,Discord,国际社媒",
-    "RULE-SET,Google FCM,国际基础服务",
-    "PROCESS-NAME,WinStore.App.exe,DIRECT",
-    "PROCESS-NAME,StoreExperienceHost.exe,DIRECT",
-    "DOMAIN-SUFFIX,mp.microsoft.com,DIRECT",
-    "DOMAIN-SUFFIX,s-microsoft.com,DIRECT",
-    "DOMAIN-SUFFIX,microsoftstore.com,DIRECT",
-    "DOMAIN-SUFFIX,onestore.ms,DIRECT",
-    "DOMAIN-SUFFIX,windowsmarketplace.com,DIRECT",
-    "DOMAIN,storeedge.microsoft.com,DIRECT",
-    "DOMAIN,storecorefulfillment.download.prss.microsoft.com,DIRECT",
-    "GEOSITE,microsoft@cn,DIRECT",
-    "RULE-SET,Microsoft,国际基础服务",
-    "RULE-SET,AI Suite,AI",
-    "RULE-SET,PayPal,DIRECT",
-    "RULE-SET,Scholar,国际基础服务",
-    "RULE-SET,Speedtest,SpeedTest",
-    "RULE-SET,Steam,Game",
-    "RULE-SET,TikTok,国际社媒",
-    "DOMAIN-SUFFIX,apps.apple.com,Apple服务",
-    "DOMAIN-SUFFIX,apps-marketplace.apple.com,Apple服务",
-    "DOMAIN-SUFFIX,appstore.com,Apple服务",
-    "DOMAIN-SUFFIX,itunes.apple.com,Apple服务",
-    "DOMAIN-SUFFIX,itunes.com,Apple服务",
-    "DOMAIN-SUFFIX,appsto.re,Apple服务",
-    "DOMAIN-SUFFIX,mzstatic.com,Apple服务",
-    "DOMAIN-SUFFIX,aaplimg.com,Apple服务",
-    "DOMAIN,ppq.apple.com,Apple服务",
-    "RULE-SET,AppleProxy,Apple服务",
-    "RULE-SET,Apple,DIRECT",
-    "RULE-SET,Apple Music,Apple服务",
-    "RULE-SET,Apple News,Apple服务",
-    "RULE-SET,Apple TV,Apple服务",
-    "RULE-SET,Apple Push,Apple服务",
-    "RULE-SET,Apple,Apple服务",
-    "RULE-SET,miHoYo,Game",
-    "RULE-SET,PROXY,PROXY",
-    "RULE-SET,Domestic,DIRECT",
-    "RULE-SET,Domestic IPs,DIRECT",
-    "RULE-SET,ChinaMaxNoIP,DIRECT",
-    "GEOSITE,cn,DIRECT",
-    "RULE-SET,LAN,DIRECT",
-    "RULE-SET,Proxy,PROXY",
-    "RULE-SET,Global,PROXY",
-    "GEOSITE,geolocation-!cn,PROXY",
-    "GEOIP,CN,DIRECT,no-resolve",
-    "GEOIP,SG,新加坡,no-resolve",
-    "GEOIP,TW,台湾,no-resolve",
-    "GEOIP,HK,香港,no-resolve",
-    "GEOIP,JP,日本,no-resolve",
-    "GEOIP,KR,韩国,no-resolve",
-    "GEOIP,US,美国,no-resolve",
-    "MATCH,FINAL"
   ],
   "rule-providers": {
-    "AdvertisingLite": {
+    "adblock": {
       "type": "http",
       "behavior": "classical",
-      "interval": 86400,
-      "format": "yaml",
-      "path": "./rules/AdvertisingLite.yaml",
-      "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/AdvertisingLite/AdvertisingLite.yaml"
-    },
-    "DirectCN": {
-      "type": "http",
-      "behavior": "classical",
-      "interval": 86400,
       "format": "text",
-      "path": "./rules/DirectCN.list",
-      "url": "https://fastly.jsdelivr.net/gh/junchan0412/proxy-configs@main/surge/rules/direct-cn.list"
+      "interval": 43200,
+      "url": "https://fastly.jsdelivr.net/gh/junchan0412/proxy-configs@main/rules/mihomo/adblock.list",
+      "path": "./rules/adblock.list",
+      "proxy": "DIRECT"
     },
-    "PreAIInfra": {
+    "apns": {
       "type": "http",
       "behavior": "classical",
-      "interval": 86400,
       "format": "text",
-      "path": "./rules/PreAIInfra.list",
-      "url": "https://fastly.jsdelivr.net/gh/junchan0412/proxy-configs@main/surge/rules/pre-ai-infra.list"
+      "interval": 43200,
+      "url": "https://fastly.jsdelivr.net/gh/junchan0412/proxy-configs@main/rules/mihomo/apns.list",
+      "path": "./rules/apns.list",
+      "proxy": "DIRECT"
     },
-    "AIMajor": {
+    "apple-cn": {
       "type": "http",
       "behavior": "classical",
-      "interval": 86400,
       "format": "text",
-      "path": "./rules/AIMajor.list",
-      "url": "https://fastly.jsdelivr.net/gh/junchan0412/proxy-configs@main/surge/rules/ai-major.list"
+      "interval": 43200,
+      "url": "https://fastly.jsdelivr.net/gh/junchan0412/proxy-configs@main/rules/mihomo/apple-cn.list",
+      "path": "./rules/apple-cn.list",
+      "proxy": "DIRECT"
     },
-    "Lan": {
+    "ai-suite": {
       "type": "http",
       "behavior": "classical",
-      "interval": 86400,
-      "format": "yaml",
-      "path": "./rules/Lan.yaml",
-      "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Lan/Lan.yaml"
+      "format": "text",
+      "interval": 43200,
+      "url": "https://fastly.jsdelivr.net/gh/junchan0412/proxy-configs@main/rules/mihomo/ai-suite.list",
+      "path": "./rules/ai-suite.list",
+      "proxy": "DIRECT"
     },
-    "iCloud": {
+    "ai": {
       "type": "http",
       "behavior": "classical",
-      "interval": 86400,
-      "format": "yaml",
-      "path": "./rules/iCloud.yaml",
-      "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/iCloud/iCloud.yaml"
+      "format": "text",
+      "interval": 43200,
+      "url": "https://fastly.jsdelivr.net/gh/junchan0412/proxy-configs@main/rules/mihomo/ai.list",
+      "path": "./rules/ai.list",
+      "proxy": "DIRECT"
     },
-    "AppleProxy": {
+    "gits": {
       "type": "http",
       "behavior": "classical",
-      "interval": 86400,
-      "format": "yaml",
-      "path": "./rules/AppleProxy.yaml",
-      "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/AppleProxy/AppleProxy.yaml"
+      "format": "text",
+      "interval": 43200,
+      "url": "https://fastly.jsdelivr.net/gh/junchan0412/proxy-configs@main/rules/mihomo/gits.list",
+      "path": "./rules/gits.list",
+      "proxy": "DIRECT"
     },
-    "AppleMedia": {
+    "private": {
       "type": "http",
       "behavior": "classical",
-      "interval": 86400,
-      "format": "yaml",
-      "path": "./rules/AppleMedia.yaml",
-      "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/AppleMedia/AppleMedia.yaml"
+      "format": "text",
+      "interval": 43200,
+      "url": "https://fastly.jsdelivr.net/gh/junchan0412/proxy-configs@main/rules/mihomo/private.list",
+      "path": "./rules/private.list",
+      "proxy": "DIRECT"
     },
-    "Proxy": {
+    "chinamax_all_no_resolve": {
       "type": "http",
       "behavior": "classical",
-      "interval": 86400,
-      "format": "yaml",
-      "path": "./rules/Proxy.yaml",
-      "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Proxy/Proxy.yaml"
+      "format": "text",
+      "interval": 43200,
+      "url": "https://fastly.jsdelivr.net/gh/junchan0412/proxy-configs@main/rules/mihomo/chinamax_all_no_resolve.list",
+      "path": "./rules/chinamax_all_no_resolve.list",
+      "proxy": "DIRECT"
     },
-    "Global": {
+    "oracle": {
       "type": "http",
       "behavior": "classical",
-      "interval": 86400,
-      "format": "yaml",
-      "path": "./rules/Global.yaml",
-      "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Global/Global.yaml"
+      "format": "text",
+      "interval": 43200,
+      "url": "https://fastly.jsdelivr.net/gh/junchan0412/proxy-configs@main/rules/mihomo/oracle.list",
+      "path": "./rules/oracle.list",
+      "proxy": "DIRECT"
     },
-    "ChinaMaxNoIP": {
+    "douyin": {
       "type": "http",
       "behavior": "classical",
-      "interval": 86400,
-      "format": "yaml",
-      "path": "./rules/ChinaMaxNoIP.yaml",
-      "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/ChinaMaxNoIP/ChinaMaxNoIP.yaml"
+      "format": "text",
+      "interval": 43200,
+      "url": "https://fastly.jsdelivr.net/gh/junchan0412/proxy-configs@main/rules/mihomo/douyin.list",
+      "path": "./rules/douyin.list",
+      "proxy": "DIRECT"
     },
-    "AdBlock": {
+    "paypal": {
       "type": "http",
       "behavior": "classical",
-      "interval": 86400,
-      "format": "yaml",
-      "path": "./rules/AdBlock.yaml",
-      "url": "https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/AdBlock.yaml"
+      "format": "text",
+      "interval": 43200,
+      "url": "https://fastly.jsdelivr.net/gh/junchan0412/proxy-configs@main/rules/mihomo/paypal.list",
+      "path": "./rules/paypal.list",
+      "proxy": "DIRECT"
     },
-    "Special": {
+    "socialmedia-cn": {
       "type": "http",
       "behavior": "classical",
-      "interval": 86400,
-      "format": "yaml",
-      "path": "./rules/Special.yaml",
-      "url": "https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Special.yaml"
+      "format": "text",
+      "interval": 43200,
+      "url": "https://fastly.jsdelivr.net/gh/junchan0412/proxy-configs@main/rules/mihomo/socialmedia-cn.list",
+      "path": "./rules/socialmedia-cn.list",
+      "proxy": "DIRECT"
     },
-    "PROXY": {
+    "dmca": {
       "type": "http",
       "behavior": "classical",
-      "interval": 86400,
-      "format": "yaml",
-      "path": "./rules/PROXY.yaml",
-      "url": "https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Proxy.yaml"
+      "format": "text",
+      "interval": 43200,
+      "url": "https://fastly.jsdelivr.net/gh/junchan0412/proxy-configs@main/rules/mihomo/dmca.list",
+      "path": "./rules/dmca.list",
+      "proxy": "DIRECT"
     },
-    "Domestic": {
+    "cdn": {
       "type": "http",
       "behavior": "classical",
-      "interval": 86400,
-      "format": "yaml",
-      "path": "./rules/Domestic.yaml",
-      "url": "https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Domestic.yaml"
+      "format": "text",
+      "interval": 43200,
+      "url": "https://fastly.jsdelivr.net/gh/junchan0412/proxy-configs@main/rules/mihomo/cdn.list",
+      "path": "./rules/cdn.list",
+      "proxy": "DIRECT"
     },
-    "Domestic IPs": {
+    "games-cn": {
       "type": "http",
       "behavior": "classical",
-      "interval": 86400,
-      "format": "yaml",
-      "path": "./rules/Domestic_IPs.yaml",
-      "url": "https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Domestic%20IPs.yaml"
+      "format": "text",
+      "interval": 43200,
+      "url": "https://fastly.jsdelivr.net/gh/junchan0412/proxy-configs@main/rules/mihomo/games-cn.list",
+      "path": "./rules/games-cn.list",
+      "proxy": "DIRECT"
     },
-    "LAN": {
+    "games": {
       "type": "http",
       "behavior": "classical",
-      "interval": 86400,
-      "format": "yaml",
-      "path": "./rules/LAN.yaml",
-      "url": "https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/LAN.yaml"
+      "format": "text",
+      "interval": 43200,
+      "url": "https://fastly.jsdelivr.net/gh/junchan0412/proxy-configs@main/rules/mihomo/games.list",
+      "path": "./rules/games.list",
+      "proxy": "DIRECT"
     },
-    "Netflix": {
+    "speedtest": {
       "type": "http",
       "behavior": "classical",
-      "interval": 86400,
-      "format": "yaml",
-      "path": "./rules/Netflix.yaml",
-      "url": "https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Media/Netflix.yaml"
+      "format": "text",
+      "interval": 43200,
+      "url": "https://fastly.jsdelivr.net/gh/junchan0412/proxy-configs@main/rules/mihomo/speedtest.list",
+      "path": "./rules/speedtest.list",
+      "proxy": "DIRECT"
     },
-    "Spotify": {
+    "apple-tv": {
       "type": "http",
       "behavior": "classical",
-      "interval": 86400,
-      "format": "yaml",
-      "path": "./rules/Spotify.yaml",
-      "url": "https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Media/Spotify.yaml"
+      "format": "text",
+      "interval": 43200,
+      "url": "https://fastly.jsdelivr.net/gh/junchan0412/proxy-configs@main/rules/mihomo/apple-tv.list",
+      "path": "./rules/apple-tv.list",
+      "proxy": "DIRECT"
     },
-    "YouTube": {
+    "apple": {
       "type": "http",
       "behavior": "classical",
-      "interval": 86400,
-      "format": "yaml",
-      "path": "./rules/YouTube.yaml",
-      "url": "https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Media/YouTube.yaml"
+      "format": "text",
+      "interval": 43200,
+      "url": "https://fastly.jsdelivr.net/gh/junchan0412/proxy-configs@main/rules/mihomo/apple.list",
+      "path": "./rules/apple.list",
+      "proxy": "DIRECT"
     },
-    "Max": {
+    "onedrive": {
       "type": "http",
       "behavior": "classical",
-      "interval": 86400,
-      "format": "yaml",
-      "path": "./rules/Max.yaml",
-      "url": "https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Media/Max.yaml"
+      "format": "text",
+      "interval": 43200,
+      "url": "https://fastly.jsdelivr.net/gh/junchan0412/proxy-configs@main/rules/mihomo/onedrive.list",
+      "path": "./rules/onedrive.list",
+      "proxy": "DIRECT"
     },
-    "Bilibili": {
+    "microsoft-cn": {
       "type": "http",
       "behavior": "classical",
-      "interval": 86400,
-      "format": "yaml",
-      "path": "./rules/Bilibili.yaml",
-      "url": "https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Media/Bilibili.yaml"
+      "format": "text",
+      "interval": 43200,
+      "url": "https://fastly.jsdelivr.net/gh/junchan0412/proxy-configs@main/rules/mihomo/microsoft-cn.list",
+      "path": "./rules/microsoft-cn.list",
+      "proxy": "DIRECT"
     },
-    "IQ": {
+    "microsoft": {
       "type": "http",
       "behavior": "classical",
-      "interval": 86400,
-      "format": "yaml",
-      "path": "./rules/IQ.yaml",
-      "url": "https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Media/IQ.yaml"
+      "format": "text",
+      "interval": 43200,
+      "url": "https://fastly.jsdelivr.net/gh/junchan0412/proxy-configs@main/rules/mihomo/microsoft.list",
+      "path": "./rules/microsoft.list",
+      "proxy": "DIRECT"
     },
-    "IQIYI": {
+    "google-fcm": {
       "type": "http",
       "behavior": "classical",
-      "interval": 86400,
-      "format": "yaml",
-      "path": "./rules/IQIYI.yaml",
-      "url": "https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Media/IQIYI.yaml"
+      "format": "text",
+      "interval": 43200,
+      "url": "https://fastly.jsdelivr.net/gh/junchan0412/proxy-configs@main/rules/mihomo/google-fcm.list",
+      "path": "./rules/google-fcm.list",
+      "proxy": "DIRECT"
     },
-    "Letv": {
+    "google": {
       "type": "http",
       "behavior": "classical",
-      "interval": 86400,
-      "format": "yaml",
-      "path": "./rules/Letv.yaml",
-      "url": "https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Media/Letv.yaml"
+      "format": "text",
+      "interval": 43200,
+      "url": "https://fastly.jsdelivr.net/gh/junchan0412/proxy-configs@main/rules/mihomo/google.list",
+      "path": "./rules/google.list",
+      "proxy": "DIRECT"
     },
-    "Netease Music": {
+    "cloudflare": {
       "type": "http",
       "behavior": "classical",
-      "interval": 86400,
-      "format": "yaml",
-      "path": "./rules/Netease_Music.yaml",
-      "url": "https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Media/Netease%20Music.yaml"
+      "format": "text",
+      "interval": 43200,
+      "url": "https://fastly.jsdelivr.net/gh/junchan0412/proxy-configs@main/rules/mihomo/cloudflare.list",
+      "path": "./rules/cloudflare.list",
+      "proxy": "DIRECT"
     },
-    "Tencent Video": {
+    "telegram": {
       "type": "http",
       "behavior": "classical",
-      "interval": 86400,
-      "format": "yaml",
-      "path": "./rules/Tencent_Video.yaml",
-      "url": "https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Media/Tencent%20Video.yaml"
+      "format": "text",
+      "interval": 43200,
+      "url": "https://fastly.jsdelivr.net/gh/junchan0412/proxy-configs@main/rules/mihomo/telegram.list",
+      "path": "./rules/telegram.list",
+      "proxy": "DIRECT"
     },
-    "Youku": {
+    "socialmedia": {
       "type": "http",
       "behavior": "classical",
-      "interval": 86400,
-      "format": "yaml",
-      "path": "./rules/Youku.yaml",
-      "url": "https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Media/Youku.yaml"
+      "format": "text",
+      "interval": 43200,
+      "url": "https://fastly.jsdelivr.net/gh/junchan0412/proxy-configs@main/rules/mihomo/socialmedia.list",
+      "path": "./rules/socialmedia.list",
+      "proxy": "DIRECT"
     },
-    "WeTV": {
+    "forum": {
       "type": "http",
       "behavior": "classical",
-      "interval": 86400,
-      "format": "yaml",
-      "path": "./rules/WeTV.yaml",
-      "url": "https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Media/WeTV.yaml"
+      "format": "text",
+      "interval": 43200,
+      "url": "https://fastly.jsdelivr.net/gh/junchan0412/proxy-configs@main/rules/mihomo/forum.list",
+      "path": "./rules/forum.list",
+      "proxy": "DIRECT"
     },
-    "ABC": {
+    "youtube": {
       "type": "http",
       "behavior": "classical",
-      "interval": 86400,
-      "format": "yaml",
-      "path": "./rules/ABC.yaml",
-      "url": "https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Media/ABC.yaml"
+      "format": "text",
+      "interval": 43200,
+      "url": "https://fastly.jsdelivr.net/gh/junchan0412/proxy-configs@main/rules/mihomo/youtube.list",
+      "path": "./rules/youtube.list",
+      "proxy": "DIRECT"
     },
-    "Abema TV": {
+    "pornhub": {
       "type": "http",
       "behavior": "classical",
-      "interval": 86400,
-      "format": "yaml",
-      "path": "./rules/Abema_TV.yaml",
-      "url": "https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Media/Abema%20TV.yaml"
+      "format": "text",
+      "interval": 43200,
+      "url": "https://fastly.jsdelivr.net/gh/junchan0412/proxy-configs@main/rules/mihomo/pornhub.list",
+      "path": "./rules/pornhub.list",
+      "proxy": "DIRECT"
     },
-    "Amazon": {
+    "notion": {
       "type": "http",
       "behavior": "classical",
-      "interval": 86400,
-      "format": "yaml",
-      "path": "./rules/Amazon.yaml",
-      "url": "https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Media/Amazon.yaml"
+      "format": "text",
+      "interval": 43200,
+      "url": "https://fastly.jsdelivr.net/gh/junchan0412/proxy-configs@main/rules/mihomo/notion.list",
+      "path": "./rules/notion.list",
+      "proxy": "DIRECT"
     },
-    "Apple Music": {
+    "wikipedia": {
       "type": "http",
       "behavior": "classical",
-      "interval": 86400,
-      "format": "yaml",
-      "path": "./rules/Apple_Music.yaml",
-      "url": "https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Media/Apple%20Music.yaml"
+      "format": "text",
+      "interval": 43200,
+      "url": "https://fastly.jsdelivr.net/gh/junchan0412/proxy-configs@main/rules/mihomo/wikipedia.list",
+      "path": "./rules/wikipedia.list",
+      "proxy": "DIRECT"
     },
-    "Apple News": {
+    "dropbox": {
       "type": "http",
       "behavior": "classical",
-      "interval": 86400,
-      "format": "yaml",
-      "path": "./rules/Apple_News.yaml",
-      "url": "https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Media/Apple%20News.yaml"
+      "format": "text",
+      "interval": 43200,
+      "url": "https://fastly.jsdelivr.net/gh/junchan0412/proxy-configs@main/rules/mihomo/dropbox.list",
+      "path": "./rules/dropbox.list",
+      "proxy": "DIRECT"
     },
-    "Apple TV": {
+    "aol": {
       "type": "http",
       "behavior": "classical",
-      "interval": 86400,
-      "format": "yaml",
-      "path": "./rules/Apple_TV.yaml",
-      "url": "https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Media/Apple%20TV.yaml"
+      "format": "text",
+      "interval": 43200,
+      "url": "https://fastly.jsdelivr.net/gh/junchan0412/proxy-configs@main/rules/mihomo/aol.list",
+      "path": "./rules/aol.list",
+      "proxy": "DIRECT"
     },
-    "Bahamut": {
+    "gfw": {
       "type": "http",
       "behavior": "classical",
-      "interval": 86400,
-      "format": "yaml",
-      "path": "./rules/Bahamut.yaml",
-      "url": "https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Media/Bahamut.yaml"
+      "format": "text",
+      "interval": 43200,
+      "url": "https://fastly.jsdelivr.net/gh/junchan0412/proxy-configs@main/rules/mihomo/gfw.list",
+      "path": "./rules/gfw.list",
+      "proxy": "DIRECT"
     },
-    "BBC iPlayer": {
+    "proxy": {
       "type": "http",
       "behavior": "classical",
-      "interval": 86400,
-      "format": "yaml",
-      "path": "./rules/BBC_iPlayer.yaml",
-      "url": "https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Media/BBC%20iPlayer.yaml"
+      "format": "text",
+      "interval": 43200,
+      "url": "https://fastly.jsdelivr.net/gh/junchan0412/proxy-configs@main/rules/mihomo/proxy.list",
+      "path": "./rules/proxy.list",
+      "proxy": "DIRECT"
     },
-    "DAZN": {
+    "domestic": {
       "type": "http",
       "behavior": "classical",
-      "interval": 86400,
-      "format": "yaml",
-      "path": "./rules/DAZN.yaml",
-      "url": "https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Media/DAZN.yaml"
+      "format": "text",
+      "interval": 43200,
+      "url": "https://fastly.jsdelivr.net/gh/junchan0412/proxy-configs@main/rules/mihomo/domestic.list",
+      "path": "./rules/domestic.list",
+      "proxy": "DIRECT"
     },
-    "Discovery Plus": {
+    "asn.china": {
       "type": "http",
       "behavior": "classical",
-      "interval": 86400,
-      "format": "yaml",
-      "path": "./rules/Discovery_Plus.yaml",
-      "url": "https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Media/Discovery%20Plus.yaml"
+      "format": "text",
+      "interval": 43200,
+      "url": "https://fastly.jsdelivr.net/gh/junchan0412/proxy-configs@main/rules/mihomo/asn.china.list",
+      "path": "./rules/asn.china.list",
+      "proxy": "DIRECT"
     },
-    "Disney Plus": {
+    "lan": {
       "type": "http",
       "behavior": "classical",
-      "interval": 86400,
-      "format": "yaml",
-      "path": "./rules/Disney_Plus.yaml",
-      "url": "https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Media/Disney%20Plus.yaml"
+      "format": "text",
+      "interval": 43200,
+      "url": "https://fastly.jsdelivr.net/gh/junchan0412/proxy-configs@main/rules/mihomo/lan.list",
+      "path": "./rules/lan.list",
+      "proxy": "DIRECT"
     },
-    "DMM": {
+    "cncidr-resolve": {
       "type": "http",
       "behavior": "classical",
-      "interval": 86400,
-      "format": "yaml",
-      "path": "./rules/DMM.yaml",
-      "url": "https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Media/DMM.yaml"
-    },
-    "encoreTVB": {
-      "type": "http",
-      "behavior": "classical",
-      "interval": 86400,
-      "format": "yaml",
-      "path": "./rules/encoreTVB.yaml",
-      "url": "https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Media/encoreTVB.yaml"
-    },
-    "F1 TV": {
-      "type": "http",
-      "behavior": "classical",
-      "interval": 86400,
-      "format": "yaml",
-      "path": "./rules/F1_TV.yaml",
-      "url": "https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Media/F1%20TV.yaml"
-    },
-    "Fox Now": {
-      "type": "http",
-      "behavior": "classical",
-      "interval": 86400,
-      "format": "yaml",
-      "path": "./rules/Fox_Now.yaml",
-      "url": "https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Media/Fox%20Now.yaml"
-    },
-    "Fox+": {
-      "type": "http",
-      "behavior": "classical",
-      "interval": 86400,
-      "format": "yaml",
-      "path": "./rules/FoxPlus.yaml",
-      "url": "https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Media/Fox%2B.yaml"
-    },
-    "Hulu Japan": {
-      "type": "http",
-      "behavior": "classical",
-      "interval": 86400,
-      "format": "yaml",
-      "path": "./rules/Hulu_Japan.yaml",
-      "url": "https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Media/Hulu%20Japan.yaml"
-    },
-    "Hulu": {
-      "type": "http",
-      "behavior": "classical",
-      "interval": 86400,
-      "format": "yaml",
-      "path": "./rules/Hulu.yaml",
-      "url": "https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Media/Hulu.yaml"
-    },
-    "Japonx": {
-      "type": "http",
-      "behavior": "classical",
-      "interval": 86400,
-      "format": "yaml",
-      "path": "./rules/Japonx.yaml",
-      "url": "https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Media/Japonx.yaml"
-    },
-    "JOOX": {
-      "type": "http",
-      "behavior": "classical",
-      "interval": 86400,
-      "format": "yaml",
-      "path": "./rules/JOOX.yaml",
-      "url": "https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Media/JOOX.yaml"
-    },
-    "KKBOX": {
-      "type": "http",
-      "behavior": "classical",
-      "interval": 86400,
-      "format": "yaml",
-      "path": "./rules/KKBOX.yaml",
-      "url": "https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Media/KKBOX.yaml"
-    },
-    "KKTV": {
-      "type": "http",
-      "behavior": "classical",
-      "interval": 86400,
-      "format": "yaml",
-      "path": "./rules/KKTV.yaml",
-      "url": "https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Media/KKTV.yaml"
-    },
-    "Line TV": {
-      "type": "http",
-      "behavior": "classical",
-      "interval": 86400,
-      "format": "yaml",
-      "path": "./rules/Line_TV.yaml",
-      "url": "https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Media/Line%20TV.yaml"
-    },
-    "myTV SUPER": {
-      "type": "http",
-      "behavior": "classical",
-      "interval": 86400,
-      "format": "yaml",
-      "path": "./rules/myTV_SUPER.yaml",
-      "url": "https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Media/myTV%20SUPER.yaml"
-    },
-    "Niconico": {
-      "type": "http",
-      "behavior": "classical",
-      "interval": 86400,
-      "format": "yaml",
-      "path": "./rules/Niconico.yaml",
-      "url": "https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Media/Niconico.yaml"
-    },
-    "Pandora": {
-      "type": "http",
-      "behavior": "classical",
-      "interval": 86400,
-      "format": "yaml",
-      "path": "./rules/Pandora.yaml",
-      "url": "https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Media/Pandora.yaml"
-    },
-    "PBS": {
-      "type": "http",
-      "behavior": "classical",
-      "interval": 86400,
-      "format": "yaml",
-      "path": "./rules/PBS.yaml",
-      "url": "https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Media/PBS.yaml"
-    },
-    "Pornhub": {
-      "type": "http",
-      "behavior": "classical",
-      "interval": 86400,
-      "format": "yaml",
-      "path": "./rules/Pornhub.yaml",
-      "url": "https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Media/Pornhub.yaml"
-    },
-    "Soundcloud": {
-      "type": "http",
-      "behavior": "classical",
-      "interval": 86400,
-      "format": "yaml",
-      "path": "./rules/Soundcloud.yaml",
-      "url": "https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Media/Soundcloud.yaml"
-    },
-    "ViuTV": {
-      "type": "http",
-      "behavior": "classical",
-      "interval": 86400,
-      "format": "yaml",
-      "path": "./rules/ViuTV.yaml",
-      "url": "https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Media/ViuTV.yaml"
-    },
-    "Telegram": {
-      "type": "http",
-      "behavior": "classical",
-      "interval": 86400,
-      "format": "yaml",
-      "path": "./rules/Telegram.yaml",
-      "url": "https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Telegram.yaml"
-    },
-    "Crypto": {
-      "type": "http",
-      "behavior": "classical",
-      "interval": 86400,
-      "format": "yaml",
-      "path": "./rules/Crypto.yaml",
-      "url": "https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Crypto.yaml"
-    },
-    "Discord": {
-      "type": "http",
-      "behavior": "classical",
-      "interval": 86400,
-      "format": "yaml",
-      "path": "./rules/Discord.yaml",
-      "url": "https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Discord.yaml"
-    },
-    "Steam": {
-      "type": "http",
-      "behavior": "classical",
-      "interval": 86400,
-      "format": "yaml",
-      "path": "./rules/Steam.yaml",
-      "url": "https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Steam.yaml"
-    },
-    "TikTok": {
-      "type": "http",
-      "behavior": "classical",
-      "interval": 86400,
-      "format": "yaml",
-      "path": "./rules/TikTok.yaml",
-      "url": "https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/TikTok.yaml"
-    },
-    "Speedtest": {
-      "type": "http",
-      "behavior": "classical",
-      "interval": 86400,
-      "format": "yaml",
-      "path": "./rules/Speedtest.yaml",
-      "url": "https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Speedtest.yaml"
-    },
-    "PayPal": {
-      "type": "http",
-      "behavior": "classical",
-      "interval": 86400,
-      "format": "yaml",
-      "path": "./rules/PayPal.yaml",
-      "url": "https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/PayPal.yaml"
-    },
-    "Microsoft": {
-      "type": "http",
-      "behavior": "classical",
-      "interval": 86400,
-      "format": "yaml",
-      "path": "./rules/Microsoft.yaml",
-      "url": "https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Microsoft.yaml"
-    },
-    "AI Suite": {
-      "type": "http",
-      "behavior": "classical",
-      "interval": 86400,
-      "format": "yaml",
-      "path": "./rules/AI_Suite.yaml",
-      "url": "https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/AI%20Suite.yaml"
-    },
-    "Apple": {
-      "type": "http",
-      "behavior": "classical",
-      "interval": 86400,
-      "format": "yaml",
-      "path": "./rules/Apple.yaml",
-      "url": "https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Apple.yaml"
-    },
-    "Apple Push": {
-      "type": "http",
-      "behavior": "classical",
-      "interval": 86400,
-      "format": "yaml",
-      "path": "./rules/Apple_Push.yaml",
-      "url": "https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Apple%20Push.yaml"
-    },
-    "Google FCM": {
-      "type": "http",
-      "behavior": "classical",
-      "interval": 86400,
-      "format": "yaml",
-      "path": "./rules/Google_FCM.yaml",
-      "url": "https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Google%20FCM.yaml"
-    },
-    "Scholar": {
-      "type": "http",
-      "behavior": "classical",
-      "interval": 86400,
-      "format": "yaml",
-      "path": "./rules/Scholar.yaml",
-      "url": "https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/Scholar.yaml"
-    },
-    "miHoYo": {
-      "type": "http",
-      "behavior": "classical",
-      "interval": 86400,
-      "format": "yaml",
-      "path": "./rules/miHoYo.yaml",
-      "url": "https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Clash/Provider/miHoYo.yaml"
+      "format": "text",
+      "interval": 43200,
+      "url": "https://fastly.jsdelivr.net/gh/junchan0412/proxy-configs@main/rules/mihomo/cncidr-resolve.list",
+      "path": "./rules/cncidr-resolve.list",
+      "proxy": "DIRECT"
     }
+  },
+  "rules": [
+    "DOMAIN,fastly.jsdelivr.net,DIRECT",
+    "RULE-SET,adblock,REJECT,no-resolve",
+    "DOMAIN,dns.google,REJECT",
+    "DOMAIN-SUFFIX,dns.google.com,REJECT",
+    "DOMAIN-SUFFIX,mozilla.cloudflare-dns.com,REJECT",
+    "DOMAIN-SUFFIX,doh.opendns.com,REJECT",
+    "DOMAIN,dns.quad9.net,REJECT",
+    "DOMAIN-SUFFIX,dns.adguard.com,REJECT",
+    "DOMAIN-SUFFIX,dns.nextdns.io,REJECT",
+    "IP-CIDR,95.161.76.100/31,REJECT,no-resolve",
+    "IP-CIDR,223.5.5.5/32,DIRECT,no-resolve",
+    "IP-CIDR,119.29.29.29/32,DIRECT,no-resolve",
+    "IP-CIDR,1.12.12.12/32,DIRECT,no-resolve",
+    "IP-CIDR,120.53.53.53/32,DIRECT,no-resolve",
+    "RULE-SET,apns,DIRECT,no-resolve",
+    "RULE-SET,apple-cn,DIRECT,no-resolve",
+    "RULE-SET,ai-suite,AI,no-resolve",
+    "RULE-SET,ai,AI,no-resolve",
+    "RULE-SET,gits,国际基础服务,no-resolve",
+    "RULE-SET,private,DIRECT,no-resolve",
+    "OR,((DST-PORT,25),(DST-PORT,110),(DST-PORT,143),(DST-PORT,465),(DST-PORT,587)),DIRECT",
+    "AND,((OR,((DOMAIN,time-ios.apple.com),(DOMAIN,time.apple.com),(DOMAIN-SUFFIX,pool.ntp.org))),(DST-PORT,123)),DIRECT",
+    "RULE-SET,chinamax_all_no_resolve,DIRECT,no-resolve",
+    "RULE-SET,oracle,DIRECT,no-resolve",
+    "RULE-SET,douyin,DIRECT,no-resolve",
+    "RULE-SET,paypal,DIRECT,no-resolve",
+    "RULE-SET,socialmedia-cn,DIRECT,no-resolve",
+    "RULE-SET,dmca,DIRECT,no-resolve",
+    "RULE-SET,cdn,DIRECT,no-resolve",
+    "RULE-SET,games-cn,DIRECT,no-resolve",
+    "RULE-SET,games,Game,no-resolve",
+    "RULE-SET,speedtest,SpeedTest,no-resolve",
+    "RULE-SET,apple-tv,DIRECT,no-resolve",
+    "RULE-SET,apple,DIRECT,no-resolve",
+    "RULE-SET,onedrive,DIRECT,no-resolve",
+    "RULE-SET,microsoft-cn,DIRECT,no-resolve",
+    "RULE-SET,microsoft,国际基础服务,no-resolve",
+    "RULE-SET,google-fcm,国际基础服务,no-resolve",
+    "RULE-SET,google,国际基础服务,no-resolve",
+    "RULE-SET,cloudflare,国际基础服务,no-resolve",
+    "RULE-SET,telegram,国际社媒,no-resolve",
+    "RULE-SET,socialmedia,国际社媒,no-resolve",
+    "RULE-SET,forum,国际社媒,no-resolve",
+    "RULE-SET,youtube,国际社媒,no-resolve",
+    "RULE-SET,pornhub,国际社媒,no-resolve",
+    "RULE-SET,notion,国际基础服务,no-resolve",
+    "RULE-SET,wikipedia,国际基础服务,no-resolve",
+    "RULE-SET,dropbox,国际基础服务,no-resolve",
+    "RULE-SET,aol,国际基础服务,no-resolve",
+    "RULE-SET,gfw,PROXY",
+    "RULE-SET,proxy,PROXY,no-resolve",
+    "RULE-SET,domestic,DIRECT,no-resolve",
+    "RULE-SET,asn.china,DIRECT,no-resolve",
+    "RULE-SET,lan,DIRECT,no-resolve",
+    "RULE-SET,cncidr-resolve,DIRECT,no-resolve",
+    "GEOIP,CN,DIRECT,no-resolve",
+    "MATCH,兜底"
+  ],
+  "geox-url": {
+    "mmdb": "https://fastly.jsdelivr.net/gh/Loyalsoldier/geoip@release/Country.mmdb",
+    "asn": "https://fastly.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/GeoLite2-ASN.mmdb"
   }
-};
-
-  Object.assign(config, override);
-  return config;
+});
 }

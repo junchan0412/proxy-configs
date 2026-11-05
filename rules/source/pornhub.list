@@ -1,0 +1,5 @@
+# Source: https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Surge/Surge%203/Provider/Media/Pornhub.list
+DOMAIN-SUFFIX,phncdn.com
+DOMAIN-SUFFIX,phprcdn.com
+DOMAIN-SUFFIX,pornhub.com
+DOMAIN-SUFFIX,pornhubpremium.com

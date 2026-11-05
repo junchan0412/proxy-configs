@@ -1,0 +1,202 @@
+[
+  {
+    "name": "adblock",
+    "url": "https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Surge/Surge%203/Provider/AdBlock.list",
+    "type": "RULE-SET"
+  },
+  {
+    "name": "apns",
+    "url": "https://fastly.jsdelivr.net/gh/QuixoticHeart/rule-set@ruleset/surge/apns.list",
+    "type": "RULE-SET"
+  },
+  {
+    "name": "apple-cn",
+    "url": "https://fastly.jsdelivr.net/gh/QuixoticHeart/rule-set@ruleset/surge/apple-cn.list",
+    "type": "RULE-SET"
+  },
+  {
+    "name": "ai-suite",
+    "url": "https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Surge/Surge%203/Provider/AI%20Suite.list",
+    "type": "RULE-SET"
+  },
+  {
+    "name": "ai",
+    "url": "https://fastly.jsdelivr.net/gh/QuixoticHeart/rule-set@ruleset/surge/ai.list",
+    "type": "RULE-SET"
+  },
+  {
+    "name": "gits",
+    "url": "https://fastly.jsdelivr.net/gh/QuixoticHeart/rule-set@ruleset/surge/gits.list",
+    "type": "RULE-SET"
+  },
+  {
+    "name": "private",
+    "url": "https://fastly.jsdelivr.net/gh/QuixoticHeart/rule-set@ruleset/surge/private.list",
+    "type": "RULE-SET"
+  },
+  {
+    "name": "chinamax_all_no_resolve",
+    "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/ChinaMax/ChinaMax_All_No_Resolve.list",
+    "type": "RULE-SET"
+  },
+  {
+    "name": "oracle",
+    "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Oracle/Oracle.list",
+    "type": "RULE-SET"
+  },
+  {
+    "name": "douyin",
+    "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/DouYin/DouYin.list",
+    "type": "RULE-SET"
+  },
+  {
+    "name": "paypal",
+    "url": "https://fastly.jsdelivr.net/gh/QuixoticHeart/rule-set@ruleset/surge/paypal.list",
+    "type": "RULE-SET"
+  },
+  {
+    "name": "socialmedia-cn",
+    "url": "https://fastly.jsdelivr.net/gh/QuixoticHeart/rule-set@ruleset/surge/socialmedia-cn.list",
+    "type": "RULE-SET"
+  },
+  {
+    "name": "dmca",
+    "url": "https://fastly.jsdelivr.net/gh/QuixoticHeart/rule-set@ruleset/surge/dmca.list",
+    "type": "RULE-SET"
+  },
+  {
+    "name": "cdn",
+    "url": "https://fastly.jsdelivr.net/gh/QuixoticHeart/rule-set@ruleset/surge/cdn.list",
+    "type": "RULE-SET"
+  },
+  {
+    "name": "games-cn",
+    "url": "https://fastly.jsdelivr.net/gh/QuixoticHeart/rule-set@ruleset/surge/games-cn.list",
+    "type": "RULE-SET"
+  },
+  {
+    "name": "games",
+    "url": "https://fastly.jsdelivr.net/gh/QuixoticHeart/rule-set@ruleset/surge/games.list",
+    "type": "RULE-SET"
+  },
+  {
+    "name": "speedtest",
+    "url": "https://fastly.jsdelivr.net/gh/QuixoticHeart/rule-set@ruleset/surge/speedtest.list",
+    "type": "RULE-SET"
+  },
+  {
+    "name": "apple-tv",
+    "url": "https://fastly.jsdelivr.net/gh/QuixoticHeart/rule-set@ruleset/surge/apple-tv.list",
+    "type": "RULE-SET"
+  },
+  {
+    "name": "apple",
+    "url": "https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Surge/Surge%203/Provider/Apple.list",
+    "type": "RULE-SET"
+  },
+  {
+    "name": "onedrive",
+    "url": "https://fastly.jsdelivr.net/gh/QuixoticHeart/rule-set@ruleset/surge/onedrive.list",
+    "type": "RULE-SET"
+  },
+  {
+    "name": "microsoft-cn",
+    "url": "https://fastly.jsdelivr.net/gh/QuixoticHeart/rule-set@ruleset/surge/microsoft-cn.list",
+    "type": "RULE-SET"
+  },
+  {
+    "name": "microsoft",
+    "url": "https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Surge/Surge%203/Provider/Microsoft.list",
+    "type": "RULE-SET"
+  },
+  {
+    "name": "google-fcm",
+    "url": "https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Surge/Surge%203/Provider/Google%20FCM.list",
+    "type": "RULE-SET"
+  },
+  {
+    "name": "google",
+    "url": "https://fastly.jsdelivr.net/gh/QuixoticHeart/rule-set@ruleset/surge/google.list",
+    "type": "RULE-SET"
+  },
+  {
+    "name": "cloudflare",
+    "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Cloudflare/Cloudflare.list",
+    "type": "RULE-SET"
+  },
+  {
+    "name": "telegram",
+    "url": "https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Surge/Surge%203/Provider/Telegram.list",
+    "type": "RULE-SET"
+  },
+  {
+    "name": "socialmedia",
+    "url": "https://fastly.jsdelivr.net/gh/QuixoticHeart/rule-set@ruleset/surge/socialmedia.list",
+    "type": "RULE-SET"
+  },
+  {
+    "name": "forum",
+    "url": "https://fastly.jsdelivr.net/gh/QuixoticHeart/rule-set@ruleset/surge/forum.list",
+    "type": "RULE-SET"
+  },
+  {
+    "name": "youtube",
+    "url": "https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Surge/Surge%203/Provider/Media/YouTube.list",
+    "type": "RULE-SET"
+  },
+  {
+    "name": "pornhub",
+    "url": "https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Surge/Surge%203/Provider/Media/Pornhub.list",
+    "type": "RULE-SET"
+  },
+  {
+    "name": "notion",
+    "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Notion/Notion.list",
+    "type": "RULE-SET"
+  },
+  {
+    "name": "wikipedia",
+    "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Wikipedia/Wikipedia.list",
+    "type": "RULE-SET"
+  },
+  {
+    "name": "dropbox",
+    "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Dropbox/Dropbox.list",
+    "type": "RULE-SET"
+  },
+  {
+    "name": "aol",
+    "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/AOL/AOL.list",
+    "type": "RULE-SET"
+  },
+  {
+    "name": "gfw",
+    "url": "https://fastly.jsdelivr.net/gh/Loyalsoldier/surge-rules@release/gfw.txt",
+    "type": "DOMAIN-SET"
+  },
+  {
+    "name": "proxy",
+    "url": "https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Surge/Surge%203/Provider/Proxy.list",
+    "type": "RULE-SET"
+  },
+  {
+    "name": "domestic",
+    "url": "https://fastly.jsdelivr.net/gh/dler-io/Rules@main/Surge/Surge%203/Provider/Domestic.list",
+    "type": "RULE-SET"
+  },
+  {
+    "name": "asn.china",
+    "url": "https://fastly.jsdelivr.net/gh/VirgilClyne/GetSomeFries@main/ruleset/ASN.China.list",
+    "type": "RULE-SET"
+  },
+  {
+    "name": "lan",
+    "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Lan/Lan.list",
+    "type": "RULE-SET"
+  },
+  {
+    "name": "cncidr-resolve",
+    "url": "https://fastly.jsdelivr.net/gh/QuixoticHeart/rule-set@ruleset/surge/cncidr-resolve.list",
+    "type": "RULE-SET"
+  }
+]

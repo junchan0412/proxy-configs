@@ -1,19 +1,5 @@
 .DS_Store
-**/.DS_Store
-
-# Private runtime configs and local overrides（仅仓库根目录的私有副本；surge/Surge.conf 为公开脱敏版）
-/Surge.conf
-*.private.conf
-*.local.conf
-*.override.local.yaml
-mihomo/*.private.yaml
-mihomo/*.local.yaml
-private-backup/
-icons/
-
-# Generated caches
-__pycache__/
-*.py[cod]
-
-# Private root-source configs (contain node credentials, subscription URLs, CA material)
 根配置/
+private-backup/
+__pycache__/
+*.pyc
