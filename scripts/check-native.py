@@ -41,7 +41,7 @@ with tempfile.TemporaryDirectory(prefix='proxy-configs-') as directory:
                 raise RuntimeError(core.stdout.read())
             try:
                 with urlopen('http://127.0.0.1:' + str(port) + '/providers/rules', timeout=1) as response:
-                    providers = json.load(response)['providers']
+                    providers = json.load(response)['providers'] or {}
                 counts = {name: provider['ruleCount'] for name, provider in providers.items()}
                 if set(counts) == set(expected) and all(counts.values()):
                     assert counts == expected, {name: (expected[name], counts[name])

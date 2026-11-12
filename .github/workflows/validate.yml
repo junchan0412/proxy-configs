@@ -19,7 +19,16 @@ jobs:
           git diff --exit-code
       - name: Check public credentials
         run: |
-          ! rg -n '(psk=|ca-p12\s*=\s*[^[:space:]]|ca-passphrase\s*=\s*[^[:space:]]|sub\.store/download|http-api\s*=|external-controller-access\s*=)' surge loon mihomo shadowrocket quantumultx egern
+          python3 - <<'PY'
+          import re
+          from pathlib import Path
+          pattern = re.compile(r'psk=|ca-p12\s*=\s*\S+|ca-passphrase\s*=\s*\S+|sub\.store/download|http-api\s*=|external-controller-access\s*=')
+          matches = [str(path) for folder in ['surge', 'loon', 'mihomo', 'shadowrocket', 'quantumultx', 'egern']
+                     for path in Path(folder).rglob('*') if path.is_file() and pattern.search(path.read_text())]
+          if matches:
+              raise SystemExit('Credentials found in: ' + ', '.join(matches))
+          print('Public credential scan passed')
+          PY
       - name: Install Mihomo
         run: |
           curl -fsSL https://github.com/MetaCubeX/mihomo/releases/download/v1.19.33/mihomo-linux-amd64-v1.19.33.gz -o /tmp/mihomo.gz
